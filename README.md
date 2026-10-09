@@ -1,21 +1,46 @@
-# findtime.net
+# FindTime v2
 
-Static site: landing + the legal/support pages Apple and Google require for app review.
+The FindTime studio website, built with React, Vite, and GSAP. Dark surfaces, spacious typography, and original product illustrations present our apps, studio, support, and policies.
 
-URLs the apps link to (must stay stable):
+## Run locally
 
-- `findtime.net/legal/privacy` → `legal/privacy.html`
-- `findtime.net/legal/terms` → `legal/terms.html`
-- `findtime.net/support` → `support.html`
+```sh
+npm ci
+npm run dev
+```
 
-## Deploy (GitHub Pages, free)
+## Build and check
 
-1. Push this folder as repo `findtime-site` (public), enable **Settings → Pages → Deploy from branch → main /(root)**.
-2. Add file `CNAME` containing `findtime.net`.
-3. At the DNS provider for findtime.net: `A` records for apex → GitHub Pages IPs (185.199.108.153, .109., .110., .111.) or `CNAME www → dog279.github.io` + apex ALIAS.
-4. GitHub Pages serves extensionless URLs (`/legal/terms` → `legal/terms.html`) automatically.
+```sh
+npm run check
+npm run preview -- --host 127.0.0.1 --port 4173
+```
 
-Cloudflare Pages / Netlify work identically (drag-and-drop the folder).
+`check` runs ESLint, builds the site, and verifies public routes, internal links and anchors, metadata, app release statuses, billing links, and the absence of analytics and session replay. To check the running production preview's HTTP routing as well:
 
-Before review: create the `support@findtime.net` mailbox or alias — both legal pages and the
-App Store support URL use it.
+```sh
+node scripts/verify.mjs http://127.0.0.1:4173
+```
+
+The build generates full HTML for `/`, `/support`, `/legal/privacy`, and `/legal/terms`, plus a branded `404.html`, sitemap, and robots file. Navigation and document contents are available without JavaScript; React enhances the mobile menu and GSAP adds reduced-motion-aware reveal animations.
+
+## Content and design
+
+- `src/components/Home.jsx`: homepage, app showcases, studio, founders, and contact.
+- `src/content/pages.json`: complete support, privacy, and terms content imported from the live site on September 16, 2026. Cloudflare-obfuscated email addresses were converted to standard `mailto:` links. Legal wording and effective dates are unchanged.
+- `src/content/site.js`: route metadata and URL normalization.
+- `src/index.css`: responsive design, accessibility states, and print styles.
+- `src/components/Symbols.jsx`: original vector artwork. The phones are promotional illustrations, not screenshots of either app.
+- `scripts/build.mjs`: Vite build and React server rendering into static documents.
+
+All product artwork is defined locally in SVG and CSS. The owner-approved iPhone-style frames showcase FindTime apps without an Apple logo. No analytics, session replay, cookies, external fonts, or third-party embeds are loaded by this site.
+
+For future edits, read [AGENTS.md](AGENTS.md) and the [design guide](docs/design-guide.md). They document the approved phone presentation, Apple-inspired design principles, current visual values, and verification workflow.
+
+## Deployment
+
+Publish the contents of `dist/` to your static host. Configure the host to serve directory index files for the existing extensionless URLs, and use `404.html` for missing routes with a 404 response. Do not rewrite every URL to the homepage: each public route has its own rendered document. The local preview includes this routing behavior.
+
+Verify all four routes and `/legal/privacy#advertising` on the target host before switching findtime.net to the new build. No hosting account or DNS changes have been made by this migration.
+
+See [the migration notes](docs/migration.md) for preserved functionality and remaining content decisions.

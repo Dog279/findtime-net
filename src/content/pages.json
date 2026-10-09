@@ -1,0 +1,151 @@
+{
+  "/support": {
+    "title": "Support — FindTime",
+    "description": "Get help with a FindTime app: bug reports, billing and subscriptions, privacy requests, and how to contact us.",
+    "html": "<h1>Support</h1>\n<p class=\"lede\">Questions, bug reports, or feedback about a FindTime app? We read everything, and one of\nthe two of us writes back.</p>\n\n<div class=\"contact-card\">\n  <a class=\"email\" href=\"mailto:support@findtime.net\">support@findtime.net</a>\n  <p>We aim to reply within 2 business days.</p>\n</div>\n\n<div class=\"checklist\">\n  <p>To help us fix it faster, include:</p>\n  <ul>\n    <li>Which app (for example BiteMatch) and its version number, shown in the app's Settings screen</li>\n    <li>Your device model and OS version (for example iPhone 15, iOS 26.5)</li>\n    <li>What you expected to happen, and what happened instead</li>\n    <li>A screenshot or screen recording, if you have one</li>\n  </ul>\n</div>\n\n<h2 id=\"billing-and-subscriptions\">Billing and subscriptions</h2>\n<p>Purchases are billed by Apple or Google, not by us, so subscription changes and refunds go through\nthem.</p>\n\n<h3>On iPhone or iPad</h3>\n<ul>\n  <li><strong>Manage or cancel:</strong> Settings → your name → Subscriptions.</li>\n  <li><strong>Request a refund:</strong> <a href=\"https://reportaproblem.apple.com\">reportaproblem.apple.com</a>.</li>\n  <li><strong>Restore a purchase:</strong> open the app's Settings screen and tap Restore Purchases.</li>\n</ul>\n\n<h3>On Android</h3>\n<ul>\n  <li><strong>Manage or cancel:</strong> Play Store → Payments &amp; subscriptions → Subscriptions.</li>\n  <li><strong>Request a refund:</strong> <a href=\"https://support.google.com/googleplay/answer/2479637\">Google Play refund request</a>.</li>\n</ul>\n\n<p>Deleting an app does <strong>not</strong> cancel its subscription — cancel it in your store account\nfirst.</p>\n\n<h2 id=\"common-questions\">Common questions</h2>\n\n<h3>Do I need an account?</h3>\n<p>No. Our apps have no sign-up and no login. Your data lives on your device.</p>\n\n<h3>Why does the app want my location?</h3>\n<p>Only apps that need it ask, and only to answer the request in front of you — BiteMatch uses it to find\nrestaurants near you. We don't store your coordinates or build any history of where you've been. You can\ndecline or revoke access in your device settings at any time.</p>\n\n<h3>Do your apps have ads?</h3>\n<p>Some of our free apps are supported by ads; our paid and subscription apps are not. Each app's store\nlisting says which it is. If you'd rather not see personalized ads, decline the tracking prompt on iOS or\nopt out of personalized ads on Android — you keep every feature either way. Details are in our\n<a href=\"/legal/privacy\">Privacy Policy</a>.</p>\n\n<h3>How do I delete my data?</h3>\n<p>Delete the app. Nearly everything our apps store is on your device and goes with it. Anything our\nservers briefly hold — like a shared swipe session — deletes itself within 24 hours. For anything else,\nemail us and we'll respond within 30 days.</p>\n\n<h3>I found a bug or have a feature request</h3>\n<p>Email us. We're a two-person studio, so we can't build everything, but we do read every message and a\nlot of what ships started as someone's email.</p>\n\n<h2 id=\"privacy-requests\">Privacy requests</h2>\n<p>To ask about, access, or delete your information, or to opt out of personalized advertising, email\n<a href=\"mailto:support@findtime.net\">support@findtime.net</a>. We respond within 30 days. Our full\n<a href=\"/legal/privacy\">Privacy Policy</a> explains what we do and don't collect.</p>\n\n<h2 id=\"company\">Company</h2>\n<p><strong>FindTime LLC</strong><br>\nDavis, California, United States<br>\n<a href=\"mailto:support@findtime.net\">support@findtime.net</a></p>",
+    "sections": [
+      {
+        "id": "billing-and-subscriptions",
+        "title": "Billing and subscriptions"
+      },
+      {
+        "id": "common-questions",
+        "title": "Common questions"
+      },
+      {
+        "id": "privacy-requests",
+        "title": "Privacy requests"
+      },
+      {
+        "id": "company",
+        "title": "Company"
+      }
+    ]
+  },
+  "/legal/privacy": {
+    "title": "Privacy Policy — FindTime",
+    "description": "FindTime's privacy policy. No accounts, no third-party analytics, and we do not sell your personal information.",
+    "html": "<h1>Privacy Policy</h1>\n<p class=\"meta\">FindTime · Effective August 1, 2026 · Last updated August 1, 2026</p>\n\n<div class=\"summary\">\n<p><strong>The short version:</strong> we don't sell your data and never have. Our apps have no user\naccounts and no third-party analytics. Most of what you do stays on your device. Some of our free apps\nshow ads — section 7 explains exactly what that involves and how to opt out. Our paid apps have none.</p>\n</div>\n\n<h2 id=\"who-we-are-and-what-this-covers\">1. Who we are and what this covers</h2>\n<p>FindTime (\"FindTime\", \"we\", \"us\") is a two-person app studio. This policy covers our website at\nfindtime.net and every app we publish, including <strong>BiteMatch</strong> and <strong>Ashfall</strong>,\nunless a specific app publishes its own policy that says otherwise. New apps we release are covered by\nthis policy from the day they ship.</p>\n<p>The data controller is <strong>FindTime LLC</strong>, Davis, California, United States. You can reach\nus any time at <a href=\"mailto:support@findtime.net\">support@findtime.net</a>.</p>\n\n<h2 id=\"our-approach\">2. Our approach</h2>\n<p>We build small apps and we collect as little as each app actually needs. Concretely, across every\nFindTime app and this website:</p>\n<ul>\n  <li>We do <strong>not</strong> require or offer user accounts. There is nothing to sign up for.</li>\n  <li>We do <strong>not</strong> collect your name, email address, phone number, contacts, photos,\n      calendar, health data, or browsing history.</li>\n  <li>We do <strong>not</strong> use third-party analytics SDKs in any app.</li>\n  <li>We do <strong>not</strong> sell your personal information. See section 8.</li>\n  <li>We do <strong>not</strong> use your data to train machine-learning models.</li>\n  <li>Some of our free apps are supported by advertising; our paid and subscription apps are not.\n      Section 7 sets out exactly what an ad-supported app shares and how to turn personalized ads off.</li>\n</ul>\n\n<h2 id=\"what-we-collect-and-why\">3. What we collect, and why</h2>\n\n<h3>Data that stays on your device</h3>\n<p>Most of what our apps remember never leaves your phone. This includes your preferences and settings,\nyour in-app history and progress (for example your taste profile, swipes, and liked restaurants in\nBiteMatch, or your save file in Ashfall), and your trial or subscription state. We cannot see any of it.\nDeleting the app deletes it.</p>\n\n<h3>Data our servers process</h3>\n<div class=\"table-scroll\" role=\"region\" aria-label=\"Privacy policy data table\" tabindex=\"0\">\n<table>\n  <thead>\n    <tr><th>Data</th><th>Why</th><th>How long we keep it</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Anonymous device identifier — a random ID generated on your device at install. Not linked to\n          your name, email, or Apple/Google account.</td>\n      <td>To tell one device from another so features like a shared session work, and to keep your\n          subscription attached to your install.</td>\n      <td>Until you delete the app.</td>\n    </tr>\n    <tr>\n      <td>Approximate location (latitude/longitude), in apps that ask for it.</td>\n      <td>Used in the moment to find places near you. See section 11 for BiteMatch specifics.</td>\n      <td>Not stored. Used to answer your request, then discarded.</td>\n    </tr>\n    <tr>\n      <td>Shared-session content — the list of options in a session and each participant's likes and\n          passes, keyed to anonymous device identifiers.</td>\n      <td>So two phones in the same session can see matches live.</td>\n      <td>Automatically deleted within 24 hours.</td>\n    </tr>\n    <tr>\n      <td>Purchase and subscription records — receipt data from Apple or Google plus an anonymous\n          app-generated identifier.</td>\n      <td>To validate purchases and know whether your subscription is active.</td>\n      <td>As long as needed to honor your purchase and meet tax and accounting obligations.</td>\n    </tr>\n    <tr>\n      <td>Advertising data, in ad-supported apps only — see section 7.</td>\n      <td>To serve and measure ads that keep a free app free.</td>\n      <td>Held by the ad provider under its own policy, not by us.</td>\n    </tr>\n    <tr>\n      <td>Standard server logs kept by our hosting providers, which can include IP address and\n          timestamp.</td>\n      <td>Security, abuse prevention, and keeping the service running. We do not use these to build\n          profiles of users.</td>\n      <td>A short period set by the provider, typically days.</td>\n    </tr>\n  </tbody>\n</table>\n</div>\n\n<h3>This website</h3>\n<p>findtime.net is a static site. It sets no cookies, runs no analytics, and embeds no trackers. Our web\nhost records standard server request logs (including IP address) for security and reliability.</p>\n\n<h2 id=\"how-we-use-data\">4. How we use data</h2>\n<p>We use the data above only to: provide and operate the features you asked for; validate and restore\npurchases; serve and measure advertising in our ad-supported apps; keep our services secure and prevent\nabuse; diagnose crashes and technical problems; and comply with law. We do not use it for automated\ndecisions that produce legal or similarly significant effects.</p>\n\n<h2 id=\"legal-bases-eea-and-uk-users\">5. Legal bases (EEA and UK users)</h2>\n<p>Where the GDPR or UK GDPR applies, we rely on: <strong>performance of a contract</strong> to deliver\nthe app features you request and to honor purchases; <strong>legitimate interests</strong> to keep our\nservices secure, prevent abuse, and fix bugs; <strong>consent</strong> for device permissions such as\nlocation and for personalized advertising, which you grant in your device settings or in a consent prompt\nand can withdraw at any time; and <strong>legal obligation</strong> where we are required to retain\nrecords.</p>\n\n<h2 id=\"third-party-services\">6. Third-party services</h2>\n<p>We use a small number of service providers to run our apps. They act on our behalf, process only what\nis described here, and are not permitted to use your data for their own purposes, except that our\nadvertising provider also acts on its own behalf as described in section 7.</p>\n<div class=\"table-scroll\" role=\"region\" aria-label=\"Privacy policy data table\" tabindex=\"0\">\n<table>\n  <thead>\n    <tr><th>Provider</th><th>What it does for us</th><th>What it receives</th></tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td><a href=\"https://supabase.com/privacy\">Supabase</a></td>\n      <td>Hosts our backend and database.</td>\n      <td>Anonymous device identifiers and short-lived shared-session data; standard request logs.</td>\n    </tr>\n    <tr>\n      <td><a href=\"https://policies.google.com/privacy\">Google Maps / Places</a></td>\n      <td>Supplies place names, ratings, and photos.</td>\n      <td>A search location and query, sent from our server. Requests are not tied to your device\n          identifier.</td>\n    </tr>\n    <tr>\n      <td><a href=\"https://www.revenuecat.com/privacy\">RevenueCat</a></td>\n      <td>Manages subscriptions and validates purchases.</td>\n      <td>Purchase receipt data and an anonymous app-generated identifier.</td>\n    </tr>\n    \n    <tr>\n      <td>[AD PROVIDER, e.g. Google AdMob]</td>\n      <td>Serves and measures ads in our ad-supported apps.</td>\n      <td>The data described in section 7.</td>\n    </tr>\n    <tr>\n      <td><a href=\"https://www.apple.com/legal/privacy/\">Apple</a> /\n          <a href=\"https://policies.google.com/privacy\">Google</a></td>\n      <td>Process all payments and distribute our apps.</td>\n      <td>Your payment details, which go directly to them. <strong>We never see or store your card\n          information.</strong></td>\n    </tr>\n  </tbody>\n</table>\n</div>\n<div class=\"callout\">\n<p><strong>We confirm that any third party with whom we share user data provides the same or equal\nprotection of user data as stated in this privacy policy.</strong></p>\n</div>\n\n<h2 id=\"advertising\">7. Advertising</h2>\n<p>Some FindTime apps are free and supported by advertising. Others are paid or subscription-based and\ncontain no ads at all. Where an app shows ads, we say so on its App Store listing and in the app itself.</p>\n\n<h3>Apps with no advertising</h3>\n<p>As of the effective date above, <strong>BiteMatch</strong> and <strong>Ashfall</strong> contain no\nadvertising and no advertising SDKs. Nothing in this section applies to them.</p>\n\n<h3>What an ad-supported app shares</h3>\n\n<p>In an ad-supported app, ads are delivered by [AD PROVIDER, e.g. Google AdMob]. To serve and measure\nthem, the ad provider receives your device's advertising identifier (the IDFA on iOS or the Advertising\nID on Android) where you have permitted its use, your IP address and coarse location, and basic device\nand app information such as device model, operating system version, and which app you are using. The ad\nprovider uses this both on our behalf and for its own purposes under its own privacy policy.</p>\n<p>We do <strong>not</strong> send advertisers your name, email address, contacts, precise saved location\nhistory, or the contents of your on-device app data such as your taste profile, saved items, or game\nsaves.</p>\n\n<h3>Your choices</h3>\n<ul>\n  <li><strong>On iOS:</strong> before an app uses your advertising identifier to track you, Apple's\n      App Tracking Transparency prompt asks your permission. If you decline, the identifier is not used\n      to track you and you will see non-personalized ads instead. Change your answer any time in\n      Settings → Privacy &amp; Security → Tracking.</li>\n  <li><strong>On Android:</strong> you can reset or delete your Advertising ID, or opt out of\n      personalized ads, in Settings → Privacy → Ads.</li>\n  <li><strong>Everywhere:</strong> declining personalized ads does not remove ads, and it does not\n      reduce the app's functionality. You still get the app; the ads are just less targeted.</li>\n  \n  <li><strong>Removing ads:</strong> where an app offers a paid tier that removes advertising, buying it\n      stops the advertising SDK from loading at all.</li>\n</ul>\n\n<h2 id=\"do-not-sell\">8. Selling and sharing your personal information</h2>\n<p>We have never sold personal information and we do not sell it, as \"sell\" is defined under the\nCalifornia Consumer Privacy Act (CCPA/CPRA) and comparable US state privacy laws.</p>\n<p>Those same laws define \"sharing\" more narrowly, as disclosing personal information for cross-context\nbehavioral advertising. In our ad-supported apps, the disclosure to our advertising provider described in\nsection 7 may qualify as sharing when you have permitted personalized ads. <strong>You can opt out at any\ntime</strong> by declining the App Tracking Transparency prompt on iOS, by opting out of personalized ads\non Android, or by emailing <a href=\"mailto:support@findtime.net\">support@findtime.net</a>. In apps\nwithout advertising, we do no sharing of any kind.</p>\n<p>Apart from the service providers listed in section 6, we do not disclose personal information to third\nparties. We may disclose data if legally compelled to do so — for example in response to a valid subpoena\nor court order — or where necessary to protect our rights or someone's safety. Given how little we hold,\nthere is usually very little to give.</p>\n\n<h2 id=\"retention-deletion-and-withdrawing-consent\">9. Retention, deletion, and withdrawing consent</h2>\n<p><strong>On-device data:</strong> delete the app and it goes with it. Apps that store a profile or save\nfile also let you reset it from within the app's settings.</p>\n<p><strong>Shared-session data:</strong> deleted automatically within 24 hours of creation. You do not\nneed to do anything.</p>\n<p><strong>Location:</strong> we don't retain it. You can revoke location access at any time in\niOS Settings → Privacy &amp; Security → Location Services, or Android Settings → Apps → Permissions.\nLocation-dependent features stop working, but the rest of the app keeps running.</p>\n<p><strong>Advertising:</strong> withdraw consent for personalized ads at any time using the controls in\nsection 7. Data already held by the ad provider is retained under its policy; the provider's opt-out and\ndeletion tools are linked from its privacy policy.</p>\n<p><strong>Purchases:</strong> managed by Apple, Google, and RevenueCat, and retained as required to\nhonor your subscription and meet our record-keeping obligations. Manage or cancel a subscription in your\nApp Store or Google Play account settings.</p>\n<p><strong>Accounts:</strong> our apps have no user accounts, so there is no account to delete. If we\never add accounts, we will provide in-app account deletion.</p>\n<p><strong>Anything else:</strong> email <a href=\"mailto:support@findtime.net\">support@findtime.net</a>\nand we will respond within 30 days.</p>\n\n<h2 id=\"your-rights\">10. Your rights</h2>\n<p>Depending on where you live, you may have the right to access, correct, delete, or receive a portable\ncopy of your personal information; to object to or restrict processing; to withdraw consent; to opt out\nof sale, sharing, or targeted advertising; and to appeal a decision we make about your request. We will\nnot discriminate against you for exercising any of these rights — in particular, opting out of\npersonalized ads never costs you features.</p>\n<p>To exercise a right, email <a href=\"mailto:support@findtime.net\">support@findtime.net</a>. Please note\nan honest limitation: because we deliberately hold no information that identifies you, we usually cannot\nlocate \"your\" data, and we may be unable to fulfill an access or deletion request beyond what deleting\nthe app already accomplishes. We are not going to start collecting more data about you in order to\nverify a request.</p>\n<p>EEA and UK users have the right to lodge a complaint with their local supervisory authority.</p>\n\n<h2 id=\"app-specific-details\">11. App-specific details</h2>\n\n<h3>BiteMatch</h3>\n<p>BiteMatch asks for your location for one purpose: finding restaurants near you. Your coordinates are\nsent to our server, which queries Google Places and returns nearby restaurants. We do not save your\ncoordinates and we build no history of where you have been. Results are cached on your device for up to\n24 hours.</p>\n<p>When you create or join a shared swipe session, our server temporarily stores the session's restaurant\nlist and each participant's likes and passes so both phones can see matches live. A session is visible\nonly to its participants, is reachable only through the room code you choose to share, and is deleted\nautomatically within 24 hours. No chat, contact, or identity information is involved. Your taste profile,\nswipe history, and liked restaurants stay on your device. BiteMatch contains no advertising.</p>\n\n<h3>Ashfall</h3>\n<p>Ashfall is entirely offline. It makes no network requests, has no backend, contains no advertising,\nand collects nothing. Your save file is stored on your device only.</p>\n\n<h2 id=\"children\">12. Children</h2>\n<p>Our apps are not directed at children under 13 (or under 16 in the EEA and UK), and we do not\nknowingly collect personal information from them. We do not knowingly serve personalized advertising to\nanyone under those ages. If you believe a child has provided us with personal information, email\n<a href=\"mailto:support@findtime.net\">support@findtime.net</a> and we will delete it.</p>\n\n<h2 id=\"international-transfers\">13. International transfers</h2>\n<p>We are based in California, United States, and our service providers operate globally, so your data\nmay be processed in countries other than your own, including the United States. Where required, we rely on\nappropriate safeguards such as the European Commission's Standard Contractual Clauses.</p>\n\n<h2 id=\"security\">14. Security</h2>\n<p>Data in transit is encrypted with TLS. Access to our backend is restricted to the two of us. Our\ndatabase enforces row-level security, so a shared session is readable only by its participants. No system\nis perfectly secure, but the strongest protection we can offer is that we hold almost nothing worth\nstealing.</p>\n\n<h2 id=\"changes-to-this-policy\">15. Changes to this policy</h2>\n<p>If we change this policy we will update this page and the effective date above. Material changes —\nparticularly any change to what we collect, to advertising, or to section 8 — will be announced in the\napp before they take effect. Previous versions are available on request.</p>\n\n<h2 id=\"contact\">16. Contact</h2>\n<p><strong>FindTime LLC</strong><br>\nDavis, California, United States<br>\n<a href=\"mailto:support@findtime.net\">support@findtime.net</a></p>",
+    "sections": [
+      {
+        "id": "who-we-are-and-what-this-covers",
+        "title": "1. Who we are and what this covers"
+      },
+      {
+        "id": "our-approach",
+        "title": "2. Our approach"
+      },
+      {
+        "id": "what-we-collect-and-why",
+        "title": "3. What we collect, and why"
+      },
+      {
+        "id": "how-we-use-data",
+        "title": "4. How we use data"
+      },
+      {
+        "id": "legal-bases-eea-and-uk-users",
+        "title": "5. Legal bases (EEA and UK users)"
+      },
+      {
+        "id": "third-party-services",
+        "title": "6. Third-party services"
+      },
+      {
+        "id": "advertising",
+        "title": "7. Advertising"
+      },
+      {
+        "id": "do-not-sell",
+        "title": "8. Selling and sharing your personal information"
+      },
+      {
+        "id": "retention-deletion-and-withdrawing-consent",
+        "title": "9. Retention, deletion, and withdrawing consent"
+      },
+      {
+        "id": "your-rights",
+        "title": "10. Your rights"
+      },
+      {
+        "id": "app-specific-details",
+        "title": "11. App-specific details"
+      },
+      {
+        "id": "children",
+        "title": "12. Children"
+      },
+      {
+        "id": "international-transfers",
+        "title": "13. International transfers"
+      },
+      {
+        "id": "security",
+        "title": "14. Security"
+      },
+      {
+        "id": "changes-to-this-policy",
+        "title": "15. Changes to this policy"
+      },
+      {
+        "id": "contact",
+        "title": "16. Contact"
+      }
+    ]
+  },
+  "/legal/terms": {
+    "title": "Terms of Use — FindTime",
+    "description": "Terms of Use for FindTime LLC apps, including subscriptions, acceptable use, and disclaimers.",
+    "html": "<h1>Terms of Use</h1>\n<p class=\"meta\">FindTime LLC · Effective August 1, 2026 · Applies to all FindTime apps unless an app\nstates otherwise.</p>\n\n<h2 id=\"agreement\">1. Agreement</h2>\n<p>By downloading or using a FindTime app, you agree to these terms with FindTime LLC (\"FindTime\", \"we\",\n\"us\"), a California limited liability company. If you don't agree, don't use the app. Where you obtained\nthe app through Apple's App Store, Apple's standard Licensed Application End User License Agreement also\napplies to the extent it doesn't conflict with these terms. You must be at least 13 years old to use our\napps.</p>\n\n<h2 id=\"subscriptions-and-purchases\">2. Subscriptions and purchases</h2>\n<p>Some features require a paid subscription (\"Pro\") offered as monthly or annual auto-renewing\nsubscriptions, or a one-time lifetime purchase. Prices are shown in the app before you buy and may vary\nby region.</p>\n<ul>\n  <li><strong>Auto-renewal.</strong> Subscriptions renew automatically unless canceled at least 24 hours\n      before the end of the current period. Your app-store account is charged for renewal within 24 hours\n      before the period ends.</li>\n  <li><strong>Free trial.</strong> If a free trial is offered, unused trial time is forfeited when you\n      purchase. Trials convert to paid subscriptions unless canceled before the trial ends.</li>\n  <li><strong>Canceling.</strong> Manage or cancel in your device's subscription settings (App Store or\n      Google Play) at any time. Deleting the app does not cancel a subscription.</li>\n  <li><strong>Refunds.</strong> Purchases are billed and refunded by Apple or Google under their\n      policies; we can't issue refunds directly.</li>\n  <li><strong>Lifetime.</strong> \"Lifetime\" means the commercial lifetime of the app — a one-time\n      purchase granting Pro features for as long as the app is offered and supported.</li>\n</ul>\n\n<h2 id=\"advertising\">3. Advertising</h2>\n<p>Some of our apps are free and supported by advertising; others are paid or subscription-based and\ncontain no ads. Where an app shows ads, we say so on its store listing and in the app. Ads are supplied\nby third-party advertising networks, and we do not control, endorse, or take responsibility for the\ncontent of any advertisement or for anything you buy from an advertiser. What an ad-supported app shares,\nand how to turn personalized ads off, is set out in our\n<a href=\"/legal/privacy\">Privacy Policy</a>. Blocking, intercepting, or artificially generating\ninteractions with ads is not permitted (see section 5).</p>\n\n<h2 id=\"restaurant-and-third-party-information\">4. Restaurant and third-party information</h2>\n<p>Restaurant names, ratings, photos, hours, and locations are provided by third parties (including\nGoogle Maps/Places) and may be incomplete, outdated, or wrong. Always confirm details — especially hours,\nallergens, and dietary information — with the business directly. FindTime has no affiliation with, and\nmakes no endorsement of, any business shown.</p>\n\n<h2 id=\"acceptable-use\">5. Acceptable use</h2>\n<p>Don't misuse the apps or their services: no reverse engineering, scraping, disrupting shared sessions,\nprobing or abusing our servers or API quotas, generating fraudulent ad interactions, or using the apps\nfor anything unlawful. We may suspend service to protect the apps or other users.</p>\n\n<h2 id=\"intellectual-property\">6. Intellectual property</h2>\n<p>The apps, their design, and their code are owned by FindTime LLC and licensed to you for personal,\nnon-commercial use on devices you own. Third-party content (including Google content) remains the\nproperty of its owners.</p>\n\n<h2 id=\"disclaimers\">7. Disclaimers</h2>\n<p>The apps are provided \"as is\" without warranties of any kind, express or implied, including fitness\nfor a particular purpose and non-infringement. We don't guarantee the apps will be uninterrupted,\nerror-free, or that any restaurant will be open, good, or to your taste.</p>\n\n<h2 id=\"limitation-of-liability\">8. Limitation of liability</h2>\n<p>To the maximum extent permitted by law, FindTime LLC will not be liable for indirect, incidental,\nspecial, consequential, or punitive damages, or for lost profits or data, arising from your use of the\napps. Our total liability for any claim is limited to the amount you paid us in the 12 months before the\nclaim.</p>\n\n<h2 id=\"termination\">9. Termination</h2>\n<p>You can stop using the apps at any time. We may suspend or terminate access for violation of these\nterms. Sections 6–8 survive termination.</p>\n\n<h2 id=\"governing-law\">10. Governing law</h2>\n<p>These terms are governed by the laws of the State of California, USA, without regard to\nconflict-of-law rules. Disputes will be resolved in the state or federal courts located in California.</p>\n\n<h2 id=\"changes\">11. Changes</h2>\n<p>We may update these terms; the effective date above will change and material updates will be noted in\nthe app. Continued use after changes means you accept them.</p>\n\n<h2 id=\"contact\">12. Contact</h2>\n<p><strong>FindTime LLC</strong><br>\nDavis, California, United States<br>\n<a href=\"mailto:support@findtime.net\">support@findtime.net</a></p>",
+    "sections": [
+      {
+        "id": "agreement",
+        "title": "1. Agreement"
+      },
+      {
+        "id": "subscriptions-and-purchases",
+        "title": "2. Subscriptions and purchases"
+      },
+      {
+        "id": "advertising",
+        "title": "3. Advertising"
+      },
+      {
+        "id": "restaurant-and-third-party-information",
+        "title": "4. Restaurant and third-party information"
+      },
+      {
+        "id": "acceptable-use",
+        "title": "5. Acceptable use"
+      },
+      {
+        "id": "intellectual-property",
+        "title": "6. Intellectual property"
+      },
+      {
+        "id": "disclaimers",
+        "title": "7. Disclaimers"
+      },
+      {
+        "id": "limitation-of-liability",
+        "title": "8. Limitation of liability"
+      },
+      {
+        "id": "termination",
+        "title": "9. Termination"
+      },
+      {
+        "id": "governing-law",
+        "title": "10. Governing law"
+      },
+      {
+        "id": "changes",
+        "title": "11. Changes"
+      },
+      {
+        "id": "contact",
+        "title": "12. Contact"
+      }
+    ]
+  }
+}
