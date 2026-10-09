@@ -208,10 +208,12 @@
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="fu">max_parallel_tools</span><span class="kw">:</span><span class="at"> </span><span class="dv">3</span></span>
 <span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">plan_loop_ceiling</span><span class="kw">:</span><span class="at"> </span><span class="dv">10</span></span></code></pre></div>
 <p><code>operational_context_budget</code> is deliberately separate from <code>context_length</code>: treating the two as one number is how a 128K model ends up overflowing under real load.</p>
+<p>For a self-hosted provider, Tenant reads the served model’s context window from <code>/v1/models</code> (vLLM’s <code>max_model_len</code>) at launch, on <code>/model use</code>, for fallbacks, helpers and the judge, whether or not the model is named in <code>config.json</code>, and uses the server’s casing of its name. An unlisted model or an unreachable server keeps the 128K default; a profile file overrides either.</p>
 <h2 id="keeping-the-prompt-small">Keeping the prompt small</h2>
 <ul>
 <li><code>"lazy_tools": true</code> in <code>config.json</code> sends the model only the ranked working set of tools plus a <code>load_tool</code> meta-tool, with a cheap name-and-description catalog of the rest in the system prompt. Off by default; worth trying on a small-context model with many tools enabled.</li>
 <li><code>/disable &lt;plugin&gt;</code> removes a plugin’s tools from the prompt entirely (no context, no compute). See <a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a>.</li>
+<li>The surfaced tools stay put for a whole session: ranking only adds tools, so the tools array at the top of the prompt changes only when it grows and a self-hosted server’s prefix cache survives between turns. <code>/clear</code>, <code>/compress</code> and automatic compaction start a fresh set. <code>"per_turn_tool_ranking": true</code> in <code>config.json</code> brings back per-turn ranking.</li>
 <li><code>/ceiling &lt;n&gt;</code> caps tool calls per turn; see <a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a>.</li>
 </ul>
 <h2 id="the-prompt-router">The prompt router</h2>

@@ -21,6 +21,8 @@ Edits by hand need a restart, except where a page says the hub re-reads them liv
 | `fallbacks` | none | ordered provider names to try on a 429, exhausted credits or an unreachable endpoint | `/model fallback` |
 | `health_gating` | off | latency gating of the fallback chain: `slow_threshold_ms`, `min_samples` (5), `alpha` (0.3), `cooldown_ms` (30000) | by hand |
 | `plan_loop_ceiling` | 16 | planner↔tool iterations per turn, per agent | `/ceiling`, **Model** page |
+| `repeat_guard` | 8 | identical rounds of the same tool calls with the same results that end a turn early; `0` or absent is the default, a negative value turns the guard off | `/ceiling repeat`, **Model** page |
+| `per_turn_tool_ranking` | false | re-rank the surfaced tools every turn instead of keeping a sticky, append-only set per session; the sticky set keeps a self-hosted server's prefix cache warm | by hand |
 | `lazy_tools` | false | send only the ranked working set of tools plus a `load_tool` meta-tool | by hand |
 | `browser_no_sandbox` | false | run Chrome without its process sandbox; accepted only inside a Linux container or user namespace | by hand |
 | `update_check` | true | serve's daily look for a newer release (one log line, nothing applied) | by hand |

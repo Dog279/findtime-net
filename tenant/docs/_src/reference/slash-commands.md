@@ -21,6 +21,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /model reload                          re-resolve the active provider's key live
 /model fallback <name...> | off        auto-route to these providers when the active one fails
 /ceiling [n]                           view or set the loop ceiling (also /loops, /loop-ceiling)
+/ceiling repeat [n|off|default]        view or set the repeat guard: identical rounds before a forced answer (0 = off)
 /reasoning [level|off]                 reasoning effort: Fugu high/xhigh, Claude Code low→max (also /effort)
 /route                                 router status and a classifier health probe
 /route configure                       wizard: big cloud model → small local model → policy

@@ -168,6 +168,18 @@
 <td><code>/ceiling</code>, <strong>Model</strong> page</td>
 </tr>
 <tr>
+<td><code>repeat_guard</code></td>
+<td>8</td>
+<td>identical rounds of the same tool calls with the same results that end a turn early; <code>0</code> or absent is the default, a negative value turns the guard off</td>
+<td><code>/ceiling repeat</code>, <strong>Model</strong> page</td>
+</tr>
+<tr>
+<td><code>per_turn_tool_ranking</code></td>
+<td>false</td>
+<td>re-rank the surfaced tools every turn instead of keeping a sticky, append-only set per session; the sticky set keeps a self-hosted server’s prefix cache warm</td>
+<td>by hand</td>
+</tr>
+<tr>
 <td><code>lazy_tools</code></td>
 <td>false</td>
 <td>send only the ranked working set of tools plus a <code>load_tool</code> meta-tool</td>

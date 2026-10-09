@@ -76,10 +76,13 @@ plan_loop_ceiling: 10
 
 `operational_context_budget` is deliberately separate from `context_length`: treating the two as one number is how a 128K model ends up overflowing under real load.
 
+For a self-hosted provider, Tenant reads the served model's context window from `/v1/models` (vLLM's `max_model_len`) at launch, on `/model use`, for fallbacks, helpers and the judge, whether or not the model is named in `config.json`, and uses the server's casing of its name. An unlisted model or an unreachable server keeps the 128K default; a profile file overrides either.
+
 ## Keeping the prompt small
 
 - `"lazy_tools": true` in `config.json` sends the model only the ranked working set of tools plus a `load_tool` meta-tool, with a cheap name-and-description catalog of the rest in the system prompt. Off by default; worth trying on a small-context model with many tools enabled.
 - `/disable <plugin>` removes a plugin's tools from the prompt entirely (no context, no compute). See [Built-in tools](/tenant/docs/mcp/built-in-tools).
+- The surfaced tools stay put for a whole session: ranking only adds tools, so the tools array at the top of the prompt changes only when it grows and a self-hosted server's prefix cache survives between turns. `/clear`, `/compress` and automatic compaction start a fresh set. `"per_turn_tool_ranking": true` in `config.json` brings back per-turn ranking.
 - `/ceiling <n>` caps tool calls per turn; see [Reasoning, ceiling &amp; turns](/tenant/docs/models/tuning).
 
 ## The prompt router

@@ -23,6 +23,23 @@ Each turn is a planner↔tool loop: the model plans, calls tools, reads results,
 
 Start around 20 to 30 for agentic work. Lower it if turns feel runaway; raise it if the agent stops before finishing long tasks. Each helper has its own budget.
 
+## The repeat guard
+
+A separate guard ends a turn early when the agent makes the same tool calls and gets the same results back several rounds in a row (as the model sees them, after the context cap). A poll whose output changes never trips it, so waiting on a job runs until the loop ceiling. When it fires, the feed says "stuck repeating the same tool calls" (event `turns/2004`), not "loop ceiling hit", and the turn is forced to synthesize an answer.
+
+```text
+/ceiling repeat           show it
+/ceiling repeat 12        allow longer identical wait loops, live
+/ceiling repeat off       only the loop ceiling ends a turn (0 works too)
+/ceiling repeat default   back to 8
+```
+
+| Setting | Default | Meaning |
+|---|---|---|
+| `repeat_guard` in `config.json` | 8 (`0` or absent) | identical rounds before a forced answer; a negative value turns the guard off |
+
+The dashboard's **Model** page has the same setting.
+
 ## Reasoning effort
 
 Two provider kinds accept an effort hint, and `/reasoning` is gated to them so a provider that would reject the field never receives it.
