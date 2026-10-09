@@ -60,6 +60,7 @@ Notes:
 | `auth.key_env` | read the key from this environment variable at launch (wins over a stored key) |
 | `auth.stored` | the key is in `credentials.json` under the provider's name |
 | `reasoning` | `""`, `high`, `xhigh` (Fugu), or `low` to `max` (Claude Code): the effort hint |
+| `vision` | `on`, `off`, or `auto` (the default, also when empty): whether the model is sent images; `auto` lets Tenant test it ([Images](/tenant/docs/models/local#images)) |
 
 The name of a provider is yours (`zai`, `local`, `gpu-box`); the kind is from the catalog.
 

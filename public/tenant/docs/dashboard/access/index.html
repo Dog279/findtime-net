@@ -104,7 +104,7 @@
 <p class="lede">Let your agent be driven from your phone. The Discord relay with button approvals, the iMessage responder with an allowlist and text approvals, and the per-surface permissions for each.</p>
 <p>Two channels let messages from a phone drive the agent. Each is deny-by-default, has its own permission map, and answers its own approvals on its own channel. The dashboard’s <strong>Access</strong> page and the slash commands below are the same switches.</p>
 <h2 id="the-discord-relay">The Discord relay</h2>
-<p>Your DMs to a bot drive the agent; the bot DMs the answers back; a dangerous action posts a card with <strong>Approve</strong> / <strong>Deny</strong> buttons. You can also DM it files (png, jpg, heic, pdf, csv, txt, mp4): they download into <code>&lt;data&gt;/relay-inbox/</code> and the agent gets the paths.</p>
+<p>Your DMs to a bot drive the agent; the bot DMs the answers back; a dangerous action posts a card with <strong>Approve</strong> / <strong>Deny</strong> buttons. You can also DM it files (png, jpg, gif, webp, heic, pdf, csv, txt, mp4): they download into <code>&lt;data&gt;/relay-inbox/</code> and the agent gets the paths. A picture also reaches a model that can see as the picture itself (<a href="/tenant/docs/first-launch/terminal-ui#images">Images</a>).</p>
 <ol type="1">
 <li>Configure the bot token and your Discord user id: <code>/configure discord</code> (see <a href="/tenant/docs/mcp/integrations">Integrations</a>).</li>
 <li>Turn the relay on:</li>
@@ -167,7 +167,7 @@
 <p>Every resolution edits the card in place (verdict, who, when; buttons disabled), so a resolved card stays as the record. Only the operator’s click counts; anyone else gets an ephemeral reply. On the dashboard, <strong>Access</strong> has the same switches: the operator, <strong>Discord may run commands</strong> (confirms first), per-area modes. <strong>Approvals &amp; safety</strong> only says that Discord requests are answered on Discord.</p>
 <p>After a restart the relay catches up: DMs sent while Tenant was down are routed oldest first, and a turn the stop cut gets “I was stopped mid-task… say <code>continue</code>” (<a href="/tenant/docs/setup/service">Run in the background</a>). A dead remote-MCP sign-in, or a log alert whose action is <code>discord</code>, arrives as a DM too.</p>
 <h2 id="the-imessage-responder">The iMessage responder</h2>
-<p>Texts from allowed handles drive the agent; it replies in the same chat. Native on a Mac (Messages’ <code>chat.db</code>, which needs Full Disk Access) or over BlueBubbles from any OS. Group chats, SMS and RCS never drive the agent and cannot approve an action.</p>
+<p>Texts from allowed handles drive the agent; it replies in the same chat. Native on a Mac (Messages’ <code>chat.db</code>, which needs Full Disk Access) or over BlueBubbles from any OS. Group chats, SMS and RCS never drive the agent and cannot approve an action. A photo (on its own or with text) drives a turn too and reaches a model that can see as the picture; one still in iCloud, not yet downloaded to the Mac, becomes a note.</p>
 <pre class="text"><code>/imessage [list]                           the allowlist and the responder&#39;s state
 /imessage on | off                         start or stop the responder live (imessage.enabled)
 /imessage passive | respond                passive: read every text, answer none; respond: answer the allowlist and the operator, 1:1 iMessage only

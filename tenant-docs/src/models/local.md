@@ -43,6 +43,22 @@ Local models write tool calls in their family's dialect. Tenant parses (and repa
 
 Set it per provider (`tool_format` in `config.json`, the wizard's **Tool format** step, `/model add <name> <endpoint> <fmt>`, `--vllm-tool-format`). A name is only a guess; a live test call is the proof. Symptoms of a wrong format: the model "answers" with JSON in prose, or tool calls arrive with missing arguments.
 
+## Images
+
+Tenant sends pictures ([pasted, dragged or attached](/tenant/docs/first-launch/terminal-ui#images), or read by a tool) only to a model that can see them. Anthropic models always can. A self-hosted model is tested when Tenant starts and when you switch models: Tenant sends it a small picture of two coloured squares and asks for the colours, left to right. The answer is logged ("Model … can see images: yes") and kept until Tenant restarts. If the test is inconclusive (the server is down, busy or rate-limited), Tenant tries again five minutes later.
+
+A hosted provider you pay per request isn't tested at launch. Its first image tests it, and that one image goes as a note; set `vision` to `auto` on the provider to test it at launch instead.
+
+`/model vision` shows the answer for the active model. If it is wrong, set it, live, and it is saved on the provider:
+
+```text
+/model vision on      # this model sees images
+/model vision off     # it doesn't: send a note with the saved path instead
+/model vision auto    # test it (the default)
+```
+
+A model that can't see gets a short note naming the image and where it was saved, so it can still say what it was sent. The dashboard's **Model** page shows the same answer.
+
 ## Embeddings
 
 ```json

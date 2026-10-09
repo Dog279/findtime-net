@@ -150,6 +150,10 @@
 <td>copy the transcript to the clipboard and a file</td>
 </tr>
 <tr>
+<td><kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>Alt</kbd>+<kbd>V</kbd> on Windows)</td>
+<td>paste the clipboard’s image into your message; with no image there, pastes text as usual (<a href="#images">Images</a>)</td>
+</tr>
+<tr>
 <td>in <code>/logs</code></td>
 <td><kbd>Enter</kbd> opens an event’s detail, <kbd>c</kbd> its correlated timeline, <kbd>Esc</kbd> or <kbd>q</kbd> goes back</td>
 </tr>
@@ -202,11 +206,25 @@
 <td>summarize old turns to free context now; <code>/expand</code> brings the latest compacted span back from the archive</td>
 </tr>
 <tr>
+<td><code>/image &lt;path&gt;</code> (<code>/img</code>)</td>
+<td>attach an image file to your next message (<a href="#images">Images</a>)</td>
+</tr>
+<tr>
 <td><code>/exit</code>, <code>/quit</code></td>
 <td>close the app</td>
 </tr>
 </tbody>
 </table>
+<h2 id="images">Images</h2>
+<p>Show the model a picture without pointing it at a file:</p>
+<ul>
+<li><strong>Paste</strong> a screenshot or a copied picture with <kbd>Ctrl</kbd>+<kbd>V</kbd>. On Windows it is <kbd>Alt</kbd>+<kbd>V</kbd>, since Windows Terminal keeps <kbd>Ctrl</kbd>+<kbd>V</kbd> for text. On Linux it needs <code>wl-paste</code> (Wayland) or <code>xclip</code> (X11).</li>
+<li><strong>Drag</strong> image files into the terminal (macOS and Linux terminals).</li>
+<li><strong><code>/image &lt;path&gt;</code></strong> attaches a file by its path.</li>
+</ul>
+<p>Each image shows in the input as <code>[image 1: name W×H]</code>; delete that text to drop the image. Send it with or without a question. PNG, JPEG, GIF and webp work everywhere, HEIC on macOS. Images are saved under <code>&lt;data&gt;/attachments/</code> (<a href="/tenant/docs/setup/directories">directories</a>), scaled to at most 1568 pixels on the long side, and kept as long as the archive keeps the conversation.</p>
+<p>The model sees the images of the last three exchanges, at most 8 per request; older ones become a short note with the saved file’s path. A model that can’t see images gets that note instead of the picture. Which models can see, and how to say so yourself, is on <a href="/tenant/docs/models/local#images">Local models</a>.</p>
+<p>Photos you send over <a href="/tenant/docs/dashboard/access">Discord or iMessage</a> reach the model the same way, and the <code>os_read_image</code> and <code>web_screenshot</code> tools show it the picture they read.</p>
 <h2 id="command-categories">Command categories</h2>
 <p>Every slash command belongs to one <code>/help</code> category. The full list with syntax is on <a href="/tenant/docs/reference/slash-commands">Slash commands</a>.</p>
 <table>
@@ -377,6 +395,7 @@
 <ul>
 <li><a href="#keys" id="toc-keys">Keys</a></li>
 <li><a href="#session-commands" id="toc-session-commands">Session commands</a></li>
+<li><a href="#images" id="toc-images">Images</a></li>
 <li><a href="#command-categories" id="toc-command-categories">Command categories</a></li>
 <li><a href="#launch-flags" id="toc-launch-flags">Launch flags</a></li>
 <li><a href="#without-the-ui" id="toc-without-the-ui">Without the UI</a></li>
