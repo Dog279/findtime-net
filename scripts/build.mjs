@@ -1,6 +1,7 @@
 import { build } from 'vite';
 import react from '@vitejs/plugin-react';
-import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -39,8 +40,19 @@ try {
     await mkdir(dirname(destination), { recursive: true });
     await writeFile(destination, html);
   }
-  await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${routes.map((route) => `<url><loc>https://findtime.net${route}</loc></url>`).join('')}</urlset>\n`);
-  console.log(`Prerendered ${routes.length} public pages and a 404 page.`);
+  // The Tenant docs are static pages copied from public/; list the current
+  // ones in the sitemap (a frozen vX.Y.Z copy points its canonical at them).
+  const docs = [];
+  const walk = async (directory, prefix) => {
+    for (const entry of await readdir(directory, { withFileTypes: true })) {
+      if (entry.isDirectory()) { if (!/^v\d/.test(entry.name)) await walk(resolve(directory, entry.name), `${prefix}${entry.name}/`); }
+      else if (entry.name === 'index.html') docs.push(prefix === '/tenant/docs/' ? prefix : prefix.replace(/\/$/, ''));
+    }
+  };
+  if (existsSync('dist/tenant/docs')) await walk(resolve('dist/tenant/docs'), '/tenant/docs/');
+  const urls = [...routes, ...docs.sort()];
+  await writeFile('dist/sitemap.xml', `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${urls.map((route) => `<url><loc>https://findtime.net${route}</loc></url>`).join('')}</urlset>\n`);
+  console.log(`Prerendered ${routes.length} public pages and a 404 page; ${docs.length} Tenant docs pages in the sitemap.`);
 } finally {
   await rm(temporaryDirectory, { recursive: true, force: true });
 }

@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>$title$ — Tenant docs — FindTime</title>
+$if(description)$<meta name="description" content="$description$">$endif$
+$if(canonical)$<link rel="canonical" href="https://findtime.net$canonical$">
+<meta property="og:title" content="$title$ — Tenant docs">
+$if(description)$<meta property="og:description" content="$description$">$endif$
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net$canonical$">$endif$
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+$nav()$
+</nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a>$if(area)$<span aria-hidden="true">/</span><a href="$area-url$">$area$</a>$endif$</p>
+<h1>$title$</h1>
+$if(description)$<p class="lede">$description$</p>$endif$
+$body$
+<div class="pagefoot">
+  $if(sourcefile)$<a href="https://github.com/Dog279/findtime-net/edit/main/$sourcefile$">Edit this page on GitHub</a>$endif$
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+$if(toc)$
+<div class="railbox">
+<div class="label">In this article</div>
+$table-of-contents$
+</div>
+$endif$
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$$/, "").replace(/\/index$$/, "").replace(/\/$$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

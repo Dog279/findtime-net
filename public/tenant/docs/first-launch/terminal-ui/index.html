@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>The terminal UI — Tenant docs — FindTime</title>
+<meta name="description" content="tenant tui is a full-screen chat with a live activity feed. Keys, the slash commands, steering a running turn, and the launch flags.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/first-launch/terminal-ui">
+<meta property="og:title" content="The terminal UI — Tenant docs">
+<meta property="og:description" content="tenant tui is a full-screen chat with a live activity feed. Keys, the slash commands, steering a running turn, and the launch flags.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/first-launch/terminal-ui">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/first-launch/setup-wizard">First launch</a></p>
+<h1>The terminal UI</h1>
+<p class="lede">tenant tui is a full-screen chat with a live activity feed. Keys, the slash commands, steering a running turn, and the launch flags.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> tui</span></code></pre></div>
+<p>The left pane is the conversation; the right pane is the activity feed: every tool call and result, approvals, route decisions, cron runs, sub-agents. A timer under the input reads <code>⏱ 1:05 · thinking… 45.0s</code> while the model answers and <code>· tools… 3.1s</code> while tools run. Type <code>/help</code> for the command index.</p>
+<h2 id="keys">Keys</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><kbd>Enter</kbd></td>
+<td>send; a line starting with <code>/</code> is a command</td>
+</tr>
+<tr>
+<td>typing mid-turn</td>
+<td>steers the agent: it addresses your message, then resumes</td>
+</tr>
+<tr>
+<td><kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd></td>
+<td>hard-stop the running turn (a stuck or looping agent); with a <code>/goal</code> active, clears the goal; never closes the app</td>
+</tr>
+<tr>
+<td><kbd>↑</kbd> / <kbd>↓</kbd></td>
+<td>recall previous prompts and commands (cursor on the first or last input line)</td>
+</tr>
+<tr>
+<td><kbd>PgUp</kbd>/<kbd>PgDn</kbd>, <kbd>Shift</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd></td>
+<td>scroll the chat pane</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>PgUp</kbd>/<kbd>PgDn</kbd>, <kbd>Alt</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd></td>
+<td>scroll the activity feed (<kbd>Ctrl</kbd>+<kbd>PgUp</kbd>/<kbd>PgDn</kbd> too)</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>S</kbd></td>
+<td>select mode: plain drag highlights text for copying in any terminal; <kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Esc</kbd> returns</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>Y</kbd></td>
+<td>copy the transcript to the clipboard and a file</td>
+</tr>
+<tr>
+<td>in <code>/logs</code></td>
+<td><kbd>Enter</kbd> opens an event’s detail, <kbd>c</kbd> its correlated timeline, <kbd>Esc</kbd> or <kbd>q</kbd> goes back</td>
+</tr>
+</tbody>
+</table>
+<p><code>/exit</code> or <code>/quit</code> is the only way out.</p>
+<h2 id="session-commands">Session commands</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/help</code></td>
+<td>the categories; <code>/help &lt;category&gt;</code> one of them (<code>/help models</code>, <code>/help safety</code>); <code>/help all</code> everything</td>
+</tr>
+<tr>
+<td><code>/whoami</code></td>
+<td>the agent id, active backend and model, from the configuration (the model’s own answer is unreliable)</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>start a fresh conversation and screen; facts, episodes and the archive are kept</td>
+</tr>
+<tr>
+<td><code>/cls</code></td>
+<td>clear the screen only</td>
+</tr>
+<tr>
+<td><code>/mouse on\|off</code></td>
+<td>on (default): the wheel scrolls the TUI; off: plain-drag selection, the wheel scrolls the terminal</td>
+</tr>
+<tr>
+<td><code>/dashboard [on\|off\|status]</code></td>
+<td>start or stop the web control panel; it launches by default and the choice persists</td>
+</tr>
+<tr>
+<td><code>/tailscale [serve\|serve off\|status]</code></td>
+<td>publish the dashboard on your tailnet over HTTPS with <code>tailscale serve</code></td>
+</tr>
+<tr>
+<td><code>/compress</code> (<code>/compact</code>)</td>
+<td>summarize old turns to free context now; <code>/expand</code> brings the latest compacted span back from the archive</td>
+</tr>
+<tr>
+<td><code>/exit</code>, <code>/quit</code></td>
+<td>close the app</td>
+</tr>
+</tbody>
+</table>
+<h2 id="command-categories">Command categories</h2>
+<p>Every slash command belongs to one <code>/help</code> category. The full list with syntax is on <a href="/tenant/docs/reference/slash-commands">Slash commands</a>.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Category</th>
+<th>Commands</th>
+<th>Covered in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Models</td>
+<td><code>/model</code>, <code>/ceiling</code>, <code>/reasoning</code>, <code>/route</code>, <code>/setup</code></td>
+<td><a href="/tenant/docs/models/providers">Models &amp; helpers</a></td>
+</tr>
+<tr>
+<td>Sub-agents</td>
+<td><code>/agents</code></td>
+<td><a href="/tenant/docs/models/helpers">Helpers</a></td>
+</tr>
+<tr>
+<td>Deep research</td>
+<td><code>/research</code>, <code>/cancel-clarify</code></td>
+<td><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></td>
+</tr>
+<tr>
+<td>Memory</td>
+<td><code>/memory</code>, <code>/compress</code>, <code>/expand</code></td>
+<td><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></td>
+</tr>
+<tr>
+<td>Tools &amp; plugins</td>
+<td><code>/tools</code>, <code>/enable</code>, <code>/disable</code>, <code>/skill</code>, <code>/configure</code>, <code>/cancel</code></td>
+<td><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a>, <a href="/tenant/docs/mcp/integrations">Integrations</a></td>
+</tr>
+<tr>
+<td>MCP connectors</td>
+<td><code>/mcp</code>, <code>/peer</code>, <code>/github</code></td>
+<td><a href="/tenant/docs/mcp/overview">MCPs &amp; tools</a></td>
+</tr>
+<tr>
+<td>Skills</td>
+<td><code>/skills</code>, <code>/ack</code>, <code>/undo</code></td>
+<td><a href="/tenant/docs/first-launch/skills">Skills</a></td>
+</tr>
+<tr>
+<td>Eval &amp; quality</td>
+<td><code>/eval</code>, <code>/judge</code></td>
+<td><a href="/tenant/docs/models/eval">Quality evals</a></td>
+</tr>
+<tr>
+<td>Safety &amp; approvals</td>
+<td><code>/permissions</code>, <code>/approve</code>, <code>/deny</code>, <code>/relay</code>, <code>/imessage</code></td>
+<td><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a>, <a href="/tenant/docs/dashboard/access">Access</a></td>
+</tr>
+<tr>
+<td>Automation</td>
+<td><code>/cron</code></td>
+<td><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></td>
+</tr>
+<tr>
+<td>Logs</td>
+<td><code>/logs</code></td>
+<td><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></td>
+</tr>
+<tr>
+<td>Goal</td>
+<td><code>/goal</code></td>
+<td><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></td>
+</tr>
+<tr>
+<td>Plan review</td>
+<td><code>/review</code></td>
+<td><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="launch-flags">Launch flags</h2>
+<p><code>tenant tui</code> takes the common flags every command takes, plus its own:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--backend echo\|vllm\|anthropic\|claudecode</code></td>
+<td>the configured provider, else <code>echo</code></td>
+<td>the inference backend; <code>echo</code> is offline and deterministic</td>
+</tr>
+<tr>
+<td><code>--agent ID</code></td>
+<td><code>main</code></td>
+<td>the agent id: its soul, settings file and memory</td>
+</tr>
+<tr>
+<td><code>--config DIR</code>, <code>--data DIR</code></td>
+<td>the OS dirs</td>
+<td>where config and data live</td>
+</tr>
+<tr>
+<td><code>--log-dir DIR</code></td>
+<td><code>&lt;data&gt;/logs</code></td>
+<td>the log book root</td>
+</tr>
+<tr>
+<td><code>--plan-loop-ceiling N</code></td>
+<td>16</td>
+<td>max planner↔︎tool iterations per turn</td>
+</tr>
+<tr>
+<td><code>--api-key KEY</code></td>
+<td></td>
+<td>a hosted provider’s key for this launch only</td>
+</tr>
+<tr>
+<td><code>--self-improve=false</code></td>
+<td>on</td>
+<td>no background distillation while the TUI is up</td>
+</tr>
+<tr>
+<td><code>--distill-every 10m</code>, <code>--profile-every 15m</code>, <code>--eval-every 24h</code></td>
+<td></td>
+<td>self-improvement cadences; eval is off until set</td>
+</tr>
+<tr>
+<td><code>--dashboard</code>, <code>--dashboard-addr ADDR</code></td>
+<td>on, <code>127.0.0.1:8770</code></td>
+<td>the web control panel</td>
+</tr>
+<tr>
+<td><code>--allow-no-memory</code></td>
+<td></td>
+<td>start even when embeddings are down</td>
+</tr>
+</tbody>
+</table>
+<p>Plugin flags (<code>--os</code>, <code>--os-allow-exec</code>, <code>--web</code>, <code>--gsuite</code>, …) are on <a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a>. A permission mode saved in <code>settings.&lt;agent&gt;.json</code> wins over an <code>--allow-*</code> flag.</p>
+<h2 id="without-the-ui">Without the UI</h2>
+<p><code>tenant chat</code> runs the same agent on stdin: one line is one turn, the answer goes to stdout. It takes the same flags.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">&#39;remember I prefer Go\nwhat do I prefer?\n&#39;</span> <span class="kw">|</span> <span class="ex">tenant</span> chat</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> web <span class="st">&quot;summarize the top story on Hacker News&quot;</span>     <span class="co"># one-shot turns scoped to one plugin</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> os <span class="st">&quot;what is using the most disk in my home dir?&quot;</span></span></code></pre></div>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/first-launch/terminal-ui.mdtenant-docs/src/first-launch/terminal-ui.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#keys" id="toc-keys">Keys</a></li>
+<li><a href="#session-commands" id="toc-session-commands">Session commands</a></li>
+<li><a href="#command-categories" id="toc-command-categories">Command categories</a></li>
+<li><a href="#launch-flags" id="toc-launch-flags">Launch flags</a></li>
+<li><a href="#without-the-ui" id="toc-without-the-ui">Without the UI</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

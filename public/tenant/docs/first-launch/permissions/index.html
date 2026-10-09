@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Permissions &amp; approvals — Tenant docs — FindTime</title>
+<meta name="description" content="Every dangerous action maps to one of eight categories you set to ask, allow or deny, per surface. Tool rules and command rules refine that per tool. Here is the whole model and every command that changes it.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/first-launch/permissions">
+<meta property="og:title" content="Permissions &amp; approvals — Tenant docs">
+<meta property="og:description" content="Every dangerous action maps to one of eight categories you set to ask, allow or deny, per surface. Tool rules and command rules refine that per tool. Here is the whole model and every command that changes it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/first-launch/permissions">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/first-launch/setup-wizard">First launch</a></p>
+<h1>Permissions &amp; approvals</h1>
+<p class="lede">Every dangerous action maps to one of eight categories you set to ask, allow or deny, per surface. Tool rules and command rules refine that per tool. Here is the whole model and every command that changes it.</p>
+<p>Tools are <strong>read by default</strong>. Anything that changes the world (runs a command, writes a file, sends a message, clicks a form) is gated: it goes through the approval broker, which resolves the action to a category, applies your rules, and either runs it, refuses it, or raises a request you answer in the terminal UI, the dashboard, Discord or iMessage.</p>
+<h2 id="the-categories">The categories</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Category</th>
+<th>Covers</th>
+<th>Dashboard name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>exec</code></td>
+<td>run shell / python / code (<code>os_exec</code>)</td>
+<td>Run commands</td>
+</tr>
+<tr>
+<td><code>write</code></td>
+<td>create and modify files (<code>os_write_file</code>, <code>os_edit_file</code>, <code>os_append_file</code>, <code>os_make_dir</code>)</td>
+<td>Change files</td>
+</tr>
+<tr>
+<td><code>destructive</code></td>
+<td>irreversible actions: <code>rm -rf</code>, format, <code>DROP</code>/<code>ALTER</code>, a web purchase or delete</td>
+<td>Irreversible actions</td>
+</tr>
+<tr>
+<td><code>web</code></td>
+<td>act on the web unprompted: click, fill, select</td>
+<td>Act on websites</td>
+</tr>
+<tr>
+<td><code>send</code></td>
+<td>outbound comms: email, iMessage, X posts, Discord messages</td>
+<td>Send messages</td>
+</tr>
+<tr>
+<td><code>egress</code></td>
+<td>sensitive tool results crossing a trust boundary (mail, files, tickets sent to an outside service)</td>
+<td>Share private data</td>
+</tr>
+<tr>
+<td><code>mcp</code></td>
+<td>the agent adopting or reconfiguring tool servers (<code>mcp_add</code>, <code>mcp_remove</code>, <code>mcp_trust</code>)</td>
+<td>Connect remote services</td>
+</tr>
+<tr>
+<td><code>sandbox</code></td>
+<td>re-running a command outside the execution sandbox after it refused it</td>
+<td>Leave the sandbox</td>
+</tr>
+</tbody>
+</table>
+<p>A tool the categories have never heard of (one from a newly adopted MCP server, say) falls to <code>destructive</code>, which always prompts, until you write a rule for it.</p>
+<h2 id="the-modes">The modes</h2>
+<table>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ask</code></td>
+<td>prompt you each time; doing nothing never says yes</td>
+</tr>
+<tr>
+<td><code>allow</code></td>
+<td>go ahead without asking</td>
+</tr>
+<tr>
+<td><code>deny</code></td>
+<td>refuse without asking</td>
+</tr>
+</tbody>
+</table>
+<p>Modes are <strong>per surface</strong>: the host (terminal UI, dashboard, serve chat, cron) has its own map, the Discord relay its own, the iMessage responder its own.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Default</th>
+<th>Stored in</th>
+<th>Set with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>host</td>
+<td><code>ask</code> for every category</td>
+<td><code>settings.&lt;agent&gt;.json</code> → <code>permissions</code></td>
+<td><code>/permissions set</code>, the dashboard’s <strong>Approvals &amp; safety</strong> page, <code>tenant permissions preset</code></td>
+</tr>
+<tr>
+<td>Discord relay</td>
+<td><code>ask</code> (buttons on a card); <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>sandbox</code> and <code>send</code> are refused outright until <code>relay.allow_exec</code> is on</td>
+<td><code>config.json</code> → <code>relay.permissions</code></td>
+<td><code>/relay permissions set</code>, the <strong>Access</strong> page</td>
+</tr>
+<tr>
+<td>iMessage responder</td>
+<td><code>deny</code> for every category</td>
+<td><code>config.json</code> → <code>imessage.permissions</code></td>
+<td><code>/imessage permissions set</code>, the <strong>Access</strong> page</td>
+</tr>
+</tbody>
+</table>
+<p>A category an update added that you have not chosen for yet is marked <strong>New</strong> and asks until you choose (<code>known_categories</code> in the settings file records what you chose).</p>
+<h2 id="changing-modes">Changing modes</h2>
+<pre class="text"><code>/permissions                        the categories&#39; modes and the tool rules
+/permissions set &lt;cat&gt; &lt;mode&gt;       e.g. /permissions set exec allow
+/relay permissions set &lt;cat&gt; &lt;mode&gt;
+/imessage permissions set &lt;cat&gt; &lt;mode&gt;</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> permissions effective [--surface local<span class="kw">|</span><span class="ex">discord</span><span class="kw">|</span><span class="ex">imessage]</span> [--agent ID]   <span class="co"># the composed authority, by agent and surface</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> permissions preset safe<span class="kw">|</span><span class="ex">balanced</span><span class="kw">|</span><span class="ex">full</span> [--surface local<span class="kw">|</span><span class="ex">discord</span><span class="kw">|</span><span class="ex">imessage]</span></span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Preset</th>
+<th>Means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>safe</code></td>
+<td>every category <code>deny</code></td>
+</tr>
+<tr>
+<td><code>balanced</code></td>
+<td>every category <code>ask</code></td>
+</tr>
+<tr>
+<td><code>full</code></td>
+<td>every category <code>allow</code>, except <code>sandbox</code>, which stays <code>ask</code></td>
+</tr>
+</tbody>
+</table>
+<p>Or by hand in <code>settings.&lt;agent&gt;.json</code>; the running hub re-reads it within about 3 seconds:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;permissions&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;exec&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;write&quot;</span><span class="fu">:</span> <span class="st">&quot;allow&quot;</span><span class="fu">,</span> <span class="dt">&quot;send&quot;</span><span class="fu">:</span> <span class="st">&quot;deny&quot;</span> <span class="fu">}</span></span></code></pre></div>
+<p>Launch flags (<code>--os-allow-exec</code>, <code>--os-allow-write</code>, <code>--gsuite-allow-send</code>, <code>--web-allow-interact</code>, …) set a category to allow for that launch. A mode saved in the settings file wins over a flag.</p>
+<blockquote>
+<p><strong>Before setting <code>exec</code> to allow,</strong> read the dashboard’s warning. Unless commands run in the sandbox, a command can change Tenant’s own settings, and the agent could then answer its own requests. Keep <code>exec</code> at <code>ask</code> unless your commands run in an enforcing sandbox profile.</p>
+</blockquote>
+<h2 id="answering-a-request">Answering a request</h2>
+<p>In the terminal UI a paused action shows a card:</p>
+<pre class="text"><code>/approve             this one action
+/approve session     the same kind of action, until Tenant restarts (or you revoke it)
+/approve always      change the category to allow (for an exec prompt: save the command&#39;s family as a rule instead)
+/deny                refuse (alias /reject)</code></pre>
+<p>The dashboard offers <strong>Allow once</strong>, <strong>Deny</strong> and, where the grant is safe to show, <strong>Allow for the rest of this session</strong>. Discord shows <strong>Approve</strong> / <strong>Deny</strong> buttons on a card; iMessage takes <code>Y &lt;nonce&gt;</code> or <code>deny &lt;nonce&gt;</code> from the operator handle. The first answer counts, wherever it came from.</p>
+<p>A request nobody answers is refused: a cron job’s after its run cap (15 minutes, <code>cron.per_run_minutes</code>), an alert investigation after 15 minutes, a Discord card after <code>relay.approval_timeout</code> (10 minutes), and every pending one when Tenant stops.</p>
+<h2 id="tool-rules">Tool rules</h2>
+<p>A rule maps a tool pattern to a mode and is checked <strong>before</strong> the category, on every surface. Rules are how you handle tools nobody pre-programmed a category for.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Matches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>write_note</code></td>
+<td>that tool on any connector (<code>mcp:…:write_note</code>) or the local tool of that name</td>
+</tr>
+<tr>
+<td><code>mcp:127.0.0.1:9000:write_note</code></td>
+<td>one tool on one server</td>
+</tr>
+<tr>
+<td><code>mcp:127.0.0.1:9000:*</code>, <code>delete_*</code>, <code>*:search_*</code></td>
+<td>many: <code>*</code> any run, <code>?</code> one character</td>
+</tr>
+</tbody>
+</table>
+<p>Most specific wins: an exact id, then a bare name, then a glob (longer literal first).</p>
+<ul>
+<li><code>allow</code> runs silently, even in an <code>ask</code> category and even for a tool the category table calls destructive.</li>
+<li><code>deny</code> refuses silently, even under a trusted connector.</li>
+<li><code>ask</code> always prompts, even past a category allow or a session grant. <strong>Approve always</strong> on such a prompt flips <strong>that rule</strong> to allow, never the category.</li>
+</ul>
+<pre class="text"><code>/permissions add &lt;tool|pattern&gt; &lt;mode&gt;     /permissions add delete_* deny
+/permissions rm &lt;pattern&gt;</code></pre>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;tool_rules&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;delete_*&quot;</span><span class="fu">:</span> <span class="st">&quot;deny&quot;</span><span class="fu">,</span> <span class="dt">&quot;write_note&quot;</span><span class="fu">:</span> <span class="st">&quot;allow&quot;</span><span class="fu">,</span> <span class="dt">&quot;mcp:127.0.0.1:9000:*&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span> <span class="fu">}</span></span></code></pre></div>
+<p>The dashboard’s <strong>Tools</strong> page has a <strong>Tool rules</strong> card. There is deliberately no agent tool for rules: the model cannot grant itself permissions. Every rule decision and change is an audit line in the <code>approvals</code> log.</p>
+<h2 id="command-rules-os_exec">Command rules (<code>os_exec</code>)</h2>
+<p>A rule can decide a shell command by its text. Patterns are <code>os_exec(&lt;glob&gt;)</code>:</p>
+<pre class="text"><code>/permissions add &quot;os_exec(brew install *)&quot; allow
+/permissions add &quot;os_exec(git push)&quot; deny        # that command alone</code></pre>
+<p>A compound command is judged per segment: any deny denies, else any ask asks, else allow when every segment matched. <strong>Always</strong> on an exec prompt saves the command’s family as such a rule instead of opening all of <code>exec</code>.</p>
+<p><strong>Read-only commands run without a prompt</strong> on the host and over Discord: <code>ls</code>, <code>cat</code>, <code>rg</code>, <code>git status</code>, <code>brew list</code>, <code>find</code> without <code>-delete</code> or <code>-exec</code>, and the like, when every segment of the command only looks, nothing redirects output and nothing escalates with <code>sudo</code>. iMessage stays deny-by-default. A category <code>deny</code> and your rules still bind. Separately, a <strong>danger classifier</strong> hard-blocks catastrophic commands whatever the mode (<code>mkfs</code>, <code>dd</code> to a device, disk erase, <code>shutdown</code>, a fork bomb, piping remote content to a shell, <code>tenant service</code> and <code>tenant update</code> from inside the agent).</p>
+<h2 id="auditing-the-posture">Auditing the posture</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> security audit <span class="pp">[--</span><span class="ss">json</span><span class="pp">]</span>     <span class="co"># non-zero exit on a critical finding</span></span></code></pre></div>
+<p>Reports what each live surface may do without approval, the browser sandbox, listeners, secret-file protection and the execution profiles. Finding ids include <code>permissions.host-exec-allow</code> (exec allowed on a surface whose commands really run on the host), <code>permissions.destructive-allow</code>, <code>permissions.sandbox-allow</code>, <code>execution.dry-run</code>, <code>execution.host</code>, <code>execution.unavailable</code>, <code>mcp.trust-annotations</code>, <code>mcp.write-bypass</code>, <code>browser.no-sandbox</code>, <code>secret.dashboard-auth</code>, <code>web.remote-reader</code>.</p>
+<p>The Security log (<code>tenant logs query "log:security"</code>, or the dashboard’s <strong>Logs</strong>) records every request, who answered it and what they answered, and every change to a mode or rule, with where it was made. It can never be cleared.</p>
+<h2 id="related-settings">Related settings</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Where</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>relay.allow_exec</code></td>
+<td><code>config.json</code>, <code>/relay exec on\|off</code></td>
+<td>unlock <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>sandbox</code> and <code>send</code> offsite; each then follows <code>relay.permissions</code></td>
+</tr>
+<tr>
+<td><code>relay.approval_timeout</code></td>
+<td><code>config.json</code>, <code>/relay timeout &lt;dur&gt;</code></td>
+<td>how long a Discord card waits (30 s to 24 h; default <code>10m</code>)</td>
+</tr>
+<tr>
+<td><code>imessage.operator</code></td>
+<td><code>config.json</code></td>
+<td>the handle whose <code>Y &lt;nonce&gt;</code> approves over iMessage; unset, an <code>ask</code> category prompts at the host instead</td>
+</tr>
+<tr>
+<td><code>cron.allow_exec</code></td>
+<td><code>config.json</code>, <code>/cron exec on\|off</code></td>
+<td>the global switch for shell jobs and exec-opted-in prompt jobs</td>
+</tr>
+<tr>
+<td><code>--os-write-roots</code>, <code>--os-deny-roots</code></td>
+<td>launch flags of the OS plugin</td>
+<td>where the file tools may write (default: Tenant’s dirs, Desktop, Documents, Downloads, the temp dir) and what they may never touch</td>
+</tr>
+</tbody>
+</table>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/first-launch/permissions.mdtenant-docs/src/first-launch/permissions.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#the-categories" id="toc-the-categories">The categories</a></li>
+<li><a href="#the-modes" id="toc-the-modes">The modes</a></li>
+<li><a href="#changing-modes" id="toc-changing-modes">Changing modes</a></li>
+<li><a href="#answering-a-request" id="toc-answering-a-request">Answering a request</a></li>
+<li><a href="#tool-rules" id="toc-tool-rules">Tool rules</a></li>
+<li><a href="#command-rules-os_exec" id="toc-command-rules-os_exec">Command rules (<code>os_exec</code>)</a></li>
+<li><a href="#auditing-the-posture" id="toc-auditing-the-posture">Auditing the posture</a></li>
+<li><a href="#related-settings" id="toc-related-settings">Related settings</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

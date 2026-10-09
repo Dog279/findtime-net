@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>CLI commands — Tenant docs — FindTime</title>
+<meta name="description" content="Every tenant subcommand, by section, with its syntax. The same registry renders tenant help, so this list is what the binary knows.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/reference/cli">
+<meta property="og:title" content="CLI commands — Tenant docs">
+<meta property="og:description" content="Every tenant subcommand, by section, with its syntax. The same registry renders tenant help, so this list is what the binary knows.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/reference/cli">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/reference/config">Reference</a></p>
+<h1>CLI commands</h1>
+<p class="lede">Every tenant subcommand, by section, with its syntax. The same registry renders tenant help, so this list is what the binary knows.</p>
+<p><code>tenant help</code> lists the jobs to start with, <code>tenant help all</code> every command by section, <code>tenant help &lt;command&gt;</code> one command’s rows, and <code>tenant &lt;command&gt; --help</code> its flags. <code>tenant completion bash|zsh|fish|powershell</code> prints a completion script.</p>
+<h2 id="common-flags">Common flags</h2>
+<p>Most commands take these; they are merged with <code>config.json</code>, and an explicit flag wins.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--backend echo\|vllm\|anthropic\|claudecode</code></td>
+<td>the configured provider, else <code>echo</code></td>
+<td>the inference backend</td>
+</tr>
+<tr>
+<td><code>--agent ID</code></td>
+<td><code>main</code></td>
+<td>the agent id</td>
+</tr>
+<tr>
+<td><code>--data DIR</code>, <code>--config DIR</code></td>
+<td>the OS dirs</td>
+<td>the data and config directories</td>
+</tr>
+<tr>
+<td><code>--log-dir DIR</code></td>
+<td><code>&lt;data&gt;/logs</code></td>
+<td>the log book root</td>
+</tr>
+<tr>
+<td><code>--vllm-endpoint URL</code>, <code>--vllm-model NAME</code>, <code>--vllm-tool-format FMT</code></td>
+<td>from config</td>
+<td>the OpenAI-compatible provider for this launch</td>
+</tr>
+<tr>
+<td><code>--embed-endpoint URL</code>, <code>--embed-model NAME</code>, <code>--embed-dim N</code></td>
+<td>from config</td>
+<td>the embedder for this launch</td>
+</tr>
+<tr>
+<td><code>--api-key KEY</code></td>
+<td></td>
+<td>a hosted provider’s key for this launch</td>
+</tr>
+<tr>
+<td><code>--plan-loop-ceiling N</code></td>
+<td>16</td>
+<td>planner↔︎tool iterations per turn</td>
+</tr>
+</tbody>
+</table>
+<p>Plugin flags (<code>--os</code>, <code>--os-allow-exec</code>, <code>--web</code>, <code>--gsuite</code>, …) are on <a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a>.</p>
+<h2 id="get-started">Get started</h2>
+<pre class="text"><code>tenant setup [--provider KIND --vllm-endpoint URL …] [--non-interactive] [--show] [--reset]
+tenant tui                                   full-screen terminal UI
+tenant chat                                  the agent loop without the UI; one stdin line is one turn
+tenant doctor [--fix] [--json]               diagnose the setup; --fix repairs what it safely can
+tenant help | help all | help &lt;command&gt;
+tenant version                               the version and build provenance
+tenant update [--version vX.Y.Z] [--yes] [--now] [--force]
+tenant update --check                        running vs latest; exit 10 when an update exists
+tenant update --rollback
+tenant completion bash|zsh|fish|powershell</code></pre>
+<h2 id="run-tenant">Run Tenant</h2>
+<pre class="text"><code>tenant serve [--dashboard-addr ADDR] [--dashboard=false] [--self-improve=false] [--distill-every D] [--profile-every D] [--eval-every D] [--allow-no-memory] [--stop-budget D]
+tenant attach [URL] [--follow] [--interval D] [--source NAME] [--level warn|error] [--trace ID] [--token T] [--since …]
+tenant service install [--print] [--system]
+tenant service status | start | stop | restart [--now] | uninstall
+tenant orchestrate &quot;&lt;task&gt;&quot; [--await-timeout 3m]        (alias: team)
+tenant logs [query|show|trace|stats|export|verify|config|clear|debug|catalog|components|recover|alerts] …
+tenant log &lt;source&gt; &quot;&lt;msg&gt;&quot; [k=v …] [--level debug|info|warn|error] [--list] [--file] [--url U] [--token T]</code></pre>
+<p><code>tenant logs</code> in full is on <a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a>.</p>
+<h2 id="memory">Memory</h2>
+<pre class="text"><code>tenant memory search &lt;query&gt;
+tenant memory import &lt;file.md&gt; [--protected] [--importance N] [--dry-run]
+tenant memory reembed
+tenant distill                               one episodic → semantic pass
+tenant consolidate [--dry-run] [--threshold T] [--holistic]
+tenant ack                                   mark the last turn good
+tenant undo                                  mark the last turn bad
+tenant skills list | show &lt;name&gt; | trust &lt;name&gt; | untrust &lt;name&gt;
+tenant skills import &lt;dir|SKILL.md&gt; [--trust]
+tenant skills export &lt;name&gt; &lt;dir&gt;
+tenant skills seed &lt;bundle&gt;                  e.g. gstack
+tenant skills auto [off|on|trusted]</code></pre>
+<h2 id="models-and-routing">Models and routing</h2>
+<pre class="text"><code>tenant model list | show &lt;name&gt;
+tenant model use &lt;name&gt; [model]
+tenant model models [name]                   what a provider serves, live
+tenant model add &lt;name&gt; --endpoint URL [--kind K] [--model M] [--tool-format F]
+tenant model remove &lt;name&gt;
+tenant route status | on | off | shadow | assisted | everywhere | stats
+tenant route export-dataset [--out FILE]
+tenant eval --subset smoke|fitness|full [--json] [--quiet] [--list] [--compaction] [--gate-only] [--judge-model M] [--baseline-check FILE] [--baseline-from FILE] [--append-trend] [--baseline-diff]</code></pre>
+<h2 id="agents-research-and-goals">Agents, research and goals</h2>
+<pre class="text"><code>tenant agents list | show &lt;name&gt;
+tenant agents add &lt;name&gt; &lt;provider&gt; [model]
+tenant agents model | rename | soul | remove …
+tenant research &quot;&lt;question&gt;&quot; [--out FILE] [--stdout] [--no-clarify] [--agents N] [--parallel N] [--depth N] [--await-timeout D] [--max-time D]
+tenant research list | show &lt;id&gt; | delete &lt;id&gt;
+tenant goal &quot;&lt;condition&gt;&quot; [--max-turns N] [--verbose]
+tenant review &lt;plan.md&gt; [--reviewers ceo,eng,design]</code></pre>
+<h2 id="one-shot-plugin-turns-read-by-default-allow--to-act">One-shot plugin turns (read by default; –allow-* to act)</h2>
+<pre class="text"><code>tenant os &quot;&lt;task&gt;&quot; [--allow-exec] [--allow-write]
+tenant web &quot;&lt;task&gt;&quot; [--show] [--allow-interact]
+tenant sql &quot;&lt;q&gt;&quot; --db FILE [--allow-write]
+tenant wiki &quot;&lt;q&gt;&quot; --dir DIR
+tenant gsuite &quot;&lt;task&gt;&quot; [--auth gcloud|sa] [--sa-json FILE] [--subject EMAIL] [--allow-send]
+tenant x &quot;&lt;task&gt;&quot; [--bearer T] [--allow-post]  |  tenant x --login [--client-id ID] [--redirect-uri URI]
+tenant imessage &quot;&lt;task&gt;&quot; [--bb-url URL] [--bb-password P] [--private-api] [--allow-send]
+tenant simplefin [--days N]</code></pre>
+<h2 id="connections-and-federation">Connections and federation</h2>
+<pre class="text"><code>tenant atlassian login --site &lt;url&gt; --client-id &lt;id&gt;
+tenant oauth-setup gsuite
+tenant mcp connect &lt;url&gt; [--trust-annotations] [--callback host:port] [--no-browser]
+tenant peer invite &lt;name&gt; (--url &lt;addr&gt; | --to &lt;peer-url&gt;) [--as &lt;self&gt;]
+tenant peer join &lt;code&gt; [--as &lt;local-name&gt;]
+tenant peer list | show &lt;name&gt; | rename &lt;old&gt; &lt;new&gt; | remove &lt;name&gt; | revoke &lt;name&gt; | rotate &lt;name&gt;
+tenant peer share &lt;name&gt; wiki=on|off memory=on|off [skills=…] [exec=…] [llm=…]
+tenant peer query &lt;name&gt; &lt;wiki|memory&gt; &quot;&lt;query&gt;&quot;
+tenant mcp-memory [--allow-writes] [--tools] [--sse-addr ADDR] [--insecure-lan] [--allow-no-memory]</code></pre>
+<h2 id="safety">Safety</h2>
+<pre class="text"><code>tenant security audit [--json]
+tenant permissions effective [--surface local|discord|imessage] [--agent ID]
+tenant permissions preset safe|balanced|full [--surface S] [--agent ID]
+tenant sandbox probe
+tenant sandbox selftest [--backend restricted|container]
+tenant sandbox redteam [--backend restricted|host]
+tenant sandbox run --surface S [--backend B] -- CMD</code></pre>
+<h2 id="your-data">Your data</h2>
+<pre class="text"><code>tenant backup [create] [--out FILE|DIR] [--encrypt] [--passphrase-file F] [--recipient age1…] [--recipients-file F] [--include-mirror] [--json]
+tenant backup verify FILE [--identity F] [--json]
+tenant backup restore FILE [--dry-run] [--yes] [--force] [--identity F]
+tenant privacy [status]
+tenant privacy retention set &lt;class&gt; &lt;days|forever&gt;
+tenant privacy prune [--yes]
+tenant privacy forget [--session ID] [--episode N] [--fact N] [--skill NAME] [--match &quot;text&quot;] [--before DATE] [--archive-month YYYY-MM] [--connector NAME] [--only-agent ID] [--yes]
+tenant privacy sessions [--limit N]
+tenant privacy export --out DIR [--no-archive] [--only-agent ID]
+tenant runs export [--out FILE]</code></pre>
+<h2 id="diagnostics-and-development">Diagnostics and development</h2>
+<pre class="text"><code>tenant mcp-selftest          spawn mcp-memory as a subprocess and exercise the protocol against it
+tenant tool-test [-q &quot;…&quot;]    one tool-calling agent turn (the hardening harness)</code></pre>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/reference/cli.mdtenant-docs/src/reference/cli.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#common-flags" id="toc-common-flags">Common flags</a></li>
+<li><a href="#get-started" id="toc-get-started">Get started</a></li>
+<li><a href="#run-tenant" id="toc-run-tenant">Run Tenant</a></li>
+<li><a href="#memory" id="toc-memory">Memory</a></li>
+<li><a href="#models-and-routing" id="toc-models-and-routing">Models and routing</a></li>
+<li><a href="#agents-research-and-goals" id="toc-agents-research-and-goals">Agents, research and goals</a></li>
+<li><a href="#one-shot-plugin-turns-read-by-default-allow--to-act" id="toc-one-shot-plugin-turns-read-by-default-allow--to-act">One-shot plugin turns (read by default; –allow-* to act)</a></li>
+<li><a href="#connections-and-federation" id="toc-connections-and-federation">Connections and federation</a></li>
+<li><a href="#safety" id="toc-safety">Safety</a></li>
+<li><a href="#your-data" id="toc-your-data">Your data</a></li>
+<li><a href="#diagnostics-and-development" id="toc-diagnostics-and-development">Diagnostics and development</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

@@ -20,6 +20,16 @@ Read `docs/design-guide.md` before changing the site's visuals. It records the o
 - Preserve `/support`, `/legal/privacy`, `/legal/terms`, and existing hash links. Keep navigation, contact links, app statuses, and billing links functional.
 - Keep the website free of analytics, session replay, external fonts, and tracking embeds. Do not invent app launch dates, store URLs, or app functionality.
 
+## Tenant and its documentation
+
+Tenant (https://github.com/Dog279/TENANT) is listed as the studio's third program: a card on the homepage, the `/tenant` route (`src/components/Tenant.jsx`, metadata in `src/content/site.js`), and the documentation at `/tenant/docs/`.
+
+- The docs are **generated static pages**, not React routes. Sources are Markdown in `tenant-docs/src/<area>/<page>.md` (YAML front matter: `title`, `description`, `area`, `area-url`; quote a value that contains `: `). `sh tenant-docs/build.sh` (pandoc: `brew install pandoc`) renders them through `tenant-docs/template.html` and the shared sidebar `tenant-docs/nav.html` into `public/tenant/docs/<area>/<page>/index.html`, which Vite copies into `dist/` unchanged. Commit the Markdown **and** the generated HTML; the host runs no pandoc.
+- Adding a page: create the `.md`, add its link to `tenant-docs/nav.html`, rebuild. Links are absolute and extensionless (`/tenant/docs/setup/install`); `npm run check` verifies every local link in the docs and that the template rendered.
+- Styles live in `public/tenant/docs/docs.css`, which repeats the header, footer and tokens of `src/index.css` because the docs do not load the React bundle. Change both when the site's values change.
+- **Versions:** `/tenant/docs/` is Latest and documents Tenant's `main`. When a Tenant release is tagged, `sh tenant-docs/build.sh && sh tenant-docs/snapshot.sh vX.Y.Z` freezes a copy under `public/tenant/docs/vX.Y.Z/` and lists it in `public/tenant/docs/versions.js`, which the header's version menu reads. Never edit a frozen copy except to correct a statement about what that version did.
+- **Facts come from the TENANT repository**, not from memory: its CLI registry (`cmd/tenant/cliregistry.go`), slash-command registry (`internal/tui/cmd_*.go`), configuration types (`internal/config/*.go`), plugin descriptors (`cmd/tenant/plugin_*.go`) and dashboard routes. A Tenant pull request that changes behavior gets a docs pull request here that references it, merged when the Tenant one merges. The TENANT repository's `CLAUDE.md` maps code areas to pages.
+
 ## Verification
 
 - Run `npm run check` after code changes. If routing changes, run the production preview and `node scripts/verify.mjs http://127.0.0.1:4173`.

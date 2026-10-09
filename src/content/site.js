@@ -9,8 +9,16 @@ export function normalizePath(path) {
   return path.replace(/\/index\.html$/, '').replace(/\/+$/, '') || '/';
 }
 
+export const tenantPage = {
+  title: 'Tenant — your own AI agent, in one binary — FindTime',
+  description: 'Tenant is an open-source, single-binary AI agent you run yourself: local or cloud models, a memory that learns, tools and MCP servers, approvals before anything dangerous, and a terminal UI, web dashboard, Discord and iMessage to drive it.',
+};
+
 export function getPage(path) {
-  return path === '/' ? homePage : documents[path];
+  if (path === '/') return homePage;
+  if (path === '/tenant') return tenantPage;
+  return documents[path];
 }
 
-export const routes = ['/', ...Object.keys(documents)];
+// The Tenant docs under /tenant/docs/ are static pages in public/, not routes.
+export const routes = ['/', '/tenant', ...Object.keys(documents)];

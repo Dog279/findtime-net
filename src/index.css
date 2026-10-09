@@ -333,3 +333,41 @@ h2 > span { color: var(--muted); }
   .no-js .nav-links { position: static; display: flex; flex-wrap: wrap; padding: 0; gap: 12px; background: transparent; border: 0; grid-column: 1 / -1; grid-row: 2; }
   .no-js .nav-links > a { font-size: 12px; min-height: 36px; }
 }
+
+/* ---------- Tenant: the third program card and the /tenant page ---------- */
+.tenant-card { grid-column: 1 / -1; background: radial-gradient(ellipse at 100% 0, #2b3a5a60, transparent 55%), #16181f; border: 1px solid #2c3140; }
+.tenant-card .app-card-top { color: #9fb0cf; }
+.tenant-icon { background: linear-gradient(135deg, #3a4b70, #1c2334); color: #a4c5ff; }
+.tenant-card .app-headline { color: #d7e1f5; }
+.tenant-card .app-description { color: #aeb6c8; min-height: 0; max-width: 62ch; }
+.tenant-card .app-status { color: #b9c6dc; }
+.tenant-card .app-status > span { background: #a4c5ff; }
+.tenant-card .offline-label { color: #b9c6dc; border-color: #44506a; }
+.tenant-card .app-details-body a { color: #c9d9f7; }
+.tenant-hero { padding: 72px 0 40px; }
+.tenant-hero h1 { font-size: clamp(44px, 6vw, 76px); line-height: 1.06; letter-spacing: -.05em; font-weight: 600; }
+.tenant-hero h1 > span { color: var(--muted); }
+.tenant-lede { color: var(--muted); font-size: 17px; line-height: 1.7; max-width: 640px; margin: 24px 0 30px; }
+.tenant-hero .hero-actions { justify-content: flex-start; margin-bottom: 36px; }
+.tenant-install { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.tenant-install-label { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.tenant-install pre { margin: 0; background: #141415; border: 1px solid var(--line); border-radius: 16px; padding: 16px 18px; font-size: 13px; line-height: 1.6; overflow: auto; color: #e4e4e9; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+.tenant-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px 48px; margin-top: 56px; }
+.tenant-mark { width: 38px; height: 38px; border-radius: 10px; display: grid; place-items: center; background: linear-gradient(135deg, #3a4b70, #1c2334); color: #a4c5ff; margin-bottom: 20px; }
+.tenant-mark svg { width: 24px; height: 24px; }
+.tenant-grid h3 { font-size: 19px; font-weight: 550; letter-spacing: -.025em; margin-bottom: 12px; }
+.tenant-grid p { font-size: 14px; line-height: 1.8; color: var(--muted); }
+.tenant-docs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+.tenant-doc { display: block; padding: 26px 28px; border-radius: 24px; background: #1b1b1e; border: 1px solid #2c2c31; transition: border-color 160ms, transform 160ms; }
+a.tenant-doc:hover { border-color: #5a6b8f; }
+a.tenant-doc:active { transform: scale(.985); }
+.tenant-doc .app-number { display: block; color: #9fb0cf; margin-bottom: 18px; }
+.tenant-doc h3 { font-size: 18px; font-weight: 550; letter-spacing: -.025em; margin-bottom: 10px; }
+.tenant-doc p { font-size: 13px; line-height: 1.7; color: var(--muted); }
+@media (max-width: 1000px) { .tenant-grid, .tenant-docs-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 700px) {
+  .tenant-install, .tenant-grid, .tenant-docs-grid { grid-template-columns: 1fr; }
+  .tenant-hero { padding-top: 48px; }
+  .tenant-hero h1 > span { display: block; }
+  .tenant-grid { gap: 32px; margin-top: 40px; }
+}
