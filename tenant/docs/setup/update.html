@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Update &amp; roll back — Tenant docs — FindTime</title>
+<meta name="description" content="tenant update moves an install to the latest release with a verified download, a pre-update backup and a way back.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/setup/update">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/setup/install">Setup &amp; install</a></p>
+<h1>Update &amp; roll back</h1>
+<p class="lede">tenant update moves an install to the latest release with a verified download, a pre-update backup and a way back.</p>
+<h2 id="commands">Commands</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> update <span class="at">--check</span>                            <span class="co"># one line: running vs latest; exit 10 when an update exists</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> update [--version vX.Y.Z] <span class="pp">[--</span><span class="ss">yes</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">now</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">force</span><span class="pp">]</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> update <span class="at">--rollback</span>                         <span class="co"># put the previous binary back</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--check</code></td>
+<td>look only; nothing changes</td>
+</tr>
+<tr>
+<td><code>--version vX.Y.Z</code></td>
+<td>install that release instead of the latest</td>
+</tr>
+<tr>
+<td><code>--yes</code></td>
+<td>skip the confirmation prompt</td>
+</tr>
+<tr>
+<td><code>--now</code></td>
+<td>restart the service without waiting for the running turn</td>
+</tr>
+<tr>
+<td><code>--force</code></td>
+<td>proceed past a warning (a version that is not newer, an unfinished previous update)</td>
+</tr>
+<tr>
+<td><code>--rollback</code></td>
+<td>swap <code>tenant.prev</code> back in and print the data-restore command</td>
+</tr>
+</tbody>
+</table>
+<p><code>TENANT_UPDATE_REPO=owner/name</code> points the check at another repository (a fork, or a private mirror).</p>
+<h2 id="what-an-update-does">What an update does</h2>
+<ol type="1">
+<li>Downloads the release archive for this OS and CPU, verifies its SHA-256 against <code>checksums.txt</code>, and verifies the cosign signature when <code>cosign</code> is on <code>PATH</code>.</li>
+<li>Runs the new binary’s <code>version</code> before touching anything.</li>
+<li>Asks (unless <code>--yes</code>).</li>
+<li>Writes an unencrypted backup of the config and data dirs to <code>&lt;data&gt;-backups/pre-update-&lt;old version&gt;.tenant-backup</code>. Credentials are left out; the previous pre-update backup is replaced.</li>
+<li>Swaps the binary in with no gap, keeping the old one as <code>tenant.prev</code> beside it.</li>
+<li>Restarts the service (<code>tenant service restart</code>, which waits for the running turn unless <code>--now</code>).</li>
+<li>Polls <code>/api/status</code> for up to 90 seconds until it reports the new version. If it never does, the old binary goes back and the service is restarted again.</li>
+</ol>
+<p>A dev build (one built from source without release stamping) refuses to update. Nothing is ever applied automatically: serve checks for a newer release once a day and files one log-book event per new tag, which <code>"update_check": false</code> in <code>config.json</code> turns off.</p>
+<h2 id="rolling-back">Rolling back</h2>
+<p>Schemas move forward only: once a new version has migrated a store, the old binary alone is not enough, and the log book refuses a database written by a newer version. Rollback is the old binary plus the pre-update backup, restored by hand:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> update <span class="at">--rollback</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service stop <span class="kw">&amp;&amp;</span> <span class="ex">tenant</span> backup restore <span class="st">&quot;&lt;data&gt;-backups/pre-update-&lt;old version&gt;.tenant-backup&quot;</span> <span class="at">--yes</span> <span class="kw">&amp;&amp;</span> <span class="ex">tenant</span> service start</span></code></pre></div>
+<p>An OS stop in the middle of an update leaves <code>&lt;data&gt;/update-state.json</code>: serve logs it at boot, <code>tenant doctor</code> warns, and the next <code>tenant update</code> clears it when the new version is what runs, or offers <code>--rollback</code>.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/setup/update.mdtenant/docs/_src/setup/update.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#commands" id="toc-commands">Commands</a></li>
+<li><a href="#what-an-update-does" id="toc-what-an-update-does">What an update does</a></li>
+<li><a href="#rolling-back" id="toc-rolling-back">Rolling back</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mark the current page in the sidebar; fold the sidebar on phones.
+  (function () {
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+  })();
+</script>
+</body>
+</html>

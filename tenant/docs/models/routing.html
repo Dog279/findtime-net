@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prompt routing — Tenant docs — FindTime</title>
+<meta name="description" content="A tiny local classifier decides, per prompt, whether a small local model or a big model should answer. Rollout stages, rules, per-agent policy, and every command.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/models/routing">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/models/providers">Models &amp; helpers</a></p>
+<h1>Prompt routing</h1>
+<p class="lede">A tiny local classifier decides, per prompt, whether a small local model or a big model should answer. Rollout stages, rules, per-agent policy, and every command.</p>
+<p>With a cheap local model and an expensive big one, routing sends each prompt to the right one. A small classifier (by default <code>hf.co/SupraLabs/Supra-Router-51M-gguf:Q4_K_M</code>, served by your local Ollama) scores every prompt for domain and complexity in a few milliseconds; the policy turns the score into a choice. Off by default, and local-only by construction: the classifier endpoint must be loopback or a provider kind marked local, so no prompt leaves the machine to be classified.</p>
+<h2 id="rollout-stages">Rollout stages</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Stage</th>
+<th><code>route.mode</code> / flags</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>off</td>
+<td><code>enabled: false</code></td>
+<td>nothing; the active provider answers everything</td>
+</tr>
+<tr>
+<td>shadow</td>
+<td><code>enabled: true, mode: "shadow"</code></td>
+<td>the classifier runs and logs what it would have chosen; the active provider still answers. Read <code>/route stats</code> for a while.</td>
+</tr>
+<tr>
+<td>assisted</td>
+<td>shadow with <code>assist: true</code></td>
+<td>shadow, plus the decision is shown in the feed so you can judge it live</td>
+</tr>
+<tr>
+<td>active</td>
+<td><code>mode: "active"</code></td>
+<td>the decision selects the model; needs <code>route.big_role</code></td>
+</tr>
+<tr>
+<td>everywhere</td>
+<td><code>mode: "everywhere"</code></td>
+<td>active for every surface, helpers included</td>
+</tr>
+</tbody>
+</table>
+<pre class="text"><code>/route                       status, plus a parseable classifier health probe
+/route configure             arrow-key wizard: big cloud model → small local model → policy
+/route on|off|shadow|assisted|everywhere
+/route force &lt;profileID&gt;     force a named profile for every prompt (a privacy override; logged)
+/route stats                 big/disagreement/failure rates, latency, breaker trips
+/route why [n]               explain the nth most recent decision (default: the latest)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> route status <span class="kw">|</span> <span class="ex">on</span> <span class="kw">|</span> <span class="ex">off</span> <span class="kw">|</span> <span class="ex">shadow</span> <span class="kw">|</span> <span class="ex">assisted</span> <span class="kw">|</span> <span class="ex">everywhere</span> <span class="kw">|</span> <span class="ex">stats</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> route export-dataset [--out FILE]     <span class="co"># the decisions as a training set</span></span></code></pre></div>
+<h2 id="configuration">Configuration</h2>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;route&quot;</span><span class="er">:</span> <span class="fu">{</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;active&quot;</span><span class="fu">,</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;big_role&quot;</span><span class="fu">:</span> <span class="st">&quot;zai&quot;</span><span class="fu">,</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;provider&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:11434&quot;</span><span class="fu">,</span> <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;hf.co/SupraLabs/Supra-Router-51M-gguf:Q4_K_M&quot;</span> <span class="fu">},</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;timeout_ms&quot;</span><span class="fu">:</span> <span class="dv">250</span><span class="fu">,</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;never_cloud&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;min_complexity_for_big&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;sticky_session&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;rules&quot;</span><span class="fu">:</span> <span class="ot">[</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span> <span class="dt">&quot;when&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;code&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">&quot;complexity_gte&quot;</span><span class="fu">:</span> <span class="dv">3</span> <span class="fu">},</span> <span class="dt">&quot;role&quot;</span><span class="fu">:</span> <span class="st">&quot;coder&quot;</span> <span class="fu">}</span><span class="ot">,</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a>    <span class="fu">{</span> <span class="dt">&quot;when&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;domain&quot;</span><span class="fu">:</span> <span class="st">&quot;math&quot;</span> <span class="fu">},</span> <span class="dt">&quot;role&quot;</span><span class="fu">:</span> <span class="st">&quot;zai&quot;</span> <span class="fu">}</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>  <span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;agents&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;discord&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;shadow&quot;</span><span class="fu">,</span> <span class="dt">&quot;never_cloud&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;log_retention_days&quot;</span><span class="fu">:</span> <span class="dv">90</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>false</td>
+<td>run the classifier at all</td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td><code>shadow</code></td>
+<td><code>shadow</code>, <code>active</code> or <code>everywhere</code></td>
+</tr>
+<tr>
+<td><code>assist</code></td>
+<td>false</td>
+<td>show decisions in the feed; only valid in shadow</td>
+</tr>
+<tr>
+<td><code>big_role</code></td>
+<td></td>
+<td>the provider name that serves “big”; required in active modes, must be a configured, wired provider</td>
+</tr>
+<tr>
+<td><code>provider.endpoint</code>, <code>provider.model</code></td>
+<td>the embed provider’s endpoint; the Supra model</td>
+<td>the classifier; must be local</td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td>250</td>
+<td>the classifier’s budget; past it the prompt goes to the default</td>
+</tr>
+<tr>
+<td><code>never_cloud</code></td>
+<td>true</td>
+<td>never route a prompt to a cloud provider the policy did not explicitly name</td>
+</tr>
+<tr>
+<td><code>min_complexity_for_big</code></td>
+<td>4</td>
+<td>the complexity score (1 to 5) at which a prompt goes big</td>
+</tr>
+<tr>
+<td><code>sticky_session</code></td>
+<td>true</td>
+<td>once a session has gone big, keep it big</td>
+</tr>
+<tr>
+<td><code>force_profile</code></td>
+<td></td>
+<td>pin one profile for every prompt (what <code>/route force</code> writes)</td>
+</tr>
+<tr>
+<td><code>rules</code></td>
+<td></td>
+<td>ordered N-way rules; the first match selects a role; no match keeps the two-way small/big behaviour</td>
+</tr>
+<tr>
+<td><code>agents</code></td>
+<td></td>
+<td>per-agent overrides of <code>mode</code> (<code>shadow</code> or <code>active</code>) and <code>never_cloud</code></td>
+</tr>
+<tr>
+<td><code>log_retention_days</code></td>
+<td>90</td>
+<td>how long <code>route-decisions.jsonl</code> is kept (negative: never pruned, at most 3650)</td>
+</tr>
+</tbody>
+</table>
+<p>A rule’s predicate is frozen at exactly four fields: <code>domain</code>, <code>complexity_gte</code>, <code>math</code>, <code>code</code>. An unknown key, or a predicate placed outside <code>when</code>, is a config error, never a silently widened rule. A rule’s <code>role</code> is a provider name.</p>
+<p>The classifier has a circuit breaker: after 3 failures it opens for 60 seconds and prompts go to the default model; <code>/route stats</code> counts the trips.</p>
+<h2 id="what-you-see">What you see</h2>
+<p>Every decision is one feed line, <code>route: shadow · small · complexity 2 · general · 85ms via 10.0.0.5:11434 (Supra-Router-51M-gguf:Q4_K_M)</code>, and one event in the <code>route</code> log with the classifier’s endpoint (host and port only), model and latency. A decision made when a helper is spawned shows as <code>route: spawn · …</code>. <code>/route why</code> explains the latest one.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/models/routing.mdtenant/docs/_src/models/routing.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#rollout-stages" id="toc-rollout-stages">Rollout stages</a></li>
+<li><a href="#configuration" id="toc-configuration">Configuration</a></li>
+<li><a href="#what-you-see" id="toc-what-you-see">What you see</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mark the current page in the sidebar; fold the sidebar on phones.
+  (function () {
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+  })();
+</script>
+</body>
+</html>

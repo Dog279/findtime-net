@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>config.json — Tenant docs — FindTime</title>
+<meta name="description" content="Every key of the machine-wide launch configuration, grouped by what it controls, with its default and the command or page that changes it.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/reference/config">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/reference/config">Reference</a></p>
+<h1>config.json</h1>
+<p class="lede">Every key of the machine-wide launch configuration, grouped by what it controls, with its default and the command or page that changes it.</p>
+<p><code>&lt;config&gt;/config.json</code> is written by <code>tenant setup</code> and read by every command; explicit flags win over it. Its shape is a documented operator interface: a field is added, never renamed, and a file from an older version loads and migrates forward. Secrets never live here (see <code>credentials.json</code> on <a href="/tenant/docs/setup/directories">Files &amp; directories</a>).</p>
+<p>Edits by hand need a restart, except where a page says the hub re-reads them live. Slash commands and the dashboard write the file for you.</p>
+<h2 id="top-level">Top level</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>schema_version</code></td>
+<td>2</td>
+<td>the layout version</td>
+<td>Tenant</td>
+</tr>
+<tr>
+<td><code>instance_id</code></td>
+<td>minted once</td>
+<td>this installation’s identity, exchanged at peer pairing</td>
+<td>Tenant</td>
+</tr>
+<tr>
+<td><code>provider</code></td>
+<td></td>
+<td>the active generation provider: a key into <code>providers</code></td>
+<td><code>/model use</code>, <code>tenant model use</code>, <strong>Model</strong> page</td>
+</tr>
+<tr>
+<td><code>providers</code></td>
+<td></td>
+<td>the configured providers (<a href="/tenant/docs/models/providers">shape</a>)</td>
+<td><code>tenant setup</code>, <code>/model add*</code>, <code>/setup</code>, <strong>Model</strong></td>
+</tr>
+<tr>
+<td><code>embed</code></td>
+<td>Ollama <code>nomic-embed-text</code>, 768</td>
+<td>the embeddings provider</td>
+<td><code>tenant setup</code>, <code>/setup</code></td>
+</tr>
+<tr>
+<td><code>fallbacks</code></td>
+<td>none</td>
+<td>ordered provider names to try on a 429, exhausted credits or an unreachable endpoint</td>
+<td><code>/model fallback</code></td>
+</tr>
+<tr>
+<td><code>health_gating</code></td>
+<td>off</td>
+<td>latency gating of the fallback chain: <code>slow_threshold_ms</code>, <code>min_samples</code> (5), <code>alpha</code> (0.3), <code>cooldown_ms</code> (30000)</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>plan_loop_ceiling</code></td>
+<td>16</td>
+<td>planner↔︎tool iterations per turn, per agent</td>
+<td><code>/ceiling</code>, <strong>Model</strong> page</td>
+</tr>
+<tr>
+<td><code>lazy_tools</code></td>
+<td>false</td>
+<td>send only the ranked working set of tools plus a <code>load_tool</code> meta-tool</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>browser_no_sandbox</code></td>
+<td>false</td>
+<td>run Chrome without its process sandbox; accepted only inside a Linux container or user namespace</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>update_check</code></td>
+<td>true</td>
+<td>serve’s daily look for a newer release (one log line, nothing applied)</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>mcp_remotes</code></td>
+<td></td>
+<td>remote MCP server URLs to reconnect at launch</td>
+<td><code>/mcp add</code>, <code>/mcp remove</code>, <strong>Remote services</strong></td>
+</tr>
+<tr>
+<td><code>mcp_trust</code></td>
+<td></td>
+<td>trust per connector URL, or <code>stdio:&lt;name&gt;</code> for a local server: <code>ask</code>, <code>allow</code>, <code>deny</code></td>
+<td><code>/mcp trust</code>, <strong>Remote services</strong></td>
+</tr>
+<tr>
+<td><code>mcp_servers</code></td>
+<td></td>
+<td>local MCP servers Tenant starts (<a href="/tenant/docs/mcp/local">fields</a>)</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>skills</code></td>
+<td></td>
+<td>per-integration <code>enabled</code> and non-secret <code>settings</code>, keyed by id</td>
+<td><code>/configure</code>, <code>tenant setup</code>, <strong>Integrations</strong></td>
+</tr>
+<tr>
+<td><code>agents</code></td>
+<td></td>
+<td>helper profiles: <code>provider</code>, <code>model</code>, <code>soul</code>, <code>description</code> (<a href="/tenant/docs/models/helpers">Helpers</a>)</td>
+<td><code>/agents</code>, <code>tenant agents</code>, <strong>Helpers</strong></td>
+</tr>
+<tr>
+<td><code>budgets</code></td>
+<td><a href="/tenant/docs/models/tuning">defaults</a></td>
+<td>the resource envelope of a team run</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>privacy.retention_days</code></td>
+<td>forever (<code>relay_inbox</code> 30)</td>
+<td>days to keep each data class</td>
+<td><code>tenant privacy retention set</code></td>
+</tr>
+<tr>
+<td><code>runs</code></td>
+<td>90 days, 10000 records</td>
+<td>durable turn records: <code>max_age_days</code>, <code>max_count</code> (negative disables pruning), <code>redact_tool_bodies</code></td>
+<td>by hand</td>
+</tr>
+</tbody>
+</table>
+<h2 id="dashboard"><code>dashboard</code></h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>on when absent</td>
+<td><code>false</code> keeps the panel off in the terminal UI (serve always has it)</td>
+<td><code>/dashboard on\|off</code></td>
+</tr>
+<tr>
+<td><code>addr</code></td>
+<td><code>127.0.0.1:8770</code></td>
+<td>the listen address; non-loopback needs TLS and a key</td>
+<td><code>--dashboard-addr</code></td>
+</tr>
+<tr>
+<td><code>tls_cert</code>, <code>tls_key</code></td>
+<td></td>
+<td>serve HTTPS</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>auth</code></td>
+<td>the generated token file</td>
+<td>your own sign-in key (32+ characters)</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>allowed_hosts</code></td>
+<td></td>
+<td>extra <code>Host</code> names a reverse proxy sends; loopback names and the Tailscale name are trusted on their own</td>
+<td>by hand</td>
+</tr>
+</tbody>
+</table>
+<h2 id="tailscale"><code>tailscale</code></h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>serve</code></td>
+<td>false</td>
+<td>re-assert <code>tailscale serve</code> for the dashboard at every launch</td>
+<td><code>/tailscale serve</code>, <code>/tailscale serve off</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="gateway"><code>gateway</code></h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mode</code></td>
+<td><code>local</code></td>
+<td>how <code>tenant mcp-memory</code> is exposed: <code>local</code> (stdio) or <code>sse</code></td>
+<td><code>tenant setup --gateway ADDR</code> / <code>--local</code></td>
+</tr>
+<tr>
+<td><code>sse_addr</code></td>
+<td></td>
+<td>the HTTP + SSE address when <code>mode</code> is <code>sse</code></td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
+<h2 id="turn_scheduler"><code>turn_scheduler</code></h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>queue_depth</code></td>
+<td>built-in</td>
+<td>the bound on unique waiting requests to the shared agent (the active turn is separate)</td>
+</tr>
+<tr>
+<td><code>source_quotas</code></td>
+<td><code>tui</code> 16, <code>dashboard</code> 16, <code>relay</code> 8, <code>peer</code> 8, <code>cron</code> 4, <code>research</code> 4</td>
+<td>queued requests per source</td>
+</tr>
+</tbody>
+</table>
+<h2 id="relay-discord"><code>relay</code> (Discord)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>false</td>
+<td>start the relay at launch</td>
+<td><code>/relay on\|off</code>, <strong>Access</strong></td>
+</tr>
+<tr>
+<td><code>operator_id</code></td>
+<td></td>
+<td>the one Discord user whose DMs drive the agent</td>
+<td><code>/relay allow</code>, <strong>Access</strong></td>
+</tr>
+<tr>
+<td><code>allow_exec</code></td>
+<td>false</td>
+<td>unlock <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>sandbox</code>, <code>send</code> offsite</td>
+<td><code>/relay exec on\|off</code>, <strong>Access</strong></td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>all <code>ask</code></td>
+<td>per-category modes for Discord turns</td>
+<td><code>/relay permissions set</code>, <strong>Access</strong></td>
+</tr>
+<tr>
+<td><code>known_categories</code></td>
+<td></td>
+<td>which categories you have chosen for</td>
+<td>Tenant</td>
+</tr>
+<tr>
+<td><code>approval_timeout</code></td>
+<td><code>10m</code></td>
+<td>how long a card waits (30 s to 24 h)</td>
+<td><code>/relay timeout</code></td>
+</tr>
+<tr>
+<td><code>card_style</code></td>
+<td><code>v2</code></td>
+<td><code>v2</code> or <code>legacy</code></td>
+<td>by hand</td>
+</tr>
+</tbody>
+</table>
+<h2 id="imessage"><code>imessage</code></h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>false</td>
+<td>start the responder at launch</td>
+<td><code>/imessage on\|off</code>, <strong>Access</strong></td>
+</tr>
+<tr>
+<td><code>passive</code></td>
+<td>false</td>
+<td>observe every text, answer none</td>
+<td><code>/imessage passive\|respond</code>, <strong>Access</strong></td>
+</tr>
+<tr>
+<td><code>allow_from</code></td>
+<td>nobody</td>
+<td>handles that may drive the agent</td>
+<td><code>/imessage allow\|deny\|clear</code>, <strong>Access</strong></td>
+</tr>
+<tr>
+<td><code>operator</code></td>
+<td></td>
+<td>the handle whose <code>Y &lt;nonce&gt;</code> approves</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>all <code>deny</code></td>
+<td>per-category modes for iMessage turns</td>
+<td><code>/imessage permissions set</code>, <strong>Access</strong></td>
+</tr>
+<tr>
+<td><code>known_categories</code></td>
+<td></td>
+<td>which categories you have chosen for</td>
+<td>Tenant</td>
+</tr>
+</tbody>
+</table>
+<h2 id="cron"><code>cron</code></h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>jobs</code></td>
+<td></td>
+<td><code>{id, name, spec, prompt, enabled, kind, exec, tz}</code> each (<a href="/tenant/docs/dashboard/cron">Scheduled jobs</a>)</td>
+<td><code>/cron</code>, the <code>cron_*</code> tools, <strong>Scheduled jobs</strong></td>
+</tr>
+<tr>
+<td><code>timezone</code></td>
+<td>local</td>
+<td>the default IANA zone</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>allow_exec</code></td>
+<td>false</td>
+<td>the kill-switch for shell and exec jobs</td>
+<td><code>/cron exec on\|off</code>, <strong>Scheduled jobs</strong></td>
+</tr>
+<tr>
+<td><code>catchup</code></td>
+<td>false</td>
+<td>fire a missed safe job once at start-up</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>per_run_minutes</code></td>
+<td>15</td>
+<td>the wall-clock cap of one run</td>
+<td>by hand</td>
+</tr>
+</tbody>
+</table>
+<h2 id="route-the-prompt-router"><code>route</code> (the prompt router)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>false</td>
+<td>run the classifier</td>
+<td><code>/route on\|off</code>, <code>/route configure</code></td>
+</tr>
+<tr>
+<td><code>mode</code></td>
+<td><code>shadow</code></td>
+<td><code>shadow</code>, <code>active</code>, <code>everywhere</code></td>
+<td><code>/route shadow\|…</code></td>
+</tr>
+<tr>
+<td><code>assist</code></td>
+<td>false</td>
+<td>show decisions in the feed (shadow only)</td>
+<td><code>/route assisted</code></td>
+</tr>
+<tr>
+<td><code>big_role</code></td>
+<td></td>
+<td>the provider name that serves “big”; required in active modes</td>
+<td><code>/route configure</code></td>
+</tr>
+<tr>
+<td><code>provider.endpoint</code>, <code>provider.model</code></td>
+<td>the embed endpoint; the Supra router model</td>
+<td>the local classifier</td>
+<td><code>/route configure</code></td>
+</tr>
+<tr>
+<td><code>timeout_ms</code></td>
+<td>250</td>
+<td>the classifier’s budget</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>never_cloud</code></td>
+<td>true</td>
+<td>never route to a cloud provider the policy did not name</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>min_complexity_for_big</code></td>
+<td>4</td>
+<td>the complexity (1 to 5) at which a prompt goes big</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>sticky_session</code></td>
+<td>true</td>
+<td>a session that went big stays big</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>force_profile</code></td>
+<td></td>
+<td>pin one profile for every prompt</td>
+<td><code>/route force</code></td>
+</tr>
+<tr>
+<td><code>rules</code></td>
+<td></td>
+<td>ordered <code>{when: {domain, complexity_gte, math, code}, role}</code></td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>agents</code></td>
+<td></td>
+<td>per-agent <code>{mode, never_cloud}</code></td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>log_retention_days</code></td>
+<td>90</td>
+<td><code>route-decisions.jsonl</code> retention (negative: never; max 3650)</td>
+<td>by hand</td>
+</tr>
+</tbody>
+</table>
+<h2 id="improve-self-improvement"><code>improve</code> (self-improvement)</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>auto_accept</code></td>
+<td><code>off</code></td>
+<td>induced skills: <code>off</code>, <code>on</code>, <code>trusted</code></td>
+<td><code>/skills auto</code>, <strong>Skills</strong></td>
+</tr>
+<tr>
+<td><code>trust_min_acks</code>, <code>trust_window</code></td>
+<td>5, 20</td>
+<td>the <code>trusted</code> gate: acks needed among the last N fed-back episodes</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>eval_every</code></td>
+<td>off</td>
+<td>the nightly eval cadence (<code>24h</code>)</td>
+<td><code>/eval every</code></td>
+</tr>
+<tr>
+<td><code>eval_at</code></td>
+<td></td>
+<td>a daily wall-clock time (<code>03:15</code>); wins over <code>eval_every</code></td>
+<td><code>/eval at</code></td>
+</tr>
+<tr>
+<td><code>profile</code></td>
+<td></td>
+<td>a helper name to run the proposer and summarizers on</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>soul_nudge_every</code></td>
+<td>off</td>
+<td>cadence of soul proposals (queued for your review)</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>reflect_every</code></td>
+<td>off</td>
+<td>cadence of the per-project reflection doc</td>
+<td>by hand</td>
+</tr>
+<tr>
+<td><code>judge</code>, <code>judge_kind</code>, <code>judge_endpoint</code>, <code>judge_key_env</code></td>
+<td>the main model</td>
+<td>a separate eval judge</td>
+<td><code>/judge set</code>, <strong>Quality</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="goal"><code>goal</code></h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>loop_ceiling</code></td>
+<td>0 (inherit)</td>
+<td>the per-turn ceiling while a <code>/goal</code> loop runs; <code>-1</code> lifts it</td>
+</tr>
+</tbody>
+</table>
+<h2 id="peer-federation"><code>peer</code> (federation)</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>listen</code></td>
+<td>off</td>
+<td>the listener address; <code>/peer serve</code> defaults to <code>0.0.0.0:9100</code> with TLS</td>
+</tr>
+<tr>
+<td><code>transport</code></td>
+<td></td>
+<td><code>overlay</code> permits plain HTTP on a non-loopback bind (you run Tailscale or WireGuard)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="logs"><code>logs</code></h2>
+<p>See <a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a> for <code>dir</code>, <code>retention_days</code>, <code>level</code>, <code>max_field_bytes</code>, <code>budget_mb</code>, <code>diagnostic</code>, <code>security</code>, <code>per_log</code>, <code>rate_limit</code> and <code>alerts</code>.</p>
+<h2 id="a-complete-example">A complete example</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;schema_version&quot;</span><span class="fu">:</span> <span class="dv">2</span><span class="fu">,</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;provider&quot;</span><span class="fu">:</span> <span class="st">&quot;zai&quot;</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;providers&quot;</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;zai&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;zai&quot;</span><span class="fu">,</span> <span class="dt">&quot;endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.z.ai/api/coding/paas/v4&quot;</span><span class="fu">,</span> <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;glm-4.6&quot;</span><span class="fu">,</span> <span class="dt">&quot;tool_format&quot;</span><span class="fu">:</span> <span class="st">&quot;openai&quot;</span><span class="fu">,</span> <span class="dt">&quot;auth&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;apikey&quot;</span><span class="fu">,</span> <span class="dt">&quot;stored&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>    <span class="dt">&quot;local&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;ollama&quot;</span><span class="fu">,</span> <span class="dt">&quot;endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:11434&quot;</span><span class="fu">,</span> <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;qwen2.5:14b&quot;</span><span class="fu">,</span> <span class="dt">&quot;tool_format&quot;</span><span class="fu">:</span> <span class="st">&quot;openai&quot;</span> <span class="fu">}</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">},</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;embed&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;ollama&quot;</span><span class="fu">,</span> <span class="dt">&quot;endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:11434&quot;</span><span class="fu">,</span> <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;nomic-embed-text&quot;</span><span class="fu">,</span> <span class="dt">&quot;embed_dim&quot;</span><span class="fu">:</span> <span class="dv">768</span> <span class="fu">},</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;fallbacks&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;local&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;plan_loop_ceiling&quot;</span><span class="fu">:</span> <span class="dv">24</span><span class="fu">,</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;dashboard&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;addr&quot;</span><span class="fu">:</span> <span class="st">&quot;127.0.0.1:8770&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tailscale&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;serve&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;relay&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">&quot;operator_id&quot;</span><span class="fu">:</span> <span class="st">&quot;123456789012345678&quot;</span><span class="fu">,</span> <span class="dt">&quot;approval_timeout&quot;</span><span class="fu">:</span> <span class="st">&quot;10m&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;imessage&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="dt">&quot;allow_from&quot;</span><span class="fu">:</span> <span class="ot">[]</span> <span class="fu">},</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cron&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;timezone&quot;</span><span class="fu">:</span> <span class="st">&quot;America/Los_Angeles&quot;</span><span class="fu">,</span> <span class="dt">&quot;jobs&quot;</span><span class="fu">:</span> <span class="ot">[</span> <span class="fu">{</span> <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;brief&quot;</span><span class="fu">,</span> <span class="dt">&quot;spec&quot;</span><span class="fu">:</span> <span class="st">&quot;0 7 * * 1-5&quot;</span><span class="fu">,</span> <span class="dt">&quot;prompt&quot;</span><span class="fu">:</span> <span class="st">&quot;Brief me on today.&quot;</span><span class="fu">,</span> <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">}</span> <span class="ot">]</span> <span class="fu">},</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;skills&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;discord&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">&quot;settings&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;operator_id&quot;</span><span class="fu">:</span> <span class="st">&quot;123456789012345678&quot;</span> <span class="fu">}</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;agents&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;Researcher&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;provider&quot;</span><span class="fu">:</span> <span class="st">&quot;zai&quot;</span><span class="fu">,</span> <span class="dt">&quot;description&quot;</span><span class="fu">:</span> <span class="st">&quot;research on the coding plan&quot;</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;improve&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;auto_accept&quot;</span><span class="fu">:</span> <span class="st">&quot;trusted&quot;</span><span class="fu">,</span> <span class="dt">&quot;eval_at&quot;</span><span class="fu">:</span> <span class="st">&quot;03:15&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;privacy&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;retention_days&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;screenshots&quot;</span><span class="fu">:</span> <span class="dv">14</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;logs&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;retention_days&quot;</span><span class="fu">:</span> <span class="dv">30</span> <span class="fu">}</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/reference/config.mdtenant/docs/_src/reference/config.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#top-level" id="toc-top-level">Top level</a></li>
+<li><a href="#dashboard" id="toc-dashboard"><code>dashboard</code></a></li>
+<li><a href="#tailscale" id="toc-tailscale"><code>tailscale</code></a></li>
+<li><a href="#gateway" id="toc-gateway"><code>gateway</code></a></li>
+<li><a href="#turn_scheduler" id="toc-turn_scheduler"><code>turn_scheduler</code></a></li>
+<li><a href="#relay-discord" id="toc-relay-discord"><code>relay</code> (Discord)</a></li>
+<li><a href="#imessage" id="toc-imessage"><code>imessage</code></a></li>
+<li><a href="#cron" id="toc-cron"><code>cron</code></a></li>
+<li><a href="#route-the-prompt-router" id="toc-route-the-prompt-router"><code>route</code> (the prompt router)</a></li>
+<li><a href="#improve-self-improvement" id="toc-improve-self-improvement"><code>improve</code> (self-improvement)</a></li>
+<li><a href="#goal" id="toc-goal"><code>goal</code></a></li>
+<li><a href="#peer-federation" id="toc-peer-federation"><code>peer</code> (federation)</a></li>
+<li><a href="#logs" id="toc-logs"><code>logs</code></a></li>
+<li><a href="#a-complete-example" id="toc-a-complete-example">A complete example</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mark the current page in the sidebar; fold the sidebar on phones.
+  (function () {
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+  })();
+</script>
+</body>
+</html>

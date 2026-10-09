@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tenant — your own AI agent, in one binary — FindTime</title>
+<meta name="description" content="Tenant is an open-source, single-binary AI agent you run yourself: local or cloud models, a memory that learns, tools and MCP servers, approvals before anything dangerous, and a terminal UI, web dashboard, Discord and iMessage to drive it.">
+<meta property="og:title" content="Tenant — your own AI agent, in one binary">
+<meta property="og:description" content="Open source. Local or cloud models. A memory that learns. Tools, MCP servers and approvals. Runs 24/7 on your own machine.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/">
+<link rel="canonical" href="https://findtime.net/tenant/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<style>
+  :root {
+    --bg: #ffffff; --bg-alt: #f6f8fa; --fg: #12151a; --muted: #5b6470;
+    --line: rgba(18,21,26,.12); --card: #ffffff;
+    --accent: #208AEF; --accent-soft: rgba(32,138,239,.08); --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1013; --bg-alt: #12171d; --fg: #e8ecf1; --muted: #9aa4b2;
+      --line: rgba(232,236,241,.14); --card: #141920;
+      --accent: #4da3f5; --accent-soft: rgba(77,163,245,.10);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.65; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 1.25rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  code { font-size: .9em; background: var(--accent-soft); padding: .1em .38em; border-radius: 5px; }
+  pre { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 10px; padding: .9rem 1.1rem;
+        overflow: auto; font-size: .88rem; line-height: 1.55; margin: 0; }
+  pre code { background: none; padding: 0; font-size: inherit; }
+
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: .55rem; font-weight: 650; letter-spacing: -.01em;
+           color: var(--fg); font-size: 1.05rem; }
+  .brand:hover { text-decoration: none; }
+  .brand svg { display: block; }
+  .brand .sep { color: var(--muted); font-weight: 400; margin: 0 .15rem; }
+  .nav-links { display: flex; gap: 1.4rem; font-size: .93rem; }
+  .nav-links a { color: var(--muted); }
+  .nav-links a:hover { color: var(--fg); text-decoration: none; }
+  @media (max-width: 560px) { .nav-links { gap: 1rem; font-size: .88rem; } .nav-links .hide-sm { display: none; } }
+
+  .hero { padding: 5rem 0 3.5rem; }
+  .eyebrow { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .06em;
+             text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
+             padding: .3rem .7rem; border-radius: 100px; margin-bottom: 1.25rem; }
+  h1 { font-size: clamp(2.1rem, 6vw, 3.2rem); line-height: 1.12; letter-spacing: -.03em; margin: 0 0 1rem; font-weight: 700; }
+  .lede { font-size: clamp(1.05rem, 2.4vw, 1.2rem); color: var(--muted); max-width: 36em; margin: 0 0 2rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .75rem; margin-bottom: 2rem; }
+  .btn { display: inline-block; padding: .65rem 1.25rem; border-radius: 10px; font-weight: 550; font-size: .95rem; border: 1px solid transparent; }
+  .btn:hover { text-decoration: none; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { filter: brightness(1.07); }
+  .btn-ghost { border-color: var(--line); color: var(--fg); }
+  .btn-ghost:hover { background: var(--bg-alt); }
+  .install { display: grid; gap: .75rem; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .install .label { font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin: 0 0 .35rem; }
+
+  section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.5rem; letter-spacing: -.02em; margin: 0 0 .5rem; font-weight: 650; }
+  .section-sub { color: var(--muted); margin: 0 0 2rem; max-width: 42em; }
+  h3 { font-size: 1.1rem; margin: 0 0 .35rem; font-weight: 600; letter-spacing: -.01em; }
+
+  .grid-3 { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+  .principle { padding: 1.25rem 1.4rem; border-left: 3px solid var(--accent); background: var(--bg-alt); border-radius: 0 10px 10px 0; }
+  .principle p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+  .docs { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); }
+  .doc { display: block; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.4rem 1.5rem; color: var(--fg); }
+  .doc:hover { text-decoration: none; border-color: var(--accent); }
+  .doc .num { font-size: .78rem; font-weight: 600; letter-spacing: .06em; color: var(--accent); text-transform: uppercase; }
+  .doc p { margin: .25rem 0 0; color: var(--muted); font-size: .93rem; }
+
+  .surfaces { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); }
+  .surface { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 1.25rem 1.4rem; }
+  .surface .icon { font-size: 1.5rem; margin-bottom: .5rem; }
+  .surface p { margin: 0; color: var(--muted); font-size: .92rem; }
+
+  .note { background: var(--accent-soft); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0; padding: 1.1rem 1.4rem; color: var(--muted); font-size: .95rem; }
+  .note strong { color: var(--fg); }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; color: var(--muted); font-size: .88rem; }
+  .foot-row { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; justify-content: space-between; align-items: center; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .foot-links a { color: var(--muted); }
+  .foot-links a:hover { color: var(--fg); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/docs/">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/#apps" class="hide-sm">Apps</a>
+      <a href="/support" class="hide-sm">Support</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="wrap hero">
+    <span class="eyebrow">Open source · MIT</span>
+    <h1>Your own AI agent, in one binary.</h1>
+    <p class="lede">
+      Tenant runs on your machine against the model you choose, local or cloud. It remembers what you
+      tell it, uses tools and MCP servers, asks before it does anything dangerous, and keeps working
+      24/7 behind a web dashboard, Discord or iMessage. No Python, no service mesh, no account.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="/tenant/docs/">Read the docs</a>
+      <a class="btn btn-ghost" href="https://github.com/Dog279/TENANT">View on GitHub</a>
+    </div>
+    <div class="install">
+      <div>
+        <p class="label">macOS or Linux</p>
+        <pre><code>curl -fsSL https://github.com/Dog279/TENANT/releases/latest/download/install.sh | sh
+tenant setup</code></pre>
+      </div>
+      <div>
+        <p class="label">Windows (PowerShell)</p>
+        <pre><code>irm https://github.com/Dog279/TENANT/releases/latest/download/install.ps1 | iex
+tenant setup</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <section id="what">
+    <div class="wrap">
+      <h2>What it is</h2>
+      <p class="section-sub">
+        A Go-native agent built on the Model Context Protocol: a planner that calls tools, a layered
+        memory that learns from interaction, first-party plugins built in, and every surface you need
+        to drive it, in one statically linked, CGO-free binary.
+      </p>
+      <div class="grid-3">
+        <div class="principle">
+          <h3>Bring your own model</h3>
+          <p>Ollama, llama.cpp, vLLM or any OpenAI-compatible server; OpenAI, Anthropic, Z.ai, xAI, Sakana, or the Claude Code CLI. Switch with one command, mix per helper, fall back automatically.</p>
+        </div>
+        <div class="principle">
+          <h3>A memory that learns</h3>
+          <p>Working set, episodes, distilled facts, skills and an append-only archive. Context compaction is reversible and auditable. A soul you own defines who the agent is.</p>
+        </div>
+        <div class="principle">
+          <h3>Safe by default</h3>
+          <p>Tools read by default. Commands, writes, sends and irreversible actions wait for your OK, per surface, with per-tool rules and an execution sandbox. A Security log that can't be cleared.</p>
+        </div>
+        <div class="principle">
+          <h3>Extend it with MCP and skills</h3>
+          <p>Connect remote MCP servers with a browser sign-in, run local ones out of process, trust each one explicitly. Teach it with Agent Skills packages it versions and trusts.</p>
+        </div>
+        <div class="principle">
+          <h3>Helpers and research</h3>
+          <p>Five specialists ship in the binary: Programmer, Researcher, Writer, QA, Strategist. Deep research fans out and returns a cited report. A goal loop keeps working until a judge says it's done.</p>
+        </div>
+        <div class="principle">
+          <h3>Runs 24/7, nothing lost</h3>
+          <p>A background service with a web dashboard. Reboots cut a turn safely and the agent picks it up when you say continue. One-file backups, retention per data class, verified updates with rollback.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="surfaces">
+    <div class="wrap">
+      <h2>Drive it from anywhere</h2>
+      <p class="section-sub">The same agent, memory and approvals behind every surface.</p>
+      <div class="surfaces">
+        <div class="surface"><div class="icon">⌨️</div><h3>Terminal UI</h3><p>Streaming chat with a live activity feed and slash commands that change everything live.</p></div>
+        <div class="surface"><div class="icon">🖥️</div><h3>Web dashboard</h3><p>Chat, approvals, memory, tools, logs, models and helpers in a browser, on your tailnet from your phone.</p></div>
+        <div class="surface"><div class="icon">💬</div><h3>Discord</h3><p>DM the bot from your phone; approve each privileged action with a tap on a card.</p></div>
+        <div class="surface"><div class="icon">📱</div><h3>iMessage</h3><p>Text it from an allowed number; an operator handle approves by reply. Mac native, or BlueBubbles anywhere.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="docs">
+    <div class="wrap">
+      <h2>Documentation</h2>
+      <p class="section-sub">Area by area: every command, every setting under the hood, and the slash command that changes it.</p>
+      <div class="docs">
+        <a class="doc" href="/tenant/docs/setup/install"><span class="num">01</span><h3>Setup &amp; install</h3><p>One-line install, files and directories, the background service, updates, backups, retention.</p></a>
+        <a class="doc" href="/tenant/docs/first-launch/setup-wizard"><span class="num">02</span><h3>First launch</h3><p>The setup wizard, doctor, the terminal UI, permissions, the sandbox, memory and skills.</p></a>
+        <a class="doc" href="/tenant/docs/models/providers"><span class="num">03</span><h3>Models &amp; helpers</h3><p>Providers, switching live, local models, fallbacks, routing, the loop ceiling, helpers and teams.</p></a>
+        <a class="doc" href="/tenant/docs/mcp/overview"><span class="num">04</span><h3>MCPs &amp; tools</h3><p>Remote and local MCP servers, trust and tool rules, built-in tools, integrations.</p></a>
+        <a class="doc" href="/tenant/docs/dashboard/overview"><span class="num">05</span><h3>Dashboard</h3><p>Sign in, every page, approvals, Discord and iMessage access, scheduled jobs, logs, the REST API.</p></a>
+        <a class="doc" href="/tenant/docs/reference/config"><span class="num">06</span><h3>Reference</h3><p>config.json and settings key by key, the CLI, the slash commands, environment variables.</p></a>
+      </div>
+    </div>
+  </section>
+
+  <section id="status">
+    <div class="wrap">
+      <div class="note">
+        <strong>Status: early but functional.</strong> Single-operator. The terminal UI, the dashboard, the plugin
+        toolset, the layered memory and compaction pipeline, multi-agent orchestration and the Discord relay
+        work today; APIs and formats may still change. The repository ships zero keys, memory or personal data:
+        everything you generate stays on your machine. Source, issues and releases are on
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>.
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. Tenant is MIT licensed.</div>
+    <div class="foot-links">
+      <a href="/tenant/docs/">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Switching models — Tenant docs — FindTime</title>
+<meta name="description" content="Change the model that answers, live, from the terminal UI, the shell or the dashboard. Pick a variant, list what a provider serves, remove one, reload a rotated key.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/models/switching">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/models/providers">Models &amp; helpers</a></p>
+<h1>Switching models</h1>
+<p class="lede">Change the model that answers, live, from the terminal UI, the shell or the dashboard. Pick a variant, list what a provider serves, remove one, reload a rotated key.</p>
+<p>The active provider is <code>provider</code> in <code>config.json</code>. Every way of switching below writes it and takes effect for the next turn, without a restart.</p>
+<h2 id="in-the-terminal-ui">In the terminal UI</h2>
+<pre class="text"><code>/model                          configured backends and the active one
+/model pick                     arrow-key picker: provider → its live model list → swap
+/model use &lt;name&gt; [&lt;model&gt;]     switch the primary; optionally pin a model variant (e.g. /model use zai glm-5.1)
+/model models [&lt;name&gt;]          the model variants a provider&#39;s endpoint serves (live)
+/model add &lt;name&gt; &lt;endpoint&gt; [fmt]
+/model add-cloud &lt;kind&gt; &lt;key&gt;   register a keyed cloud provider (zai, openai, grok, anthropic)
+/model add claudecode           register the Claude Code subscription backend (no key)
+/model remove &lt;name&gt;            delete a backend (not the active one)
+/model reload                   re-resolve the active provider&#39;s key live (after a rotation)
+/model fallback &lt;name...&gt;       auto-route to these providers when the active one fails (off to clear)
+/whoami                         which agent, backend and model you are talking to, from the configuration</code></pre>
+<p><code>/model pick</code> fetches the provider’s live model list (<code>/v1/models</code>, or the provider’s catalog for Claude Code), so a new cloud model is one keypress away.</p>
+<h2 id="from-a-shell">From a shell</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> model list                                   <span class="co"># configured backends and the active one</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> model show <span class="op">&lt;</span>name<span class="op">&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> model use <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="pp">[</span><span class="ss">model</span><span class="pp">]</span>                     <span class="co"># switch; optionally pin a variant</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> model models <span class="pp">[</span><span class="ss">name</span><span class="pp">]</span>                          <span class="co"># what the provider serves, live</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> model add <span class="op">&lt;</span>name<span class="op">&gt;</span> --endpoint URL [--kind K] [--model M] [--tool-format F]</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> model remove <span class="op">&lt;</span>name<span class="op">&gt;</span></span></code></pre></div>
+<p><code>--kind</code> defaults to <code>vllm</code>; see the <a href="/tenant/docs/models/providers">catalog</a> for the others. A shell switch is read by the next launch and by a running hub’s next turn.</p>
+<h2 id="on-the-dashboard">On the dashboard</h2>
+<p>The <strong>Model</strong> page lists every provider with <strong>Use this model</strong> and <strong>Remove</strong> (both confirm first), <strong>Reload API keys</strong>, and the two add forms. For a server on your network, give the address you would give any OpenAI-compatible app (<code>http://host:port</code>, with or without <code>/v1</code>): the page checks the server, finds its kind (vLLM, llama.cpp, Ollama, or <code>openai-compat</code>) and sends one test message that offers the model a tool. If the model answers without using the tool, it is still added with a warning; if the server refuses the test outright (an embedding model, or a model the server will not give tools), it is not added and the server’s reason is shown. Nothing changes until you press <strong>Use this model</strong> or give it to a helper.</p>
+<h2 id="what-switching-does-not-change">What switching does not change</h2>
+<ul>
+<li><strong>Helpers</strong> keep their own pinned provider and model (<a href="/tenant/docs/models/helpers">Helpers</a>). Built-in helpers inherit the primary, so they follow a switch.</li>
+<li><strong>Embeddings</strong> are a separate provider (<code>embed</code>). Switching the chat model never touches the embedding space; switching the embedder needs <code>tenant memory reembed</code>.</li>
+<li><strong>The route’s big model</strong> (<code>route.big_role</code>) is pinned by name; see <a href="/tenant/docs/models/routing">Prompt routing</a>.</li>
+</ul>
+<h2 id="degraded-mode">Degraded mode</h2>
+<p>When the active endpoint stops answering (and no <a href="/tenant/docs/models/fallbacks">fallback</a> is configured), Tenant degrades to the offline echo backend, says so in the feed and on the dashboard’s <strong>Overview</strong>, and suspends autonomous work (cron, self-improvement, relay turns). The reconnect monitor restores the model without a restart once the endpoint answers again; <code>/model reload</code> forces a re-resolve after a key rotation.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/models/switching.mdtenant/docs/_src/models/switching.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#in-the-terminal-ui" id="toc-in-the-terminal-ui">In the terminal UI</a></li>
+<li><a href="#from-a-shell" id="toc-from-a-shell">From a shell</a></li>
+<li><a href="#on-the-dashboard" id="toc-on-the-dashboard">On the dashboard</a></li>
+<li><a href="#what-switching-does-not-change" id="toc-what-switching-does-not-change">What switching does not change</a></li>
+<li><a href="#degraded-mode" id="toc-degraded-mode">Degraded mode</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mark the current page in the sidebar; fold the sidebar on phones.
+  (function () {
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+  })();
+</script>
+</body>
+</html>

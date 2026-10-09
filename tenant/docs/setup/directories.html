@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Files &amp; directories — Tenant docs — FindTime</title>
+<meta name="description" content="Where Tenant keeps its configuration, secrets, memory, logs and work, on each OS.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/setup/directories">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/setup/install">Setup &amp; install</a></p>
+<h1>Files &amp; directories</h1>
+<p class="lede">Where Tenant keeps its configuration, secrets, memory, logs and work, on each OS.</p>
+<p>Tenant uses two directories: a <strong>config dir</strong> for what you configure and a <strong>data dir</strong> for what it learns and records. Nothing is ever written inside the repository or next to the binary.</p>
+<h2 id="locations">Locations</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>Config dir <code>&lt;config&gt;</code></th>
+<th>Data dir <code>&lt;data&gt;</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>macOS</td>
+<td><code>~/Library/Application Support/tenant</code></td>
+<td><code>~/Library/Application Support/tenant</code> (the same folder)</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>$XDG_CONFIG_HOME/tenant</code>, else <code>~/.config/tenant</code></td>
+<td><code>$XDG_DATA_HOME/tenant</code>, else <code>~/.local/share/tenant</code></td>
+</tr>
+<tr>
+<td>Windows</td>
+<td><code>%AppData%\tenant</code> (<code>C:\Users\&lt;you&gt;\AppData\Roaming\tenant</code>)</td>
+<td><code>%LocalAppData%\tenant</code> (<code>C:\Users\&lt;you&gt;\AppData\Local\tenant</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>Every command takes <code>--config DIR</code> and <code>--data DIR</code> to use other directories. The background service pins the directories it was installed with into its unit, and <code>tenant doctor</code> warns if the ones you pass no longer match.</p>
+<p>A Windows service runs as a service account, so its directories are that account’s: <code>C:\Windows\System32\config\systemprofile\AppData\Roaming\tenant</code> for SYSTEM, <code>C:\Windows\ServiceProfiles\LocalService\AppData\Roaming\tenant</code> for LOCAL SERVICE, unless the service passes <code>--config</code>.</p>
+<h2 id="the-config-dir">The config dir</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Path</th>
+<th>What</th>
+<th>Who writes it</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>config.json</code></td>
+<td>the launch configuration: providers, embeddings, dashboard, relay, cron jobs, MCP servers, helpers, routing, logs (<a href="/tenant/docs/reference/config">reference</a>)</td>
+<td><code>tenant setup</code>, slash commands, the dashboard, you</td>
+</tr>
+<tr>
+<td><code>credentials.json</code></td>
+<td>API keys and integration secrets, keyed by provider id or <code>skill:&lt;name&gt;:&lt;field&gt;</code>; owner-only (<code>0600</code>, or a protected DACL on Windows)</td>
+<td><code>tenant setup</code>, <code>/model add-cloud</code>, <code>/configure</code>, the <strong>Provider keys</strong> page</td>
+</tr>
+<tr>
+<td><code>settings.&lt;agent&gt;.json</code></td>
+<td>the per-agent runtime settings: enabled tools, permission modes, tool rules, exec profiles and exceptions (<a href="/tenant/docs/reference/settings">reference</a>)</td>
+<td><code>/enable</code>, <code>/permissions</code>, the dashboard, you (re-read live)</td>
+</tr>
+<tr>
+<td><code>dashboard-auth-token</code></td>
+<td>the dashboard sign-in key, created on first start</td>
+<td>Tenant</td>
+</tr>
+<tr>
+<td><code>soul/&lt;agent&gt;.toml</code></td>
+<td>the agent’s identity and operating rules (T0)</td>
+<td><code>/memory soul import</code>, the <strong>Memory</strong> page</td>
+</tr>
+<tr>
+<td><code>soul/proposed/*.toml</code></td>
+<td>soul changes the self-improvement loop proposes for your review; never applied on their own</td>
+<td>Tenant</td>
+</tr>
+<tr>
+<td><code>profiles/*.yaml</code></td>
+<td>your overrides of the built-in model profiles (context budgets, reserves)</td>
+<td>you</td>
+</tr>
+<tr>
+<td><code>mcp/</code></td>
+<td>the OAuth token cache for remote MCP connectors</td>
+<td>Tenant</td>
+</tr>
+</tbody>
+</table>
+<p>Secrets never live in <code>config.json</code>. <code>tenant doctor</code> checks the permissions of every secret file and <code>tenant doctor --fix</code> repairs them. The file tools the agent uses refuse to read or write <code>credentials.json</code>, <code>settings.&lt;agent&gt;.json</code> and the token file.</p>
+<h2 id="the-data-dir">The data dir</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Path</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>episodes.db</code></td>
+<td>conversation turns (episodic memory, T2)</td>
+</tr>
+<tr>
+<td><code>facts.db</code></td>
+<td>distilled facts (semantic memory, T3)</td>
+</tr>
+<tr>
+<td><code>skills.db</code></td>
+<td>the skill library (T4), with trust, origin and history</td>
+</tr>
+<tr>
+<td><code>usage.db</code></td>
+<td>the token usage ledger</td>
+</tr>
+<tr>
+<td><code>runs.db</code></td>
+<td>durable records of every turn (<code>tenant runs export</code>, <code>tenant logs trace</code>)</td>
+</tr>
+<tr>
+<td><code>tenant_meta.db</code></td>
+<td>scheduler cursors and small durable state</td>
+</tr>
+<tr>
+<td><code>archive/YYYY-MM/&lt;session&gt;.jsonl</code></td>
+<td>the append-only archive of every message as it was written (T5)</td>
+</tr>
+<tr>
+<td><code>logs/&lt;source&gt;/YYYY-MM-DD.log</code></td>
+<td>the log book’s text files, one folder per subsystem</td>
+</tr>
+<tr>
+<td><code>logs/logbook.db</code></td>
+<td>the log book’s store, which the dashboard, <code>tenant logs</code> and alerts read</td>
+</tr>
+<tr>
+<td><code>research/</code></td>
+<td>deep-research runs and their reports</td>
+</tr>
+<tr>
+<td><code>screenshots/</code></td>
+<td>browser screenshots the web plugin took</td>
+</tr>
+<tr>
+<td><code>relay-inbox/</code></td>
+<td>files you sent the agent over Discord</td>
+</tr>
+<tr>
+<td><code>eval-artifacts/</code></td>
+<td>eval reports, <code>baseline.&lt;subset&gt;.json</code> and <code>trend.jsonl</code></td>
+</tr>
+<tr>
+<td><code>route-decisions.jsonl</code></td>
+<td>the prompt router’s decision log</td>
+</tr>
+<tr>
+<td><code>cron-history.json</code></td>
+<td>run history of scheduled jobs (their definitions are in <code>config.json</code>)</td>
+</tr>
+<tr>
+<td><code>discord-cursor.json</code>, <code>interrupted.json</code></td>
+<td>what Tenant needs to catch up after a restart</td>
+</tr>
+<tr>
+<td><code>update-state.json</code></td>
+<td>present only while an update is in progress or was interrupted</td>
+</tr>
+<tr>
+<td><code>proc/</code></td>
+<td>logs of background processes started with <code>os_exec background: true</code></td>
+</tr>
+<tr>
+<td><code>mcp/&lt;name&gt;/</code></td>
+<td>the work dir of each local MCP server</td>
+</tr>
+<tr>
+<td><code>x-token.json</code></td>
+<td>the X (Twitter) OAuth token</td>
+</tr>
+<tr>
+<td><code>.tenant.lock</code></td>
+<td>held shared by every running command, exclusively by <code>tenant backup restore</code></td>
+</tr>
+</tbody>
+</table>
+<p>Next to the data dir, <code>tenant update</code> keeps <code>&lt;data&gt;-backups/pre-update-&lt;version&gt;.tenant-backup</code>.</p>
+<h2 id="retention">Retention</h2>
+<p>Each class of data has its own retention: <code>tenant privacy</code> shows it and <code>tenant privacy retention set &lt;class&gt; &lt;days|forever&gt;</code> changes it. Logs are kept 30 days by default (<code>logs.retention_days</code>), run records 90 days (<code>runs.max_age_days</code>), route decisions 90 days (<code>route.log_retention_days</code>). See <a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a>.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/setup/directories.mdtenant/docs/_src/setup/directories.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#locations" id="toc-locations">Locations</a></li>
+<li><a href="#the-config-dir" id="toc-the-config-dir">The config dir</a></li>
+<li><a href="#the-data-dir" id="toc-the-data-dir">The data dir</a></li>
+<li><a href="#retention" id="toc-retention">Retention</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Mark the current page in the sidebar; fold the sidebar on phones.
+  (function () {
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+  })();
+</script>
+</body>
+</html>
