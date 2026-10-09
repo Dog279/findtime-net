@@ -4,37 +4,182 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Support — FindTime</title>
+<meta name="description" content="Get help with a FindTime app: bug reports, billing and subscriptions, privacy requests, and how to contact us.">
+<link rel="canonical" href="https://findtime.net/support">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; line-height: 1.6; }
-  h1 { font-size: 1.8rem; }
-  h2 { font-size: 1.15rem; margin-top: 2rem; }
-  a { color: #208AEF; }
-  .card { border: 1px solid rgba(128,128,128,.3); border-radius: 10px; padding: 1rem 1.25rem; margin: 1rem 0; }
-  footer { margin-top: 3rem; opacity: .6; font-size: .85rem; }
+  :root {
+    --bg: #ffffff; --bg-alt: #f6f8fa; --fg: #12151a; --muted: #5b6470;
+    --line: rgba(18,21,26,.12); --card: #ffffff;
+    --accent: #208AEF; --accent-soft: rgba(32,138,239,.08); --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1013; --bg-alt: #12171d; --fg: #e8ecf1; --muted: #9aa4b2;
+      --line: rgba(232,236,241,.14); --card: #141920;
+      --accent: #4da3f5; --accent-soft: rgba(77,163,245,.10);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 1.25rem; }
+  .doc { max-width: 740px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: .55rem; font-weight: 650;
+           letter-spacing: -.01em; color: var(--fg); font-size: 1.05rem; }
+  .brand:hover { text-decoration: none; }
+  .nav-links { display: flex; gap: 1.4rem; font-size: .93rem; }
+  .nav-links a { color: var(--muted); }
+  .nav-links a:hover { color: var(--fg); text-decoration: none; }
+  @media (max-width: 560px) { .nav-links { gap: 1rem; font-size: .88rem; } .nav-links .hide-sm { display: none; } }
+
+  h1 { font-size: clamp(1.9rem, 5vw, 2.4rem); letter-spacing: -.025em; margin: 2.5rem 0 .5rem; font-weight: 700; }
+  .lede { color: var(--muted); font-size: 1.05rem; margin: 0 0 2rem; }
+  h2 { font-size: 1.25rem; letter-spacing: -.015em; margin: 2.75rem 0 .75rem; font-weight: 650;
+       padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  h3 { font-size: 1.02rem; margin: 1.5rem 0 .4rem; font-weight: 600; }
+  ul { padding-left: 1.25rem; }
+  li { margin-bottom: .5rem; }
+
+  .contact-card {
+    background: var(--accent-soft); border: 1px solid var(--line);
+    border-left: 4px solid var(--accent); border-radius: 0 12px 12px 0;
+    padding: 1.35rem 1.5rem; margin: 0 0 1rem;
+  }
+  .contact-card .email { font-size: 1.15rem; font-weight: 600; display: block; margin-bottom: .35rem; }
+  .contact-card p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  .checklist { background: var(--bg-alt); border: 1px solid var(--line); border-radius: 12px;
+               padding: 1.1rem 1.5rem; }
+  .checklist p { margin: 0 0 .5rem; font-weight: 600; font-size: .95rem; }
+  .checklist ul { margin: 0; }
+  .checklist li { color: var(--muted); font-size: .93rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; color: var(--muted); font-size: .88rem; }
+  .foot-row { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; justify-content: space-between; align-items: center; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .foot-links a { color: var(--muted); }
+  .foot-links a:hover { color: var(--fg); }
 </style>
 </head>
 <body>
-<h1>Support</h1>
-<p>Questions, bug reports, or feedback about a FindTime app? We read everything.</p>
 
-<div class="card">
-  <strong>Email us:</strong> <a href="mailto:support@findtime.net">support@findtime.net</a><br>
-  Include your app (e.g. BiteMatch), device model, and what you expected vs. what happened.
-  We aim to reply within 2 business days.
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime
+    </a>
+    <nav class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/#about" class="hide-sm">About</a>
+      <a href="/legal/privacy">Privacy</a>
+      <a href="/legal/terms">Terms</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
+
+<h1>Support</h1>
+<p class="lede">Questions, bug reports, or feedback about a FindTime app? We read everything, and one of
+the two of us writes back.</p>
+
+<div class="contact-card">
+  <a class="email" href="mailto:support@findtime.net">support@findtime.net</a>
+  <p>We aim to reply within 2 business days.</p>
 </div>
 
-<h2>Billing &amp; subscriptions</h2>
-<p>Purchases are billed by Apple or Google. To manage, cancel, or request a refund: on iPhone, open
-<em>Settings → your name → Subscriptions</em> (refunds at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>);
-on Android, open <em>Play Store → Payments &amp; subscriptions</em>. In BiteMatch you can also use
-<em>Settings → Manage subscription</em>.</p>
+<div class="checklist">
+  <p>To help us fix it faster, include:</p>
+  <ul>
+    <li>Which app (for example BiteMatch) and its version number, shown in the app's Settings screen</li>
+    <li>Your device model and OS version (for example iPhone 15, iOS 26.5)</li>
+    <li>What you expected to happen, and what happened instead</li>
+    <li>A screenshot or screen recording, if you have one</li>
+  </ul>
+</div>
 
-<h2>Privacy</h2>
-<p>Our apps have no accounts and keep your preferences on your device. Details in the
+<h2>Billing and subscriptions</h2>
+<p>Purchases are billed by Apple or Google, not by us, so subscription changes and refunds go through
+them.</p>
+
+<h3>On iPhone or iPad</h3>
+<ul>
+  <li><strong>Manage or cancel:</strong> Settings → your name → Subscriptions.</li>
+  <li><strong>Request a refund:</strong> <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</li>
+  <li><strong>Restore a purchase:</strong> open the app's Settings screen and tap Restore Purchases.</li>
+</ul>
+
+<h3>On Android</h3>
+<ul>
+  <li><strong>Manage or cancel:</strong> Play Store → Payments &amp; subscriptions → Subscriptions.</li>
+  <li><strong>Request a refund:</strong> <a href="https://support.google.com/googleplay/answer/2479637">Google Play refund request</a>.</li>
+</ul>
+
+<p>Deleting an app does <strong>not</strong> cancel its subscription — cancel it in your store account
+first.</p>
+
+<h2>Common questions</h2>
+
+<h3>Do I need an account?</h3>
+<p>No. Our apps have no sign-up and no login. Your data lives on your device.</p>
+
+<h3>Why does the app want my location?</h3>
+<p>Only apps that need it ask, and only to answer the request in front of you — BiteMatch uses it to find
+restaurants near you. We don't store your coordinates or build any history of where you've been. You can
+decline or revoke access in your device settings at any time.</p>
+
+<h3>Do your apps have ads?</h3>
+<p>Some of our free apps are supported by ads; our paid and subscription apps are not. Each app's store
+listing says which it is. If you'd rather not see personalized ads, decline the tracking prompt on iOS or
+opt out of personalized ads on Android — you keep every feature either way. Details are in our
 <a href="/legal/privacy">Privacy Policy</a>.</p>
 
-<footer>© 2026 FindTime. <a href="/legal/terms">Terms of Use</a> · <a href="/legal/privacy">Privacy Policy</a></footer>
+<h3>How do I delete my data?</h3>
+<p>Delete the app. Nearly everything our apps store is on your device and goes with it. Anything our
+servers briefly hold — like a shared swipe session — deletes itself within 24 hours. For anything else,
+email us and we'll respond within 30 days.</p>
+
+<h3>I found a bug or have a feature request</h3>
+<p>Email us. We're a two-person studio, so we can't build everything, but we do read every message and a
+lot of what ships started as someone's email.</p>
+
+<h2>Privacy requests</h2>
+<p>To ask about, access, or delete your information, or to opt out of personalized advertising, email
+<a href="mailto:support@findtime.net">support@findtime.net</a>. We respond within 30 days. Our full
+<a href="/legal/privacy">Privacy Policy</a> explains what we do and don't collect.</p>
+
+<h2>Company</h2>
+<p><strong>FindTime LLC</strong><br>
+Davis, California, United States<br>
+<a href="mailto:support@findtime.net">support@findtime.net</a></p>
+
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/privacy#advertising">Your Privacy Choices</a>
+      <a href="/legal/terms">Terms of Use</a>
+      <a href="/support">Support</a>
+      <a href="mailto:support@findtime.net">Contact</a>
+    </div>
+  </div>
+</footer>
 </body>
 </html>
