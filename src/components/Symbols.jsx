@@ -1,6 +1,10 @@
 export function ClockMark() {
   return <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" strokeWidth="2.2" /><path d="M16 8v8l5 3" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" /><circle cx="16" cy="16" r="1.7" fill="currentColor" /></svg>;
 }
+// Tenant: a terminal prompt, the agent you run yourself.
+export function AgentMark() {
+  return <svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="m9 11 6 5-6 5" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" /><path d="M17 21h6" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" /></svg>;
+}
 
 export function BowlMark() {
   return <svg viewBox="0 0 120 120" fill="none" aria-hidden="true"><path d="m76 24 24-10M79 34l27-4" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /><path d="M23 57h74c-2 24-15 38-37 38S25 81 23 57Z" fill="currentColor" /><path d="M19 57h82M46 100h28" stroke="currentColor" strokeWidth="5" strokeLinecap="round" /><path d="M60 43S43 35 43 26c0-9 13-12 17-3 4-9 17-6 17 3 0 9-17 17-17 17Z" fill="currentColor" /></svg>;

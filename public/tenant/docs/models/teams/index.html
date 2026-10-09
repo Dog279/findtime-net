@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Teams, research &amp; goals — Tenant docs — FindTime</title>
+<meta name="description" content="Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with a judge, and cascading plan review.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/models/teams">
+<meta property="og:title" content="Teams, research &amp; goals — Tenant docs">
+<meta property="og:description" content="Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with a judge, and cascading plan review.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/models/teams">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/models/providers">Models &amp; helpers</a></p>
+<h1>Teams, research &amp; goals</h1>
+<p class="lede">Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with a judge, and cascading plan review.</p>
+<h2 id="orchestrate-a-team">Orchestrate: a team</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> orchestrate <span class="st">&quot;&lt;task&gt;&quot;</span> [--await-timeout 3m]       <span class="co"># alias: tenant team</span></span></code></pre></div>
+<p>An orchestrator plans the task, spawns concurrent helpers (the built-in five or <a href="/tenant/docs/models/helpers">yours</a>), and they coordinate over a live bus until the work self-resolves. The envelope is <code>budgets</code> in <code>config.json</code> (<a href="/tenant/docs/models/tuning">defaults</a>): concurrent helpers, agents per run, tool calls, tokens, cost, wall time, browser instances. <code>--await-timeout</code> is how long the orchestrator waits for its helpers (default 3 minutes).</p>
+<p>The terminal UI’s feed shows each helper’s lines prefixed with its name (<code>[writer] thought for 2.5s</code>); the <code>subagents</code> log keeps them.</p>
+<h2 id="deep-research">Deep research</h2>
+<pre class="text"><code>/research &lt;question&gt;           plan → parallel web researchers → cited report
+/research! &lt;question&gt;          skip the clarification step for a vague query
+/cancel-clarify                abort a pending clarification
+/research history [N]          past runs, newest first
+/research show &lt;id&gt;            a past run&#39;s report and metadata
+/research replay &lt;id&gt;          re-run a past question against the current model
+/research delete &lt;id&gt;          purge a run from disk</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> research <span class="st">&quot;&lt;question&gt;&quot;</span> [--out FILE] <span class="pp">[--</span><span class="ss">stdout</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">no</span><span class="pp">-</span><span class="ss">clarify</span><span class="pp">]</span> <span class="dt">\</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  [--agents 5] [--parallel 3] [--depth 2] [--await-timeout 10m] [--max-time 20m]</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> research list <span class="kw">|</span> <span class="ex">show</span> <span class="op">&lt;</span>id<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">delete</span> <span class="op">&lt;</span>id<span class="op">&gt;</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--agents</code></td>
+<td>5</td>
+<td>sub-questions per cycle (the plan, then each reflection)</td>
+</tr>
+<tr>
+<td><code>--parallel</code></td>
+<td>3</td>
+<td>concurrent researchers per wave</td>
+</tr>
+<tr>
+<td><code>--depth</code></td>
+<td>2</td>
+<td>reflection cycles; 1 is a single pass, more is iterative deepening</td>
+</tr>
+<tr>
+<td><code>--await-timeout</code></td>
+<td>10m</td>
+<td>how long to wait for each wave</td>
+</tr>
+<tr>
+<td><code>--max-time</code></td>
+<td>20m</td>
+<td>wall-clock cap across all cycles (0: none)</td>
+</tr>
+<tr>
+<td><code>--out FILE</code></td>
+<td></td>
+<td>write the report here instead of the wiki or stdout</td>
+</tr>
+<tr>
+<td><code>--stdout</code></td>
+<td></td>
+<td>print the report; skips the wiki deposit</td>
+</tr>
+<tr>
+<td><code>--no-clarify</code></td>
+<td></td>
+<td>skip the up-front clarification of a vague question</td>
+</tr>
+</tbody>
+</table>
+<p>A run plans sub-questions, fans out researchers over the web plugin, reflects, deepens, and writes a cited Markdown report. The report is saved to the run (<code>&lt;data&gt;/research/</code>) and, when a wiki folder is configured, deposited there as notes. A report cut off by the token limit, or made mostly of planning, is retried once and otherwise fails the run. The dashboard’s <strong>Research</strong> page starts, watches and stops runs; a source on your own network shows as plain text there, not a link.</p>
+<h2 id="goal-the-autonomous-loop">Goal: the autonomous loop</h2>
+<pre class="text"><code>/goal &lt;condition&gt;      set and start: e.g. /goal write a test for feature X and make it pass
+/goal show             the condition, turns used, the judge&#39;s last verdict
+/goal clear            stop (aliases: stop, off, reset, cancel); Esc or Ctrl-C also clears it</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> goal <span class="st">&quot;&lt;condition&gt;&quot;</span> [--max-turns 20] <span class="pp">[--</span><span class="ss">verbose</span><span class="pp">]</span></span></code></pre></div>
+<p>A judge model reads each turn’s result and decides whether the condition holds; while it does not, the loop auto-continues. <code>--max-turns</code> (default 20) is the safety cap. <code>goal.loop_ceiling</code> in <code>config.json</code> gives goal turns their own per-turn ceiling (<code>-1</code> lifts it). The dashboard’s <strong>Autopilot</strong> page shows a goal started from the terminal UI with <strong>Stop after this step</strong>; a background service has no Autopilot.</p>
+<h2 id="plan-review">Plan review</h2>
+<pre class="text"><code>/review &lt;plan.md&gt;              CEO, Engineer and Designer reviews, appended to the file
+/review &lt;plan.md&gt; ceo,eng      a subset (ceo, eng, design)</code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> review <span class="op">&lt;</span>plan.md<span class="op">&gt;</span> [--reviewers ceo,eng,design]</span></code></pre></div>
+<p>Three reviewer personas (shipped in the binary beside the built-in helpers) read a plan file in turn and append their findings. <code>/skills seed gstack</code> installs the matching founder-mode skills.</p>
+<h2 id="peers-federation">Peers (federation)</h2>
+<p>Two Tenants can pair with mutual consent and share what each permits: the wiki, memory, skills, exec or an LLM.</p>
+<pre class="text"><code>/peer                                list peers and their share policy (also /peer show|remove)
+/peer serve [addr]                   start the listener (default 0.0.0.0:9100, TLS)
+/peer invite &lt;name&gt; &lt;ip|url&gt;         pair: they Approve/Deny and match a PIN
+/peer rename &lt;old&gt; &lt;new&gt;
+/peer reconnect                      fold paired peers&#39; shared knowledge into your search now
+/peer stats                          per-peer federated-search tally
+/configure peer &lt;name&gt;               the share editor: set &lt;item&gt; allow|deny</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> peer invite <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="er">(</span><span class="ex">--url</span> <span class="op">&lt;</span>addr<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">--to</span> <span class="op">&lt;</span>peer-url<span class="op">&gt;</span><span class="kw">)</span> <span class="ex">[--as</span> <span class="op">&lt;</span>self<span class="op">&gt;</span>]</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> peer join <span class="op">&lt;</span>code<span class="op">&gt;</span> [--as <span class="op">&lt;</span>local-name<span class="op">&gt;</span>]</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> peer list <span class="kw">|</span> <span class="ex">show</span> <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">rename</span> <span class="op">&lt;</span>old<span class="op">&gt;</span> <span class="op">&lt;</span>new<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">remove</span> <span class="kw">|</span> <span class="ex">revoke</span> <span class="kw">|</span> <span class="ex">rotate</span> <span class="op">&lt;</span>name<span class="op">&gt;</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> peer share <span class="op">&lt;</span>name<span class="op">&gt;</span> wiki=on<span class="kw">|</span><span class="ex">off</span> memory=on<span class="kw">|</span><span class="ex">off</span> <span class="pp">[</span><span class="ss">skills=…</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">exec=…</span><span class="pp">]</span> <span class="pp">[</span><span class="ss">llm=…</span><span class="pp">]</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> peer query <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>wiki<span class="kw">|</span><span class="ex">memory</span><span class="op">&gt;</span> <span class="st">&quot;&lt;query&gt;&quot;</span></span></code></pre></div>
+<p><code>peer.listen</code> in <code>config.json</code> binds the listener at launch; a non-loopback bind is refused without TLS unless <code>peer.transport</code> is <code>overlay</code> (you run Tailscale or WireGuard). A pairing request on the dashboard asks a second time and shows the PIN.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/models/teams.mdtenant-docs/src/models/teams.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#orchestrate-a-team" id="toc-orchestrate-a-team">Orchestrate: a team</a></li>
+<li><a href="#deep-research" id="toc-deep-research">Deep research</a></li>
+<li><a href="#goal-the-autonomous-loop" id="toc-goal-the-autonomous-loop">Goal: the autonomous loop</a></li>
+<li><a href="#plan-review" id="toc-plan-review">Plan review</a></li>
+<li><a href="#peers-federation" id="toc-peers-federation">Peers (federation)</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

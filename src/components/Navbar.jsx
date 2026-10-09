@@ -31,6 +31,7 @@ export default function Navbar({ route }) {
         <div id="nav-links" className={`nav-links${open ? ' is-open' : ''}`}>
           <a href="/#apps" onClick={() => setOpen(false)}>Apps</a>
           <a href="/#about" onClick={() => setOpen(false)}>Our studio</a>
+          <a href="/tenant" aria-current={route === '/tenant' ? 'page' : undefined}>Tenant</a>
           <a href="/support" aria-current={route === '/support' ? 'page' : undefined}>Support</a>
           <a href="/legal/privacy" aria-current={route === '/legal/privacy' ? 'page' : undefined}>Privacy</a>
         </div>

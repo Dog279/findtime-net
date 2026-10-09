@@ -22,7 +22,7 @@ npm run preview -- --host 127.0.0.1 --port 4173
 node scripts/verify.mjs http://127.0.0.1:4173
 ```
 
-The build generates full HTML for `/`, `/support`, `/legal/privacy`, and `/legal/terms`, plus a branded `404.html`, sitemap, and robots file. Navigation and document contents are available without JavaScript; React enhances the mobile menu and GSAP adds reduced-motion-aware reveal animations.
+The build generates full HTML for `/`, `/tenant`, `/support`, `/legal/privacy`, and `/legal/terms`, plus a branded `404.html`, sitemap, and robots file. The Tenant documentation under `/tenant/docs/` is a set of static pages generated from Markdown by `sh tenant-docs/build.sh` (pandoc) into `public/`, committed, and copied into `dist/` by the build; see [AGENTS.md](AGENTS.md). Navigation and document contents are available without JavaScript; React enhances the mobile menu and GSAP adds reduced-motion-aware reveal animations.
 
 ## Content and design
 

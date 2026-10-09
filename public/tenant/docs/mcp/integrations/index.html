@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Integrations — Tenant docs — FindTime</title>
+<meta name="description" content="The services with keys or sign-ins: Google Workspace, Discord, iMessage, X, GitHub, Atlassian, SimpleFIN, web search. Each one’s fields, where the secret lives, and the three ways to configure it.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/mcp/integrations">
+<meta property="og:title" content="Integrations — Tenant docs">
+<meta property="og:description" content="The services with keys or sign-ins: Google Workspace, Discord, iMessage, X, GitHub, Atlassian, SimpleFIN, web search. Each one’s fields, where the secret lives, and the three ways to configure it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/mcp/integrations">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/mcp/overview">MCPs &amp; tools</a></p>
+<h1>Integrations</h1>
+<p class="lede">The services with keys or sign-ins: Google Workspace, Discord, iMessage, X, GitHub, Atlassian, SimpleFIN, web search. Each one’s fields, where the secret lives, and the three ways to configure it.</p>
+<p>An integration’s non-secret settings live in <code>config.json</code> under <code>skills.&lt;id&gt;</code> (<code>enabled</code>, <code>settings</code>); its secrets live in <code>credentials.json</code> under <code>skill:&lt;id&gt;:&lt;field&gt;</code>. Configuring one probes the credentials and auto-enables it.</p>
+<h2 id="three-ways-to-configure">Three ways to configure</h2>
+<pre class="text"><code>/configure                        arrow-key key picker: set an API key for any service
+/configure &lt;id&gt;                   interactive walkthrough, one field at a time (e.g. /configure gsuite)
+/configure &lt;id&gt; &lt;key=value …&gt;     one shot (e.g. /configure gsuite auth=gcloud)
+/skill list                       the integrations and their state
+/skill show &lt;id&gt;                  fields with masked values
+/skill probe &lt;id&gt;                 re-test the credentials without changing anything
+/skill clear &lt;id&gt; &lt;field&gt;         remove a stored credential (auto-disables if a required field goes)
+/cancel                           abort a walkthrough</code></pre>
+<p><code>tenant setup</code> offers the same forms at its end (and under Modify → Skills), and the dashboard’s <strong>Integrations</strong> page has <strong>Test connection</strong>, <strong>Save</strong> and <strong>Disconnect</strong>; <strong>Provider keys</strong> holds every API key (write-only: a key you paste is never shown again, only replaced or removed).</p>
+<h2 id="the-integrations">The integrations</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Id</th>
+<th>Fields (<code>*</code> required)</th>
+<th>Secret stored as</th>
+<th>Environment alternative</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>gsuite</code></td>
+<td><code>auth</code>* (<code>gcloud</code>, <code>sa</code> or <code>oauth</code>), <code>sa_json</code> (service-account key path), <code>subject</code> (the user to impersonate), <code>oauth_creds_json</code> (OAuth client JSON)</td>
+<td>the key files you point at</td>
+<td></td>
+</tr>
+<tr>
+<td><code>discord</code></td>
+<td><code>token</code><em>, <code>operator_id</code></em> (your Discord user id: 17 to 20 digits)</td>
+<td><code>skill:discord:token</code></td>
+<td><code>DISCORD_BOT_TOKEN</code></td>
+</tr>
+<tr>
+<td><code>imessage</code></td>
+<td><code>url</code> (BlueBubbles server; blank on a Mac reads Messages directly), <code>password</code></td>
+<td><code>skill:imessage:password</code></td>
+<td><code>BLUEBUBBLES_URL</code>, <code>BLUEBUBBLES_PASSWORD</code></td>
+</tr>
+<tr>
+<td><code>x</code></td>
+<td><code>bearer</code>* (your X app token)</td>
+<td><code>skill:x:bearer</code></td>
+<td><code>X_BEARER_TOKEN</code></td>
+</tr>
+<tr>
+<td><code>github</code></td>
+<td><code>repo</code>* (comma-separated <code>owner/name</code>, <code>:write</code> suffix for writable), <code>token</code>* (fine-grained PAT), <code>allow_write</code>, <code>api_base</code> (GitHub Enterprise)</td>
+<td><code>skill:github:token</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>atlassian</code></td>
+<td><code>auth</code>* (<code>mcp</code> default, <code>oauth</code>, or <code>token</code>), <code>site</code><em>, <code>project</code>, <code>client_id</code></em> and <code>client_secret</code>* (oauth), <code>email</code>* and <code>api_token</code>* (token)</td>
+<td><code>skill:atlassian:client_secret</code>, <code>skill:atlassian:api_token</code></td>
+<td><code>ATLASSIAN_TOKEN</code>, <code>ATLASSIAN_CLIENT_SECRET</code></td>
+</tr>
+<tr>
+<td><code>simplefin</code></td>
+<td><code>access_url</code>* (the setup token from bridge.simplefin.org, or a claimed access URL)</td>
+<td><code>skill:simplefin:access_url</code></td>
+<td></td>
+</tr>
+<tr>
+<td><code>web</code></td>
+<td><code>jina_reader</code> (off unless enabled: sends failed-page URLs to r.jina.ai), <code>brave_key</code></td>
+<td><code>brave_search</code>, <code>tavily</code>, <code>jina</code></td>
+<td><code>BRAVE_SEARCH_API_KEY</code> / <code>BRAVE_API_KEY</code>, <code>TAVILY_API_KEY</code> / <code>TAVILY_KEY</code>, <code>JINA_API_KEY</code> / <code>JINA_KEY</code></td>
+</tr>
+<tr>
+<td><code>sql</code></td>
+<td><code>db</code> (a SQLite file path; a folder is rejected)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>wiki</code></td>
+<td><code>dir</code> (the Markdown folder)</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td><code>crm</code></td>
+<td>the external <code>crm-tool</code> binary</td>
+<td></td>
+<td><code>CRM_TOOL_PATH</code></td>
+</tr>
+</tbody>
+</table>
+<p>An environment variable wins over a stored secret.</p>
+<h2 id="setup-notes">Setup notes</h2>
+<p><strong>Google Workspace.</strong> Three auth modes, in order of fit: <code>gcloud</code> (Application Default Credentials from the <code>gcloud</code> CLI, for your own account), <code>sa</code> (a service account with domain-wide delegation, impersonating <code>subject</code>; the one for a business deployment), and <code>oauth</code> (a Desktop-app OAuth client JSON; <code>tenant oauth-setup gsuite</code> walks through creating it). Domain-wide delegation matches scope strings exactly and is per client id. Sending (<code>gmail_send</code>, <code>calendar_create</code>) follows the <code>send</code> category.</p>
+<p><strong>Discord.</strong> Create the bot at discord.com/developers/applications, invite it to a server (OAuth2 → bot), paste the token. The same token powers two things: the Discord plugin (read channels, send, react as the bot) and the <strong>relay</strong>, which lets your DMs drive the agent and approve actions with buttons; the relay is its own switch, see <a href="/tenant/docs/dashboard/access">Access</a>. Your user id (Developer Mode → right-click your name → Copy User ID) is the operator the relay obeys.</p>
+<p><strong>iMessage.</strong> On a Mac Tenant reads Messages directly and needs Full Disk Access; nothing to configure. BlueBubbles serves Messages from a Mac to any OS: give its URL and password. The autonomous responder and its allowlist are on <a href="/tenant/docs/dashboard/access">Access</a>.</p>
+<p><strong>X.</strong> Reads use the app token; posting needs the one-time OAuth consent (<code>tenant x --login</code>, with <code>--client-id</code> and <code>--redirect-uri</code> matching the app), cached in <code>&lt;data&gt;/x-token.json</code>.</p>
+<p><strong>GitHub.</strong> A fine-grained personal access token scoped to the repositories you list. A repository is read-only unless listed with <code>:write</code> (or <code>/github write owner/name</code>); <code>allow_write</code> skips the per-action prompt on writable repositories.</p>
+<p><strong>Atlassian.</strong> The default path is the Atlassian MCP server (<code>/mcp add https://mcp.atlassian.com/v1/mcp</code>, a browser sign-in); the plugin’s own <code>oauth</code> and <code>token</code> paths exist for Jira without MCP. <code>tenant atlassian login --site &lt;url&gt; --client-id &lt;id&gt;</code> runs the OAuth sign-in with the secret in <code>ATLASSIAN_CLIENT_SECRET</code>.</p>
+<p><strong>SimpleFIN.</strong> Link your banks at bridge.simplefin.org; your bank credentials never touch Tenant. Paste the setup token once; it is claimed into an access URL. Read-only: balances, transactions, spend summaries.</p>
+<p><strong>Web search.</strong> Without a key, <code>web_search</code> drives Chrome. A Tavily or Brave key gives an API search; Jina Reader is a page-extraction fallback that is off until you enable it, because it sends URLs to a third party.</p>
+<p>Every <code>tenant doctor</code> run includes one check per enabled integration (for example <strong>discord (if enabled)</strong>: the token resolves and reaches Discord). Removing an integration’s credentials: <code>/skill clear &lt;id&gt; &lt;field&gt;</code>, the <strong>Integrations</strong> page’s <strong>Disconnect</strong>, or <code>tenant privacy forget --connector &lt;id&gt;</code>.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/mcp/integrations.mdtenant-docs/src/mcp/integrations.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#three-ways-to-configure" id="toc-three-ways-to-configure">Three ways to configure</a></li>
+<li><a href="#the-integrations" id="toc-the-integrations">The integrations</a></li>
+<li><a href="#setup-notes" id="toc-setup-notes">Setup notes</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

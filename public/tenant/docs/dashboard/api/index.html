@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>REST API — Tenant docs — FindTime</title>
+<meta name="description" content="The JSON API behind the dashboard, for scripts and monitors: status, tools, posture, approvals, memory, the log book, and the event stream. Bearer-token authenticated.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/dashboard/api">
+<meta property="og:title" content="REST API — Tenant docs">
+<meta property="og:description" content="The JSON API behind the dashboard, for scripts and monitors: status, tools, posture, approvals, memory, the log book, and the event stream. Bearer-token authenticated.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/dashboard/api">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/dashboard/overview">Dashboard</a></p>
+<h1>REST API</h1>
+<p class="lede">The JSON API behind the dashboard, for scripts and monitors: status, tools, posture, approvals, memory, the log book, and the event stream. Bearer-token authenticated.</p>
+<p>Every request needs the dashboard key as a bearer token, except <code>GET /healthz</code>:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">TOKEN</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> ~/Library/Application\ Support/tenant/dashboard-auth-token<span class="va">)</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> http://127.0.0.1:8770/api/status <span class="at">-H</span> <span class="st">&quot;Authorization: Bearer </span><span class="va">$TOKEN</span><span class="st">&quot;</span></span></code></pre></div>
+<p>The browser never sends the token itself (it holds a session cookie); scripts use the <code>Authorization</code> header. No path takes the token from the URL. Requests have size and time limits, and a cross-site cookie is refused.</p>
+<h2 id="status-and-control">Status and control</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>Body / answer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/healthz</code></td>
+<td><code>200</code> without a key; <code>HEAD</code> needs one</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/status</code></td>
+<td><code>{status, version, plugins, tools_enabled, tools_total, turn_active, turn_age_secs, turn_queue_depth, turn_queue_age_secs, turn_queue: [{position, source, age_secs, eta_secs}], pending_approvals, team_budget}</code></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/tools</code></td>
+<td><code>[{name, plugin, enabled, destructive}]</code> (<code>destructive</code> is the plugin’s gate class)</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/tools/{name}</code></td>
+<td><code>{"enabled": bool}</code> → <code>{changed, scope}</code></td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/plugins/{label}</code></td>
+<td><code>{"enabled": bool}</code> → <code>{changed, scope}</code>: a whole plugin</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/posture</code></td>
+<td><code>{allow_send}</code>: true when every gated tool is on</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/posture</code></td>
+<td><code>{"allow_send": bool}</code> → <code>{allow_send, changed, skipped}</code>: flips every gated tool, best effort</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/approvals</code></td>
+<td><code>[{id, category, action, detail, age_secs}]</code></td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/approvals/{id}</code></td>
+<td><code>{"decision": "approve" \| "approve_session" \| "approve_always" \| "deny"}</code></td>
+</tr>
+</tbody>
+</table>
+<p><code>tenant service status</code>, <code>tenant doctor</code> and <code>tenant update</code> read <code>/api/status</code> for the running version and liveness.</p>
+<h2 id="chat-and-streams">Chat and streams</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>POST</code></td>
+<td><code>/chat/send</code>, <code>/chat/interject</code>, <code>/chat/stop</code></td>
+<td>the Chat page’s form posts (CSRF-protected; use the page)</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/events</code></td>
+<td>the dashboard’s server-sent event stream (page updates)</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/ws</code></td>
+<td>the dashboard’s live socket</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/research/live</code></td>
+<td>a research run’s live feed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="memory">Memory</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/memory/facts?limit=</code></td>
+<td><code>{facts, next_cursor}</code></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/memory/facts/{id}</code>, <code>/{id}/provenance</code>, <code>/{id}/turns</code></td>
+<td>one fact, where it came from, the turns it came from</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/memory/facts/temporal</code>, <code>/api/memory/facts/removed</code></td>
+<td>temporal view with stats; recently removed</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/memory/facts/{id}/edit</code>, <code>/invalidate</code>, <code>/revalidate</code>, <code>/restore</code>, <code>/restore-version</code></td>
+<td>fact edits</td>
+</tr>
+<tr>
+<td><code>DELETE</code></td>
+<td><code>/api/memory/facts/{id}</code></td>
+<td>remove (to Recently removed)</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/memory/facts/resolve</code></td>
+<td><code>{"keep_id", "discard_id"}</code>: merge two</td>
+</tr>
+<tr>
+<td><code>GET</code> <code>POST</code></td>
+<td><code>/api/memory/soul</code></td>
+<td>the soul as Markdown (<code>{"markdown"}</code>)</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/memory/userprofile</code>; <code>POST …/resync</code></td>
+<td>the learned user model</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/memory/working/count</code></td>
+<td><code>{count}</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-log-book">The log book</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/events?q=&amp;cursor=&amp;limit=&amp;reverse=&amp;count=</code></td>
+<td><code>{events, next, restarted, count}</code>: up to <code>limit</code> (100, at most 1000) matches after <code>cursor</code>, oldest first, or newest first with <code>reverse=1</code></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/events/{seq}</code></td>
+<td><code>{event, spec, help, stats}</code></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/events/stream?q=</code></td>
+<td>server-sent events; resumes after <code>Last-Event-ID</code> with no missed row</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/events/stats?q=&amp;bucket=</code>, <code>/api/events/top?q=&amp;n=</code></td>
+<td>counts by time, log and level; the most frequent ids</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/events/timeline/{id}?depth=</code></td>
+<td>a trace’s or activity’s events across every log, with its run record</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/events/export?q=&amp;format=ndjson\|csv\|text</code></td>
+<td>every match after a header record</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/events</code></td>
+<td>one event (JSON) or a batch (NDJSON): <code>{accepted}</code>; Tenant’s own logs and providers are refused (403)</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/logbook/logs[/{log}]</code></td>
+<td><code>{logs: [{name, group, events, bytes, policy, last_write, …}]}</code></td>
+</tr>
+<tr>
+<td><code>PATCH</code></td>
+<td><code>/api/logbook/logs/{log}</code></td>
+<td><code>{max_bytes, max_age_s, on_full, min_level, enabled, debug_for, reset}</code></td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/logbook/logs/{log}/clear</code></td>
+<td><code>{log, cleared}</code>; the Security log answers 403</td>
+</tr>
+<tr>
+<td><code>GET</code> <code>POST</code> <code>DELETE</code></td>
+<td><code>/api/logbook/views[/{name}]</code></td>
+<td>saved views: <code>{name, filter, builtin}</code></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/logbook/catalog[/{provider}][?id=N]</code></td>
+<td>the event reference</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/logbook/components</code></td>
+<td>what the process runs: <code>{name, kind, log, state, since, started, error, activity}</code></td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/logbook/verify[?log=security]</code>, <code>/api/logbook/audit?since=&amp;until=</code></td>
+<td>the integrity check and chain; the audit bundle</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/logbook/recover</code></td>
+<td>copy a quarantined store back</td>
+</tr>
+<tr>
+<td><code>GET</code> <code>POST</code> <code>PATCH</code> <code>DELETE</code></td>
+<td><code>/api/logbook/alerts[/{name}]</code></td>
+<td>the alert rules</td>
+</tr>
+<tr>
+<td><code>GET</code></td>
+<td><code>/api/activity?source=&amp;level=&amp;limit=</code></td>
+<td>the v1 activity feed from the store</td>
+</tr>
+<tr>
+<td><code>GET</code> <code>POST</code></td>
+<td><code>/api/logs</code>, <code>/api/logs/{source}</code>, <code>/api/logs/{source}/{name}</code></td>
+<td>list sources, list or serve a source’s text files; <code>POST</code> files a line (JSON or <code>text/plain</code>)</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/api/addon/event</code></td>
+<td>an add-on’s event, filed under its own name</td>
+</tr>
+</tbody>
+</table>
+<p>Sensitive values come back as <code>«sensitive»</code> unless the request adds <code>sensitive=1</code>, which is recorded in the Security log. Cursors are <code>&lt;store id&gt;.&lt;seq&gt;</code>; a restored store has a new id, and <code>restarted</code> says a cursor started over.</p>
+<h2 id="page-forms">Page forms</h2>
+<p>Every dashboard page posts plain forms (<code>/models/use</code>, <code>/cron/add</code>, <code>/safety/mode</code>, <code>/mcp/trust</code>, <code>/skills/trust</code>, …). They are CSRF-protected and meant for the browser; drive them through the page, or use the <code>/api/</code> routes above from a script.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/dashboard/api.mdtenant-docs/src/dashboard/api.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#status-and-control" id="toc-status-and-control">Status and control</a></li>
+<li><a href="#chat-and-streams" id="toc-chat-and-streams">Chat and streams</a></li>
+<li><a href="#memory" id="toc-memory">Memory</a></li>
+<li><a href="#the-log-book" id="toc-the-log-book">The log book</a></li>
+<li><a href="#page-forms" id="toc-page-forms">Page forms</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

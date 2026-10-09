@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './components/Home';
 import DocumentPage from './components/DocumentPage';
+import Tenant from './components/Tenant';
 import { getPage, normalizePath } from './content/site';
 
 export default function App({ path = '/' }) {
@@ -35,7 +36,7 @@ export default function App({ path = '/' }) {
     <div ref={root}>
       <a className="skip-link" href="#main">Skip to content</a>
       <Navbar route={route} />
-      {route === '/' ? <Home /> : page ? <DocumentPage page={page} route={route} /> : (
+      {route === '/' ? <Home /> : route === '/tenant' ? <Tenant /> : page ? <DocumentPage page={page} route={route} /> : (
         <main id="main" className="not-found container" tabIndex={-1}>
           <p className="eyebrow">404 · A little off course</p>
           <h1>Let’s find your way back.</h1>

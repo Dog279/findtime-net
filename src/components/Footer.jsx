@@ -16,6 +16,7 @@ export default function Footer() {
             <a href="/legal/privacy#advertising">Your Privacy Choices</a>
             <a href="/legal/terms">Terms of Use</a>
             <a href="/support">Support</a>
+            <a href="/tenant/docs/">Tenant docs</a>
             <a href="mailto:support@findtime.net">Contact</a>
           </nav>
         </div>

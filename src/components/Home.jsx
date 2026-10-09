@@ -1,4 +1,4 @@
-import { BowlMark, FlameMark, PrincipleMark } from './Symbols';
+import { AgentMark, BowlMark, FlameMark, PrincipleMark } from './Symbols';
 
 const principles = [
   { icon: 'privacy', title: 'Privacy by default.', text: 'Our apps have no user accounts and keep your data on your device. We collect the minimum a feature needs, and nothing more.' },
@@ -84,6 +84,20 @@ export default function Home() {
                   <p>A survival story you can take anywhere. Ashfall runs entirely on your device, with no backend, no advertising, and no data collection.</p>
                   <p>Your save file is yours. It stays on your device.</p>
                   <a href="/legal/privacy#app-specific-details">How Ashfall handles your data <span aria-hidden="true">↗</span></a>
+                </div>
+              </details>
+            </article>
+            <article className="app-card tenant-card" id="tenant" data-reveal>
+              <div className="app-card-top"><span className="app-category">AI AGENT · OPEN SOURCE</span><span className="app-number">03</span></div>
+              <div className="app-identity"><div className="app-icon tenant-icon"><AgentMark /></div><h3>Tenant</h3></div>
+              <p className="app-headline">Your own AI agent.<br />In one binary.</p>
+              <p className="app-description">A single-binary agent you run on your own machine against the model you choose, local or cloud. It remembers what you tell it, uses tools and MCP servers, asks before anything dangerous, and runs 24/7 behind a web dashboard, Discord or iMessage.</p>
+              <div className="app-card-bottom"><span className="app-status"><span />Open source, MIT</span><span className="offline-label">Self-hosted</span></div>
+              <details className="app-details">
+                <summary>Get to know Tenant <span className="expand-icon" aria-hidden="true" /></summary>
+                <div className="app-details-body">
+                  <p>Install it with one line on macOS, Linux or Windows, point it at Ollama or a cloud key, and talk to it in the terminal or a browser. Everything it learns stays on your machine; the repository ships no keys, memory or personal data.</p>
+                  <a href="/tenant">Install, features and the full documentation <span aria-hidden="true">↗</span></a>
                 </div>
               </details>
             </article>

@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Reasoning, ceiling &amp; turns — Tenant docs — FindTime</title>
+<meta name="description" content="The loop ceiling, the reasoning-effort hint for providers that take one, team budgets, and how serve admits turns from several sources at once.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/models/tuning">
+<meta property="og:title" content="Reasoning, ceiling &amp; turns — Tenant docs">
+<meta property="og:description" content="The loop ceiling, the reasoning-effort hint for providers that take one, team budgets, and how serve admits turns from several sources at once.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/models/tuning">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/models/providers">Models &amp; helpers</a></p>
+<h1>Reasoning, ceiling &amp; turns</h1>
+<p class="lede">The loop ceiling, the reasoning-effort hint for providers that take one, team budgets, and how serve admits turns from several sources at once.</p>
+<h2 id="the-loop-ceiling">The loop ceiling</h2>
+<p>Each turn is a planner↔︎tool loop: the model plans, calls tools, reads results, plans again. The <strong>ceiling</strong> caps how many iterations it gets before it is forced to synthesize an answer (the turn is then marked truncated).</p>
+<pre class="text"><code>/ceiling          show the current ceiling
+/ceiling 30       raise it, live (also /loops, /loop-ceiling)</code></pre>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Scope</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>plan_loop_ceiling</code> in <code>config.json</code></td>
+<td>16</td>
+<td>every normal turn, per agent</td>
+</tr>
+<tr>
+<td><code>--plan-loop-ceiling N</code></td>
+<td></td>
+<td>this launch</td>
+</tr>
+<tr>
+<td><code>plan_loop_ceiling</code> in a model profile</td>
+<td></td>
+<td>that model</td>
+</tr>
+<tr>
+<td><code>goal.loop_ceiling</code> in <code>config.json</code></td>
+<td>0 (inherit)</td>
+<td>turns of an active <code>/goal</code> loop only; <code>-1</code> lifts the per-turn cap so a long autonomous run is bounded only by the goal’s turn cap, errors and <kbd>Esc</kbd></td>
+</tr>
+</tbody>
+</table>
+<p>Start around 20 to 30 for agentic work. Lower it if turns feel runaway; raise it if the agent stops before finishing long tasks. Each helper has its own budget.</p>
+<h2 id="the-repeat-guard">The repeat guard</h2>
+<p>A separate guard ends a turn early when the agent makes the same tool calls and gets the same results back several rounds in a row (as the model sees them, after the context cap). A poll whose output changes never trips it, so waiting on a job runs until the loop ceiling. When it fires, the feed says “stuck repeating the same tool calls” (event <code>turns/2004</code>), not “loop ceiling hit”, and the turn is forced to synthesize an answer.</p>
+<pre class="text"><code>/ceiling repeat           show it
+/ceiling repeat 12        allow longer identical wait loops, live
+/ceiling repeat off       only the loop ceiling ends a turn (0 works too)
+/ceiling repeat default   back to 8</code></pre>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Setting</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>repeat_guard</code> in <code>config.json</code></td>
+<td>8 (<code>0</code> or absent)</td>
+<td>identical rounds before a forced answer; a negative value turns the guard off</td>
+</tr>
+</tbody>
+</table>
+<p>The dashboard’s <strong>Model</strong> page has the same setting.</p>
+<h2 id="reasoning-effort">Reasoning effort</h2>
+<p>Two provider kinds accept an effort hint, and <code>/reasoning</code> is gated to them so a provider that would reject the field never receives it.</p>
+<pre class="text"><code>/reasoning              arrow-key picker (also /effort)
+/reasoning xhigh        set it live; persists as the provider&#39;s &quot;reasoning&quot;
+/reasoning off          clear it</code></pre>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Levels</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sakana</code> (Fugu)</td>
+<td><code>high</code>, <code>xhigh</code> (<code>max</code> is accepted as an alias of <code>xhigh</code>)</td>
+</tr>
+<tr>
+<td><code>claudecode</code></td>
+<td><code>low</code>, <code>medium</code>, <code>high</code>, <code>xhigh</code>, <code>max</code> (the CLI’s own <code>--effort</code> ladder)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="thinking-vs-tool-time">Thinking vs tool time</h2>
+<p>The terminal UI’s timer shows which phase a turn is in (<code>thinking… 45.0s</code>, <code>tools… 3.1s</code>), each model call ends with <code>thought for 8.2s</code>, and the turn’s end line splits the total (<code>turn 4:12 — thinking 3:40 · tools 32.0s</code>). The same split is on the dashboard’s Chat, on the turn’s end event, in <code>runs.db</code> (<code>think_ms</code>, <code>tools_ms</code>) and in <code>tenant logs trace</code>. A slow model and a hung one no longer look the same.</p>
+<h2 id="team-budgets">Team budgets</h2>
+<p>A multi-agent run (<code>tenant orchestrate</code>, deep research) has a structural envelope. Omitted keys take the defaults:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;budgets&quot;</span><span class="er">:</span> <span class="fu">{</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_concurrent_subagents&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_agents_per_run&quot;</span><span class="fu">:</span> <span class="dv">16</span><span class="fu">,</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_tool_calls_per_turn&quot;</span><span class="fu">:</span> <span class="dv">64</span><span class="fu">,</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_tool_calls_per_run&quot;</span><span class="fu">:</span> <span class="dv">256</span><span class="fu">,</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_tokens_per_run&quot;</span><span class="fu">:</span> <span class="dv">500000</span><span class="fu">,</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_cost_usd&quot;</span><span class="fu">:</span> <span class="dv">25</span><span class="fu">,</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_wall_time&quot;</span><span class="fu">:</span> <span class="st">&quot;30m&quot;</span><span class="fu">,</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_browser_instances&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;bus_history_cap&quot;</span><span class="fu">:</span> <span class="dv">1000</span><span class="fu">,</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;input_cost_per_million_usd&quot;</span><span class="fu">:</span> <span class="dv">15</span><span class="fu">,</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;output_cost_per_million_usd&quot;</span><span class="fu">:</span> <span class="dv">75</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<p>The cost rates are conservative hosted-model estimates used to compute <code>max_cost_usd</code>; set your own for a local or differently priced endpoint. <code>GET /api/status</code> reports the live <code>team_budget</code> during a run.</p>
+<h2 id="turn-admission-in-serve-mode">Turn admission in serve mode</h2>
+<p>The hub runs <strong>one turn at a time</strong> across every source (dashboard chat, Discord, iMessage, cron, peers, research), so unattended traffic can never race the working set. Waiting requests queue; <code>turn_scheduler</code> bounds the queue:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;turn_scheduler&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;queue_depth&quot;</span><span class="fu">:</span> <span class="dv">32</span><span class="fu">,</span> <span class="dt">&quot;source_quotas&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;relay&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span> <span class="dt">&quot;cron&quot;</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">}</span> <span class="fu">}</span></span></code></pre></div>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Default quota</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tui</code>, <code>dashboard</code></td>
+<td>16</td>
+</tr>
+<tr>
+<td><code>relay</code>, <code>peer</code></td>
+<td>8</td>
+</tr>
+<tr>
+<td><code>cron</code>, <code>research</code></td>
+<td>4</td>
+</tr>
+</tbody>
+</table>
+<p><code>GET /api/status</code> reports <code>turn_active</code>, <code>turn_age_secs</code>, <code>turn_queue_depth</code> and the queue with each entry’s source and ETA. A second dashboard message sent while one is being answered is refused and stays in the box; scheduled jobs and relay turns queue behind the active turn and never hold up Chat.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/models/tuning.mdtenant-docs/src/models/tuning.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#the-loop-ceiling" id="toc-the-loop-ceiling">The loop ceiling</a></li>
+<li><a href="#the-repeat-guard" id="toc-the-repeat-guard">The repeat guard</a></li>
+<li><a href="#reasoning-effort" id="toc-reasoning-effort">Reasoning effort</a></li>
+<li><a href="#thinking-vs-tool-time" id="toc-thinking-vs-tool-time">Thinking vs tool time</a></li>
+<li><a href="#team-budgets" id="toc-team-budgets">Team budgets</a></li>
+<li><a href="#turn-admission-in-serve-mode" id="toc-turn-admission-in-serve-mode">Turn admission in serve mode</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

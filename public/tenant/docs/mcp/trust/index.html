@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Trust &amp; tool rules — Tenant docs — FindTime</title>
+<meta name="description" content="Per-connector trust answers “this whole server”; tool rules answer “this tool”. Both apply live, from the terminal UI, the dashboard, the agent, or a text editor.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/mcp/trust">
+<meta property="og:title" content="Trust &amp; tool rules — Tenant docs">
+<meta property="og:description" content="Per-connector trust answers “this whole server”; tool rules answer “this tool”. Both apply live, from the terminal UI, the dashboard, the agent, or a text editor.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/mcp/trust">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/mcp/overview">MCPs &amp; tools</a></p>
+<h1>Trust &amp; tool rules</h1>
+<p class="lede">Per-connector trust answers “this whole server”; tool rules answer “this tool”. Both apply live, from the terminal UI, the dashboard, the agent, or a text editor.</p>
+<h2 id="connector-trust">Connector trust</h2>
+<p>Every MCP connector, remote or local, has a live trust mode. It is set at adoption, changed any time, persisted per server in <code>config.json</code> (<code>mcp_trust</code>), and re-applied when the connector reconnects at launch.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Mode</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ask</code> (default)</td>
+<td>every gated call prompts; a tool the server annotates read-only skips the gate only when its annotations are trusted (<code>--trust-annotations</code> / <code>--mcp-trust-annotations</code>)</td>
+</tr>
+<tr>
+<td><code>allow</code></td>
+<td>its tools run without per-call approval</td>
+</tr>
+<tr>
+<td><code>deny</code></td>
+<td>its tools are refused and hidden from the agent</td>
+</tr>
+</tbody>
+</table>
+<pre class="text"><code>/mcp trust &lt;label&gt; &lt;ask|allow|deny&gt;
+/mcp allow &lt;label&gt;  ·  /mcp ask &lt;label&gt;  ·  /mcp deny &lt;label&gt;</code></pre>
+<p>The dashboard’s <strong>Remote services</strong> page: <strong>Ask first</strong> and <strong>Block</strong> are one tap; <strong>Don’t ask</strong> confirms first, because its tools then go ahead even in a category set to Deny. The agent’s <code>mcp_trust</code> tool is gated by the <code>mcp</code> category. <code>tenant security audit</code> reports <code>mcp.trust-annotations</code> and <code>mcp.write-bypass</code> when trust lets writes through unprompted.</p>
+<h2 id="tool-rules">Tool rules</h2>
+<p>A rule maps a tool pattern to a mode and is checked <strong>before</strong> the category, inside the connector gate and on every broker (host, Discord, iMessage):</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Matches</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>write_note</code></td>
+<td>that tool on any connector, or the local tool of that name</td>
+</tr>
+<tr>
+<td><code>mcp:127.0.0.1:9000:write_note</code></td>
+<td>one tool on one server</td>
+</tr>
+<tr>
+<td><code>mcp:127.0.0.1:9000:*</code>, <code>delete_*</code>, <code>*:search_*</code></td>
+<td>a glob: <code>*</code> any run, <code>?</code> one character</td>
+</tr>
+</tbody>
+</table>
+<p>Most specific wins: exact id, then bare name, then glob (longer literal first).</p>
+<pre class="text"><code>/permissions add mcp:127.0.0.1:9000:* allow     allow-list a server&#39;s tools under an ask category
+/permissions add delete_* deny                  deny one dangerous tool on an allowed server
+/permissions add write_note ask                 force a prompt on one tool in an allow category
+/permissions rm delete_*</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;tool_rules&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;delete_*&quot;</span><span class="fu">:</span> <span class="st">&quot;deny&quot;</span><span class="fu">,</span> <span class="dt">&quot;write_note&quot;</span><span class="fu">:</span> <span class="st">&quot;allow&quot;</span> <span class="fu">}</span></span></code></pre></div>
+<p>The file is <code>&lt;config&gt;/settings.&lt;agent&gt;.json</code>; the running hub applies an edit within about 3 seconds. The <strong>Tools</strong> page has a <strong>Tool rules</strong> card. There is no agent tool for rules: the model cannot grant itself permissions.</p>
+<h2 id="how-the-layers-compose">How the layers compose</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Rule</th>
+<th>Trust</th>
+<th>Category</th>
+<th>Result</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>allow</code></td>
+<td><code>ask</code></td>
+<td><code>ask</code> or <code>destructive</code></td>
+<td>runs silently</td>
+</tr>
+<tr>
+<td><code>deny</code></td>
+<td><code>allow</code></td>
+<td><code>allow</code></td>
+<td>refused silently</td>
+</tr>
+<tr>
+<td><code>ask</code></td>
+<td><code>allow</code></td>
+<td><code>allow</code> or a session grant</td>
+<td>prompts anyway; <strong>approve always</strong> flips the rule, not the category</td>
+</tr>
+<tr>
+<td>none</td>
+<td><code>deny</code></td>
+<td>any</td>
+<td>hidden: connector deny wins over everything</td>
+</tr>
+<tr>
+<td>none</td>
+<td><code>ask</code></td>
+<td><code>allow</code></td>
+<td>runs</td>
+</tr>
+<tr>
+<td>none</td>
+<td><code>ask</code></td>
+<td><code>ask</code></td>
+<td>prompts</td>
+</tr>
+</tbody>
+</table>
+<p>Every rule decision and every change to trust or rules is an audit line in the <code>approvals</code> log and the Security log.</p>
+<h2 id="recommended-posture">Recommended posture</h2>
+<ol type="1">
+<li>Leave new connectors at <code>ask</code> and work with them for a day.</li>
+<li>Allow-list the safe read tools with rules (<code>mcp:&lt;label&gt;:search_*</code> allow).</li>
+<li>Move a connector to <code>allow</code> only when every tool it offers is one you would run unprompted; deny the exceptions by rule.</li>
+<li>Keep <code>/permissions set mcp ask</code> unless you want the agent adopting tool servers on its own.</li>
+</ol>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/mcp/trust.mdtenant-docs/src/mcp/trust.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#connector-trust" id="toc-connector-trust">Connector trust</a></li>
+<li><a href="#tool-rules" id="toc-tool-rules">Tool rules</a></li>
+<li><a href="#how-the-layers-compose" id="toc-how-the-layers-compose">How the layers compose</a></li>
+<li><a href="#recommended-posture" id="toc-recommended-posture">Recommended posture</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>
