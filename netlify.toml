@@ -1,0 +1,10 @@
+# Netlify builds the site from this repository. Linking the site to the repo in
+# the Netlify dashboard picks these up; nothing else needs to be configured.
+# Netlify serves dist/404.html for missing routes and resolves the
+# extensionless URLs (/support, /tenant/docs/setup/install) to their index.html.
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
