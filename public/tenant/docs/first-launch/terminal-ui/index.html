@@ -222,7 +222,7 @@
 <li><strong>Drag</strong> image files into the terminal (macOS and Linux terminals).</li>
 <li><strong><code>/image &lt;path&gt;</code></strong> attaches a file by its path.</li>
 </ul>
-<p>Each image shows in the input as <code>[image 1: name W×H]</code>; delete that text to drop the image. Send it with or without a question. PNG, JPEG, GIF and webp work everywhere, HEIC on macOS. Images are saved under <code>&lt;data&gt;/attachments/</code> (<a href="/tenant/docs/setup/directories">directories</a>), scaled to at most 1568 pixels on the long side, and kept as long as the archive keeps the conversation.</p>
+<p>Each image shows in the input as <code>[image 1: name W×H]</code>, and the footer counts what’s attached. <kbd>Backspace</kbd> right after a tag removes it, and the image with it. Send it with or without a question. PNG, JPEG, GIF and webp work everywhere, HEIC on macOS. Images are saved under <code>&lt;data&gt;/attachments/</code> (<a href="/tenant/docs/setup/directories">directories</a>), scaled to at most 1568 pixels on the long side, and kept as long as the archive keeps the conversation.</p>
 <p>The model sees the images of the last three exchanges, at most 8 per request; older ones become a short note with the saved file’s path. A model that can’t see images gets that note instead of the picture. Which models can see, and how to say so yourself, is on <a href="/tenant/docs/models/local#images">Local models</a>.</p>
 <p>Photos you send over <a href="/tenant/docs/dashboard/access">Discord or iMessage</a> reach the model the same way, and the <code>os_read_image</code> and <code>web_screenshot</code> tools show it the picture they read.</p>
 <h2 id="command-categories">Command categories</h2>
