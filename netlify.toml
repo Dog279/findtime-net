@@ -8,3 +8,12 @@
 
 [build.environment]
   NODE_VERSION = "22"
+
+# The same response headers the previous deployment served.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "SAMEORIGIN"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), interest-cohort=()"

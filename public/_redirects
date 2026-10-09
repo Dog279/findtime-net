@@ -1,0 +1,9 @@
+# Netlify path rules for findtime.net (copied into dist/ by the build).
+# The real routes (/support, /legal/privacy, /legal/terms, /tenant, /tenant/docs/...)
+# are prerendered directories and need no rule. These are the alternates people
+# and app reviewers try.
+/privacy          /legal/privacy    301
+/privacy-policy   /legal/privacy    301
+/terms            /legal/terms      301
+/help             /support          301
+/contact          /support          301
