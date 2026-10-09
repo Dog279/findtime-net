@@ -4,85 +4,175 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Terms of Use — FindTime</title>
+<meta name="description" content="Terms of Use for FindTime LLC apps, including subscriptions, acceptable use, and disclaimers.">
+<link rel="canonical" href="https://findtime.net/legal/terms">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; line-height: 1.6; }
-  h1 { font-size: 1.8rem; margin-bottom: .25rem; }
-  h2 { font-size: 1.15rem; margin-top: 2rem; }
-  .meta { opacity: .6; font-size: .9rem; }
-  a { color: #208AEF; }
-  footer { margin-top: 3rem; opacity: .6; font-size: .85rem; }
+  :root {
+    --bg: #ffffff; --bg-alt: #f6f8fa; --fg: #12151a; --muted: #5b6470;
+    --line: rgba(18,21,26,.12); --card: #ffffff;
+    --accent: #208AEF; --accent-soft: rgba(32,138,239,.08);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1013; --bg-alt: #12171d; --fg: #e8ecf1; --muted: #9aa4b2;
+      --line: rgba(232,236,241,.14); --card: #141920;
+      --accent: #4da3f5; --accent-soft: rgba(77,163,245,.10);
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.7; -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 1.25rem; }
+  .doc { max-width: 740px; margin: 0 auto; padding: 0 1.25rem 4rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: .55rem; font-weight: 650;
+           letter-spacing: -.01em; color: var(--fg); font-size: 1.05rem; }
+  .brand:hover { text-decoration: none; }
+  .nav-links { display: flex; gap: 1.4rem; font-size: .93rem; }
+  .nav-links a { color: var(--muted); }
+  .nav-links a:hover { color: var(--fg); text-decoration: none; }
+  @media (max-width: 560px) { .nav-links { gap: 1rem; font-size: .88rem; } .nav-links .hide-sm { display: none; } }
+
+  h1 { font-size: clamp(1.9rem, 5vw, 2.4rem); letter-spacing: -.025em; margin: 2.5rem 0 .4rem; font-weight: 700; }
+  .meta { color: var(--muted); font-size: .9rem; margin: 0 0 2rem; }
+  h2 { font-size: 1.25rem; letter-spacing: -.015em; margin: 2.75rem 0 .75rem; font-weight: 650;
+       padding-top: 1.25rem; border-top: 1px solid var(--line); }
+  ul { padding-left: 1.25rem; }
+  li { margin-bottom: .5rem; }
+
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; color: var(--muted); font-size: .88rem; }
+  .foot-row { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; justify-content: space-between; align-items: center; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .foot-links a { color: var(--muted); }
+  .foot-links a:hover { color: var(--fg); }
 </style>
 </head>
 <body>
+
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime
+    </a>
+    <nav class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/#about" class="hide-sm">About</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main class="doc">
+
 <h1>Terms of Use</h1>
-<p class="meta">FindTime · Effective July 23, 2026 · Applies to BiteMatch and other FindTime apps unless an app states otherwise.</p>
+<p class="meta">FindTime LLC · Effective August 1, 2026 · Applies to all FindTime apps unless an app
+states otherwise.</p>
 
 <h2>1. Agreement</h2>
-<p>By downloading or using a FindTime app, you agree to these terms. If you don't agree, don't use the
-app. Where you obtained the app through Apple's App Store, Apple's standard Licensed Application End User
-License Agreement also applies to the extent it doesn't conflict with these terms.</p>
+<p>By downloading or using a FindTime app, you agree to these terms with FindTime LLC ("FindTime", "we",
+"us"), a California limited liability company. If you don't agree, don't use the app. Where you obtained
+the app through Apple's App Store, Apple's standard Licensed Application End User License Agreement also
+applies to the extent it doesn't conflict with these terms. You must be at least 13 years old to use our
+apps.</p>
 
-<h2>2. Subscriptions &amp; purchases</h2>
+<h2>2. Subscriptions and purchases</h2>
 <p>Some features require a paid subscription ("Pro") offered as monthly or annual auto-renewing
 subscriptions, or a one-time lifetime purchase. Prices are shown in the app before you buy and may vary
 by region.</p>
 <ul>
   <li><strong>Auto-renewal.</strong> Subscriptions renew automatically unless canceled at least 24 hours
-  before the end of the current period. Your app-store account is charged for renewal within 24 hours
-  before the period ends.</li>
+      before the end of the current period. Your app-store account is charged for renewal within 24 hours
+      before the period ends.</li>
   <li><strong>Free trial.</strong> If a free trial is offered, unused trial time is forfeited when you
-  purchase. Trials convert to paid subscriptions unless canceled before the trial ends.</li>
+      purchase. Trials convert to paid subscriptions unless canceled before the trial ends.</li>
   <li><strong>Canceling.</strong> Manage or cancel in your device's subscription settings (App Store or
-  Google Play) any time. Deleting the app does not cancel a subscription.</li>
-  <li><strong>Refunds.</strong> Purchases are billed and refunded by Apple or Google under their policies;
-  we can't issue refunds directly.</li>
-  <li><strong>Lifetime.</strong> "Lifetime" means the commercial lifetime of the app — a one-time purchase
-  granting Pro features for as long as the app is offered and supported.</li>
+      Google Play) at any time. Deleting the app does not cancel a subscription.</li>
+  <li><strong>Refunds.</strong> Purchases are billed and refunded by Apple or Google under their
+      policies; we can't issue refunds directly.</li>
+  <li><strong>Lifetime.</strong> "Lifetime" means the commercial lifetime of the app — a one-time
+      purchase granting Pro features for as long as the app is offered and supported.</li>
 </ul>
 
-<h2>3. Restaurant information</h2>
-<p>Restaurant names, ratings, photos, hours, and locations are provided by third parties (including Google
-Maps/Places) and may be incomplete, outdated, or wrong. Always confirm details — especially hours,
-allergens, and dietary information — with the restaurant directly. FindTime has no affiliation with, and
-makes no endorsement of, any restaurant shown.</p>
+<h2>3. Advertising</h2>
+<p>Some of our apps are free and supported by advertising; others are paid or subscription-based and
+contain no ads. Where an app shows ads, we say so on its store listing and in the app. Ads are supplied
+by third-party advertising networks, and we do not control, endorse, or take responsibility for the
+content of any advertisement or for anything you buy from an advertiser. What an ad-supported app shares,
+and how to turn personalized ads off, is set out in our
+<a href="/legal/privacy">Privacy Policy</a>. Blocking, intercepting, or artificially generating
+interactions with ads is not permitted (see section 5).</p>
 
-<h2>4. Acceptable use</h2>
+<h2>4. Restaurant and third-party information</h2>
+<p>Restaurant names, ratings, photos, hours, and locations are provided by third parties (including
+Google Maps/Places) and may be incomplete, outdated, or wrong. Always confirm details — especially hours,
+allergens, and dietary information — with the business directly. FindTime has no affiliation with, and
+makes no endorsement of, any business shown.</p>
+
+<h2>5. Acceptable use</h2>
 <p>Don't misuse the apps or their services: no reverse engineering, scraping, disrupting shared sessions,
-probing or abusing our servers or API quotas, or using the apps for anything unlawful. We may suspend
-service to protect the apps or other users.</p>
+probing or abusing our servers or API quotas, generating fraudulent ad interactions, or using the apps
+for anything unlawful. We may suspend service to protect the apps or other users.</p>
 
-<h2>5. Intellectual property</h2>
-<p>The apps, their design, and their code are owned by FindTime and licensed to you for personal,
+<h2>6. Intellectual property</h2>
+<p>The apps, their design, and their code are owned by FindTime LLC and licensed to you for personal,
 non-commercial use on devices you own. Third-party content (including Google content) remains the
 property of its owners.</p>
 
-<h2>6. Disclaimers</h2>
-<p>The apps are provided "as is" without warranties of any kind, express or implied, including fitness for
-a particular purpose and non-infringement. We don't guarantee the apps will be uninterrupted, error-free,
-or that any restaurant will be open, good, or to your taste.</p>
+<h2>7. Disclaimers</h2>
+<p>The apps are provided "as is" without warranties of any kind, express or implied, including fitness
+for a particular purpose and non-infringement. We don't guarantee the apps will be uninterrupted,
+error-free, or that any restaurant will be open, good, or to your taste.</p>
 
-<h2>7. Limitation of liability</h2>
-<p>To the maximum extent permitted by law, FindTime will not be liable for indirect, incidental, special,
-consequential, or punitive damages, or for lost profits or data, arising from your use of the apps. Our
-total liability for any claim is limited to the amount you paid us in the 12 months before the claim.</p>
+<h2>8. Limitation of liability</h2>
+<p>To the maximum extent permitted by law, FindTime LLC will not be liable for indirect, incidental,
+special, consequential, or punitive damages, or for lost profits or data, arising from your use of the
+apps. Our total liability for any claim is limited to the amount you paid us in the 12 months before the
+claim.</p>
 
-<h2>8. Termination</h2>
+<h2>9. Termination</h2>
 <p>You can stop using the apps at any time. We may suspend or terminate access for violation of these
-terms. Sections 5–7 survive termination.</p>
+terms. Sections 6–8 survive termination.</p>
 
-<h2>9. Governing law</h2>
-<p>These terms are governed by the laws of the State of California, USA, without regard to conflict-of-law
-rules. Disputes will be resolved in the state or federal courts located in California.</p>
+<h2>10. Governing law</h2>
+<p>These terms are governed by the laws of the State of California, USA, without regard to
+conflict-of-law rules. Disputes will be resolved in the state or federal courts located in California.</p>
 
-<h2>10. Changes</h2>
+<h2>11. Changes</h2>
 <p>We may update these terms; the effective date above will change and material updates will be noted in
 the app. Continued use after changes means you accept them.</p>
 
-<h2>11. Contact</h2>
-<p>FindTime · <a href="mailto:support@findtime.net">support@findtime.net</a></p>
+<h2>12. Contact</h2>
+<p><strong>FindTime LLC</strong><br>
+Davis, California, United States<br>
+<a href="mailto:support@findtime.net">support@findtime.net</a></p>
 
-<footer>© 2026 FindTime. <a href="/legal/privacy">Privacy Policy</a> · <a href="/support">Support</a></footer>
+</main>
+
+<footer>
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/privacy#advertising">Your Privacy Choices</a>
+      <a href="/legal/terms">Terms of Use</a>
+      <a href="/support">Support</a>
+      <a href="mailto:support@findtime.net">Contact</a>
+    </div>
+  </div>
+</footer>
 </body>
 </html>

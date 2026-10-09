@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Providers — Tenant docs — FindTime</title>
+<meta name="description" content="The catalog of model providers Tenant speaks to, local and cloud, with each one’s default endpoint, model, tool format and key.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/models/providers">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/models/providers">Models &amp; helpers</a></p>
+<h1>Providers</h1>
+<p class="lede">The catalog of model providers Tenant speaks to, local and cloud, with each one’s default endpoint, model, tool format and key.</p>
+<p>A <strong>provider</strong> is one model endpoint and how to reach it. <code>config.json</code> holds a named set of them under <code>providers</code>; <code>provider</code> names the active one; <code>embed</code> is the separate embeddings provider. Switching is a one-line change, never a re-setup.</p>
+<h2 id="the-catalog">The catalog</h2>
+<p>Every OpenAI-compatible kind runs through the same backend (it speaks <code>/v1/chat/completions</code>); only the endpoint, key and paths differ.</p>
+<table style="width:99%;">
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+<col style="width: 16%" />
+</colgroup>
+<thead>
+<tr>
+<th>Kind</th>
+<th>Label</th>
+<th>Default endpoint</th>
+<th>Default model</th>
+<th>Tool format</th>
+<th>Key</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>vllm</code></td>
+<td>vLLM (self-hosted)</td>
+<td>(yours)</td>
+<td>auto-detect</td>
+<td><code>gemma</code></td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>ollama</code></td>
+<td>Ollama (local)</td>
+<td><code>http://localhost:11434</code></td>
+<td>auto-detect</td>
+<td><code>openai</code></td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>llamacpp</code></td>
+<td>llama.cpp server (local)</td>
+<td><code>http://localhost:8080</code></td>
+<td>auto-detect</td>
+<td><code>openai</code></td>
+<td>none</td>
+</tr>
+<tr>
+<td><code>openai-compat</code></td>
+<td>any <code>/v1/chat/completions</code> server (LM Studio, LocalAI, SGLang, a LiteLLM proxy)</td>
+<td>(yours)</td>
+<td>auto-detect</td>
+<td><code>openai</code></td>
+<td>optional</td>
+</tr>
+<tr>
+<td><code>openai</code></td>
+<td>OpenAI</td>
+<td><code>https://api.openai.com</code></td>
+<td><code>gpt-4o</code></td>
+<td><code>openai</code></td>
+<td><code>OPENAI_API_KEY</code></td>
+</tr>
+<tr>
+<td><code>grok</code></td>
+<td>Grok (xAI)</td>
+<td><code>https://api.x.ai</code></td>
+<td><code>grok-2-latest</code></td>
+<td><code>openai</code></td>
+<td><code>XAI_API_KEY</code></td>
+</tr>
+<tr>
+<td><code>zai</code></td>
+<td>Z.ai GLM, coding plan, global (the default Z.ai kind)</td>
+<td><code>https://api.z.ai/api/coding/paas/v4</code></td>
+<td><code>glm-4.6</code></td>
+<td><code>openai</code></td>
+<td><code>ZAI_API_KEY</code></td>
+</tr>
+<tr>
+<td><code>zai-coding</code></td>
+<td>alias of <code>zai</code>, kept for older configs</td>
+<td>same</td>
+<td><code>glm-4.6</code></td>
+<td><code>openai</code></td>
+<td><code>ZAI_API_KEY</code></td>
+</tr>
+<tr>
+<td><code>zai-coding-cn</code></td>
+<td>Z.ai GLM, coding plan, China (bigmodel.cn)</td>
+<td><code>https://open.bigmodel.cn/api/coding/paas/v4</code></td>
+<td><code>glm-4.6</code></td>
+<td><code>openai</code></td>
+<td><code>ZAI_API_KEY</code></td>
+</tr>
+<tr>
+<td><code>zai-metered</code></td>
+<td>Z.ai GLM, metered per-token API</td>
+<td><code>https://api.z.ai/api/paas/v4</code></td>
+<td><code>glm-4.6</code></td>
+<td><code>openai</code></td>
+<td><code>ZAI_API_KEY</code></td>
+</tr>
+<tr>
+<td><code>sakana</code></td>
+<td>Sakana AI (Fugu)</td>
+<td><code>https://api.sakana.ai</code></td>
+<td><code>fugu-ultra</code></td>
+<td><code>openai</code></td>
+<td><code>SAKANA_API_KEY</code></td>
+</tr>
+<tr>
+<td><code>anthropic</code></td>
+<td>Anthropic (Claude)</td>
+<td><code>https://api.anthropic.com</code></td>
+<td><code>claude-sonnet-4-20250514</code></td>
+<td>native</td>
+<td><code>ANTHROPIC_API_KEY</code></td>
+</tr>
+<tr>
+<td><code>claudecode</code></td>
+<td>Claude Code CLI (<code>claude -p</code>, billed to that subscription)</td>
+<td><code>claudecode://auto</code> (a discovery sentinel)</td>
+<td><code>opus</code></td>
+<td><code>qwen</code></td>
+<td>none: the logged-in CLI</td>
+</tr>
+<tr>
+<td><code>echo</code></td>
+<td>offline, deterministic stand-in for development</td>
+<td></td>
+<td></td>
+<td></td>
+<td>none</td>
+</tr>
+</tbody>
+</table>
+<p>Notes:</p>
+<ul>
+<li><strong>Z.ai</strong> bills differently by path: <code>/api/coding/paas/v4</code> against the coding-plan subscription, <code>/api/paas/v4</code> per token. A metered account that runs out answers <code>429 Insufficient balance</code>, which Tenant reports as out of credits and routes to a <a href="/tenant/docs/models/fallbacks">fallback</a>. Z.ai’s load balancer recycles HTTP/2 connections mid-stream, so Tenant uses HTTP/1.1 for it.</li>
+<li><strong>Claude Code</strong> accepts the CLI’s aliases (<code>opus</code>, <code>sonnet</code>, <code>haiku</code>, <code>fable</code>) or full model ids. It is deliberately not treated as local capacity by the router: a scarce cloud resource. <code>TENANT_CLAUDE_BIN</code> points at a specific <code>claude</code> binary.</li>
+<li><strong>Tokenizing.</strong> Only vLLM exposes <code>/tokenize</code>; every other kind budgets context with a chars/4 estimate. <code>tenant doctor</code> says which one is in use.</li>
+<li><strong>Reasoning effort.</strong> <code>sakana</code> and <code>claudecode</code> accept a per-provider effort hint; see <a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a>.</li>
+</ul>
+<h2 id="a-provider-in-config.json">A provider in config.json</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;provider&quot;</span><span class="er">:</span> <span class="st">&quot;zai&quot;</span><span class="er">,</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;providers&quot;</span><span class="er">:</span> <span class="fu">{</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;zai&quot;</span><span class="fu">:</span>   <span class="fu">{</span> <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;zai&quot;</span><span class="fu">,</span> <span class="dt">&quot;endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.z.ai/api/coding/paas/v4&quot;</span><span class="fu">,</span> <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;glm-4.6&quot;</span><span class="fu">,</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>             <span class="dt">&quot;tool_format&quot;</span><span class="fu">:</span> <span class="st">&quot;openai&quot;</span><span class="fu">,</span> <span class="dt">&quot;auth&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;apikey&quot;</span><span class="fu">,</span> <span class="dt">&quot;stored&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;local&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;ollama&quot;</span><span class="fu">,</span> <span class="dt">&quot;endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:11434&quot;</span><span class="fu">,</span> <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;qwen2.5:14b&quot;</span><span class="fu">,</span> <span class="dt">&quot;tool_format&quot;</span><span class="fu">:</span> <span class="st">&quot;openai&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;claude&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;anthropic&quot;</span><span class="fu">,</span> <span class="dt">&quot;endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;https://api.anthropic.com&quot;</span><span class="fu">,</span> <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;claude-sonnet-4-20250514&quot;</span><span class="fu">,</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>              <span class="dt">&quot;auth&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;mode&quot;</span><span class="fu">:</span> <span class="st">&quot;apikey&quot;</span><span class="fu">,</span> <span class="dt">&quot;key_env&quot;</span><span class="fu">:</span> <span class="st">&quot;ANTHROPIC_API_KEY&quot;</span> <span class="fu">}</span> <span class="fu">}</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span><span class="er">,</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;embed&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;ollama&quot;</span><span class="fu">,</span> <span class="dt">&quot;endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:11434&quot;</span><span class="fu">,</span> <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;nomic-embed-text&quot;</span><span class="fu">,</span> <span class="dt">&quot;embed_dim&quot;</span><span class="fu">:</span> <span class="dv">768</span> <span class="fu">}</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>kind</code></td>
+<td>a catalog kind above</td>
+</tr>
+<tr>
+<td><code>endpoint</code></td>
+<td>the base URL, without <code>/v1</code></td>
+</tr>
+<tr>
+<td><code>model</code></td>
+<td>the model id; empty means auto-detect at launch from <code>/v1/models</code></td>
+</tr>
+<tr>
+<td><code>tool_format</code></td>
+<td><code>qwen</code>, <code>gemma</code>, <code>llama</code>, <code>mistral</code>, <code>openai</code>, or <code>auto</code> to follow whatever model the server serves</td>
+</tr>
+<tr>
+<td><code>embed_dim</code></td>
+<td>embeddings only: the vector size (<code>nomic-embed-text</code> 768, <code>bge-m3</code> 1024)</td>
+</tr>
+<tr>
+<td><code>auth.mode</code></td>
+<td><code>none</code>, <code>apikey</code> or <code>oauth</code></td>
+</tr>
+<tr>
+<td><code>auth.key_env</code></td>
+<td>read the key from this environment variable at launch (wins over a stored key)</td>
+</tr>
+<tr>
+<td><code>auth.stored</code></td>
+<td>the key is in <code>credentials.json</code> under the provider’s name</td>
+</tr>
+<tr>
+<td><code>reasoning</code></td>
+<td><code>""</code>, <code>high</code>, <code>xhigh</code> (Fugu), or <code>low</code> to <code>max</code> (Claude Code): the effort hint</td>
+</tr>
+</tbody>
+</table>
+<p>The name of a provider is yours (<code>zai</code>, <code>local</code>, <code>gpu-box</code>); the kind is from the catalog.</p>
+<h2 id="keys">Keys</h2>
+<p>Keys never live in <code>config.json</code>. Three ways to supply one:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Way</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>stored</td>
+<td><code>tenant setup</code> → Paste &amp; store; <code>/model add-cloud &lt;kind&gt; &lt;key&gt;</code>; <code>/configure</code>; the dashboard’s <strong>Provider keys</strong> page. Saved to <code>&lt;config&gt;/credentials.json</code> under the provider name, owner-only.</td>
+</tr>
+<tr>
+<td>environment</td>
+<td><code>tenant setup</code> → Reference an env var, or <code>"auth": {"key_env": "OPENAI_API_KEY"}</code>; read at launch. An env var wins over a stored key.</td>
+</tr>
+<tr>
+<td>one launch</td>
+<td><code>--api-key KEY</code> on any command</td>
+</tr>
+</tbody>
+</table>
+<p>After rotating a key, <code>/model reload</code> (or <strong>Reload API keys</strong> on the dashboard’s <strong>Model</strong> page) re-resolves the active provider’s key live. <code>tenant doctor</code> checks that every keyed provider has a resolvable secret.</p>
+<h2 id="add-a-provider">Add a provider</h2>
+<ul>
+<li>Interactive: <code>tenant setup</code> (Modify → Model provider) or <code>/setup</code> in the terminal UI.</li>
+<li>One line, cloud: <code>/model add-cloud zai sk-…</code> registers the kind, stores the key and names the provider after the kind (<code>zai</code>, <code>openai</code>, <code>grok</code>, <code>anthropic</code>).</li>
+<li>One line, Claude Code: <code>/model add claudecode</code>.</li>
+<li>Self-hosted: <code>/model add &lt;name&gt; &lt;endpoint&gt; [fmt]</code> or <code>tenant model add &lt;name&gt; --endpoint URL [--kind K] [--model M] [--tool-format F]</code>.</li>
+<li>Dashboard: <strong>Model</strong> → “Add a model from a server on your network” (probes the server, finds its kind, and sends one tool-call test) or “Add a cloud model”.</li>
+</ul>
+<p>Then switch to it: <a href="/tenant/docs/models/switching">Switching models</a>. Local servers in detail: <a href="/tenant/docs/models/local">Local models</a>.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/models/providers.mdtenant/docs/_src/models/providers.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#the-catalog" id="toc-the-catalog">The catalog</a></li>
+<li><a href="#a-provider-in-config.json" id="toc-a-provider-in-config.json">A provider in config.json</a></li>
+<li><a href="#keys" id="toc-keys">Keys</a></li>
+<li><a href="#add-a-provider" id="toc-add-a-provider">Add a provider</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

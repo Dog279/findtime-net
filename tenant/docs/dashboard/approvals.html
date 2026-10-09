@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approvals — Tenant docs — FindTime</title>
+<meta name="description" content="When the agent needs your OK, where the request appears, what the buttons do, what happens if nobody answers, and the rows that set what it may do on its own.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/dashboard/approvals">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/dashboard/overview">Dashboard</a></p>
+<h1>Approvals</h1>
+<p class="lede">When the agent needs your OK, where the request appears, what the buttons do, what happens if nobody answers, and the rows that set what it may do on its own.</p>
+<p>Some things the agent wants to do wait for you first: running a command, changing files, sending a message. Doing nothing never says yes. The model behind this is on <a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a>; this page is the dashboard’s side of it.</p>
+<h2 id="where-a-request-appears">Where a request appears</h2>
+<p>Within a second:</p>
+<ul>
+<li>on <strong>Approvals &amp; safety</strong>, under “Waiting for your OK”;</li>
+<li>above the message box on <strong>Chat</strong>, when you are there;</li>
+<li>on every page, in the line under the title: “1 action is waiting for your OK”, with an <strong>Answer it</strong> link;</li>
+<li>on <strong>Overview</strong>, in the “Waiting for your OK” count.</li>
+</ul>
+<p>Each request says what the agent wants to do, in which area, which tool asked, how long it has waited, and the full text of what it wants to run or send. Characters that could hide text show as markers like <code>⟨U+202E⟩</code>. A long request says so: read all of it before you allow it.</p>
+<h2 id="the-buttons">The buttons</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Button</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Allow once</strong></td>
+<td>this one action goes ahead</td>
+</tr>
+<tr>
+<td><strong>Deny</strong></td>
+<td>refused; the agent is told no and carries on without it</td>
+</tr>
+<tr>
+<td><strong>Allow for the rest of this session</strong></td>
+<td>behind a second step, only on some requests: the same kind of action goes ahead without asking until Tenant restarts, or until you press <strong>Ask me again</strong> on its row. Not offered where the grant would be hidden or let the agent get around your settings: commands that do not run in the sandbox, leaving the sandbox, requests from iMessage, and requests a tool rule made ask.</td>
+</tr>
+<tr>
+<td>a pairing request from another computer</td>
+<td>asks a second time: allow it only if the person pairing told you the same PIN the request shows</td>
+</tr>
+</tbody>
+</table>
+<p>There is no “always” button here. To stop being asked about a whole area, change its row (below): a deliberate step with a warning.</p>
+<p><strong>“This was already answered (here, in another tab, or in the terminal) or it timed out.”</strong> Someone got there first. The first answer counts.</p>
+<p><strong>Requests from a Discord conversation</strong> are answered on Discord, with the buttons on the card; the page only says they are there. <strong>Requests from iMessage</strong> are in the list, marked “from iMessage”, and are answered here (or by the operator’s text reply).</p>
+<h2 id="if-nobody-answers">If nobody answers</h2>
+<table>
+<thead>
+<tr>
+<th>Request from</th>
+<th>Refused when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a scheduled job</td>
+<td>its run ends: 15 minutes (<code>cron.per_run_minutes</code>)</td>
+</tr>
+<tr>
+<td>your Chat message</td>
+<td>you press <strong>Stop</strong></td>
+</tr>
+<tr>
+<td>an alert investigation</td>
+<td>15 minutes</td>
+</tr>
+<tr>
+<td>a Discord card</td>
+<td><code>relay.approval_timeout</code> (10 minutes)</td>
+</tr>
+<tr>
+<td>anything still waiting</td>
+<td>Tenant stops</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-the-agent-may-do-on-its-own">What the agent may do on its own</h2>
+<p>One row per area, in words. Each says what the agent can do now.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Area</th>
+<th>Covers</th>
+<th>Recommended</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Run commands</td>
+<td>run commands and programs on the computer running Tenant</td>
+<td>Ask</td>
+</tr>
+<tr>
+<td>Change files</td>
+<td>create and change files</td>
+<td>Ask</td>
+</tr>
+<tr>
+<td>Irreversible actions</td>
+<td>things that cannot be undone</td>
+<td>Ask</td>
+</tr>
+<tr>
+<td>Act on websites</td>
+<td>click, type and submit forms on websites</td>
+<td>Ask</td>
+</tr>
+<tr>
+<td>Send messages</td>
+<td>email, texts and posts in your name</td>
+<td>Ask</td>
+</tr>
+<tr>
+<td>Share private data</td>
+<td>send private information it has read to an outside service</td>
+<td>Ask</td>
+</tr>
+<tr>
+<td>Connect remote services</td>
+<td>connect new remote services and trust their tools</td>
+<td>Ask</td>
+</tr>
+<tr>
+<td>Leave the sandbox</td>
+<td>run a command outside the safety box after the box stopped it</td>
+<td>Ask</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Ask:</strong> it asks you first, every time. One tap.</li>
+<li><strong>Allow:</strong> it goes ahead without asking. Choosing Allow opens a second step that explains it before anything changes.</li>
+<li><strong>Deny:</strong> it cannot, and does not ask. One tap. Two settings are stronger than Deny, for their own tools only: a tool rule on <strong>Tools</strong> that lets a tool go ahead (<strong>Don’t ask</strong>), and a remote service set to <strong>Don’t ask</strong>. Discord’s lock (<strong>Access</strong> → Discord may not run commands) holds even over those.</li>
+</ul>
+<p><strong>New.</strong> An area an update added, which you have not chosen for yet, asks until you choose. A notice on every page links here, and <strong>Keep them at Ask</strong> chooses Ask for all of them at once.</p>
+<p><strong>Before you set Run commands to Allow,</strong> read its warning. It names the account commands run as; as SYSTEM on Windows that account has full control of the computer. Unless commands run in the sandbox, a command can change Tenant’s own settings, and the agent could then answer its own requests on this page. Keep it at Ask unless your commands run in an enforcing sandbox profile. <strong>Leave the sandbox</strong> always carries the same warning.</p>
+<p><strong>Scheduled jobs that run commands</strong> follow their own switch on <strong>Scheduled jobs</strong>, not these rows. Everything else follows these rows: Chat, alerts, research, and scheduled jobs that do not run commands.</p>
+<p><strong>Approvals &amp; safety or Access?</strong> <strong>Access</strong> sets who may message the agent on Discord and iMessage and what those conversations may make it do. <strong>Approvals &amp; safety</strong> sets what it does for you and for its own jobs.</p>
+<h2 id="by-rest">By REST</h2>
+<pre class="http"><code>GET  /api/approvals                     [{id, category, action, detail, age_secs}]
+POST /api/approvals/{id}                {&quot;decision&quot;: &quot;approve&quot; | &quot;approve_session&quot; | &quot;approve_always&quot; | &quot;deny&quot;}</code></pre>
+<p><code>approve_always</code> exists only here; on the page a permanent change is an area’s row. See <a href="/tenant/docs/dashboard/api">REST API</a>.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/dashboard/approvals.mdtenant/docs/_src/dashboard/approvals.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#where-a-request-appears" id="toc-where-a-request-appears">Where a request appears</a></li>
+<li><a href="#the-buttons" id="toc-the-buttons">The buttons</a></li>
+<li><a href="#if-nobody-answers" id="toc-if-nobody-answers">If nobody answers</a></li>
+<li><a href="#what-the-agent-may-do-on-its-own" id="toc-what-the-agent-may-do-on-its-own">What the agent may do on its own</a></li>
+<li><a href="#by-rest" id="toc-by-rest">By REST</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

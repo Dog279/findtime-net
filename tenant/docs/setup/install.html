@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Install — Tenant docs — FindTime</title>
+<meta name="description" content="One line on macOS, Linux or Windows. No sudo, no toolchain, a verified download.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/setup/install">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/setup/install">Setup &amp; install</a></p>
+<h1>Install</h1>
+<p class="lede">One line on macOS, Linux or Windows. No sudo, no toolchain, a verified download.</p>
+<h2 id="one-line-install">One-line install</h2>
+<p>macOS or Linux:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://github.com/Dog279/TENANT/releases/latest/download/install.sh <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
+<p>Windows (PowerShell):</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">irm</span> https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/</span>Dog279<span class="op">/</span>TENANT<span class="op">/</span>releases<span class="op">/</span>latest<span class="op">/</span>download<span class="op">/</span>install<span class="op">.</span><span class="fu">ps1</span> <span class="op">|</span> <span class="fu">iex</span></span></code></pre></div>
+<p>The script downloads the release archive for your OS and CPU, checks its SHA-256 against the release’s <code>checksums.txt</code>, and installs the binary for the current user:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>macOS and Linux</th>
+<th>Windows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Binary</td>
+<td><code>~/.local/bin/tenant</code></td>
+<td><code>%LOCALAPPDATA%\Programs\tenant\tenant.exe</code></td>
+</tr>
+<tr>
+<td>Rights needed</td>
+<td>none (no sudo)</td>
+<td>none (no administrator)</td>
+</tr>
+<tr>
+<td>Quarantine</td>
+<td>none: a <code>curl</code> download carries no Gatekeeper mark</td>
+<td>none: no SmartScreen prompt</td>
+</tr>
+</tbody>
+</table>
+<p>If the directory is not on your <code>PATH</code>, the script prints the line to add. Confirm with:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> version</span></code></pre></div>
+<h3 id="script-options">Script options</h3>
+<p>Set these in the environment before running the script.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>TENANT_VERSION</code></td>
+<td>the latest release</td>
+<td>Install this version, written without the leading <code>v</code> (<code>0.2.0</code>).</td>
+</tr>
+<tr>
+<td><code>TENANT_INSTALL_DIR</code></td>
+<td><code>~/.local/bin</code> or <code>%LOCALAPPDATA%\Programs\tenant</code></td>
+<td>Where the binary goes.</td>
+</tr>
+<tr>
+<td><code>TENANT_REPO</code></td>
+<td><code>Dog279/TENANT</code></td>
+<td>The GitHub repository asked for the latest release.</td>
+</tr>
+<tr>
+<td><code>TENANT_BASE_URL</code></td>
+<td>the release’s download URL</td>
+<td>A directory URL that holds the archive and <code>checksums.txt</code> (a mirror).</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">TENANT_VERSION</span><span class="op">=</span>0.1.0 <span class="va">TENANT_INSTALL_DIR</span><span class="op">=</span>/opt/tenant/bin <span class="fu">sh</span> <span class="at">-c</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://github.com/Dog279/TENANT/releases/latest/download/install.sh<span class="va">)</span><span class="st">&quot;</span></span></code></pre></div>
+<h2 id="manual-install">Manual install</h2>
+<p>Every release on the <a href="https://github.com/Dog279/TENANT/releases/latest">Releases page</a> carries:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>File</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tenant_&lt;version&gt;_&lt;os&gt;_&lt;cpu&gt;.tar.gz</code> (<code>.zip</code> on Windows)</td>
+<td>the binary, <code>README.md</code> and <code>LICENSE</code>; <code>os</code> is <code>darwin</code>, <code>linux</code> or <code>windows</code>, <code>cpu</code> is <code>x86_64</code> or <code>aarch64</code></td>
+</tr>
+<tr>
+<td><code>checksums.txt</code></td>
+<td>SHA-256 of every archive</td>
+</tr>
+<tr>
+<td><code>checksums.txt.sigstore.json</code></td>
+<td>a keyless cosign signature of the checksums, made by the release workflow through GitHub OIDC</td>
+</tr>
+<tr>
+<td><code>*.spdx.json</code></td>
+<td>an SBOM per archive</td>
+</tr>
+<tr>
+<td><code>install.sh</code>, <code>install.ps1</code></td>
+<td>the scripts above</td>
+</tr>
+</tbody>
+</table>
+<p>Download the archive, verify it, and put <code>tenant</code> (<code>tenant.exe</code>) on your <code>PATH</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">shasum</span> <span class="at">-a</span> 256 <span class="at">-c</span> <span class="at">--ignore-missing</span> checksums.txt</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> tenant_0.1.0_darwin_aarch64.tar.gz tenant</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> tenant ~/.local/bin/</span></code></pre></div>
+<p>A browser download on macOS carries a quarantine mark; <code>xattr -d com.apple.quarantine ~/.local/bin/tenant</code> clears it.</p>
+<h2 id="build-from-source">Build from source</h2>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/Dog279/TENANT.git</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> TENANT</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> build ./cmd/tenant        <span class="co"># needs Go 1.26+; produces ./tenant</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> test ./...                <span class="co"># optional</span></span></code></pre></div>
+<p>A build without release stamping reports itself as a dev build, and <code>tenant update</code> refuses to replace a dev build.</p>
+<h2 id="after-installing">After installing</h2>
+<ol type="1">
+<li><code>tenant setup</code> writes <code>config.json</code> and your keys. See <a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a>.</li>
+<li><code>tenant doctor</code> checks the setup.</li>
+<li><code>tenant tui</code> opens the terminal UI, or <code>tenant service install</code> runs Tenant in the background. See <a href="/tenant/docs/setup/service">Run in the background</a>.</li>
+</ol>
+<p>Tab completion:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="op">&lt;(</span><span class="ex">tenant</span> completion bash<span class="op">)</span>      <span class="co"># ~/.bashrc</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="op">&lt;(</span><span class="ex">tenant</span> completion zsh<span class="op">)</span>       <span class="co"># ~/.zshrc, after compinit</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> completion fish <span class="kw">|</span> <span class="bu">source</span>       <span class="co"># or save to ~/.config/fish/completions/tenant.fish</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tenant completion powershell <span class="op">|</span> <span class="fu">Out-String</span> <span class="op">|</span> <span class="fu">Invoke-Expression</span>   <span class="co"># in $PROFILE</span></span></code></pre></div>
+<h2 id="uninstall">Uninstall</h2>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service uninstall     <span class="co"># if you installed the background service</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ~/.local/bin/tenant       <span class="co"># the binary (and tenant.prev, if an update left one)</span></span></code></pre></div>
+<p>Your config and data stay where <a href="/tenant/docs/setup/directories">Files &amp; directories</a> says. <code>tenant privacy export --out DIR</code> writes everything as readable files first if you want to keep it; delete the two directories to remove it.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/setup/install.mdtenant/docs/_src/setup/install.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#one-line-install" id="toc-one-line-install">One-line install</a></li>
+<li><a href="#manual-install" id="toc-manual-install">Manual install</a></li>
+<li><a href="#build-from-source" id="toc-build-from-source">Build from source</a></li>
+<li><a href="#after-installing" id="toc-after-installing">After installing</a></li>
+<li><a href="#uninstall" id="toc-uninstall">Uninstall</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

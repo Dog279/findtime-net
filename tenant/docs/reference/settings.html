@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>settings.&lt;agent&gt;.json — Tenant docs — FindTime</title>
+<meta name="description" content="The per-agent runtime settings the running hub re-reads live. Enabled tools, permission modes, tool rules, execution profiles and sandbox exceptions.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/reference/settings">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/reference/config">Reference</a></p>
+<h1>settings.&lt;agent&gt;.json</h1>
+<p class="lede">The per-agent runtime settings the running hub re-reads live. Enabled tools, permission modes, tool rules, execution profiles and sandbox exceptions.</p>
+<p><code>&lt;config&gt;/settings.&lt;agent&gt;.json</code> (<code>settings.main.json</code> for the default agent) holds what must survive a restart but changes while Tenant runs. The running hub polls it and applies a hand edit within about 3 seconds, reporting what it reloaded in the feed; its own saves never re-trigger. A corrupt file is reported and ignored, never silently replaced. The agent’s file tools refuse to read or write it.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tools&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;os_exec&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">&quot;web_click&quot;</span><span class="fu">:</span> <span class="kw">false</span> <span class="fu">},</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;exec&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;write&quot;</span><span class="fu">:</span> <span class="st">&quot;allow&quot;</span><span class="fu">,</span> <span class="dt">&quot;destructive&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;web&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;send&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;egress&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;mcp&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;sandbox&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;known_categories&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;exec&quot;</span><span class="ot">,</span> <span class="st">&quot;write&quot;</span><span class="ot">,</span> <span class="st">&quot;destructive&quot;</span><span class="ot">,</span> <span class="st">&quot;web&quot;</span><span class="ot">,</span> <span class="st">&quot;send&quot;</span><span class="ot">,</span> <span class="st">&quot;egress&quot;</span><span class="ot">,</span> <span class="st">&quot;mcp&quot;</span><span class="ot">,</span> <span class="st">&quot;sandbox&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;announced_categories&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;egress&quot;</span><span class="ot">,</span> <span class="st">&quot;mcp&quot;</span><span class="ot">,</span> <span class="st">&quot;sandbox&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tool_rules&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;delete_*&quot;</span><span class="fu">:</span> <span class="st">&quot;deny&quot;</span><span class="fu">,</span> <span class="dt">&quot;write_note&quot;</span><span class="fu">:</span> <span class="st">&quot;allow&quot;</span><span class="fu">,</span> <span class="dt">&quot;os_exec(brew install *)&quot;</span><span class="fu">:</span> <span class="st">&quot;allow&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;exec_profiles&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;default&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;enforce&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">&quot;env_pass&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;JAVA_HOME&quot;</span><span class="ot">]</span> <span class="fu">},</span> <span class="dt">&quot;cron-shell&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;backend&quot;</span><span class="fu">:</span> <span class="st">&quot;host&quot;</span> <span class="fu">}</span> <span class="fu">},</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;exec_exceptions&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;local&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;/Users/me/projects&quot;</span><span class="ot">]</span> <span class="fu">}</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Meaning</th>
+<th>Written by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tools</code></td>
+<td>tool name → enabled; overrides the launch-flag default on the next run; a tool missing from the map keeps its flag default</td>
+<td><code>/enable</code>, <code>/disable</code>, <strong>Tools</strong> page, <code>/api/tools</code></td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>category → <code>ask</code>, <code>allow</code>, <code>deny</code> for the host surface</td>
+<td><code>/permissions set</code>, <code>/approve always</code>, <strong>Approvals &amp; safety</strong>, <code>tenant permissions preset</code></td>
+</tr>
+<tr>
+<td><code>known_categories</code></td>
+<td>the categories you have chosen a mode for; one that asks and is not listed arrived with an update and shows as <strong>New</strong></td>
+<td>every permission change</td>
+</tr>
+<tr>
+<td><code>announced_categories</code></td>
+<td>the new categories the terminal UI has already told you about</td>
+<td>the terminal UI</td>
+</tr>
+<tr>
+<td><code>tool_rules</code></td>
+<td>pattern → mode: an exact action id, a bare tool name, a glob, or <code>os_exec(&lt;glob&gt;)</code> for a command (<a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a>)</td>
+<td><code>/permissions add</code>, <code>/permissions rm</code>, <strong>Tools</strong> page, by hand</td>
+</tr>
+<tr>
+<td><code>exec_profiles</code></td>
+<td>surface or <code>default</code> → the execution profile (<a href="/tenant/docs/first-launch/sandbox">fields</a>)</td>
+<td>by hand only</td>
+</tr>
+<tr>
+<td><code>exec_exceptions</code></td>
+<td>surface → folders its sandboxed commands may also write to</td>
+<td><strong>Always</strong> on a sandbox prompt; removed by hand</td>
+</tr>
+</tbody>
+</table>
+<p>The agent id is <code>--agent ID</code> (default <code>main</code>); each agent has its own settings file, soul and memory.</p>
+<p>The Discord relay’s and the iMessage responder’s permission maps live in <code>config.json</code> (<code>relay.permissions</code>, <code>imessage.permissions</code>), not here; tool rules and exec profiles are shared by every surface.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/reference/settings.mdtenant/docs/_src/reference/settings.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

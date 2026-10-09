@@ -4,33 +4,324 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>FindTime — small apps, well made</title>
+<meta name="description" content="FindTime LLC is a two-person studio in Davis, California building small, focused apps for iPhone and Android. No accounts, no third-party analytics, and we never sell your data.">
+<meta property="og:title" content="FindTime — small apps, well made">
+<meta property="og:description" content="A two-person studio building small, focused apps for iPhone and Android.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/">
+<link rel="canonical" href="https://findtime.net/">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
 <style>
-  :root { color-scheme: light dark; }
-  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-         max-width: 720px; margin: 0 auto; padding: 4rem 1.25rem; line-height: 1.6; text-align: center; }
-  h1 { font-size: 2.2rem; margin-bottom: .5rem; }
-  .tag { opacity: .7; font-size: 1.05rem; }
-  .app { border: 1px solid rgba(128,128,128,.3); border-radius: 14px; padding: 1.5rem;
-         margin: 2.5rem auto; max-width: 420px; text-align: left; }
-  .app h2 { margin: 0 0 .25rem; font-size: 1.3rem; }
-  .app p { margin: .25rem 0 0; opacity: .8; }
-  a { color: #208AEF; }
-  footer { margin-top: 4rem; opacity: .6; font-size: .85rem; }
+  :root {
+    --bg: #ffffff;
+    --bg-alt: #f6f8fa;
+    --fg: #12151a;
+    --muted: #5b6470;
+    --line: rgba(18,21,26,.12);
+    --card: #ffffff;
+    --accent: #208AEF;
+    --accent-soft: rgba(32,138,239,.08);
+    --radius: 14px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d1013;
+      --bg-alt: #12171d;
+      --fg: #e8ecf1;
+      --muted: #9aa4b2;
+      --line: rgba(232,236,241,.14);
+      --card: #141920;
+      --accent: #4da3f5;
+      --accent-soft: rgba(77,163,245,.10);
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 0 1.25rem; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav { display: flex; align-items: center; justify-content: space-between; height: 60px; }
+  .brand { display: flex; align-items: center; gap: .55rem; font-weight: 650; letter-spacing: -.01em;
+           color: var(--fg); font-size: 1.05rem; }
+  .brand:hover { text-decoration: none; }
+  .brand svg { display: block; }
+  .nav-links { display: flex; gap: 1.4rem; font-size: .93rem; }
+  .nav-links a { color: var(--muted); }
+  .nav-links a:hover { color: var(--fg); text-decoration: none; }
+  @media (max-width: 560px) { .nav-links { gap: 1rem; font-size: .88rem; } .nav-links .hide-sm { display: none; } }
+
+  /* ---------- hero ---------- */
+  .hero { padding: 5rem 0 4rem; }
+  .eyebrow { display: inline-block; font-size: .8rem; font-weight: 600; letter-spacing: .06em;
+             text-transform: uppercase; color: var(--accent); background: var(--accent-soft);
+             padding: .3rem .7rem; border-radius: 100px; margin-bottom: 1.25rem; }
+  h1 { font-size: clamp(2.1rem, 6vw, 3.2rem); line-height: 1.12; letter-spacing: -.03em;
+       margin: 0 0 1rem; font-weight: 700; }
+  .lede { font-size: clamp(1.05rem, 2.4vw, 1.2rem); color: var(--muted); max-width: 34em; margin: 0 0 2rem; }
+  .cta-row { display: flex; flex-wrap: wrap; gap: .75rem; }
+  .btn { display: inline-block; padding: .65rem 1.25rem; border-radius: 10px; font-weight: 550;
+         font-size: .95rem; border: 1px solid transparent; }
+  .btn:hover { text-decoration: none; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { filter: brightness(1.07); }
+  .btn-ghost { border-color: var(--line); color: var(--fg); }
+  .btn-ghost:hover { background: var(--bg-alt); }
+
+  /* ---------- sections ---------- */
+  section { padding: 3.5rem 0; border-top: 1px solid var(--line); }
+  h2 { font-size: 1.5rem; letter-spacing: -.02em; margin: 0 0 .5rem; font-weight: 650; }
+  .section-sub { color: var(--muted); margin: 0 0 2rem; max-width: 40em; }
+  h3 { font-size: 1.1rem; margin: 0 0 .35rem; font-weight: 600; letter-spacing: -.01em; }
+
+  /* ---------- apps ---------- */
+  .apps { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+  .app {
+    background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 1.5rem; display: flex; flex-direction: column;
+  }
+  .app-icon {
+    width: 52px; height: 52px; border-radius: 13px; display: grid; place-items: center;
+    font-size: 1.6rem; margin-bottom: 1rem; background: var(--accent-soft);
+    border: 1px solid var(--line);
+  }
+  .app p { color: var(--muted); margin: 0 0 1rem; font-size: .95rem; }
+  .app .status { margin-top: auto; font-size: .82rem; font-weight: 600; color: var(--muted);
+                 display: inline-flex; align-items: center; gap: .4rem; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); display: inline-block; }
+
+  /* ---------- principles ---------- */
+  .grid-3 { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); }
+  .principle { padding: 1.25rem 1.4rem; border-left: 3px solid var(--accent); background: var(--bg-alt);
+               border-radius: 0 10px 10px 0; }
+  .principle p { margin: 0; color: var(--muted); font-size: .93rem; }
+
+  /* ---------- founders ---------- */
+  .founders { display: grid; gap: 1.25rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .founder { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius);
+             padding: 1.5rem; }
+  .avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--accent); color: #fff;
+            display: grid; place-items: center; font-weight: 650; font-size: 1.05rem; margin-bottom: .9rem; }
+  .role { color: var(--accent); font-size: .82rem; font-weight: 600; text-transform: uppercase;
+          letter-spacing: .05em; margin: 0 0 .6rem; }
+  .founder p.bio { color: var(--muted); margin: 0; font-size: .93rem; }
+
+  /* ---------- contact ---------- */
+  .contact-box { background: var(--bg-alt); border: 1px solid var(--line); border-radius: var(--radius);
+                 padding: 1.75rem; }
+  .contact-box dl { display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.5rem; margin: 0; font-size: .95rem; }
+  .contact-box dt { color: var(--muted); }
+  .contact-box dd { margin: 0; }
+  @media (max-width: 480px) { .contact-box dl { grid-template-columns: 1fr; gap: .1rem 0; }
+                              .contact-box dd { margin-bottom: .7rem; } }
+
+  /* ---------- footer ---------- */
+  footer { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; color: var(--muted); font-size: .88rem; }
+  .foot-row { display: flex; flex-wrap: wrap; gap: .75rem 1.5rem; justify-content: space-between; align-items: center; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
+  .foot-links a { color: var(--muted); }
+  .foot-links a:hover { color: var(--fg); }
 </style>
 </head>
 <body>
-<h1>FindTime</h1>
-<p class="tag">A two-person studio making small, well-made apps.</p>
 
-<div class="app">
-  <h2>🍜 BiteMatch</h2>
-  <p>Swipe restaurants near you. Match with a friend. Dinner, decided.</p>
-  <p><em>Coming soon to the App Store.</em></p>
-</div>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime
+    </a>
+    <nav class="nav-links">
+      <a href="#apps">Apps</a>
+      <a href="/tenant/">Tenant</a>
+      <a href="#about" class="hide-sm">About</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <div class="wrap hero">
+    <span class="eyebrow">Independent app studio</span>
+    <h1>Small apps, well made.</h1>
+    <p class="lede">
+      FindTime is a two-person studio building focused apps for iPhone and Android.
+      No accounts to create, no third-party analytics, and we don't sell your data —
+      we never have.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="#apps">See our apps</a>
+      <a class="btn btn-ghost" href="mailto:support@findtime.net">Get in touch</a>
+    </div>
+  </div>
+
+  <section id="apps">
+    <div class="wrap">
+      <h2>Our apps</h2>
+      <p class="section-sub">
+        We'd rather make a few things properly than many things quickly. Each app does one job well
+        and respects the person using it.
+      </p>
+      <div class="apps">
+
+        <div class="app">
+          <div class="app-icon">🍜</div>
+          <h3>BiteMatch</h3>
+          <p>
+            Swipe through restaurants near you and match with a friend on where to eat.
+            Two phones, one shared session, dinner decided in about a minute — no group chat required.
+          </p>
+          <span class="status"><span class="dot"></span> Coming soon to the App Store</span>
+        </div>
+
+        <div class="app">
+          <div class="app-icon">🔥</div>
+          <h3>Ashfall</h3>
+          <p>
+            A text-driven survival game about scarcity and slow rebuilding. Entirely offline —
+            it makes no network requests and collects nothing at all.
+          </p>
+          <span class="status"><span class="dot"></span> In development</span>
+        </div>
+
+        <div class="app">
+          <div class="app-icon">🤖</div>
+          <h3>Tenant</h3>
+          <p>
+            Your own AI agent, in one binary. Local or cloud models, a memory that learns, tools and MCP
+            servers, approvals before anything dangerous. Runs 24/7 on your machine with a web dashboard,
+            Discord and iMessage. Open source. <a href="/tenant/">Install and docs</a>.
+          </p>
+          <span class="status"><span class="dot"></span> Open source, MIT</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap">
+      <h2>How we work</h2>
+      <p class="section-sub">
+        We're small on purpose. That shapes everything about how our apps are built and what
+        they ask of you.
+      </p>
+      <div class="grid-3">
+        <div class="principle">
+          <h3>Privacy by default</h3>
+          <p>
+            Our apps have no user accounts and keep your data on your device. We collect the
+            minimum a feature needs, and nothing more.
+          </p>
+        </div>
+        <div class="principle">
+          <h3>Straight about money</h3>
+          <p>
+            Some of our free apps show ads; our paid apps don't, and we say which is which up
+            front. Either way we don't sell your data and we use no third-party analytics.
+          </p>
+        </div>
+        <div class="principle">
+          <h3>You reach actual people</h3>
+          <p>
+            There's no support ticket maze. Email us and one of the two people who built the
+            app writes back, usually within two business days.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="founders">
+    <div class="wrap">
+      <h2>Who we are</h2>
+      <p class="section-sub">FindTime is built and run by two people.</p>
+      <div class="founders">
+
+        <div class="founder">
+          <div class="avatar">DT</div>
+          <h3>Dylan Taylor</h3>
+          <p class="role">Co-founder</p>
+          <p class="bio">
+            Product and engineering. Works on app architecture, backend infrastructure, and
+            the release process across the portfolio.
+          </p>
+        </div>
+
+        <div class="founder">
+          <div class="avatar">BC</div>
+          <h3>Ben Coffman</h3>
+          <p class="role">Co-founder</p>
+          <p class="bio">
+            Engineering and platform. Works on systems, tooling, and the infrastructure our
+            apps run on.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <p class="section-sub">
+        Questions about an app, a bug to report, or a privacy request — email is the fastest way
+        to reach us.
+      </p>
+      <div class="contact-box">
+        <dl>
+          <dt>Email</dt>
+          <dd><a href="mailto:support@findtime.net">support@findtime.net</a></dd>
+
+          <dt>Support</dt>
+          <dd><a href="/support">Help, billing, and subscriptions</a></dd>
+
+          <dt>Privacy</dt>
+          <dd><a href="/legal/privacy">Read our privacy policy</a></dd>
+
+          <dt>Company</dt>
+          <dd>FindTime LLC<br>Davis, California, United States</dd>
+        </dl>
+      </div>
+    </div>
+  </section>
+
+</main>
 
 <footer>
-  <a href="/support">Support</a> · <a href="/legal/privacy">Privacy Policy</a> · <a href="/legal/terms">Terms of Use</a><br>
-  © 2026 FindTime
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/privacy#advertising">Your Privacy Choices</a>
+      <a href="/legal/terms">Terms of Use</a>
+      <a href="/support">Support</a>
+      <a href="/tenant/">Tenant</a>
+      <a href="mailto:support@findtime.net">Contact</a>
+    </div>
+  </div>
 </footer>
 </body>
 </html>

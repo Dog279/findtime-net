@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Access: Discord &amp; iMessage — Tenant docs — FindTime</title>
+<meta name="description" content="Let your agent be driven from your phone. The Discord relay with button approvals, the iMessage responder with an allowlist and text approvals, and the per-surface permissions for each.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/dashboard/access">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/dashboard/overview">Dashboard</a></p>
+<h1>Access: Discord &amp; iMessage</h1>
+<p class="lede">Let your agent be driven from your phone. The Discord relay with button approvals, the iMessage responder with an allowlist and text approvals, and the per-surface permissions for each.</p>
+<p>Two channels let messages from a phone drive the agent. Each is deny-by-default, has its own permission map, and answers its own approvals on its own channel. The dashboard’s <strong>Access</strong> page and the slash commands below are the same switches.</p>
+<h2 id="the-discord-relay">The Discord relay</h2>
+<p>Your DMs to a bot drive the agent; the bot DMs the answers back; a dangerous action posts a card with <strong>Approve</strong> / <strong>Deny</strong> buttons. You can also DM it files (png, jpg, heic, pdf, csv, txt, mp4): they download into <code>&lt;data&gt;/relay-inbox/</code> and the agent gets the paths.</p>
+<ol type="1">
+<li>Configure the bot token and your Discord user id: <code>/configure discord</code> (see <a href="/tenant/docs/mcp/integrations">Integrations</a>).</li>
+<li>Turn the relay on:</li>
+</ol>
+<pre class="text"><code>/relay [status]                            running? the operator, exec on or off
+/relay on | off                            start or stop live; the choice persists (relay.enabled)
+/relay allow &lt;discord-user-id&gt;             the one operator whose DMs drive the agent (relay.operator_id)
+/relay exec on | off                       unlock exec, write, destructive, sandbox and send offsite (relay.allow_exec; default off)
+/relay timeout &lt;duration&gt;                  how long a card waits before auto-denying (30s to 24h; default 10m)
+/relay permissions [set &lt;cat&gt; &lt;mode&gt;]      per-category ask | allow | deny for the relay (ask = a button card)</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;relay&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">&quot;operator_id&quot;</span><span class="fu">:</span> <span class="st">&quot;123456789012345678&quot;</span><span class="fu">,</span> <span class="dt">&quot;allow_exec&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>           <span class="dt">&quot;approval_timeout&quot;</span><span class="fu">:</span> <span class="st">&quot;10m&quot;</span><span class="fu">,</span> <span class="dt">&quot;card_style&quot;</span><span class="fu">:</span> <span class="st">&quot;v2&quot;</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>           <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;web&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;egress&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;mcp&quot;</span><span class="fu">:</span> <span class="st">&quot;deny&quot;</span> <span class="fu">}</span> <span class="fu">}</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>false</td>
+<td>start the relay at launch</td>
+</tr>
+<tr>
+<td><code>operator_id</code></td>
+<td></td>
+<td>the single Discord user whose DMs are obeyed; everyone else is ignored</td>
+</tr>
+<tr>
+<td><code>allow_exec</code></td>
+<td>false</td>
+<td>while false, <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>sandbox</code> and <code>send</code> are refused offsite whatever the permissions or a tool rule say (the bot’s own post and react still follow <code>send</code>); true: those categories follow <code>permissions</code></td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>all <code>ask</code></td>
+<td>per-category modes for Discord turns; <code>ask</code> posts a card</td>
+</tr>
+<tr>
+<td><code>approval_timeout</code></td>
+<td><code>10m</code></td>
+<td>a card nobody taps is denied after this</td>
+</tr>
+<tr>
+<td><code>card_style</code></td>
+<td><code>v2</code></td>
+<td>the Components-v2 container card; <code>legacy</code> is plain content with a button row; v2 falls back on its own if Discord rejects the post</td>
+</tr>
+</tbody>
+</table>
+<p>Every resolution edits the card in place (verdict, who, when; buttons disabled), so a resolved card stays as the record. Only the operator’s click counts; anyone else gets an ephemeral reply. On the dashboard, <strong>Access</strong> has the same switches: the operator, <strong>Discord may run commands</strong> (confirms first), per-area modes. <strong>Approvals &amp; safety</strong> only says that Discord requests are answered on Discord.</p>
+<p>After a restart the relay catches up: DMs sent while Tenant was down are routed oldest first, and a turn the stop cut gets “I was stopped mid-task… say <code>continue</code>” (<a href="/tenant/docs/setup/service">Run in the background</a>). A dead remote-MCP sign-in, or a log alert whose action is <code>discord</code>, arrives as a DM too.</p>
+<h2 id="the-imessage-responder">The iMessage responder</h2>
+<p>Texts from allowed handles drive the agent; it replies in the same chat. Native on a Mac (Messages’ <code>chat.db</code>, which needs Full Disk Access) or over BlueBubbles from any OS. Group chats, SMS and RCS never drive the agent and cannot approve an action.</p>
+<pre class="text"><code>/imessage [list]                           the allowlist and the responder&#39;s state
+/imessage on | off                         start or stop the responder live (imessage.enabled)
+/imessage passive | respond                passive: read every text, answer none; respond: answer the allowlist and the operator, 1:1 iMessage only
+/imessage permissions [set &lt;cat&gt; &lt;mode&gt;]   per-category modes for the responder&#39;s tools (default: deny)
+/imessage allow &lt;handle&gt;                   permit a phone number or email to drive the agent
+/imessage deny &lt;handle&gt; | clear            remove one handle, or empty the allowlist</code></pre>
+<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;imessage&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">&quot;passive&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="dt">&quot;allow_from&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;+15550001111&quot;</span><span class="ot">,</span> <span class="st">&quot;pat@example.com&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>              <span class="dt">&quot;operator&quot;</span><span class="fu">:</span> <span class="st">&quot;+15550001111&quot;</span><span class="fu">,</span> <span class="dt">&quot;permissions&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;web&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span><span class="fu">,</span> <span class="dt">&quot;send&quot;</span><span class="fu">:</span> <span class="st">&quot;ask&quot;</span> <span class="fu">}</span> <span class="fu">}</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>enabled</code></td>
+<td>false</td>
+<td>start the responder at launch</td>
+</tr>
+<tr>
+<td><code>passive</code></td>
+<td>false</td>
+<td>observe only: every text is logged as an <code>imessage</code> Observed event and shown in the feed, none drives a turn</td>
+</tr>
+<tr>
+<td><code>allow_from</code></td>
+<td>empty (nobody)</td>
+<td>the handles that may drive the agent, matched per message</td>
+</tr>
+<tr>
+<td><code>operator</code></td>
+<td></td>
+<td>the handle whose <code>Y &lt;nonce&gt;</code> approves a gated action; unset, an <code>ask</code> category prompts at the host (TUI or dashboard) instead</td>
+</tr>
+<tr>
+<td><code>permissions</code></td>
+<td>all <code>deny</code></td>
+<td>per-category modes for iMessage turns</td>
+</tr>
+</tbody>
+</table>
+<p>An allowlisted contact can chat but not approve: a gated action texts a prompt with a nonce to the chat it came from, and only <code>Y &lt;nonce&gt;</code> (or <code>deny &lt;nonce&gt;</code>) from the operator handle resolves it. One turn runs at a time; a second text mid-turn gets a “busy” reply. On a Mac, senders are named from Contacts (“Pat Lee (+15550001111)”), read-only under the same Full Disk Access. Turning the responder on gives the agent its <code>imessage_*</code> tools at once.</p>
+<h2 id="which-surface-decides-what">Which surface decides what</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>Host (TUI, dashboard, cron)</th>
+<th>Discord relay</th>
+<th>iMessage responder</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default modes</td>
+<td><code>ask</code></td>
+<td><code>ask</code>, plus the <code>allow_exec</code> lock</td>
+<td><code>deny</code></td>
+</tr>
+<tr>
+<td>stored in</td>
+<td><code>settings.&lt;agent&gt;.json</code></td>
+<td><code>config.json</code> → <code>relay.permissions</code></td>
+<td><code>config.json</code> → <code>imessage.permissions</code></td>
+</tr>
+<tr>
+<td>approvals answered</td>
+<td>TUI card, dashboard, REST</td>
+<td>the Discord card</td>
+<td><code>Y &lt;nonce&gt;</code> by the operator, or the dashboard</td>
+</tr>
+<tr>
+<td>tool rules</td>
+<td>shared</td>
+<td>shared</td>
+<td>shared</td>
+</tr>
+<tr>
+<td>read-only commands skip the prompt</td>
+<td>yes</td>
+<td>yes</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p><code>tenant permissions effective --surface discord</code> and <code>tenant security audit</code> show the composed result per surface.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/dashboard/access.mdtenant/docs/_src/dashboard/access.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#the-discord-relay" id="toc-the-discord-relay">The Discord relay</a></li>
+<li><a href="#the-imessage-responder" id="toc-the-imessage-responder">The iMessage responder</a></li>
+<li><a href="#which-surface-decides-what" id="toc-which-surface-decides-what">Which surface decides what</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

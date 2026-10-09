@@ -1,0 +1,1 @@
+window.TENANT_DOCS_VERSIONS = [];

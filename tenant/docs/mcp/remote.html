@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Remote MCP servers — Tenant docs — FindTime</title>
+<meta name="description" content="Connect any MCP server over HTTP, with a browser sign-in when it asks for one. From the terminal UI, the shell, the dashboard, or by the agent itself.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/mcp/remote">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/mcp/overview">MCPs &amp; tools</a></p>
+<h1>Remote MCP servers</h1>
+<p class="lede">Connect any MCP server over HTTP, with a browser sign-in when it asks for one. From the terminal UI, the shell, the dashboard, or by the agent itself.</p>
+<p>A remote server’s tools appear as <code>mcp:&lt;label&gt;:&lt;tool&gt;</code> and start at trust <code>ask</code>: every gated call prompts you until you decide otherwise. Connections persist in <code>config.json</code> (<code>mcp_remotes</code>, the URLs; <code>mcp_trust</code>, the trust per URL) and reconnect silently at the next launch.</p>
+<h2 id="connect">Connect</h2>
+<pre class="text"><code>/mcp                                     connected servers, their state and tool counts
+/mcp add &lt;url&gt;                           connect; a browser opens only if the server asks for sign-in
+/mcp trust &lt;label&gt; &lt;ask|allow|deny&gt;      live trust for its tools (also /mcp allow|ask|deny &lt;label&gt;)
+/mcp remove &lt;url&gt;                        disconnect and forget it</code></pre>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> mcp connect <span class="op">&lt;</span>url<span class="op">&gt;</span> <span class="pp">[--</span><span class="ss">trust</span><span class="pp">-</span><span class="ss">annotations</span><span class="pp">]</span> [--callback 127.0.0.1:8765] <span class="pp">[--</span><span class="ss">no</span><span class="pp">-</span><span class="ss">browser</span><span class="pp">]</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--trust-annotations</code></td>
+<td>trust the server’s own read-only annotations, so tools it marks read-only skip the gate under <code>ask</code></td>
+</tr>
+<tr>
+<td><code>--callback host:port</code></td>
+<td>the local OAuth callback (default <code>127.0.0.1:8765</code>)</td>
+</tr>
+<tr>
+<td><code>--no-browser</code></td>
+<td>reconnect from the cached token only; fail if there is none (tests the silent-reconnect path)</td>
+</tr>
+</tbody>
+</table>
+<p>The dashboard’s <strong>Remote services</strong> page has <strong>Connect</strong> (with the URL), a per-server trust select, <strong>Reconnect</strong> and <strong>Disconnect</strong>.</p>
+<pre class="text"><code>/mcp add https://mcp.atlassian.com/v1/mcp</code></pre>
+<h2 id="sign-in">Sign-in</h2>
+<p>Tenant speaks OAuth 2.1 with dynamic client registration. When a server answers <code>401</code>, Tenant binds the callback port, opens a browser, captures the code, and releases the port; the token goes to <code>&lt;config&gt;/mcp/</code>. A server that never asks for sign-in (a local tool server) never touches the port. Sign-ins are serialized, and the port is bound only during one, so a long-running hub can add servers indefinitely.</p>
+<p>On a machine with no screen (a Windows service), the browser never appears: press <strong>Connect</strong>, then open the dashboard <strong>on that machine</strong>, find the “sign-in: open this URL to authorize Tenant” line in <strong>Logs</strong> (filter <code>open this URL</code>, or <code>log:mcp*</code>), and finish the sign-in in a browser there. The link is good for that one sign-in.</p>
+<p><strong>A dead refresh token is loud.</strong> When a server’s refresh fails for good, the connector is marked as needing re-auth: <code>/mcp</code> shows “⚠ NEEDS RE-AUTH since … /mcp add <url>”, <strong>Remote services</strong> shows a red badge and <strong>Reconnect</strong>, <code>tenant doctor</code> fails its <strong>remote MCP auth</strong> check, the operator gets a Discord DM when the relay is on, and every cron summary carries a banner until you reconnect. Re-auth needs the host browser once: <code>tenant mcp connect &lt;url&gt;</code> or <strong>Reconnect</strong>.</p>
+<h2 id="labels">Labels</h2>
+<p>A hosted service is labelled by host (<code>mcp:mcp.atlassian.com</code>). A local address keeps its port (<code>mcp:127.0.0.1:9000</code>), and a URL that would still collide gets its path appended, so several local servers on one host coexist.</p>
+<h2 id="the-agent-connects-its-own-tools">The agent connects its own tools</h2>
+<p>Four agent tools let the model adopt a tool server at runtime, gated by the <code>mcp</code> permission category (<code>ask</code> by default):</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>mcp_list</code></td>
+<td>the connected servers</td>
+</tr>
+<tr>
+<td><code>mcp_add url=… [trust=allow] [reason=…]</code></td>
+<td>connect a server; when it asks for <code>trust=allow</code>, a second prompt lets you decide whether its tools run unprompted</td>
+</tr>
+<tr>
+<td><code>mcp_trust</code></td>
+<td>change a server’s trust</td>
+</tr>
+<tr>
+<td><code>mcp_remove</code></td>
+<td>disconnect one (refused for a local server, which lives in <code>config.json</code>)</td>
+</tr>
+</tbody>
+</table>
+<p><code>/permissions set mcp allow</code> is the hands-off switch: the agent can build a tool server, connect it, and have its tools trusted without a prompt. Each adopted server still starts at <code>ask</code> unless the agent asked for <code>allow</code> and the category auto-approved it. Cron runs never get these tools. A complete example tool server, with the adoption loop written up, is in the Tenant repository under <code>reference/mcp/</code>.</p>
+<h2 id="logs">Logs</h2>
+<p>Each connector has its own log: <code>tenant logs query "log:mcp*"</code>, or the dashboard’s <strong>Logs</strong> with <code>log:mcp*</code>. A connector URL’s key never reaches the system log or a connect error.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/mcp/remote.mdtenant/docs/_src/mcp/remote.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#connect" id="toc-connect">Connect</a></li>
+<li><a href="#sign-in" id="toc-sign-in">Sign-in</a></li>
+<li><a href="#labels" id="toc-labels">Labels</a></li>
+<li><a href="#the-agent-connects-its-own-tools" id="toc-the-agent-connects-its-own-tools">The agent connects its own tools</a></li>
+<li><a href="#logs" id="toc-logs">Logs</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

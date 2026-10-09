@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy &amp; retention — Tenant docs — FindTime</title>
+<meta name="description" content="See every class of data Tenant keeps and for how long, set retention per class, forget specific things with a preview, and export everything.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/setup/privacy">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="/">
+      <svg width="24" height="24" viewBox="0 0 100 100" aria-hidden="true">
+        <rect width="100" height="100" rx="22" fill="#208AEF"/>
+        <circle cx="50" cy="50" r="30" fill="none" stroke="white" stroke-width="7"/>
+        <path d="M50 30v22l14 9" fill="none" stroke="white" stroke-width="7" stroke-linecap="round"/>
+      </svg>
+      FindTime <span class="sep">/</span> <span>Tenant</span>
+    </a>
+    <nav class="nav-links">
+      <a href="/tenant/" class="hide-sm">Overview</a>
+      <a href="/tenant/docs/" class="here">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support" class="hide-sm">Support</a>
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main class="content">
+<p class="crumbs"><a href="/tenant/docs/">Tenant docs</a> › <a href="/tenant/docs/setup/install">Setup &amp; install</a></p>
+<h1>Privacy &amp; retention</h1>
+<p class="lede">See every class of data Tenant keeps and for how long, set retention per class, forget specific things with a preview, and export everything.</p>
+<p>Tenant keeps everything on your machine, in the <a href="/tenant/docs/setup/directories">data dir</a>. This repository-free design is the whole privacy model: no account, no telemetry, and no key, memory or wiki content ever leaves the machine except through a tool you turned on.</p>
+<h2 id="commands">Commands</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> privacy <span class="pp">[</span><span class="ss">status</span><span class="pp">]</span>                       <span class="co"># every class: what it is, how long it is kept, how to remove it</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> privacy retention set <span class="op">&lt;</span>class<span class="op">&gt;</span> <span class="op">&lt;</span>days<span class="kw">|</span><span class="ex">forever</span><span class="op">&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> privacy prune <span class="pp">[--</span><span class="ss">yes</span><span class="pp">]</span>                  <span class="co"># remove everything past its retention now</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> privacy forget <span class="pp">[</span><span class="ss">selectors</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">yes</span><span class="pp">]</span>     <span class="co"># remove specific data, with a preview first</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> privacy sessions [--limit N]           <span class="co"># recent sessions, to find an id to forget</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> privacy export <span class="at">--out</span> DIR <span class="pp">[--</span><span class="ss">no</span><span class="pp">-</span><span class="ss">archive</span><span class="pp">]</span> [--only-agent ID]</span></code></pre></div>
+<h3 id="selectors-for-forget">Selectors for <code>forget</code></h3>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Selector</th>
+<th>Removes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--session ID</code></td>
+<td>one conversation session: its episodes, facts distilled from it, and its archive events</td>
+</tr>
+<tr>
+<td><code>--episode N</code></td>
+<td>one episode</td>
+</tr>
+<tr>
+<td><code>--fact N</code></td>
+<td>one fact</td>
+</tr>
+<tr>
+<td><code>--skill NAME</code></td>
+<td>one skill, with its history</td>
+</tr>
+<tr>
+<td><code>--match "text"</code></td>
+<td>the text wherever it appears (rows, search index and archive events; ASCII letters match in any case)</td>
+</tr>
+<tr>
+<td><code>--before YYYY-MM-DD</code></td>
+<td>everything recorded before that day (or an RFC 3339 time)</td>
+</tr>
+<tr>
+<td><code>--archive-month YYYY-MM</code></td>
+<td>one month of the archive</td>
+</tr>
+<tr>
+<td><code>--connector NAME</code></td>
+<td>a connected service’s stored credentials and token cache</td>
+</tr>
+<tr>
+<td><code>--only-agent ID</code></td>
+<td>limit any of the above to one agent’s data</td>
+</tr>
+</tbody>
+</table>
+<p><code>forget</code> always shows what it would delete and asks, unless <code>--yes</code>. It deletes for real: rows, the search index and the archive events. (<code>/memory forget fact:&lt;id&gt;</code> in the terminal UI only hides a fact from recall.)</p>
+<h2 id="retention-classes">Retention classes</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Class</th>
+<th>Data</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>episodes</code></td>
+<td>conversation turns (<code>episodes.db</code>)</td>
+<td>forever</td>
+</tr>
+<tr>
+<td><code>facts</code></td>
+<td>distilled facts not confirmed within the period (<code>facts.db</code>)</td>
+<td>forever</td>
+</tr>
+<tr>
+<td><code>archive</code></td>
+<td>raw session events (<code>archive/</code>)</td>
+<td>forever</td>
+</tr>
+<tr>
+<td><code>usage</code></td>
+<td>the token usage ledger (<code>usage.db</code>)</td>
+<td>forever</td>
+</tr>
+<tr>
+<td><code>research</code></td>
+<td>research runs and reports (<code>research/</code>)</td>
+<td>forever</td>
+</tr>
+<tr>
+<td><code>screenshots</code></td>
+<td>browser screenshots (<code>screenshots/</code>)</td>
+<td>forever</td>
+</tr>
+<tr>
+<td><code>relay_inbox</code></td>
+<td>files received over the Discord relay (<code>relay-inbox/</code>)</td>
+<td>30 days (<code>-1</code> keeps forever)</td>
+</tr>
+<tr>
+<td><code>eval_artifacts</code></td>
+<td>eval reports (<code>eval-artifacts/</code>)</td>
+<td>forever</td>
+</tr>
+</tbody>
+</table>
+<p>Three more classes have their settings elsewhere in <code>config.json</code>: run records (<code>runs.max_age_days</code>, 90), the route log (<code>route.log_retention_days</code>, 90) and the log book (<code>logs.retention_days</code>, 30).</p>
+<p><code>retention set</code> writes <code>privacy.retention_days</code> in <code>config.json</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;privacy&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;retention_days&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;episodes&quot;</span><span class="fu">:</span> <span class="dv">365</span><span class="fu">,</span> <span class="dt">&quot;screenshots&quot;</span><span class="fu">:</span> <span class="dv">14</span><span class="fu">,</span> <span class="dt">&quot;relay_inbox&quot;</span><span class="fu">:</span> <span class="dv">-1</span> <span class="fu">}</span> <span class="fu">}</span></span></code></pre></div>
+<p>The background hub applies retention on its own; <code>tenant privacy prune</code> applies it now.</p>
+<h2 id="export">Export</h2>
+<p><code>tenant privacy export --out DIR</code> writes a directory that must not exist yet (or be empty): <code>episodes.jsonl</code>, facts, skills, the soul, research reports and, unless <code>--no-archive</code>, the raw session events. Everything is readable without Tenant.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant/docs/_src/setup/privacy.mdtenant/docs/_src/setup/privacy.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#commands" id="toc-commands">Commands</a></li>
+<li><a href="#retention-classes" id="toc-retention-classes">Retention classes</a></li>
+<li><a href="#export" id="toc-export">Export</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site">
+  <div class="wrap foot-row">
+    <div>© 2026 FindTime LLC. All rights reserved.</div>
+    <div class="foot-links">
+      <a href="/tenant/">Tenant</a>
+      <a href="/tenant/docs/">Docs</a>
+      <a href="/support">Support</a>
+      <a href="/legal/privacy">Privacy Policy</a>
+      <a href="/legal/terms">Terms of Use</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
+    document.querySelectorAll(".side a").forEach(function (a) {
+      var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
+      if (h === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 800px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>
