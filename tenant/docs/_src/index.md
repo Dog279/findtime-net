@@ -61,4 +61,5 @@ No model yet? `tenant tui --backend echo` runs an offline, deterministic stand-i
 - `tenant …` is a shell command. `/…` is a slash command typed into the terminal UI (`tenant tui`).
 - `<config>` is Tenant's config directory and `<data>` its data directory. [Files &amp; directories](/tenant/docs/setup/directories) lists them per OS.
 - A setting shown as `dashboard.addr` is the key `addr` inside the `dashboard` object of `config.json`.
+- These pages describe Tenant's current `main` branch (**Latest**). The version menu at the top right switches to the documentation frozen for a release, so what you read matches the binary you run.
 - Most things can be changed three ways: a slash command (live, persisted), the dashboard (live, persisted), or editing the JSON by hand (the running hub re-reads `settings.<agent>.json` within a few seconds; `config.json` edits need a restart unless the page says otherwise).

@@ -8,6 +8,7 @@
 <link rel="canonical" href="https://findtime.net/tenant/docs/mcp/built-in-tools">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%23208AEF'/><circle cx='50' cy='50' r='30' fill='none' stroke='white' stroke-width='7'/><path d='M50 30v22l14 9' fill='none' stroke='white' stroke-width='7' stroke-linecap='round'/></svg>">
 <link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
 </head>
 <body>
 
@@ -26,6 +27,9 @@
       <a href="/tenant/docs/" class="here">Docs</a>
       <a href="https://github.com/Dog279/TENANT">GitHub</a>
       <a href="/support" class="hide-sm">Support</a>
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
     </nav>
   </div>
 </header>
@@ -269,8 +273,8 @@
 </footer>
 
 <script>
-  // Mark the current page in the sidebar; fold the sidebar on phones.
   (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
     var here = location.pathname.replace(/\.html$/, "").replace(/\/index$/, "/");
     document.querySelectorAll(".side a").forEach(function (a) {
       var h = a.getAttribute("href").replace(/\.html$/, "").replace(/\/index$/, "/");
@@ -278,6 +282,35 @@
     });
     if (window.matchMedia("(max-width: 800px)").matches) {
       var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
     }
   })();
 </script>

@@ -171,3 +171,10 @@ footer.site { border-top: 1px solid var(--line); padding: 2.5rem 0 3.5rem; color
 .foot-links { display: flex; flex-wrap: wrap; gap: 1.25rem; }
 .foot-links a { color: var(--muted); }
 .foot-links a:hover { color: var(--fg); }
+
+/* the version menu and the banner on a frozen version */
+select.ver { font: inherit; font-size: .86rem; color: var(--fg); background: var(--bg-alt); border: 1px solid var(--line);
+             border-radius: 8px; padding: .25rem .5rem; cursor: pointer; }
+select.ver:hover { border-color: var(--accent); }
+.verbanner { margin: 0 0 1.25rem; padding: .65rem 1rem; border-radius: 10px; font-size: .9rem;
+             background: rgba(229,165,10,.12); border: 1px solid rgba(229,165,10,.45); color: var(--fg); }
