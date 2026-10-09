@@ -54,7 +54,7 @@ Notes:
 | `kind` | a catalog kind above |
 | `endpoint` | the base URL, without `/v1` |
 | `model` | the model id; empty means auto-detect at launch from `/v1/models` |
-| `tool_format` | `qwen`, `gemma`, `llama`, `mistral`, `openai`, or `auto` to follow whatever model the server serves |
+| `tool_format` | `qwen`, `gemma`, `llama`, `mistral`, `glm`, `openai`, or `auto` to follow whatever model the server serves |
 | `embed_dim` | embeddings only: the vector size (`nomic-embed-text` 768, `bge-m3` 1024) |
 | `auth.mode` | `none`, `apikey` or `oauth` |
 | `auth.key_env` | read the key from this environment variable at launch (wins over a stored key) |

@@ -38,8 +38,11 @@ Local models write tool calls in their family's dialect. Tenant parses (and repa
 | `gemma` | Gemma |
 | `llama` | Llama |
 | `mistral` | Mistral, Mixtral, Devstral, Magistral, Codestral, Ministral, Pixtral |
+| `glm` | GLM-4.5 and later, ChatGLM: Z.ai's `<tool_call>name` with `<arg_key>`/`<arg_value>` pairs |
 | `openai` | native `tool_calls` in the response (most Ollama models, every cloud API) |
 | `auto` | follow the served model: Tenant reads the family from the model id each time the server reports one, so a server that swaps model families keeps a matching parser |
+
+Z.ai's own API returns native tool calls, so its kinds keep `openai`; `glm` is for a GLM you serve yourself on a server that passes the model's text through.
 
 Set it per provider (`tool_format` in `config.json`, the wizard's **Tool format** step, `/model add <name> <endpoint> <fmt>`, `--vllm-tool-format`). A name is only a guess; a live test call is the proof. Symptoms of a wrong format: the model "answers" with JSON in prose, or tool calls arrive with missing arguments.
 

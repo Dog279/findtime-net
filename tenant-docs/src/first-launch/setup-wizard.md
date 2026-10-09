@@ -27,7 +27,7 @@ When a config already exists you choose first:
 2. **Endpoint (base URL).** Defaults to the kind's endpoint (`http://localhost:11434` for Ollama, `https://api.openai.com` for OpenAI). Give the base, without `/v1`.
 3. **Auth**, for keyed kinds: **Paste &amp; store the key** (saved to the owner-only `credentials.json`) or **Reference an env var** (read `$OPENAI_API_KEY`, `$ANTHROPIC_API_KEY`, `$XAI_API_KEY`, `$ZAI_API_KEY` or `$SAKANA_API_KEY` at launch).
 4. **Model.** For a local kind the wizard probes `<endpoint>/v1/models` and lists what it finds; leave it blank to auto-detect at launch. For a cloud kind the default is the kind's (`gpt-4o`, `claude-sonnet-4-20250514`, `glm-4.6`, `grok-2-latest`, `fugu-ultra`, `opus`).
-5. **Tool format**, for OpenAI-compatible kinds: `qwen`, `gemma`, `llama`, `mistral` or `openai`. Keep the kind's default (`openai` for Ollama and cloud APIs, `gemma` for vLLM) unless you know the model's family needs another. Anthropic and Claude Code skip this step.
+5. **Tool format**, for OpenAI-compatible kinds: `qwen`, `gemma`, `llama`, `mistral`, `glm` or `openai`. Keep the kind's default (`openai` for Ollama and cloud APIs, `gemma` for vLLM) unless you know the model's family needs another. Anthropic and Claude Code skip this step.
 
 ## Step 2: embeddings
 
@@ -52,7 +52,7 @@ The wizard saves, prints a summary (`tenant setup --show` prints it again any ti
 | `--provider KIND` | preselect a provider |
 | `--vllm-endpoint URL` | the provider's base URL |
 | `--vllm-model NAME` | the model id |
-| `--vllm-tool-format FMT` | `qwen`, `gemma`, `llama`, `mistral` or `openai` |
+| `--vllm-tool-format FMT` | `qwen`, `gemma`, `llama`, `mistral`, `glm` or `openai` |
 | `--api-key KEY` | store this key for the provider |
 | `--embed-endpoint URL`, `--embed-model NAME`, `--embed-dim N` | the embeddings provider (`nomic-embed-text` is 768, `bge-m3` is 1024) |
 | `--gateway ADDR` | serve `mcp-memory` over HTTP + SSE on this address |

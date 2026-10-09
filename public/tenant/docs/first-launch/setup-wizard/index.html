@@ -138,7 +138,7 @@
 <li><strong>Endpoint (base URL).</strong> Defaults to the kind’s endpoint (<code>http://localhost:11434</code> for Ollama, <code>https://api.openai.com</code> for OpenAI). Give the base, without <code>/v1</code>.</li>
 <li><strong>Auth</strong>, for keyed kinds: <strong>Paste &amp; store the key</strong> (saved to the owner-only <code>credentials.json</code>) or <strong>Reference an env var</strong> (read <code>$OPENAI_API_KEY</code>, <code>$ANTHROPIC_API_KEY</code>, <code>$XAI_API_KEY</code>, <code>$ZAI_API_KEY</code> or <code>$SAKANA_API_KEY</code> at launch).</li>
 <li><strong>Model.</strong> For a local kind the wizard probes <code>&lt;endpoint&gt;/v1/models</code> and lists what it finds; leave it blank to auto-detect at launch. For a cloud kind the default is the kind’s (<code>gpt-4o</code>, <code>claude-sonnet-4-20250514</code>, <code>glm-4.6</code>, <code>grok-2-latest</code>, <code>fugu-ultra</code>, <code>opus</code>).</li>
-<li><strong>Tool format</strong>, for OpenAI-compatible kinds: <code>qwen</code>, <code>gemma</code>, <code>llama</code>, <code>mistral</code> or <code>openai</code>. Keep the kind’s default (<code>openai</code> for Ollama and cloud APIs, <code>gemma</code> for vLLM) unless you know the model’s family needs another. Anthropic and Claude Code skip this step.</li>
+<li><strong>Tool format</strong>, for OpenAI-compatible kinds: <code>qwen</code>, <code>gemma</code>, <code>llama</code>, <code>mistral</code>, <code>glm</code> or <code>openai</code>. Keep the kind’s default (<code>openai</code> for Ollama and cloud APIs, <code>gemma</code> for vLLM) unless you know the model’s family needs another. Anthropic and Claude Code skip this step.</li>
 </ol>
 <h2 id="step-2-embeddings">Step 2: embeddings</h2>
 <p>Skipped for <code>echo</code>. The default is a local Ollama at <code>http://localhost:11434</code> serving <code>nomic-embed-text</code> (768 dimensions). The wizard probes the endpoint and prints a hint if it is down. Memory recall depends on this: see <a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a>.</p>
@@ -175,7 +175,7 @@
 </tr>
 <tr>
 <td><code>--vllm-tool-format FMT</code></td>
-<td><code>qwen</code>, <code>gemma</code>, <code>llama</code>, <code>mistral</code> or <code>openai</code></td>
+<td><code>qwen</code>, <code>gemma</code>, <code>llama</code>, <code>mistral</code>, <code>glm</code> or <code>openai</code></td>
 </tr>
 <tr>
 <td><code>--api-key KEY</code></td>

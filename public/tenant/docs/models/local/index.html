@@ -178,6 +178,10 @@
 <td>Mistral, Mixtral, Devstral, Magistral, Codestral, Ministral, Pixtral</td>
 </tr>
 <tr>
+<td><code>glm</code></td>
+<td>GLM-4.5 and later, ChatGLM: Z.ai’s <code>&lt;tool_call&gt;name</code> with <code>&lt;arg_key&gt;</code>/<code>&lt;arg_value&gt;</code> pairs</td>
+</tr>
+<tr>
 <td><code>openai</code></td>
 <td>native <code>tool_calls</code> in the response (most Ollama models, every cloud API)</td>
 </tr>
@@ -187,6 +191,7 @@
 </tr>
 </tbody>
 </table>
+<p>Z.ai’s own API returns native tool calls, so its kinds keep <code>openai</code>; <code>glm</code> is for a GLM you serve yourself on a server that passes the model’s text through.</p>
 <p>Set it per provider (<code>tool_format</code> in <code>config.json</code>, the wizard’s <strong>Tool format</strong> step, <code>/model add &lt;name&gt; &lt;endpoint&gt; &lt;fmt&gt;</code>, <code>--vllm-tool-format</code>). A name is only a guess; a live test call is the proof. Symptoms of a wrong format: the model “answers” with JSON in prose, or tool calls arrive with missing arguments.</p>
 <h2 id="images">Images</h2>
 <p>Tenant sends pictures (<a href="/tenant/docs/first-launch/terminal-ui#images">pasted, dragged or attached</a>, or read by a tool) only to a model that can see them. Anthropic models always can. A self-hosted model is tested when Tenant starts and when you switch models: Tenant sends it a small picture of two coloured squares and asks for the colours, left to right. The answer is logged (“Model … can see images: yes”) and kept until Tenant restarts. If the test is inconclusive (the server is down, busy or rate-limited), Tenant tries again five minutes later.</p>
