@@ -23,7 +23,7 @@ The menu groups the pages. On a phone, **Menu** at the top opens it; **Log out**
 | **Scheduled jobs** | `/cron` | cron jobs with preset schedules or a typed cron line, run now, enable, the exec switch | **Delete** a job; turning on **Scheduled jobs may make changes** |
 | **Approvals &amp; safety** | `/safety` | what is waiting for your OK; what the agent may do on its own ([Approvals](/tenant/docs/dashboard/approvals)) | **Allow** for an area, **Allow for the rest of this session**, a pairing's **Allow once** |
 | **Access** | `/access` | who may message the agent on Discord and iMessage and what those conversations may make it do ([Access](/tenant/docs/dashboard/access)) | **Add someone**, **Remove everyone**, removing the last person, **Turn on** / **Start**, changing the approving Discord account, letting Discord run commands, **Allow** for an area |
-| **Model** | `/models` | which model answers; add a server on your network or a cloud model; the loop ceiling and the repeat guard; **Reload API keys** | **Use this model**, **Remove** |
+| **Model** | `/models` | which model answers and whether it can see images; add a server on your network or a cloud model; the loop ceiling and the repeat guard; **Reload API keys** | **Use this model**, **Remove** |
 | **Integrations** | `/integrations` | Google, Atlassian, GitHub and the others: save, test, disconnect; GitHub repositories and their write mode | **Disconnect**, **Allow changes** on a repository |
 | **Provider keys** | `/settings/keys` | the API keys, write-only; a new key for the model in use applies on **Reload API keys** | **Remove** |
 | **Settings** | `/settings` | the rest | |

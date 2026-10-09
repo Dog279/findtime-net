@@ -6,7 +6,7 @@ area-url: /tenant/docs/models/providers
 ---
 
 ```bash
-tenant eval --subset smoke|fitness|full [--json] [--quiet] [--list]
+tenant eval --subset smoke|fitness|full|vision [--json] [--quiet] [--list]
 tenant eval --gate-only --baseline-check FILE      # compare against a baseline, no new run
 tenant eval --compaction                           # score the context compactor's fidelity instead (ignores --subset)
 tenant eval --judge-model <model>                  # a different grader for this run
@@ -16,6 +16,8 @@ tenant eval --baseline-diff                        # the per-task movers vs the 
 ```
 
 Artifacts live under `<data>/eval-artifacts/`: one `eval-*.json` per run, `baseline.<subset>.json`, and `trend.jsonl`. A manual `--append-trend` run advances the nightly clock, so a morning run stands the night's down.
+
+The `vision` subset checks that images reach the model: Tenant draws the number 4817 and asks the model to read it. It needs a model that can see, so it runs only when you ask for it and is not part of `full`. Tenant tests whether the model can see before it starts.
 
 ## The nightly gate
 

@@ -27,7 +27,9 @@ select { font: inherit; }
 :focus-visible { outline: 3px solid #92b8fb; outline-offset: 6px; border-radius: 3px; }
 main:focus { outline: none; }
 h2, h3, h4 { scroll-margin-top: 90px; }
-.container { width: min(1120px, calc(100% - 96px)); margin-inline: auto; }
+/* Wider than the main site's 1120px: three columns of docs need the room on a
+   desktop screen (at 1120px the article was 588px wide). */
+.container { width: min(1440px, calc(100% - 96px)); margin-inline: auto; }
 .skip-link { position: fixed; top: 12px; left: 12px; z-index: 100; padding: 14px 22px; background: white; color: #111; border-radius: 30px; transform: translateY(-180%); }
 .skip-link:focus { transform: translateY(0); }
 
@@ -57,10 +59,10 @@ select.ver:hover { border-color: #5a5a60; }
 .site-footer a:hover { color: white; }
 
 /* ---------- three columns ---------- */
-.docs { display: grid; grid-template-columns: 230px minmax(0, 1fr) 190px; gap: 56px; padding: 36px 0 90px; }
+.docs { display: grid; grid-template-columns: 232px minmax(0, 1fr) 200px; gap: 48px; padding: 40px 0 90px; }
 
 /* left: the whole doc set */
-.side { font-size: 12px; }
+.side { font-size: 13px; }
 .side .sidebox { position: sticky; top: 84px; max-height: calc(100vh - 110px); overflow: auto; padding: 6px; margin-left: -6px; }
 .side summary { list-style: none; cursor: pointer; font-weight: 600; color: #eeeef1; padding-block: 8px; }
 .side summary::-webkit-details-marker { display: none; }
@@ -76,7 +78,7 @@ select.ver:hover { border-color: #5a5a60; }
 .side li a.active { color: white; background: #1c1c20; }
 
 /* right: this page */
-.rail { font-size: 12px; }
+.rail { font-size: 13px; }
 .rail .railbox { position: sticky; top: 84px; max-height: calc(100vh - 110px); overflow: auto; }
 .rail .label { font-weight: 600; color: #eeeef1; margin: 8px 0 12px; }
 .rail ul { list-style: none; margin: 0; padding: 0; }
@@ -94,10 +96,10 @@ select.ver:hover { border-color: #5a5a60; }
 .content h2 { font-size: 27px; line-height: 1.25; color: var(--heading); letter-spacing: -.03em; margin: 52px 0 20px; padding-top: 30px; border-top: 1px solid var(--line); font-weight: 600; }
 .content h3 { font-size: 19px; color: #e3e3e8; letter-spacing: -.015em; margin: 30px 0 10px; font-weight: 550; }
 .content h4 { font-size: 16px; color: #e3e3e8; margin: 22px 0 8px; font-weight: 550; }
-.content p { margin: 0 0 17px; max-width: 72ch; }
+.content p { margin: 0 0 17px; max-width: 46em; } /* em, not ch: -apple-system's ch runs wide, so 72ch let lines reach ~110 characters */
 .content ul, .content ol { margin: 16px 0 24px; padding-left: 24px; }
 .content ul { list-style-type: disc; }
-.content li { margin-block: 8px; padding-left: 4px; max-width: 72ch; }
+.content li { margin-block: 8px; padding-left: 4px; max-width: 46em; }
 .content strong { color: #e4e4e9; font-weight: 600; }
 .content a { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; overflow-wrap: anywhere; }
 .content a:hover { color: #d5e4ff; }
@@ -165,11 +167,20 @@ kbd { font-size: .85em; border: 1px solid #3a3a3f; border-bottom-width: 2px; bor
 .pagefoot a:hover { color: white; }
 
 /* ---------- responsive ---------- */
+@media (min-width: 1800px) {
+  .container { width: min(1560px, calc(100% - 128px)); }
+  .docs { grid-template-columns: 248px minmax(0, 1fr) 220px; gap: 64px; }
+}
+/* Below 1360px the page outline would squeeze the article: drop it there. */
+@media (max-width: 1359px) {
+  .docs { grid-template-columns: 232px minmax(0, 1fr); }
+  .rail { display: none; }
+}
 @media (max-width: 1000px) {
   .container { width: calc(100% - 64px); }
   .nav-links { gap: 28px; }
   .docs { grid-template-columns: 190px minmax(0, 1fr); gap: 38px; }
-  .rail { display: none; }
+  .side, .rail { font-size: 12px; }
 }
 @media (max-width: 700px) {
   .container { width: calc(100% - 40px); }

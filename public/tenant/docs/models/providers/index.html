@@ -282,7 +282,7 @@
 </tr>
 <tr>
 <td><code>tool_format</code></td>
-<td><code>qwen</code>, <code>gemma</code>, <code>llama</code>, <code>mistral</code>, <code>openai</code>, or <code>auto</code> to follow whatever model the server serves</td>
+<td><code>qwen</code>, <code>gemma</code>, <code>llama</code>, <code>mistral</code>, <code>glm</code>, <code>openai</code>, or <code>auto</code> to follow whatever model the server serves</td>
 </tr>
 <tr>
 <td><code>embed_dim</code></td>
@@ -303,6 +303,10 @@
 <tr>
 <td><code>reasoning</code></td>
 <td><code>""</code>, <code>high</code>, <code>xhigh</code> (Fugu), or <code>low</code> to <code>max</code> (Claude Code): the effort hint</td>
+</tr>
+<tr>
+<td><code>vision</code></td>
+<td><code>on</code>, <code>off</code>, or <code>auto</code> (the default, also when empty): whether the model is sent images; <code>auto</code> lets Tenant test it (<a href="/tenant/docs/models/local#images">Images</a>)</td>
 </tr>
 </tbody>
 </table>

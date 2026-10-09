@@ -20,6 +20,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /model remove <name>                   delete a backend (not the active one)
 /model reload                          re-resolve the active provider's key live
 /model fallback <name...> | off        auto-route to these providers when the active one fails
+/model vision [on|off|auto]            whether the active model is sent images (auto = probe it)
 /ceiling [n]                           view or set the loop ceiling (also /loops, /loop-ceiling)
 /ceiling repeat [n|off|default]        view or set the repeat guard: identical rounds before a forced answer (0 = off)
 /reasoning [level|off]                 reasoning effort: Fugu high/xhigh, Claude Code low→max (also /effort)
@@ -202,6 +203,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /tailscale [serve|serve off|status]   (also /ts)
 /clear                                fresh conversation and screen; memory is kept
 /cls                                  clear the screen only
+/image <path>                         attach an image file to your next message (also /img; Ctrl+V pastes one, Alt+V on Windows)
 /mouse on|off
 /exit, /quit                          the only way out
 ```

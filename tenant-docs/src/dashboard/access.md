@@ -9,7 +9,7 @@ Two channels let messages from a phone drive the agent. Each is deny-by-default,
 
 ## The Discord relay
 
-Your DMs to a bot drive the agent; the bot DMs the answers back; a dangerous action posts a card with **Approve** / **Deny** buttons. You can also DM it files (png, jpg, heic, pdf, csv, txt, mp4): they download into `<data>/relay-inbox/` and the agent gets the paths.
+Your DMs to a bot drive the agent; the bot DMs the answers back; a dangerous action posts a card with **Approve** / **Deny** buttons. You can also DM it files (png, jpg, gif, webp, heic, pdf, csv, txt, mp4): they download into `<data>/relay-inbox/` and the agent gets the paths. A picture also reaches a model that can see as the picture itself ([Images](/tenant/docs/first-launch/terminal-ui#images)).
 
 1. Configure the bot token and your Discord user id: `/configure discord` (see [Integrations](/tenant/docs/mcp/integrations)).
 2. Turn the relay on:
@@ -44,7 +44,7 @@ After a restart the relay catches up: DMs sent while Tenant was down are routed 
 
 ## The iMessage responder
 
-Texts from allowed handles drive the agent; it replies in the same chat. Native on a Mac (Messages' `chat.db`, which needs Full Disk Access) or over BlueBubbles from any OS. Group chats, SMS and RCS never drive the agent and cannot approve an action.
+Texts from allowed handles drive the agent; it replies in the same chat. Native on a Mac (Messages' `chat.db`, which needs Full Disk Access) or over BlueBubbles from any OS. Group chats, SMS and RCS never drive the agent and cannot approve an action. A photo (on its own or with text) drives a turn too and reaches a model that can see as the picture; one still in iCloud, not yet downloaded to the Mac, becomes a note.
 
 ```text
 /imessage [list]                           the allowlist and the responder's state

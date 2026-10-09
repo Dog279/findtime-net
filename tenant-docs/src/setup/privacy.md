@@ -40,7 +40,7 @@ tenant privacy export --out DIR [--no-archive] [--only-agent ID]
 |---|---|---|
 | `episodes` | conversation turns (`episodes.db`) | forever |
 | `facts` | distilled facts not confirmed within the period (`facts.db`) | forever |
-| `archive` | raw session events (`archive/`) | forever |
+| `archive` | raw session events (`archive/`), and the images messages carried (`attachments/`) | forever |
 | `usage` | the token usage ledger (`usage.db`) | forever |
 | `research` | research runs and reports (`research/`) | forever |
 | `screenshots` | browser screenshots (`screenshots/`) | forever |

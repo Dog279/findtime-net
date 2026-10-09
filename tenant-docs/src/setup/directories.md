@@ -50,6 +50,7 @@ Secrets never live in `config.json`. `tenant doctor` checks the permissions of e
 | `research/` | deep-research runs and their reports |
 | `screenshots/` | browser screenshots the web plugin took |
 | `relay-inbox/` | files you sent the agent over Discord |
+| `attachments/YYYY-MM/` | images messages carried (pasted, sent over a relay, or read by a tool), scaled and saved once each; they follow the archive's retention |
 | `eval-artifacts/` | eval reports, `baseline.<subset>.json` and `trend.jsonl` |
 | `route-decisions.jsonl` | the prompt router's decision log |
 | `cron-history.json` | run history of scheduled jobs (their definitions are in `config.json`) |

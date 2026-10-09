@@ -80,7 +80,7 @@ tenant model add <name> --endpoint URL [--kind K] [--model M] [--tool-format F]
 tenant model remove <name>
 tenant route status | on | off | shadow | assisted | everywhere | stats
 tenant route export-dataset [--out FILE]
-tenant eval --subset smoke|fitness|full [--json] [--quiet] [--list] [--compaction] [--gate-only] [--judge-model M] [--baseline-check FILE] [--baseline-from FILE] [--append-trend] [--baseline-diff]
+tenant eval --subset smoke|fitness|full|vision [--json] [--quiet] [--list] [--compaction] [--gate-only] [--judge-model M] [--baseline-check FILE] [--baseline-from FILE] [--append-trend] [--baseline-diff]
 ```
 
 ## Agents, research and goals
