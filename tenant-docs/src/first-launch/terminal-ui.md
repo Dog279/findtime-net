@@ -47,7 +47,7 @@ The left pane is the conversation; the right pane is the activity feed: every to
 
 Show the model a picture without pointing it at a file:
 
-- **Paste** a screenshot or a copied picture with <kbd>Ctrl</kbd>+<kbd>V</kbd>. On Windows it is <kbd>Alt</kbd>+<kbd>V</kbd>, since Windows Terminal keeps <kbd>Ctrl</kbd>+<kbd>V</kbd> for text. On Linux it needs `wl-paste` (Wayland) or `xclip` (X11). On a Mac, <kbd>Cmd</kbd>+<kbd>V</kbd> also attaches an image file copied in Finder, but most terminals send nothing for a screenshot on the clipboard, so use <kbd>Ctrl</kbd>+<kbd>V</kbd> for those.
+- **Paste** a screenshot or a copied picture with <kbd>Ctrl</kbd>+<kbd>V</kbd>. On Windows it is <kbd>Alt</kbd>+<kbd>V</kbd>, since Windows Terminal keeps <kbd>Ctrl</kbd>+<kbd>V</kbd> for text. On Linux it needs `wl-paste` (Wayland) or `xclip` (X11). On a Mac use <kbd>Ctrl</kbd>+<kbd>V</kbd> too: terminals keep <kbd>Cmd</kbd>+<kbd>V</kbd> for their own text paste and send nothing for an image.
 - **Drag** image files into the terminal (macOS and Linux terminals).
 - **`/image <path>`** attaches a file by its path.
 
