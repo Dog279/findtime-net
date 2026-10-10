@@ -141,6 +141,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /eval trend [n]
 /eval diff
 /judge [set <kind> <model>|clear|status]  the eval judge model
+/judge loop [on [<endpoint> [<model>]]|off]  the judge loop: a decision model checks task answers and sends them back
 ```
 
 ## Safety &amp; approvals ([Permissions](/tenant/docs/first-launch/permissions), [Access](/tenant/docs/dashboard/access))

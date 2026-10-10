@@ -171,6 +171,20 @@
 </tbody>
 </table>
 <p>The dashboard’s <strong>Model</strong> page has the same setting.</p>
+<h2 id="the-judge-loop">The judge loop</h2>
+<p>A judge can check the agent’s work before an answer reaches you. It is a <strong>decision model</strong>: it doesn’t write text, it answers yes/no questions with probabilities, so it is fast and can’t be argued with. Cloudflare’s <a href="https://huggingface.co/Cloudflare/clef-flash">Clef-flash</a> is the default; any server with the System One API (<code>POST /v1/systemone</code>) works.</p>
+<ul>
+<li><strong>Triage.</strong> When a prompt comes in, the judge decides whether it is a task (do, change, look up or check something), a question or chat. This runs while the model is already working, so it adds no wait. Only tasks are checked.</li>
+<li><strong>Check.</strong> When the model answers a task, the judge asks four questions: is it fully done, did it cover every part, does it claim actions no tool call shows, and did it hand the work back instead of doing it. If any check fails, the work goes back to the model with a short note saying which, and the model continues. A send-back doesn’t count against the step limit.</li>
+<li><strong>At most three rounds.</strong> An answer the judge still can’t confirm goes out marked <code>— judge: not confirmed (done 0.31, …)</code>, so you know to look closer. Answers that hit the step limit or the repeat guard are checked too and get the same mark.</li>
+<li><strong>Your “no” is final.</strong> If a safety setting or you refused an action during the turn, the judge never sends the work back to ask again.</li>
+<li><strong>Not checked:</strong> <code>/goal</code> turns (the goal judges itself), helper and peer agents, and research.</li>
+<li><strong>If the judge is down,</strong> answers go out unchecked, the outage is logged once, and judging pauses for a minute before trying again.</li>
+</ul>
+<pre class="text"><code>/judge loop                                   on or off, and where
+/judge loop on http://host:30000 [model]      switch it on (asks the server once first; model defaults to clef-flash)
+/judge loop off</code></pre>
+<p>Each check shows in the activity feed as <code>⚖ judge …</code>. <code>/model</code> names the judge while it’s on, and the <strong>Model</strong> page has the same switch. The judge’s tokens count toward the session’s totals. It is saved as <code>judge_loop</code> in <code>config.json</code> (<a href="/tenant/docs/reference/config">reference</a>).</p>
 <h2 id="reasoning-effort">Reasoning effort</h2>
 <p>Two provider kinds accept an effort hint, and <code>/reasoning</code> is gated to them so a provider that would reject the field never receives it.</p>
 <pre class="text"><code>/reasoning              arrow-key picker (also /effort)
@@ -202,23 +216,23 @@
 <p>The terminal UI’s timer shows which phase a turn is in (<code>thinking… 45.0s</code>, <code>tools… 3.1s</code>), each model call ends with <code>thought for 8.2s</code>, and the turn’s end line splits the total (<code>turn 4:12 — thinking 3:40 · tools 32.0s</code>). The same split is on the dashboard’s Chat, on the turn’s end event, in <code>runs.db</code> (<code>think_ms</code>, <code>tools_ms</code>) and in <code>tenant logs trace</code>. A slow model and a hung one no longer look the same.</p>
 <h2 id="team-budgets">Team budgets</h2>
 <p>A multi-agent run (<code>tenant orchestrate</code>, deep research) has a structural envelope. Omitted keys take the defaults:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;budgets&quot;</span><span class="er">:</span> <span class="fu">{</span></span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_concurrent_subagents&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_agents_per_run&quot;</span><span class="fu">:</span> <span class="dv">16</span><span class="fu">,</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_tool_calls_per_turn&quot;</span><span class="fu">:</span> <span class="dv">64</span><span class="fu">,</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_tool_calls_per_run&quot;</span><span class="fu">:</span> <span class="dv">256</span><span class="fu">,</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_tokens_per_run&quot;</span><span class="fu">:</span> <span class="dv">500000</span><span class="fu">,</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_cost_usd&quot;</span><span class="fu">:</span> <span class="dv">25</span><span class="fu">,</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_wall_time&quot;</span><span class="fu">:</span> <span class="st">&quot;30m&quot;</span><span class="fu">,</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_browser_instances&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;bus_history_cap&quot;</span><span class="fu">:</span> <span class="dv">1000</span><span class="fu">,</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;input_cost_per_million_usd&quot;</span><span class="fu">:</span> <span class="dv">15</span><span class="fu">,</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;output_cost_per_million_usd&quot;</span><span class="fu">:</span> <span class="dv">75</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;budgets&quot;</span><span class="er">:</span> <span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_concurrent_subagents&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_agents_per_run&quot;</span><span class="fu">:</span> <span class="dv">16</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_tool_calls_per_turn&quot;</span><span class="fu">:</span> <span class="dv">64</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_tool_calls_per_run&quot;</span><span class="fu">:</span> <span class="dv">256</span><span class="fu">,</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_tokens_per_run&quot;</span><span class="fu">:</span> <span class="dv">500000</span><span class="fu">,</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_cost_usd&quot;</span><span class="fu">:</span> <span class="dv">25</span><span class="fu">,</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_wall_time&quot;</span><span class="fu">:</span> <span class="st">&quot;30m&quot;</span><span class="fu">,</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;max_browser_instances&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;bus_history_cap&quot;</span><span class="fu">:</span> <span class="dv">1000</span><span class="fu">,</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;input_cost_per_million_usd&quot;</span><span class="fu">:</span> <span class="dv">15</span><span class="fu">,</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;output_cost_per_million_usd&quot;</span><span class="fu">:</span> <span class="dv">75</span></span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
 <p>The cost rates are conservative hosted-model estimates used to compute <code>max_cost_usd</code>; set your own for a local or differently priced endpoint. <code>GET /api/status</code> reports the live <code>team_budget</code> during a run.</p>
 <h2 id="turn-admission-in-serve-mode">Turn admission in serve mode</h2>
 <p>The hub runs <strong>one turn at a time</strong> across every source (dashboard chat, Discord, iMessage, cron, peers, research), so unattended traffic can never race the working set. Waiting requests queue; <code>turn_scheduler</code> bounds the queue:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;turn_scheduler&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;queue_depth&quot;</span><span class="fu">:</span> <span class="dv">32</span><span class="fu">,</span> <span class="dt">&quot;source_quotas&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;relay&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span> <span class="dt">&quot;cron&quot;</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">}</span> <span class="fu">}</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;turn_scheduler&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;queue_depth&quot;</span><span class="fu">:</span> <span class="dv">32</span><span class="fu">,</span> <span class="dt">&quot;source_quotas&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;relay&quot;</span><span class="fu">:</span> <span class="dv">4</span><span class="fu">,</span> <span class="dt">&quot;cron&quot;</span><span class="fu">:</span> <span class="dv">2</span> <span class="fu">}</span> <span class="fu">}</span></span></code></pre></div>
 <table>
 <thead>
 <tr>
@@ -255,6 +269,7 @@
 <ul>
 <li><a href="#the-loop-ceiling" id="toc-the-loop-ceiling">The loop ceiling</a></li>
 <li><a href="#the-repeat-guard" id="toc-the-repeat-guard">The repeat guard</a></li>
+<li><a href="#the-judge-loop" id="toc-the-judge-loop">The judge loop</a></li>
 <li><a href="#reasoning-effort" id="toc-reasoning-effort">Reasoning effort</a></li>
 <li><a href="#thinking-vs-tool-time" id="toc-thinking-vs-tool-time">Thinking vs tool time</a></li>
 <li><a href="#team-budgets" id="toc-team-budgets">Team budgets</a></li>
