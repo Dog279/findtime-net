@@ -209,5 +209,6 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /cls                                  clear the screen only
 /image <path>                         attach an image file to your next message (also /img; Ctrl+V pastes one, Alt+V on Windows)
 /mouse on|off
+/feed on|off                          show or hide the activity feed (Alt+F too); the choice persists
 /exit, /quit                          the only way out
 ```

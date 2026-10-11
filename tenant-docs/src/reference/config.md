@@ -52,6 +52,14 @@ Edits by hand need a restart, except where a page says the hub re-reads them liv
 |---|---|---|---|
 | `serve` | false | re-assert `tailscale serve` for the dashboard at every launch | `/tailscale serve`, `/tailscale serve off` |
 
+## `tui`
+
+The terminal app's own choices.
+
+| Key | Default | Meaning | Changed by |
+|---|---|---|---|
+| `feed` | shown | `"off"` hides the activity feed at launch (the saved `/feed off`) | `/feed on\|off`, Alt+F |
+
 ## `gateway`
 
 | Key | Default | Meaning | Changed by |

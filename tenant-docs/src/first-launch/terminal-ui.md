@@ -11,6 +11,8 @@ tenant tui
 
 The left pane is the conversation; the right pane is the activity feed: every tool call and result, approvals, route decisions, cron runs, sub-agents. A timer under the input reads `⏱ 1:05 · thinking… 45.0s` while the model answers and `· tools… 3.1s` while tools run. Type `/help` for the command index.
 
+Each exchange is a block: a header line with who wrote it, the time and, for the agent, the model; then the text, rendered from Markdown (headings, lists, code panels, tables, task boxes) and wrapped at the pane's width, never mid-word. A tool the agent calls shows as one line inside the block where it happened, `⏺ web_search("…") ✓ 1.2s · …`; <kbd>Ctrl</kbd>+<kbd>O</kbd> opens every row to its arguments and result, and a failed call is open already. While the agent works, the line under its answer says what it is doing and for how long. In the feed, a turn's lines sit indented under a header with the time and the first words of your message; `/feed off` or <kbd>Alt</kbd>+<kbd>F</kbd> hides the feed for a wider reading column, and the choice is kept for the next launch.
+
 ## Keys
 
 | Key | Effect |
@@ -23,6 +25,8 @@ The left pane is the conversation; the right pane is the activity feed: every to
 | <kbd>Alt</kbd>+<kbd>PgUp</kbd>/<kbd>PgDn</kbd>, <kbd>Alt</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd> | scroll the activity feed (<kbd>Ctrl</kbd>+<kbd>PgUp</kbd>/<kbd>PgDn</kbd> too) |
 | <kbd>Ctrl</kbd>+<kbd>S</kbd> | select mode: plain drag highlights text for copying in any terminal; <kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Esc</kbd> returns |
 | <kbd>Ctrl</kbd>+<kbd>Y</kbd> | copy the transcript to the clipboard and a file |
+| <kbd>Ctrl</kbd>+<kbd>O</kbd> | open or close the tool rows in every turn (arguments and results) |
+| <kbd>Alt</kbd>+<kbd>F</kbd> | hide or show the activity feed (same as `/feed off` and `/feed on`); the choice persists |
 | <kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>Alt</kbd>+<kbd>V</kbd> on Windows) | paste the clipboard's image into your message; with no image there, pastes text as usual ([Images](#images)) |
 | in `/logs` | <kbd>Enter</kbd> opens an event's detail, <kbd>c</kbd> its correlated timeline, <kbd>Esc</kbd> or <kbd>q</kbd> goes back |
 
@@ -37,6 +41,7 @@ The left pane is the conversation; the right pane is the activity feed: every to
 | `/clear` | start a fresh conversation and screen; facts, episodes and the archive are kept |
 | `/cls` | clear the screen only |
 | `/mouse on\|off` | on (default): the wheel scrolls the TUI; off: plain-drag selection, the wheel scrolls the terminal |
+| `/feed on\|off` | show or hide the activity feed on the right (<kbd>Alt</kbd>+<kbd>F</kbd> too); the choice persists across launches |
 | `/dashboard [on\|off\|status]` | start or stop the web control panel; it launches by default and the choice persists |
 | `/tailscale [serve\|serve off\|status]` | publish the dashboard on your tailnet over HTTPS with `tailscale serve` |
 | `/compress` (`/compact`) | summarize old turns to free context now; `/expand` brings the latest compacted span back from the archive |
