@@ -58,7 +58,7 @@ A run plans sub-questions, fans out researchers over the web plugin, reflects, d
 tenant goal "<condition>" [--max-turns 20] [--verbose]
 ```
 
-The goal's check (a model call, not the [judge](/tenant/docs/models/tuning#the-judge)) reads each turn's result and decides whether the condition holds; while it does not, the loop auto-continues. `--max-turns` (default 20) is the safety cap. `goal.loop_ceiling` in `config.json` gives goal turns their own per-turn ceiling (`-1` lifts it). The dashboard's **Autopilot** page shows a goal started from the terminal UI with **Stop after this step**; a background service has no Autopilot.
+The goal's check (a model call, not the [judge](/tenant/docs/models/judge)) reads each turn's result and decides whether the condition holds; while it does not, the loop auto-continues. `--max-turns` (default 20) is the safety cap. `goal.loop_ceiling` in `config.json` gives goal turns their own per-turn ceiling (`-1` lifts it). The dashboard's **Autopilot** page shows a goal started from the terminal UI with **Stop after this step**; a background service has no Autopilot.
 
 ## Plan review
 

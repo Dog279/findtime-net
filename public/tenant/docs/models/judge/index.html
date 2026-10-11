@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>The Judge — Tenant docs — FindTime</title>
+<meta name="description" content="A decision model that checks the agent’s work before an answer reaches you. What it checks, how to set it up with /judge use clef or the Model page, what you see, and what it never does.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/models/judge">
+<meta property="og:title" content="The Judge — Tenant docs">
+<meta property="og:description" content="A decision model that checks the agent’s work before an answer reaches you. What it checks, how to set it up with /judge use clef or the Model page, what you see, and what it never does.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/models/judge">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/models/providers">Models &amp; helpers</a></p>
+<h1>The Judge</h1>
+<p class="lede">A decision model that checks the agent’s work before an answer reaches you. What it checks, how to set it up with /judge use clef or the Model page, what you see, and what it never does.</p>
+<p>The judge sits in front of your model and checks that a task was actually done before the answer reaches you. It is a <strong>decision model</strong>, not a chat model: it doesn’t write text, it answers yes/no questions with probabilities, so it is fast and can’t be argued with. Cloudflare’s <a href="https://huggingface.co/Cloudflare/clef-flash">Clef-flash</a> on your own server is the kind Tenant knows today (<code>clef</code>); any server with the System One API (<code>POST /v1/systemone</code>) answers the same way, and a hosted one needs only its address and key.</p>
+<p>The judge is off until you set it up. It is not the <a href="/tenant/docs/models/eval#the-quality-model">Quality model</a>, which grades eval answers, and not the <a href="/tenant/docs/models/teams#goals">goal’s check</a>, which decides when <code>/goal</code> is finished.</p>
+<h2 id="what-it-does">What it does</h2>
+<ul>
+<li><strong>Triage.</strong> When a prompt comes in, the judge decides whether it is a task (do, change, look up or check something), a question or chat. This runs while the model is already working, so it adds no wait. Only tasks are checked.</li>
+<li><strong>Check.</strong> When the model answers a task, the judge asks four questions: is it fully done, did it cover every part, does it claim actions no tool call shows, and did it hand the work back instead of doing it. If any check fails, the work goes back to the model with a short note saying which, and the model continues. A send-back doesn’t count against the step limit.</li>
+<li><strong>Bounded rounds.</strong> By default an answer may be sent back three times (<code>/judge rounds</code> sets 1 to 5). An answer the judge still can’t confirm goes out marked <code>— judge: not confirmed (done 0.31, …)</code>, so you know to look closer. Answers that hit the step limit or the repeat guard are checked too and get the same mark.</li>
+<li><strong>Your “no” is final.</strong> If a safety setting or you refused an action during the turn, the judge never sends the work back to ask again.</li>
+<li><strong>Not checked:</strong> <code>/goal</code> turns (the goal has its own check), helper and peer agents, and research.</li>
+<li><strong>If the judge is down,</strong> answers go out unchecked, the outage is logged once, and judging pauses for a minute before trying again.</li>
+</ul>
+<h2 id="set-it-up">Set it up</h2>
+<pre class="text"><code>/judge use clef [model]       prompts for the server&#39;s address, then its key (hidden; blank for none);
+                              asks the server once, saves, switches on (model defaults to clef-flash)</code></pre>
+<p>The prompt asks for the server’s address first, like <code>http://host:30000</code>, then for its key, which is hidden as you type; leave it blank if the server takes none. Tenant then asks the server one triage question <strong>with that key</strong>, and only when the server answers does it save anything: the server, model and switch in <code>config.json</code>, the key in <code>credentials.json</code>. A wrong address or a refused key saves nothing, so you can try again. <code>/cancel</code> leaves the prompt with nothing changed.</p>
+<p>The <strong>Model</strong> page of the dashboard has the same settings in its Judge card: the kind, the address, the model, a key box that is never shown filled (blank keeps the saved key), the rounds, and the switch. It follows the same rule: the server is asked with the key you typed before anything is saved.</p>
+<pre class="text"><code>/judge                        kind, model, server, whether a key is saved, on or off, rounds
+/judge on | off               switch it (on asks the server one question first)
+/judge rounds &lt;1-5&gt;           how many times an answer may be sent back (default 3)</code></pre>
+<h2 id="what-you-see">What you see</h2>
+<p>Each triage and check shows in the activity feed as a <code>⚖ judge …</code> line, and a send-back says which check failed. <code>/model</code> names the judge while it is on. In the logs, the <strong>turns</strong> source carries one event per check (<code>Judge</code>), one when an answer went out unconfirmed (<code>judge could not confirm an answer</code>) and one when the server was unreachable (<code>judge unavailable</code>). The judge’s tokens count toward the session’s totals.</p>
+<h2 id="where-it-is-saved">Where it is saved</h2>
+<p>The settings live under <code>judge</code> in <code>config.json</code> (<code>enabled</code>, <code>kind</code>, <code>endpoint</code>, <code>model</code>, <code>rounds</code>; see the <a href="/tenant/docs/reference/config">reference</a>); the key, if the server wants one, lives in <code>credentials.json</code> under <code>judge</code> and is never written to <code>config.json</code>, a log or a page. A saved <code>judge_loop</code> from an earlier build migrates on load.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/models/judge.mdtenant-docs/src/models/judge.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#what-it-does" id="toc-what-it-does">What it does</a></li>
+<li><a href="#set-it-up" id="toc-set-it-up">Set it up</a></li>
+<li><a href="#what-you-see" id="toc-what-you-see">What you see</a></li>
+<li><a href="#where-it-is-saved" id="toc-where-it-is-saved">Where it is saved</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

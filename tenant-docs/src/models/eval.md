@@ -51,7 +51,7 @@ The Quality model is the model that grades the answers. By default the main mode
 "improve": { "quality_model": "claude-sonnet-4-20250514", "quality_model_kind": "anthropic", "quality_model_endpoint": "", "quality_model_key_env": "ANTHROPIC_API_KEY" }
 ```
 
-The key is read from the environment variable at run time and never stored. `--quality-model` on `tenant eval` overrides it for one run. The dashboard's **Quality** page has the same card. This is not the [judge](/tenant/docs/models/tuning#the-judge), which checks a turn's answer before it reaches you.
+The key is read from the environment variable at run time and never stored. `--quality-model` on `tenant eval` overrides it for one run. The dashboard's **Quality** page has the same card. This is not the [judge](/tenant/docs/models/judge), which checks a turn's answer before it reaches you.
 
 ## What the self-improvement loop never does
 

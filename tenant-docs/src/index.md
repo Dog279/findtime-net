@@ -17,7 +17,7 @@ Tenant is one static binary you run yourself. It keeps a memory that learns from
 </a>
 <a class="card" href="/tenant/docs/models/providers">
 <h3>Models &amp; helpers</h3>
-<p>Local and cloud providers, switching live, fallbacks, routing, the loop ceiling, and the helpers your agent delegates to.</p>
+<p>Local and cloud providers, switching live, fallbacks, routing, the loop ceiling, the judge that checks the work, and the helpers your agent delegates to.</p>
 </a>
 <a class="card" href="/tenant/docs/mcp/overview">
 <h3>MCPs &amp; tools</h3>
@@ -51,7 +51,7 @@ No model yet? `tenant tui --backend echo` runs an offline, deterministic stand-i
 |---|---|
 | [Setup &amp; install](/tenant/docs/setup/install) | you are installing, upgrading, backing up, or wondering where a file went |
 | [First launch](/tenant/docs/first-launch/setup-wizard) | you have a binary and want a working, safely-permissioned agent |
-| [Models &amp; helpers](/tenant/docs/models/providers) | you want to change which model answers, add a fallback, or hand work to specialists |
+| [Models &amp; helpers](/tenant/docs/models/providers) | you want to change which model answers, add a fallback, have a judge check the work, or hand work to specialists |
 | [MCPs &amp; tools](/tenant/docs/mcp/overview) | you want the agent to do more: connect an MCP server, turn on Gmail, run commands |
 | [Dashboard](/tenant/docs/dashboard/overview) | you run Tenant in the background and drive it from a browser or your phone |
 | [Reference](/tenant/docs/reference/config) | you know what you want to change and need the exact key, flag or command |
