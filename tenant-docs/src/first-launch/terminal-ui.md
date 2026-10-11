@@ -47,11 +47,11 @@ The left pane is the conversation; the right pane is the activity feed: every to
 
 Show the model a picture without pointing it at a file:
 
-- **Paste** a screenshot or a copied picture with <kbd>Ctrl</kbd>+<kbd>V</kbd>. On Windows it is <kbd>Alt</kbd>+<kbd>V</kbd>, since Windows Terminal keeps <kbd>Ctrl</kbd>+<kbd>V</kbd> for text. On Linux it needs `wl-paste` (Wayland) or `xclip` (X11).
+- **Paste** a screenshot or a copied picture with <kbd>Ctrl</kbd>+<kbd>V</kbd>. On Windows it is <kbd>Alt</kbd>+<kbd>V</kbd>, since Windows Terminal keeps <kbd>Ctrl</kbd>+<kbd>V</kbd> for text. On Linux it needs `wl-paste` (Wayland) or `xclip` (X11). On a Mac use <kbd>Ctrl</kbd>+<kbd>V</kbd> too: terminals keep <kbd>Cmd</kbd>+<kbd>V</kbd> for their own text paste and send nothing for an image.
 - **Drag** image files into the terminal (macOS and Linux terminals).
 - **`/image <path>`** attaches a file by its path.
 
-Each image shows in the input as `[image 1: name W×H]`; delete that text to drop the image. Send it with or without a question. PNG, JPEG, GIF and webp work everywhere, HEIC on macOS. Images are saved under `<data>/attachments/` ([directories](/tenant/docs/setup/directories)), scaled to at most 1568 pixels on the long side, and kept as long as the archive keeps the conversation.
+Each image shows in the input as `[image 1: name W×H]`, and the footer counts what's attached. <kbd>Backspace</kbd> right after a tag removes it, and the image with it. Send it with or without a question. PNG, JPEG, GIF and webp work everywhere, HEIC on macOS. Images are saved under `<data>/attachments/` ([directories](/tenant/docs/setup/directories)), scaled to at most 1568 pixels on the long side, and kept as long as the archive keeps the conversation.
 
 The model sees the images of the last three exchanges, at most 8 per request; older ones become a short note with the saved file's path. A model that can't see images gets that note instead of the picture. Which models can see, and how to say so yourself, is on [Local models](/tenant/docs/models/local#images).
 
@@ -63,14 +63,14 @@ Every slash command belongs to one `/help` category. The full list with syntax i
 
 | Category | Commands | Covered in |
 |---|---|---|
-| Models | `/model`, `/ceiling`, `/reasoning`, `/route`, `/setup` | [Models &amp; helpers](/tenant/docs/models/providers) |
+| Models | `/model`, `/ceiling`, `/reasoning`, `/route`, `/setup`, `/judge` | [Models &amp; helpers](/tenant/docs/models/providers) |
 | Sub-agents | `/agents` | [Helpers](/tenant/docs/models/helpers) |
 | Deep research | `/research`, `/cancel-clarify` | [Teams, research &amp; goals](/tenant/docs/models/teams) |
 | Memory | `/memory`, `/compress`, `/expand` | [Memory &amp; soul](/tenant/docs/first-launch/memory) |
 | Tools &amp; plugins | `/tools`, `/enable`, `/disable`, `/skill`, `/configure`, `/cancel` | [Built-in tools](/tenant/docs/mcp/built-in-tools), [Integrations](/tenant/docs/mcp/integrations) |
 | MCP connectors | `/mcp`, `/peer`, `/github` | [MCPs &amp; tools](/tenant/docs/mcp/overview) |
 | Skills | `/skills`, `/ack`, `/undo` | [Skills](/tenant/docs/first-launch/skills) |
-| Eval &amp; quality | `/eval`, `/judge` | [Quality evals](/tenant/docs/models/eval) |
+| Eval &amp; quality | `/eval` | [Quality evals](/tenant/docs/models/eval) |
 | Safety &amp; approvals | `/permissions`, `/approve`, `/deny`, `/relay`, `/imessage` | [Permissions &amp; approvals](/tenant/docs/first-launch/permissions), [Access](/tenant/docs/dashboard/access) |
 | Automation | `/cron` | [Scheduled jobs](/tenant/docs/dashboard/cron) |
 | Logs | `/logs` | [Logs &amp; alerts](/tenant/docs/dashboard/logs) |

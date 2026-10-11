@@ -1,6 +1,6 @@
 ---
 title: Quality evals
-description: The eval harness scores the agent on fixed tasks, a nightly run gates regressions against a baseline, and an optional separate judge model grades the answers.
+description: The eval harness scores the agent on fixed tasks, a nightly run gates regressions against a baseline, and the Quality model grades the answers.
 area: Models &amp; helpers
 area-url: /tenant/docs/models/providers
 ---
@@ -9,7 +9,7 @@ area-url: /tenant/docs/models/providers
 tenant eval --subset smoke|fitness|full|vision [--json] [--quiet] [--list]
 tenant eval --gate-only --baseline-check FILE      # compare against a baseline, no new run
 tenant eval --compaction                           # score the context compactor's fidelity instead (ignores --subset)
-tenant eval --judge-model <model>                  # a different grader for this run
+tenant eval --quality-model <model>                # a different Quality model (grader) for this run
 tenant eval --baseline-from eval-2026-10-01.json   # build the regression baseline from an existing artifact
 tenant eval --append-trend                         # file the run under <data>/eval-artifacts and append to trend.jsonl
 tenant eval --baseline-diff                        # the per-task movers vs the baseline, offline
@@ -37,21 +37,21 @@ The `vision` subset checks that images reach the model: Tenant draws the number 
 
 `--eval-every 24h` on `tenant serve` or `tenant tui` does the same for one launch (it needs `--self-improve`, the default). The run is heavy (the full live eval), so schedule it for a quiet hour. The dashboard's **Quality** page shows the scores over time and runs a check (a few minutes).
 
-## A separate judge
+## The Quality model
 
-By default the main model grades its own answers. A separate judge grades both `tenant eval` and the nightly run:
+The Quality model is the model that grades the answers. By default the main model grades its own; a separate Quality model grades both `tenant eval` and the nightly run:
 
 ```text
-/judge set <kind> <model>     e.g. /judge set anthropic claude-sonnet-4-20250514
-/judge status
-/judge clear
+/eval model                                    who grades, today
+/eval model set <kind> <model> [endpoint]      e.g. /eval model set anthropic claude-sonnet-4-20250514
+/eval model clear                              the main model grades its own answers again
 ```
 
 ```json
-"improve": { "judge": "claude-sonnet-4-20250514", "judge_kind": "anthropic", "judge_endpoint": "", "judge_key_env": "ANTHROPIC_API_KEY" }
+"improve": { "quality_model": "claude-sonnet-4-20250514", "quality_model_kind": "anthropic", "quality_model_endpoint": "", "quality_model_key_env": "ANTHROPIC_API_KEY" }
 ```
 
-The key is read from the environment variable at run time and never stored. `--judge-model` on `tenant eval` overrides it for one run. The dashboard's **Quality** page has the same setting.
+The key is read from the environment variable at run time and never stored. `--quality-model` on `tenant eval` overrides it for one run. The dashboard's **Quality** page has the same card. This is not the [judge](/tenant/docs/models/tuning#the-judge), which checks a turn's answer before it reaches you.
 
 ## What the self-improvement loop never does
 

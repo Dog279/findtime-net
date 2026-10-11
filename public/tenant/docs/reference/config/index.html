@@ -176,6 +176,12 @@
 <td><code>/ceiling repeat</code>, <strong>Model</strong> page</td>
 </tr>
 <tr>
+<td><code>judge</code></td>
+<td>off</td>
+<td>the <a href="/tenant/docs/models/tuning#the-judge">judge</a>: <code>{"enabled", "kind" (</code>clef<code>), "endpoint", "model" (default</code>clef-flash<code>), "rounds" (1 to 5, default 3)}</code>; its key lives in <code>credentials.json</code> under <code>judge</code>. A saved <code>judge_loop</code> from before migrates on load</td>
+<td><code>/judge</code>, <strong>Model</strong> page</td>
+</tr>
+<tr>
 <td><code>per_turn_tool_ranking</code></td>
 <td>false</td>
 <td>re-rank the surfaced tools every turn instead of keeping a sticky, append-only set per session; the sticky set keeps a self-hosted server’s prefix cache warm</td>
@@ -703,10 +709,10 @@
 <td>by hand</td>
 </tr>
 <tr>
-<td><code>judge</code>, <code>judge_kind</code>, <code>judge_endpoint</code>, <code>judge_key_env</code></td>
+<td><code>quality_model</code>, <code>quality_model_kind</code>, <code>quality_model_endpoint</code>, <code>quality_model_key_env</code></td>
 <td>the main model</td>
-<td>a separate eval judge</td>
-<td><code>/judge set</code>, <strong>Quality</strong></td>
+<td>the <a href="/tenant/docs/models/eval#the-quality-model">Quality model</a>, a separate grader for the evals; the old <code>judge*</code> names migrate on load</td>
+<td><code>/eval model</code>, <strong>Quality</strong></td>
 </tr>
 </tbody>
 </table>

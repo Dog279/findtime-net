@@ -218,11 +218,11 @@
 <h2 id="images">Images</h2>
 <p>Show the model a picture without pointing it at a file:</p>
 <ul>
-<li><strong>Paste</strong> a screenshot or a copied picture with <kbd>Ctrl</kbd>+<kbd>V</kbd>. On Windows it is <kbd>Alt</kbd>+<kbd>V</kbd>, since Windows Terminal keeps <kbd>Ctrl</kbd>+<kbd>V</kbd> for text. On Linux it needs <code>wl-paste</code> (Wayland) or <code>xclip</code> (X11).</li>
+<li><strong>Paste</strong> a screenshot or a copied picture with <kbd>Ctrl</kbd>+<kbd>V</kbd>. On Windows it is <kbd>Alt</kbd>+<kbd>V</kbd>, since Windows Terminal keeps <kbd>Ctrl</kbd>+<kbd>V</kbd> for text. On Linux it needs <code>wl-paste</code> (Wayland) or <code>xclip</code> (X11). On a Mac use <kbd>Ctrl</kbd>+<kbd>V</kbd> too: terminals keep <kbd>Cmd</kbd>+<kbd>V</kbd> for their own text paste and send nothing for an image.</li>
 <li><strong>Drag</strong> image files into the terminal (macOS and Linux terminals).</li>
 <li><strong><code>/image &lt;path&gt;</code></strong> attaches a file by its path.</li>
 </ul>
-<p>Each image shows in the input as <code>[image 1: name W×H]</code>; delete that text to drop the image. Send it with or without a question. PNG, JPEG, GIF and webp work everywhere, HEIC on macOS. Images are saved under <code>&lt;data&gt;/attachments/</code> (<a href="/tenant/docs/setup/directories">directories</a>), scaled to at most 1568 pixels on the long side, and kept as long as the archive keeps the conversation.</p>
+<p>Each image shows in the input as <code>[image 1: name W×H]</code>, and the footer counts what’s attached. <kbd>Backspace</kbd> right after a tag removes it, and the image with it. Send it with or without a question. PNG, JPEG, GIF and webp work everywhere, HEIC on macOS. Images are saved under <code>&lt;data&gt;/attachments/</code> (<a href="/tenant/docs/setup/directories">directories</a>), scaled to at most 1568 pixels on the long side, and kept as long as the archive keeps the conversation.</p>
 <p>The model sees the images of the last three exchanges, at most 8 per request; older ones become a short note with the saved file’s path. A model that can’t see images gets that note instead of the picture. Which models can see, and how to say so yourself, is on <a href="/tenant/docs/models/local#images">Local models</a>.</p>
 <p>Photos you send over <a href="/tenant/docs/dashboard/access">Discord or iMessage</a> reach the model the same way, and the <code>os_read_image</code> and <code>web_screenshot</code> tools show it the picture they read.</p>
 <h2 id="command-categories">Command categories</h2>
@@ -243,7 +243,7 @@
 <tbody>
 <tr>
 <td>Models</td>
-<td><code>/model</code>, <code>/ceiling</code>, <code>/reasoning</code>, <code>/route</code>, <code>/setup</code></td>
+<td><code>/model</code>, <code>/ceiling</code>, <code>/reasoning</code>, <code>/route</code>, <code>/setup</code>, <code>/judge</code></td>
 <td><a href="/tenant/docs/models/providers">Models &amp; helpers</a></td>
 </tr>
 <tr>
@@ -278,7 +278,7 @@
 </tr>
 <tr>
 <td>Eval &amp; quality</td>
-<td><code>/eval</code>, <code>/judge</code></td>
+<td><code>/eval</code></td>
 <td><a href="/tenant/docs/models/eval">Quality evals</a></td>
 </tr>
 <tr>

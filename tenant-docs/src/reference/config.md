@@ -22,6 +22,7 @@ Edits by hand need a restart, except where a page says the hub re-reads them liv
 | `health_gating` | off | latency gating of the fallback chain: `slow_threshold_ms`, `min_samples` (5), `alpha` (0.3), `cooldown_ms` (30000) | by hand |
 | `plan_loop_ceiling` | 16 | planner↔tool iterations per turn, per agent | `/ceiling`, **Model** page |
 | `repeat_guard` | 8 | identical rounds of the same tool calls with the same results that end a turn early; `0` or absent is the default, a negative value turns the guard off | `/ceiling repeat`, **Model** page |
+| `judge` | off | the [judge](/tenant/docs/models/tuning#the-judge): `{"enabled", "kind" (`clef`), "endpoint", "model" (default `clef-flash`), "rounds" (1 to 5, default 3)}`; its key lives in `credentials.json` under `judge`. A saved `judge_loop` from before migrates on load | `/judge`, **Model** page |
 | `per_turn_tool_ranking` | false | re-rank the surfaced tools every turn instead of keeping a sticky, append-only set per session; the sticky set keeps a self-hosted server's prefix cache warm | by hand |
 | `lazy_tools` | false | send only the ranked working set of tools plus a `load_tool` meta-tool | by hand |
 | `browser_no_sandbox` | false | run Chrome without its process sandbox; accepted only inside a Linux container or user namespace | by hand |
@@ -127,7 +128,7 @@ Edits by hand need a restart, except where a page says the hub re-reads them liv
 | `profile` | | a helper name to run the proposer and summarizers on | by hand |
 | `soul_nudge_every` | off | cadence of soul proposals (queued for your review) | by hand |
 | `reflect_every` | off | cadence of the per-project reflection doc | by hand |
-| `judge`, `judge_kind`, `judge_endpoint`, `judge_key_env` | the main model | a separate eval judge | `/judge set`, **Quality** |
+| `quality_model`, `quality_model_kind`, `quality_model_endpoint`, `quality_model_key_env` | the main model | the [Quality model](/tenant/docs/models/eval#the-quality-model), a separate grader for the evals; the old `judge*` names migrate on load | `/eval model`, **Quality** |
 
 ## `goal`
 

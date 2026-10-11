@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080808">
 <title>Quality evals — Tenant docs — FindTime</title>
-<meta name="description" content="The eval harness scores the agent on fixed tasks, a nightly run gates regressions against a baseline, and an optional separate judge model grades the answers.">
+<meta name="description" content="The eval harness scores the agent on fixed tasks, a nightly run gates regressions against a baseline, and the Quality model grades the answers.">
 <link rel="canonical" href="https://findtime.net/tenant/docs/models/eval">
 <meta property="og:title" content="Quality evals — Tenant docs">
-<meta property="og:description" content="The eval harness scores the agent on fixed tasks, a nightly run gates regressions against a baseline, and an optional separate judge model grades the answers.">
+<meta property="og:description" content="The eval harness scores the agent on fixed tasks, a nightly run gates regressions against a baseline, and the Quality model grades the answers.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://findtime.net/tenant/docs/models/eval">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -101,11 +101,11 @@
 <main id="main" class="content" tabindex="-1">
 <p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/models/providers">Models &amp; helpers</a></p>
 <h1>Quality evals</h1>
-<p class="lede">The eval harness scores the agent on fixed tasks, a nightly run gates regressions against a baseline, and an optional separate judge model grades the answers.</p>
+<p class="lede">The eval harness scores the agent on fixed tasks, a nightly run gates regressions against a baseline, and the Quality model grades the answers.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> eval <span class="at">--subset</span> smoke<span class="kw">|</span><span class="ex">fitness</span><span class="kw">|</span><span class="ex">full</span><span class="kw">|</span><span class="ex">vision</span> <span class="pp">[--</span><span class="ss">json</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">quiet</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">list</span><span class="pp">]</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> eval <span class="at">--gate-only</span> <span class="at">--baseline-check</span> FILE      <span class="co"># compare against a baseline, no new run</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> eval <span class="at">--compaction</span>                           <span class="co"># score the context compactor&#39;s fidelity instead (ignores --subset)</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> eval <span class="at">--judge-model</span> <span class="op">&lt;</span>model<span class="op">&gt;</span>                  <span class="co"># a different grader for this run</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> eval <span class="at">--quality-model</span> <span class="op">&lt;</span>model<span class="op">&gt;</span>                <span class="co"># a different Quality model (grader) for this run</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> eval <span class="at">--baseline-from</span> eval-2026-10-01.json   <span class="co"># build the regression baseline from an existing artifact</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> eval <span class="at">--append-trend</span>                         <span class="co"># file the run under &lt;data&gt;/eval-artifacts and append to trend.jsonl</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> eval <span class="at">--baseline-diff</span>                        <span class="co"># the per-task movers vs the baseline, offline</span></span></code></pre></div>
@@ -121,13 +121,13 @@
 /eval diff                  per-task movers vs the baseline: what improved, what declined and why</code></pre>
 <div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;improve&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;eval_every&quot;</span><span class="fu">:</span> <span class="st">&quot;24h&quot;</span><span class="fu">,</span> <span class="dt">&quot;eval_at&quot;</span><span class="fu">:</span> <span class="st">&quot;03:15&quot;</span> <span class="fu">}</span></span></code></pre></div>
 <p><code>--eval-every 24h</code> on <code>tenant serve</code> or <code>tenant tui</code> does the same for one launch (it needs <code>--self-improve</code>, the default). The run is heavy (the full live eval), so schedule it for a quiet hour. The dashboard’s <strong>Quality</strong> page shows the scores over time and runs a check (a few minutes).</p>
-<h2 id="a-separate-judge">A separate judge</h2>
-<p>By default the main model grades its own answers. A separate judge grades both <code>tenant eval</code> and the nightly run:</p>
-<pre class="text"><code>/judge set &lt;kind&gt; &lt;model&gt;     e.g. /judge set anthropic claude-sonnet-4-20250514
-/judge status
-/judge clear</code></pre>
-<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;improve&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;judge&quot;</span><span class="fu">:</span> <span class="st">&quot;claude-sonnet-4-20250514&quot;</span><span class="fu">,</span> <span class="dt">&quot;judge_kind&quot;</span><span class="fu">:</span> <span class="st">&quot;anthropic&quot;</span><span class="fu">,</span> <span class="dt">&quot;judge_endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span> <span class="dt">&quot;judge_key_env&quot;</span><span class="fu">:</span> <span class="st">&quot;ANTHROPIC_API_KEY&quot;</span> <span class="fu">}</span></span></code></pre></div>
-<p>The key is read from the environment variable at run time and never stored. <code>--judge-model</code> on <code>tenant eval</code> overrides it for one run. The dashboard’s <strong>Quality</strong> page has the same setting.</p>
+<h2 id="the-quality-model">The Quality model</h2>
+<p>The Quality model is the model that grades the answers. By default the main model grades its own; a separate Quality model grades both <code>tenant eval</code> and the nightly run:</p>
+<pre class="text"><code>/eval model                                    who grades, today
+/eval model set &lt;kind&gt; &lt;model&gt; [endpoint]      e.g. /eval model set anthropic claude-sonnet-4-20250514
+/eval model clear                              the main model grades its own answers again</code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;improve&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;quality_model&quot;</span><span class="fu">:</span> <span class="st">&quot;claude-sonnet-4-20250514&quot;</span><span class="fu">,</span> <span class="dt">&quot;quality_model_kind&quot;</span><span class="fu">:</span> <span class="st">&quot;anthropic&quot;</span><span class="fu">,</span> <span class="dt">&quot;quality_model_endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span> <span class="dt">&quot;quality_model_key_env&quot;</span><span class="fu">:</span> <span class="st">&quot;ANTHROPIC_API_KEY&quot;</span> <span class="fu">}</span></span></code></pre></div>
+<p>The key is read from the environment variable at run time and never stored. <code>--quality-model</code> on <code>tenant eval</code> overrides it for one run. The dashboard’s <strong>Quality</strong> page has the same card. This is not the <a href="/tenant/docs/models/tuning#the-judge">judge</a>, which checks a turn’s answer before it reaches you.</p>
 <h2 id="what-the-self-improvement-loop-never-does">What the self-improvement loop never does</h2>
 <p>The eval’s model-under-test is always the daily model, and a candidate soul change is always graded on it: <code>improve.profile</code> can pin the proposer to a stronger model, never the scorer. Soul proposals wait for your review in <code>&lt;config&gt;/soul/proposed/</code>.</p>
 <div class="pagefoot">
@@ -142,7 +142,7 @@
 <div class="label">In this article</div>
 <ul>
 <li><a href="#the-nightly-gate" id="toc-the-nightly-gate">The nightly gate</a></li>
-<li><a href="#a-separate-judge" id="toc-a-separate-judge">A separate judge</a></li>
+<li><a href="#the-quality-model" id="toc-the-quality-model">The Quality model</a></li>
 <li><a href="#what-the-self-improvement-loop-never-does" id="toc-what-the-self-improvement-loop-never-does">What the self-improvement loop never does</a></li>
 </ul>
 </div>

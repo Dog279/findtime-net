@@ -40,6 +40,27 @@ A separate guard ends a turn early when the agent makes the same tool calls and 
 
 The dashboard's **Model** page has the same setting.
 
+## The judge
+
+A judge can check the agent's work before an answer reaches you. It is a **decision model**: it doesn't write text, it answers yes/no questions with probabilities, so it is fast and can't be argued with. Cloudflare's [Clef-flash](https://huggingface.co/Cloudflare/clef-flash) on your own server is the kind Tenant knows today (`clef`); any server with the System One API (`POST /v1/systemone`) answers the same way, and a hosted one needs only its address and key. The judge is not the [Quality model](/tenant/docs/models/eval#the-quality-model), which grades the eval answers.
+
+- **Triage.** When a prompt comes in, the judge decides whether it is a task (do, change, look up or check something), a question or chat. This runs while the model is already working, so it adds no wait. Only tasks are checked.
+- **Check.** When the model answers a task, the judge asks four questions: is it fully done, did it cover every part, does it claim actions no tool call shows, and did it hand the work back instead of doing it. If any check fails, the work goes back to the model with a short note saying which, and the model continues. A send-back doesn't count against the step limit.
+- **At most three rounds.** An answer the judge still can't confirm goes out marked `— judge: not confirmed (done 0.31, …)`, so you know to look closer. Answers that hit the step limit or the repeat guard are checked too and get the same mark.
+- **Your "no" is final.** If a safety setting or you refused an action during the turn, the judge never sends the work back to ask again.
+- **Not checked:** `/goal` turns (the goal judges itself), helper and peer agents, and research.
+- **If the judge is down,** answers go out unchecked, the outage is logged once, and judging pauses for a minute before trying again.
+
+```text
+/judge use clef [model]       set it up: asks for the server's address, then its key (hidden; blank for none),
+                              asks the server once, saves, switches on (model defaults to clef-flash)
+/judge                        kind, model, server, whether a key is saved, on or off, rounds
+/judge on | off               switch it (on asks the server one question first)
+/judge rounds <1-5>           how many times an answer may be sent back (default 3)
+```
+
+Each check shows in the activity feed as `⚖ judge …`. `/model` names the judge while it's on, and the **Model** page's Judge card has the same settings, with a key box that is never shown filled. The judge's tokens count toward the session's totals. It is saved as `judge` in `config.json` ([reference](/tenant/docs/reference/config)) and its key, if the server wants one, in `credentials.json`.
+
 ## Reasoning effort
 
 Two provider kinds accept an effort hint, and `/reasoning` is gated to them so a provider that would reject the field never receives it.
