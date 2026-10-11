@@ -10,7 +10,7 @@ The menu groups the pages. On a phone, **Menu** at the top opens it; **Log out**
 | Page | Path | What it is for | Asks first |
 |---|---|---|---|
 | **Overview** | `/` | how the agent is (an alert, a model it cannot reach), what is waiting for you, what it may do, the services it is connected to; its model and quality score once they have data | nothing |
-| **Chat** | `/chat` | talk to the agent; its requests for your OK appear above the message box; a `thinking…` row counts up while it answers | nothing; **Stop** is immediate |
+| **Chat** | `/chat` | talk to the agent; the page opens with the last 20 exchanges; the answer appears as it is written and settles rendered from Markdown (headings, lists, code, tables); each tool call is a card you can open to what was asked and what came back, with a link into Logs; its requests for your OK appear above the message box; a `thinking…` row counts up while it answers | nothing; **Stop** is immediate |
 | **Autopilot** | `/goal` | a `/goal` started from the terminal UI; **Stop after this step** | nothing |
 | **Logs** | `/logs` | everything the agent and Tenant do, newest first: filters, saved views, **○ live**, an event's detail and timeline ([Logs &amp; alerts](/tenant/docs/dashboard/logs)) | **Clear** a log; **Reveal** shows a hidden value and is recorded; the Security log can never be cleared |
 | **Memory** | `/memory` | what the agent knows about you: facts with provenance and history, the soul, the user profile, **Recently removed** with restore | nothing |
