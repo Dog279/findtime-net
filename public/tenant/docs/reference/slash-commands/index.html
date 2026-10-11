@@ -124,7 +124,11 @@
 /route force &lt;profileID&gt;               force a named profile (logged)
 /route stats                           big/disagreement/failure rates, latency, breaker trips
 /route why [n]                         explain the nth most recent routing decision
-/setup                                 arrow-key setup menu: provider, model, endpoint, key, embeddings, gateway</code></pre>
+/setup                                 arrow-key setup menu: provider, model, endpoint, key, embeddings, gateway
+/judge                                 the judge: kind, model, server, key, on or off, rounds
+/judge on|off                          switch the judge (on asks the server one question first)
+/judge use clef [model]                set it up: prompts for the server&#39;s address, then its key (hidden; blank for none)
+/judge rounds &lt;1-5&gt;                    how many times an answer may be sent back (default 3)</code></pre>
 <h2 id="sub-agents-helpers">Sub-agents (<a href="/tenant/docs/models/helpers">Helpers</a>)</h2>
 <pre class="text"><code>/agents                                           list named sub-agent profiles
 /agents add &lt;name&gt; &lt;provider&gt; [model] [-- desc]   register one
@@ -206,8 +210,7 @@
 /eval now
 /eval trend [n]
 /eval diff
-/judge [set &lt;kind&gt; &lt;model&gt;|clear|status]  the eval judge model
-/judge loop [on [&lt;endpoint&gt; [&lt;model&gt;]]|off]  the judge loop: a decision model checks task answers and sends them back</code></pre>
+/eval model [set &lt;kind&gt; &lt;model&gt; [endpoint]|clear]   the Quality model: which model grades eval answers</code></pre>
 <h2 id="safety-approvals-permissions-access">Safety &amp; approvals (<a href="/tenant/docs/first-launch/permissions">Permissions</a>, <a href="/tenant/docs/dashboard/access">Access</a>)</h2>
 <pre class="text"><code>/permissions                              per-category modes and the tool rules (also /perms)
 /permissions set &lt;cat&gt; &lt;mode&gt;

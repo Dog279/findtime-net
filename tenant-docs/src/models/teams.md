@@ -1,6 +1,6 @@
 ---
 title: Teams, research &amp; goals
-description: Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with a judge, and cascading plan review.
+description: Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with its own completion check, and cascading plan review.
 area: Models &amp; helpers
 area-url: /tenant/docs/models/providers
 ---
@@ -50,7 +50,7 @@ A run plans sub-questions, fans out researchers over the web plugin, reflects, d
 
 ```text
 /goal <condition>      set and start: e.g. /goal write a test for feature X and make it pass
-/goal show             the condition, turns used, the judge's last verdict
+/goal show             the condition, turns used, the last check's verdict
 /goal clear            stop (aliases: stop, off, reset, cancel); Esc or Ctrl-C also clears it
 ```
 
@@ -58,7 +58,7 @@ A run plans sub-questions, fans out researchers over the web plugin, reflects, d
 tenant goal "<condition>" [--max-turns 20] [--verbose]
 ```
 
-A judge model reads each turn's result and decides whether the condition holds; while it does not, the loop auto-continues. `--max-turns` (default 20) is the safety cap. `goal.loop_ceiling` in `config.json` gives goal turns their own per-turn ceiling (`-1` lifts it). The dashboard's **Autopilot** page shows a goal started from the terminal UI with **Stop after this step**; a background service has no Autopilot.
+The goal's check (a model call, not the [judge](/tenant/docs/models/tuning#the-judge)) reads each turn's result and decides whether the condition holds; while it does not, the loop auto-continues. `--max-turns` (default 20) is the safety cap. `goal.loop_ceiling` in `config.json` gives goal turns their own per-turn ceiling (`-1` lifts it). The dashboard's **Autopilot** page shows a goal started from the terminal UI with **Stop after this step**; a background service has no Autopilot.
 
 ## Plan review
 

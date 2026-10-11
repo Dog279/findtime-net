@@ -63,14 +63,14 @@ Every slash command belongs to one `/help` category. The full list with syntax i
 
 | Category | Commands | Covered in |
 |---|---|---|
-| Models | `/model`, `/ceiling`, `/reasoning`, `/route`, `/setup` | [Models &amp; helpers](/tenant/docs/models/providers) |
+| Models | `/model`, `/ceiling`, `/reasoning`, `/route`, `/setup`, `/judge` | [Models &amp; helpers](/tenant/docs/models/providers) |
 | Sub-agents | `/agents` | [Helpers](/tenant/docs/models/helpers) |
 | Deep research | `/research`, `/cancel-clarify` | [Teams, research &amp; goals](/tenant/docs/models/teams) |
 | Memory | `/memory`, `/compress`, `/expand` | [Memory &amp; soul](/tenant/docs/first-launch/memory) |
 | Tools &amp; plugins | `/tools`, `/enable`, `/disable`, `/skill`, `/configure`, `/cancel` | [Built-in tools](/tenant/docs/mcp/built-in-tools), [Integrations](/tenant/docs/mcp/integrations) |
 | MCP connectors | `/mcp`, `/peer`, `/github` | [MCPs &amp; tools](/tenant/docs/mcp/overview) |
 | Skills | `/skills`, `/ack`, `/undo` | [Skills](/tenant/docs/first-launch/skills) |
-| Eval &amp; quality | `/eval`, `/judge` | [Quality evals](/tenant/docs/models/eval) |
+| Eval &amp; quality | `/eval` | [Quality evals](/tenant/docs/models/eval) |
 | Safety &amp; approvals | `/permissions`, `/approve`, `/deny`, `/relay`, `/imessage` | [Permissions &amp; approvals](/tenant/docs/first-launch/permissions), [Access](/tenant/docs/dashboard/access) |
 | Automation | `/cron` | [Scheduled jobs](/tenant/docs/dashboard/cron) |
 | Logs | `/logs` | [Logs &amp; alerts](/tenant/docs/dashboard/logs) |

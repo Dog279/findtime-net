@@ -40,7 +40,7 @@ Referenced by `auth.key_env`, or read when the wizard's **Reference an env var**
 | `ZAI_API_KEY` | `zai`, `zai-coding`, `zai-coding-cn`, `zai-metered` |
 | `SAKANA_API_KEY` | `sakana` |
 
-The eval judge's key is read from `improve.judge_key_env` (default: the kind's variable above).
+The Quality model's key is read from `improve.quality_model_key_env` (default: the kind's variable above). The judge's key is not an environment variable: it lives in `credentials.json`.
 
 ## Integrations
 

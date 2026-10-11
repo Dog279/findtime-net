@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080808">
 <title>Teams, research &amp; goals — Tenant docs — FindTime</title>
-<meta name="description" content="Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with a judge, and cascading plan review.">
+<meta name="description" content="Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with its own completion check, and cascading plan review.">
 <link rel="canonical" href="https://findtime.net/tenant/docs/models/teams">
 <meta property="og:title" content="Teams, research &amp; goals — Tenant docs">
-<meta property="og:description" content="Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with a judge, and cascading plan review.">
+<meta property="og:description" content="Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with its own completion check, and cascading plan review.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://findtime.net/tenant/docs/models/teams">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -101,7 +101,7 @@
 <main id="main" class="content" tabindex="-1">
 <p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/models/providers">Models &amp; helpers</a></p>
 <h1>Teams, research &amp; goals</h1>
-<p class="lede">Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with a judge, and cascading plan review.</p>
+<p class="lede">Multi-agent orchestration over a live bus, deep research that ends in a cited report, an autonomous goal loop with its own completion check, and cascading plan review.</p>
 <h2 id="orchestrate-a-team">Orchestrate: a team</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> orchestrate <span class="st">&quot;&lt;task&gt;&quot;</span> [--await-timeout 3m]       <span class="co"># alias: tenant team</span></span></code></pre></div>
 <p>An orchestrator plans the task, spawns concurrent helpers (the built-in five or <a href="/tenant/docs/models/helpers">yours</a>), and they coordinate over a live bus until the work self-resolves. The envelope is <code>budgets</code> in <code>config.json</code> (<a href="/tenant/docs/models/tuning">defaults</a>): concurrent helpers, agents per run, tool calls, tokens, cost, wall time, browser instances. <code>--await-timeout</code> is how long the orchestrator waits for its helpers (default 3 minutes).</p>
@@ -176,10 +176,10 @@
 <p>A run plans sub-questions, fans out researchers over the web plugin, reflects, deepens, and writes a cited Markdown report. The report is saved to the run (<code>&lt;data&gt;/research/</code>) and, when a wiki folder is configured, deposited there as notes. A report cut off by the token limit, or made mostly of planning, is retried once and otherwise fails the run. The dashboard’s <strong>Research</strong> page starts, watches and stops runs; a source on your own network shows as plain text there, not a link.</p>
 <h2 id="goal-the-autonomous-loop">Goal: the autonomous loop</h2>
 <pre class="text"><code>/goal &lt;condition&gt;      set and start: e.g. /goal write a test for feature X and make it pass
-/goal show             the condition, turns used, the judge&#39;s last verdict
+/goal show             the condition, turns used, the last check&#39;s verdict
 /goal clear            stop (aliases: stop, off, reset, cancel); Esc or Ctrl-C also clears it</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> goal <span class="st">&quot;&lt;condition&gt;&quot;</span> [--max-turns 20] <span class="pp">[--</span><span class="ss">verbose</span><span class="pp">]</span></span></code></pre></div>
-<p>A judge model reads each turn’s result and decides whether the condition holds; while it does not, the loop auto-continues. <code>--max-turns</code> (default 20) is the safety cap. <code>goal.loop_ceiling</code> in <code>config.json</code> gives goal turns their own per-turn ceiling (<code>-1</code> lifts it). The dashboard’s <strong>Autopilot</strong> page shows a goal started from the terminal UI with <strong>Stop after this step</strong>; a background service has no Autopilot.</p>
+<p>The goal’s check (a model call, not the <a href="/tenant/docs/models/tuning#the-judge">judge</a>) reads each turn’s result and decides whether the condition holds; while it does not, the loop auto-continues. <code>--max-turns</code> (default 20) is the safety cap. <code>goal.loop_ceiling</code> in <code>config.json</code> gives goal turns their own per-turn ceiling (<code>-1</code> lifts it). The dashboard’s <strong>Autopilot</strong> page shows a goal started from the terminal UI with <strong>Stop after this step</strong>; a background service has no Autopilot.</p>
 <h2 id="plan-review">Plan review</h2>
 <pre class="text"><code>/review &lt;plan.md&gt;              CEO, Engineer and Designer reviews, appended to the file
 /review &lt;plan.md&gt; ceo,eng      a subset (ceo, eng, design)</code></pre>

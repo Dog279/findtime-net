@@ -31,6 +31,10 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /route stats                           big/disagreement/failure rates, latency, breaker trips
 /route why [n]                         explain the nth most recent routing decision
 /setup                                 arrow-key setup menu: provider, model, endpoint, key, embeddings, gateway
+/judge                                 the judge: kind, model, server, key, on or off, rounds
+/judge on|off                          switch the judge (on asks the server one question first)
+/judge use clef [model]                set it up: prompts for the server's address, then its key (hidden; blank for none)
+/judge rounds <1-5>                    how many times an answer may be sent back (default 3)
 ```
 
 ## Sub-agents ([Helpers](/tenant/docs/models/helpers))
@@ -140,8 +144,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /eval now
 /eval trend [n]
 /eval diff
-/judge [set <kind> <model>|clear|status]  the eval judge model
-/judge loop [on [<endpoint> [<model>]]|off]  the judge loop: a decision model checks task answers and sends them back
+/eval model [set <kind> <model> [endpoint]|clear]   the Quality model: which model grades eval answers
 ```
 
 ## Safety &amp; approvals ([Permissions](/tenant/docs/first-launch/permissions), [Access](/tenant/docs/dashboard/access))

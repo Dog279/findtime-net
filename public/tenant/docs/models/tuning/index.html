@@ -171,8 +171,8 @@
 </tbody>
 </table>
 <p>The dashboard’s <strong>Model</strong> page has the same setting.</p>
-<h2 id="the-judge-loop">The judge loop</h2>
-<p>A judge can check the agent’s work before an answer reaches you. It is a <strong>decision model</strong>: it doesn’t write text, it answers yes/no questions with probabilities, so it is fast and can’t be argued with. Cloudflare’s <a href="https://huggingface.co/Cloudflare/clef-flash">Clef-flash</a> is the default; any server with the System One API (<code>POST /v1/systemone</code>) works.</p>
+<h2 id="the-judge">The judge</h2>
+<p>A judge can check the agent’s work before an answer reaches you. It is a <strong>decision model</strong>: it doesn’t write text, it answers yes/no questions with probabilities, so it is fast and can’t be argued with. Cloudflare’s <a href="https://huggingface.co/Cloudflare/clef-flash">Clef-flash</a> on your own server is the kind Tenant knows today (<code>clef</code>); any server with the System One API (<code>POST /v1/systemone</code>) answers the same way, and a hosted one needs only its address and key. The judge is not the <a href="/tenant/docs/models/eval#the-quality-model">Quality model</a>, which grades the eval answers.</p>
 <ul>
 <li><strong>Triage.</strong> When a prompt comes in, the judge decides whether it is a task (do, change, look up or check something), a question or chat. This runs while the model is already working, so it adds no wait. Only tasks are checked.</li>
 <li><strong>Check.</strong> When the model answers a task, the judge asks four questions: is it fully done, did it cover every part, does it claim actions no tool call shows, and did it hand the work back instead of doing it. If any check fails, the work goes back to the model with a short note saying which, and the model continues. A send-back doesn’t count against the step limit.</li>
@@ -181,10 +181,12 @@
 <li><strong>Not checked:</strong> <code>/goal</code> turns (the goal judges itself), helper and peer agents, and research.</li>
 <li><strong>If the judge is down,</strong> answers go out unchecked, the outage is logged once, and judging pauses for a minute before trying again.</li>
 </ul>
-<pre class="text"><code>/judge loop                                   on or off, and where
-/judge loop on http://host:30000 [model]      switch it on (asks the server once first; model defaults to clef-flash)
-/judge loop off</code></pre>
-<p>Each check shows in the activity feed as <code>⚖ judge …</code>. <code>/model</code> names the judge while it’s on, and the <strong>Model</strong> page has the same switch. The judge’s tokens count toward the session’s totals. It is saved as <code>judge_loop</code> in <code>config.json</code> (<a href="/tenant/docs/reference/config">reference</a>).</p>
+<pre class="text"><code>/judge use clef [model]       set it up: asks for the server&#39;s address, then its key (hidden; blank for none),
+                              asks the server once, saves, switches on (model defaults to clef-flash)
+/judge                        kind, model, server, whether a key is saved, on or off, rounds
+/judge on | off               switch it (on asks the server one question first)
+/judge rounds &lt;1-5&gt;           how many times an answer may be sent back (default 3)</code></pre>
+<p>Each check shows in the activity feed as <code>⚖ judge …</code>. <code>/model</code> names the judge while it’s on, and the <strong>Model</strong> page’s Judge card has the same settings, with a key box that is never shown filled. The judge’s tokens count toward the session’s totals. It is saved as <code>judge</code> in <code>config.json</code> (<a href="/tenant/docs/reference/config">reference</a>) and its key, if the server wants one, in <code>credentials.json</code>.</p>
 <h2 id="reasoning-effort">Reasoning effort</h2>
 <p>Two provider kinds accept an effort hint, and <code>/reasoning</code> is gated to them so a provider that would reject the field never receives it.</p>
 <pre class="text"><code>/reasoning              arrow-key picker (also /effort)
@@ -269,7 +271,7 @@
 <ul>
 <li><a href="#the-loop-ceiling" id="toc-the-loop-ceiling">The loop ceiling</a></li>
 <li><a href="#the-repeat-guard" id="toc-the-repeat-guard">The repeat guard</a></li>
-<li><a href="#the-judge-loop" id="toc-the-judge-loop">The judge loop</a></li>
+<li><a href="#the-judge" id="toc-the-judge">The judge</a></li>
 <li><a href="#reasoning-effort" id="toc-reasoning-effort">Reasoning effort</a></li>
 <li><a href="#thinking-vs-tool-time" id="toc-thinking-vs-tool-time">Thinking vs tool time</a></li>
 <li><a href="#team-budgets" id="toc-team-budgets">Team budgets</a></li>

@@ -24,7 +24,7 @@ A Windows service runs as a service account, so its directories are that account
 | Path | What | Who writes it |
 |---|---|---|
 | `config.json` | the launch configuration: providers, embeddings, dashboard, relay, cron jobs, MCP servers, helpers, routing, logs ([reference](/tenant/docs/reference/config)) | `tenant setup`, slash commands, the dashboard, you |
-| `credentials.json` | API keys and integration secrets, keyed by provider id or `skill:<name>:<field>`; owner-only (`0600`, or a protected DACL on Windows) | `tenant setup`, `/model add-cloud`, `/configure`, the **Provider keys** page |
+| `credentials.json` | API keys and integration secrets, keyed by provider id, `skill:<name>:<field>` or `judge` (the [judge](/tenant/docs/models/tuning#the-judge)'s key); owner-only (`0600`, or a protected DACL on Windows) | `tenant setup`, `/model add-cloud`, `/configure`, the **Provider keys** page |
 | `settings.<agent>.json` | the per-agent runtime settings: enabled tools, permission modes, tool rules, exec profiles and exceptions ([reference](/tenant/docs/reference/settings)) | `/enable`, `/permissions`, the dashboard, you (re-read live) |
 | `dashboard-auth-token` | the dashboard sign-in key, created on first start | Tenant |
 | `soul/<agent>.toml` | the agent's identity and operating rules (T0) | `/memory soul import`, the **Memory** page |
