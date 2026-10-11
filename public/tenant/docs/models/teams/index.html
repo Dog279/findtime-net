@@ -69,6 +69,7 @@
   <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
   <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
   <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/judge">The Judge</a></li>
   <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
 </ul></details>
 <details class="area"><summary>MCPs &amp; tools</summary><ul>
@@ -179,7 +180,7 @@
 /goal show             the condition, turns used, the last check&#39;s verdict
 /goal clear            stop (aliases: stop, off, reset, cancel); Esc or Ctrl-C also clears it</code></pre>
 <div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> goal <span class="st">&quot;&lt;condition&gt;&quot;</span> [--max-turns 20] <span class="pp">[--</span><span class="ss">verbose</span><span class="pp">]</span></span></code></pre></div>
-<p>The goal’s check (a model call, not the <a href="/tenant/docs/models/tuning#the-judge">judge</a>) reads each turn’s result and decides whether the condition holds; while it does not, the loop auto-continues. <code>--max-turns</code> (default 20) is the safety cap. <code>goal.loop_ceiling</code> in <code>config.json</code> gives goal turns their own per-turn ceiling (<code>-1</code> lifts it). The dashboard’s <strong>Autopilot</strong> page shows a goal started from the terminal UI with <strong>Stop after this step</strong>; a background service has no Autopilot.</p>
+<p>The goal’s check (a model call, not the <a href="/tenant/docs/models/judge">judge</a>) reads each turn’s result and decides whether the condition holds; while it does not, the loop auto-continues. <code>--max-turns</code> (default 20) is the safety cap. <code>goal.loop_ceiling</code> in <code>config.json</code> gives goal turns their own per-turn ceiling (<code>-1</code> lifts it). The dashboard’s <strong>Autopilot</strong> page shows a goal started from the terminal UI with <strong>Stop after this step</strong>; a background service has no Autopilot.</p>
 <h2 id="plan-review">Plan review</h2>
 <pre class="text"><code>/review &lt;plan.md&gt;              CEO, Engineer and Designer reviews, appended to the file
 /review &lt;plan.md&gt; ceo,eng      a subset (ceo, eng, design)</code></pre>

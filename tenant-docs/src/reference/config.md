@@ -22,7 +22,7 @@ Edits by hand need a restart, except where a page says the hub re-reads them liv
 | `health_gating` | off | latency gating of the fallback chain: `slow_threshold_ms`, `min_samples` (5), `alpha` (0.3), `cooldown_ms` (30000) | by hand |
 | `plan_loop_ceiling` | 16 | planner↔tool iterations per turn, per agent | `/ceiling`, **Model** page |
 | `repeat_guard` | 8 | identical rounds of the same tool calls with the same results that end a turn early; `0` or absent is the default, a negative value turns the guard off | `/ceiling repeat`, **Model** page |
-| `judge` | off | the [judge](/tenant/docs/models/tuning#the-judge): `{"enabled", "kind" (`clef`), "endpoint", "model" (default `clef-flash`), "rounds" (1 to 5, default 3)}`; its key lives in `credentials.json` under `judge`. A saved `judge_loop` from before migrates on load | `/judge`, **Model** page |
+| `judge` | off | the [judge](/tenant/docs/models/judge): `{"enabled", "kind" (`clef`), "endpoint", "model" (default `clef-flash`), "rounds" (1 to 5, default 3)}`; its key lives in `credentials.json` under `judge`. A saved `judge_loop` from before migrates on load | `/judge`, **Model** page |
 | `per_turn_tool_ranking` | false | re-rank the surfaced tools every turn instead of keeping a sticky, append-only set per session; the sticky set keeps a self-hosted server's prefix cache warm | by hand |
 | `lazy_tools` | false | send only the ranked working set of tools plus a `load_tool` meta-tool | by hand |
 | `browser_no_sandbox` | false | run Chrome without its process sandbox; accepted only inside a Linux container or user namespace | by hand |

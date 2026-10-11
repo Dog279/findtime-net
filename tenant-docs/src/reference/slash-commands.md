@@ -7,7 +7,7 @@ area-url: /tenant/docs/reference/config
 
 Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to one `/help` category; a command's changes apply live and persist. The detail pages linked under each heading explain them.
 
-## Models ([providers](/tenant/docs/models/providers), [switching](/tenant/docs/models/switching), [tuning](/tenant/docs/models/tuning), [routing](/tenant/docs/models/routing))
+## Models ([providers](/tenant/docs/models/providers), [switching](/tenant/docs/models/switching), [tuning](/tenant/docs/models/tuning), [judge](/tenant/docs/models/judge), [routing](/tenant/docs/models/routing))
 
 ```text
 /model                                 list configured model backends and the active one
