@@ -112,7 +112,7 @@
 <li><strong>Bounded rounds.</strong> By default an answer may be sent back three times (<code>/judge rounds</code> sets 1 to 5). An answer the judge still can’t confirm goes out marked <code>— judge: not confirmed (done 0.31, …)</code>, so you know to look closer. Answers that hit the step limit or the repeat guard are checked too and get the same mark.</li>
 <li><strong>Your “no” is final.</strong> If a safety setting or you refused an action during the turn, the judge never sends the work back to ask again.</li>
 <li><strong>Not checked:</strong> <code>/goal</code> turns (the goal has its own check), helper and peer agents, and research.</li>
-<li><strong>If the judge is down,</strong> answers go out unchecked, the outage is logged once, and judging pauses for a minute before trying again.</li>
+<li><strong>If the judge is down,</strong> answers go out unchecked, the outage is logged once, and judging pauses for a minute before trying again. A check waits up to 30 seconds for the server. What the judge is sent is bounded: the request and the answer at 3,000 characters each, then the newest tool calls (outputs for the newest 8), 12,000 characters in all, so a 9B judge on a pair of Tesla T4s answers in about 4 seconds at worst.</li>
 </ul>
 <h2 id="set-it-up">Set it up</h2>
 <pre class="text"><code>/judge use clef [model]       prompts for the server&#39;s address, then its key (hidden; blank for none);
@@ -123,7 +123,7 @@
 /judge on | off               switch it (on asks the server one question first)
 /judge rounds &lt;1-5&gt;           how many times an answer may be sent back (default 3)</code></pre>
 <h2 id="what-you-see">What you see</h2>
-<p>Each triage and check shows in the activity feed as a <code>⚖ judge …</code> line, and a send-back says which check failed. <code>/model</code> names the judge while it is on. In the logs, the <strong>turns</strong> source carries one event per check (<code>Judge</code>), one when an answer went out unconfirmed (<code>judge could not confirm an answer</code>) and one when the server was unreachable (<code>judge unavailable</code>). The judge’s tokens count toward the session’s totals.</p>
+<p>Each triage and check shows in the activity feed as a <code>⚖ judge …</code> line, a send-back says which check failed, and each check ends with what it cost (<code>· 3114 tokens, 3.4s</code>). <code>/model</code> names the judge while it is on. In the logs, the <strong>turns</strong> source carries one event per check (<code>Judge</code>), one when an answer went out unconfirmed (<code>judge could not confirm an answer</code>) and one when the server was unreachable (<code>judge unavailable</code>). The judge’s tokens count toward the session’s totals.</p>
 <h2 id="where-it-is-saved">Where it is saved</h2>
 <p>The settings live under <code>judge</code> in <code>config.json</code> (<code>enabled</code>, <code>kind</code>, <code>endpoint</code>, <code>model</code>, <code>rounds</code>; see the <a href="/tenant/docs/reference/config">reference</a>); the key, if the server wants one, lives in <code>credentials.json</code> under <code>judge</code> and is never written to <code>config.json</code>, a log or a page. A saved <code>judge_loop</code> from an earlier build migrates on load.</p>
 <div class="pagefoot">
