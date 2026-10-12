@@ -9,7 +9,7 @@ Every request needs the dashboard key as a bearer token, except `GET /healthz`:
 
 ```bash
 TOKEN=$(cat ~/Library/Application\ Support/tenant/dashboard-auth-token)
-curl -s http://127.0.0.1:8770/api/status -H "Authorization: Bearer $TOKEN"
+curl -s http://127.0.0.1:9770/api/status -H "Authorization: Bearer $TOKEN"
 ```
 
 The browser never sends the token itself (it holds a session cookie); scripts use the `Authorization` header. No path takes the token from the URL. Requests have size and time limits, and a cross-site cookie is refused.

@@ -64,7 +64,7 @@ Flags of `tenant serve` (also used by the unit):
 
 | Flag | Default | Effect |
 |---|---|---|
-| `--dashboard-addr ADDR` | `127.0.0.1:8770` | listen elsewhere; a non-loopback address is refused without TLS and a key ([dashboard](/tenant/docs/dashboard/overview)) |
+| `--dashboard-addr ADDR` | `127.0.0.1:9770` | listen elsewhere; a non-loopback address is refused without TLS and a key ([dashboard](/tenant/docs/dashboard/overview)) |
 | `--dashboard=false` | | run without the panel |
 | `--self-improve=false` | | no background distill, consolidate or profile jobs |
 | `--distill-every 10m`, `--profile-every 15m` | | cadences of the self-improvement jobs |

@@ -32,4 +32,4 @@ The menu groups the pages. On a phone, **Menu** at the top opens it; **Log out**
 
 **Live updates paused. Reload the page to see new requests.** The page lost its connection to Tenant (a restart, or the network dropped). Reload.
 
-Every page is also reachable by its path, so a bookmark to `http://127.0.0.1:8770/safety` opens straight to approvals after sign-in.
+Every page is also reachable by its path, so a bookmark to `http://127.0.0.1:9770/safety` opens straight to approvals after sign-in.

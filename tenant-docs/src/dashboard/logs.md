@@ -71,7 +71,7 @@ Any program on the machine can file a line, no rebuild:
 ```bash
 tenant log deploy "rolled out v2.3" host=web1 ok=true [--level warn|error] [--file]
 tenant log --list                                  # the sources
-curl -X POST http://127.0.0.1:8770/api/logs/deploy -H "Authorization: Bearer $TOKEN" -d '{"msg":"rolled out v2.3"}'
+curl -X POST http://127.0.0.1:9770/api/logs/deploy -H "Authorization: Bearer $TOKEN" -d '{"msg":"rolled out v2.3"}'
 ```
 
 Events from outside are filed under `ext.<name>` and marked `external`. A folder you drop under the log root is discovered within seconds and tailed live. A stdlib-only Go client any program can copy is in the Tenant repository under `reference/logging/`.

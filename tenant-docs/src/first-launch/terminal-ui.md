@@ -96,7 +96,7 @@ Every slash command belongs to one `/help` category. The full list with syntax i
 | `--api-key KEY` | | a hosted provider's key for this launch only |
 | `--self-improve=false` | on | no background distillation while the TUI is up |
 | `--distill-every 10m`, `--profile-every 15m`, `--eval-every 24h` | | self-improvement cadences; eval is off until set |
-| `--dashboard`, `--dashboard-addr ADDR` | on, `127.0.0.1:8770` | the web control panel |
+| `--dashboard`, `--dashboard-addr ADDR` | on, `127.0.0.1:9770` | the web control panel |
 | `--allow-no-memory` | | start even when embeddings are down |
 
 Plugin flags (`--os`, `--os-allow-exec`, `--web`, `--gsuite`, …) are on [Built-in tools](/tenant/docs/mcp/built-in-tools). A permission mode saved in `settings.<agent>.json` wins over an `--allow-*` flag.
