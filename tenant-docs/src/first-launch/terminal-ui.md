@@ -62,6 +62,10 @@ The model sees the images of the last three exchanges, at most 8 per request; ol
 
 Photos you send over [Discord or iMessage](/tenant/docs/dashboard/access) reach the model the same way, and the `os_read_image` and `web_screenshot` tools show it the picture they read.
 
+## Components
+
+When the answer is a table or a list of steps, the agent can draw it instead of describing it: the `ui_render` tool names the kind and hands Tenant the data, and the terminal app draws a boxed table (a caption above, a source line below) or a checklist with <kbd>✓</kbd> done, <kbd>◐</kbd> in progress and <kbd>○</kbd> to-do marks. A component is the answer, so it is always open; <kbd>Ctrl</kbd>+<kbd>O</kbd> folds the other tool rows around it. The dashboard's Chat page draws the same components. The model writes no markup, only data, so a component is always plain text in your terminal. `/disable ui` turns the tool off.
+
 ## Command categories
 
 Every slash command belongs to one `/help` category. The full list with syntax is on [Slash commands](/tenant/docs/reference/slash-commands).
