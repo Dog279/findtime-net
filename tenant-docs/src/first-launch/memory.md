@@ -58,7 +58,7 @@ tenant memory reembed                                                       # re
 tenant doctor --context-debug "what do I prefer"                            # trace what a query would retrieve
 ```
 
-`--protected` marks imported facts merge-protected (use it for feedback and corrections). The dashboard's **Memory** page is a fact inspector: provenance (which turns a fact came from), temporal history, edit, invalidate, restore, and a **Recently removed** list.
+`--protected` marks imported facts merge-protected (use it for feedback and corrections). The dashboard's **Memory** page is a fact inspector: provenance (which turns a fact came from), edit, invalidate, restore, a **Recently removed** list, and **Knowledge time**, a timeline of when each live fact was first learned and last confirmed (**Show history** adds the replaced and removed ones).
 
 ## Distillation and consolidation
 
