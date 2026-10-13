@@ -105,7 +105,7 @@
 <p class="lede">The JSON API behind the dashboard, for scripts and monitors: status, tools, posture, approvals, memory, the log book, and the event stream. Bearer-token authenticated.</p>
 <p>Every request needs the dashboard key as a bearer token, except <code>GET /healthz</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="va">TOKEN</span><span class="op">=</span><span class="va">$(</span><span class="fu">cat</span> ~/Library/Application\ Support/tenant/dashboard-auth-token<span class="va">)</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> http://127.0.0.1:8770/api/status <span class="at">-H</span> <span class="st">&quot;Authorization: Bearer </span><span class="va">$TOKEN</span><span class="st">&quot;</span></span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-s</span> http://127.0.0.1:9770/api/status <span class="at">-H</span> <span class="st">&quot;Authorization: Bearer </span><span class="va">$TOKEN</span><span class="st">&quot;</span></span></code></pre></div>
 <p>The browser never sends the token itself (it holds a session cookie); scripts use the <code>Authorization</code> header. No path takes the token from the URL. Requests have size and time limits, and a cross-site cookie is refused.</p>
 <h2 id="status-and-control">Status and control</h2>
 <table>

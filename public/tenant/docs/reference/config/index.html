@@ -281,7 +281,7 @@
 </tr>
 <tr>
 <td><code>addr</code></td>
-<td><code>127.0.0.1:8770</code></td>
+<td><code>127.0.0.1:9770</code></td>
 <td>the listen address; non-loopback needs TLS and a key</td>
 <td><code>--dashboard-addr</code></td>
 </tr>
@@ -327,6 +327,32 @@
 <td>false</td>
 <td>re-assert <code>tailscale serve</code> for the dashboard at every launch</td>
 <td><code>/tailscale serve</code>, <code>/tailscale serve off</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="tui"><code>tui</code></h2>
+<p>The terminal app’s own choices.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>feed</code></td>
+<td>shown</td>
+<td><code>"off"</code> hides the activity feed at launch (the saved <code>/feed off</code>)</td>
+<td><code>/feed on\|off</code>, Alt+F</td>
 </tr>
 </tbody>
 </table>
@@ -779,7 +805,7 @@
 <span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;embed&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;kind&quot;</span><span class="fu">:</span> <span class="st">&quot;ollama&quot;</span><span class="fu">,</span> <span class="dt">&quot;endpoint&quot;</span><span class="fu">:</span> <span class="st">&quot;http://localhost:11434&quot;</span><span class="fu">,</span> <span class="dt">&quot;model&quot;</span><span class="fu">:</span> <span class="st">&quot;nomic-embed-text&quot;</span><span class="fu">,</span> <span class="dt">&quot;embed_dim&quot;</span><span class="fu">:</span> <span class="dv">768</span> <span class="fu">},</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;fallbacks&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;local&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;plan_loop_ceiling&quot;</span><span class="fu">:</span> <span class="dv">24</span><span class="fu">,</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;dashboard&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;addr&quot;</span><span class="fu">:</span> <span class="st">&quot;127.0.0.1:8770&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;dashboard&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;addr&quot;</span><span class="fu">:</span> <span class="st">&quot;127.0.0.1:9770&quot;</span> <span class="fu">},</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tailscale&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;serve&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">},</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;relay&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">&quot;operator_id&quot;</span><span class="fu">:</span> <span class="st">&quot;123456789012345678&quot;</span><span class="fu">,</span> <span class="dt">&quot;approval_timeout&quot;</span><span class="fu">:</span> <span class="st">&quot;10m&quot;</span> <span class="fu">},</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;imessage&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;enabled&quot;</span><span class="fu">:</span> <span class="kw">false</span><span class="fu">,</span> <span class="dt">&quot;allow_from&quot;</span><span class="fu">:</span> <span class="ot">[]</span> <span class="fu">},</span></span>
@@ -804,6 +830,7 @@
 <li><a href="#top-level" id="toc-top-level">Top level</a></li>
 <li><a href="#dashboard" id="toc-dashboard"><code>dashboard</code></a></li>
 <li><a href="#tailscale" id="toc-tailscale"><code>tailscale</code></a></li>
+<li><a href="#tui" id="toc-tui"><code>tui</code></a></li>
 <li><a href="#gateway" id="toc-gateway"><code>gateway</code></a></li>
 <li><a href="#turn_scheduler" id="toc-turn_scheduler"><code>turn_scheduler</code></a></li>
 <li><a href="#relay-discord" id="toc-relay-discord"><code>relay</code> (Discord)</a></li>

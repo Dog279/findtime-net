@@ -11,7 +11,7 @@ From the dashboard you watch what the agent does, answer its requests, chat with
 
 - Under `tenant serve` (the [background service](/tenant/docs/setup/service)) it is always on: it is the only control surface.
 - In the terminal UI it launches by default; `/dashboard off` stops it and persists the choice (`dashboard.enabled: false`), `/dashboard on` brings it back, `/dashboard status` shows the address. `tenant tui --dashboard=false` for one launch.
-- The address is **http://127.0.0.1:8770** on the machine running Tenant (`dashboard.addr`, or `--dashboard-addr`). `http://localhost:8770` works too.
+- The address is **http://127.0.0.1:9770** on the machine running Tenant (`dashboard.addr`, or `--dashboard-addr`). `http://localhost:9770` works too.
 
 ## Sign in
 
@@ -40,14 +40,14 @@ Get-Content -LiteralPath "$env:APPDATA\tenant\dashboard-auth-token"   # Windows,
 
 | | How |
 |---|---|
-| This computer only (default) | `http://127.0.0.1:8770` |
+| This computer only (default) | `http://127.0.0.1:9770` |
 | Your phone or another device | Tailscale: `/tailscale serve` in the terminal UI, or `"tailscale": {"serve": true}` in `config.json` so the background service publishes it at every start. Tenant trusts the Tailscale name on its own and the tailnet carries HTTPS. |
 | Behind a reverse proxy on the same computer | add the name the proxy uses to `dashboard.allowed_hosts` |
-| On a network address (`--dashboard-addr 0.0.0.0:8770`) | refused at start unless **both** `dashboard.tls_cert` + `dashboard.tls_key` and `dashboard.auth` are set |
+| On a network address (`--dashboard-addr 0.0.0.0:9770`) | refused at start unless **both** `dashboard.tls_cert` + `dashboard.tls_key` and `dashboard.auth` are set |
 | The internet | never forward the port |
 
 ```json
-"dashboard": { "addr": "127.0.0.1:8770", "allowed_hosts": ["tenant.internal"], "tls_cert": "", "tls_key": "", "auth": "" }
+"dashboard": { "addr": "127.0.0.1:9770", "allowed_hosts": ["tenant.internal"], "tls_cert": "", "tls_key": "", "auth": "" }
 ```
 
 | Page says | Meaning | Do |

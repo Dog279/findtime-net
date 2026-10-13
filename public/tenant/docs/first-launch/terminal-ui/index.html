@@ -105,6 +105,7 @@
 <p class="lede">tenant tui is a full-screen chat with a live activity feed. Keys, the slash commands, steering a running turn, and the launch flags.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> tui</span></code></pre></div>
 <p>The left pane is the conversation; the right pane is the activity feed: every tool call and result, approvals, route decisions, cron runs, sub-agents. A timer under the input reads <code>⏱ 1:05 · thinking… 45.0s</code> while the model answers and <code>· tools… 3.1s</code> while tools run. Type <code>/help</code> for the command index.</p>
+<p>Each exchange is a block: a header line with who wrote it, the time and, for the agent, the model; then the text, rendered from Markdown (headings, lists, code panels, tables, task boxes) and wrapped at the pane’s width, never mid-word. A tool the agent calls shows as one line inside the block where it happened, <code>⏺ web_search("…") ✓ 1.2s · …</code>; <kbd>Ctrl</kbd>+<kbd>O</kbd> opens every row to its arguments and result, and a failed call is open already. While the agent works, the line under its answer says what it is doing and for how long. In the feed, a turn’s lines sit indented under a header with the time and the first words of your message; <code>/feed off</code> or <kbd>Alt</kbd>+<kbd>F</kbd> hides the feed for a wider reading column, and the choice is kept for the next launch.</p>
 <h2 id="keys">Keys</h2>
 <table>
 <colgroup>
@@ -151,6 +152,14 @@
 <td>copy the transcript to the clipboard and a file</td>
 </tr>
 <tr>
+<td><kbd>Ctrl</kbd>+<kbd>O</kbd></td>
+<td>open or close the tool rows in every turn (arguments and results)</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>F</kbd></td>
+<td>hide or show the activity feed (same as <code>/feed off</code> and <code>/feed on</code>); the choice persists</td>
+</tr>
+<tr>
 <td><kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>Alt</kbd>+<kbd>V</kbd> on Windows)</td>
 <td>paste the clipboard’s image into your message; with no image there, pastes text as usual (<a href="#images">Images</a>)</td>
 </tr>
@@ -195,6 +204,10 @@
 <td>on (default): the wheel scrolls the TUI; off: plain-drag selection, the wheel scrolls the terminal</td>
 </tr>
 <tr>
+<td><code>/feed on\|off</code></td>
+<td>show or hide the activity feed on the right (<kbd>Alt</kbd>+<kbd>F</kbd> too); the choice persists across launches</td>
+</tr>
+<tr>
 <td><code>/dashboard [on\|off\|status]</code></td>
 <td>start or stop the web control panel; it launches by default and the choice persists</td>
 </tr>
@@ -226,6 +239,8 @@
 <p>Each image shows in the input as <code>[image 1: name W×H]</code>, and the footer counts what’s attached. <kbd>Backspace</kbd> right after a tag removes it, and the image with it. Send it with or without a question. PNG, JPEG, GIF and webp work everywhere, HEIC on macOS. Images are saved under <code>&lt;data&gt;/attachments/</code> (<a href="/tenant/docs/setup/directories">directories</a>), scaled to at most 1568 pixels on the long side, and kept as long as the archive keeps the conversation.</p>
 <p>The model sees the images of the last three exchanges, at most 8 per request; older ones become a short note with the saved file’s path. A model that can’t see images gets that note instead of the picture. Which models can see, and how to say so yourself, is on <a href="/tenant/docs/models/local#images">Local models</a>.</p>
 <p>Photos you send over <a href="/tenant/docs/dashboard/access">Discord or iMessage</a> reach the model the same way, and the <code>os_read_image</code> and <code>web_screenshot</code> tools show it the picture they read.</p>
+<h2 id="components">Components</h2>
+<p>When the answer is a table or a list of steps, the agent can draw it instead of describing it: the <code>ui_render</code> tool names the kind and hands Tenant the data, and the terminal app draws a boxed table (a caption above, a source line below) or a checklist with <kbd>✓</kbd> done, <kbd>◐</kbd> in progress and <kbd>○</kbd> to-do marks. Two kinds answer back: <strong>choices</strong> are numbered options, and typing the number sends that message; a <strong>form</strong> asks for each field in turn (a pick list for a choice, a typed value otherwise), with the default in the hint, and sends the filled message; <kbd>Esc</kbd> or <code>/cancel</code> leaves it with nothing sent. Those messages show “via choices” or “via form” in their header, and a component can never send a slash command. A component is the answer, so it is always open; <kbd>Ctrl</kbd>+<kbd>O</kbd> folds the other tool rows around it. The dashboard’s Chat page draws the same components. The model writes no markup, only data, so a component is always plain text in your terminal. <code>/disable ui</code> turns the tool off.</p>
 <h2 id="command-categories">Command categories</h2>
 <p>Every slash command belongs to one <code>/help</code> category. The full list with syntax is on <a href="/tenant/docs/reference/slash-commands">Slash commands</a>.</p>
 <table>
@@ -367,7 +382,7 @@
 </tr>
 <tr>
 <td><code>--dashboard</code>, <code>--dashboard-addr ADDR</code></td>
-<td>on, <code>127.0.0.1:8770</code></td>
+<td>on, <code>127.0.0.1:9770</code></td>
 <td>the web control panel</td>
 </tr>
 <tr>
@@ -397,6 +412,7 @@
 <li><a href="#keys" id="toc-keys">Keys</a></li>
 <li><a href="#session-commands" id="toc-session-commands">Session commands</a></li>
 <li><a href="#images" id="toc-images">Images</a></li>
+<li><a href="#components" id="toc-components">Components</a></li>
 <li><a href="#command-categories" id="toc-command-categories">Command categories</a></li>
 <li><a href="#launch-flags" id="toc-launch-flags">Launch flags</a></li>
 <li><a href="#without-the-ui" id="toc-without-the-ui">Without the UI</a></li>

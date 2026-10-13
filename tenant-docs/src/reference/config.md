@@ -41,7 +41,7 @@ Edits by hand need a restart, except where a page says the hub re-reads them liv
 | Key | Default | Meaning | Changed by |
 |---|---|---|---|
 | `enabled` | on when absent | `false` keeps the panel off in the terminal UI (serve always has it) | `/dashboard on\|off` |
-| `addr` | `127.0.0.1:8770` | the listen address; non-loopback needs TLS and a key | `--dashboard-addr` |
+| `addr` | `127.0.0.1:9770` | the listen address; non-loopback needs TLS and a key | `--dashboard-addr` |
 | `tls_cert`, `tls_key` | | serve HTTPS | by hand |
 | `auth` | the generated token file | your own sign-in key (32+ characters) | by hand |
 | `allowed_hosts` | | extra `Host` names a reverse proxy sends; loopback names and the Tailscale name are trusted on their own | by hand |
@@ -51,6 +51,14 @@ Edits by hand need a restart, except where a page says the hub re-reads them liv
 | Key | Default | Meaning | Changed by |
 |---|---|---|---|
 | `serve` | false | re-assert `tailscale serve` for the dashboard at every launch | `/tailscale serve`, `/tailscale serve off` |
+
+## `tui`
+
+The terminal app's own choices.
+
+| Key | Default | Meaning | Changed by |
+|---|---|---|---|
+| `feed` | shown | `"off"` hides the activity feed at launch (the saved `/feed off`) | `/feed on\|off`, Alt+F |
 
 ## `gateway`
 
@@ -160,7 +168,7 @@ See [Logs &amp; alerts](/tenant/docs/dashboard/logs) for `dir`, `retention_days`
   "embed": { "kind": "ollama", "endpoint": "http://localhost:11434", "model": "nomic-embed-text", "embed_dim": 768 },
   "fallbacks": ["local"],
   "plan_loop_ceiling": 24,
-  "dashboard": { "addr": "127.0.0.1:8770" },
+  "dashboard": { "addr": "127.0.0.1:9770" },
   "tailscale": { "serve": true },
   "relay": { "enabled": true, "operator_id": "123456789012345678", "approval_timeout": "10m" },
   "imessage": { "enabled": false, "allow_from": [] },

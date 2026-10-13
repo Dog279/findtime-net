@@ -129,7 +129,7 @@
 <tr>
 <td><strong>Chat</strong></td>
 <td><code>/chat</code></td>
-<td>talk to the agent; its requests for your OK appear above the message box; a <code>thinking…</code> row counts up while it answers</td>
+<td>talk to the agent; the page opens with the last 20 exchanges; the answer appears as it is written and settles rendered from Markdown (headings, lists, code, tables); each tool call is a card you can open to what was asked and what came back, with a link into Logs; when the agent answers with a component (a table, a checklist, buttons for the next step, a small form) it is drawn in place of the card and again when the page reloads; a tap or a Send starts your next turn and that message is marked “via choices” or “via form”; a form whose call is gone after a restart says so and sends nothing; <strong>Show activity</strong> opens a rail beside the chat with what the agent is doing as it happens (each tool call and result, the judge’s checks, a compaction, an error), the same lines the terminal app’s feed shows, the last 200 kept; on a phone it sits below the chat; its requests for your OK appear above the message box; a <code>thinking…</code> row counts up while it answers</td>
 <td>nothing; <strong>Stop</strong> is immediate</td>
 </tr>
 <tr>
@@ -232,7 +232,7 @@
 </table>
 <p><strong>Busy.</strong> While the agent answers a Chat message, the line under every page title says “Your agent is answering a message”, with <strong>Stop</strong>. Scheduled jobs, Discord and iMessage conversations and alert checks run alongside and never hold up Chat. A second message sent while it is answering is not sent and stays in the box.</p>
 <p><strong>Live updates paused. Reload the page to see new requests.</strong> The page lost its connection to Tenant (a restart, or the network dropped). Reload.</p>
-<p>Every page is also reachable by its path, so a bookmark to <code>http://127.0.0.1:8770/safety</code> opens straight to approvals after sign-in.</p>
+<p>Every page is also reachable by its path, so a bookmark to <code>http://127.0.0.1:9770/safety</code> opens straight to approvals after sign-in.</p>
 <div class="pagefoot">
   <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/dashboard/pages.mdtenant-docs/src/dashboard/pages.md">Edit this page on GitHub</a>
   <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
