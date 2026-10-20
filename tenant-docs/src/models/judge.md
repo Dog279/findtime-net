@@ -16,7 +16,7 @@ The judge is off until you set it up. It is not the [Quality model](/tenant/docs
 - **Bounded rounds.** By default an answer may be sent back three times (`/judge rounds` sets 1 to 5). An answer the judge still can't confirm goes out marked `— judge: not confirmed (done 0.31, …)`, so you know to look closer. Answers that hit the step limit or the repeat guard are checked too and get the same mark.
 - **Your "no" is final.** If a safety setting or you refused an action during the turn, the judge never sends the work back to ask again.
 - **Not checked:** `/goal` turns (the goal has its own check), helper and peer agents, and research.
-- **If the judge is down,** answers go out unchecked, the outage is logged once, and judging pauses for a minute before trying again.
+- **If the judge is down,** answers go out unchecked, the outage is logged once, and judging pauses for a minute before trying again. A check waits up to 30 seconds for the server. What the judge is sent is bounded: the request and the answer at 3,000 characters each, then the newest tool calls (outputs for the newest 8), 12,000 characters in all, so a 9B judge on a pair of Tesla T4s answers in about 4 seconds at worst.
 
 ## Set it up
 
@@ -37,7 +37,7 @@ The **Model** page of the dashboard has the same settings in its Judge card: the
 
 ## What you see
 
-Each triage and check shows in the activity feed as a `⚖ judge …` line, and a send-back says which check failed. `/model` names the judge while it is on. In the logs, the **turns** source carries one event per check (`Judge`), one when an answer went out unconfirmed (`judge could not confirm an answer`) and one when the server was unreachable (`judge unavailable`). The judge's tokens count toward the session's totals.
+Each triage and check shows in the activity feed as a `⚖ judge …` line, a send-back says which check failed, and each check ends with what it cost (`· 3114 tokens, 3.4s`). `/model` names the judge while it is on. In the logs, the **turns** source carries one event per check (`Judge`), one when an answer went out unconfirmed (`judge could not confirm an answer`) and one when the server was unreachable (`judge unavailable`). The judge's tokens count toward the session's totals.
 
 ## Where it is saved
 
