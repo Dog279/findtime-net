@@ -309,6 +309,10 @@
 <td><code>vision</code></td>
 <td><code>on</code>, <code>off</code>, or <code>auto</code> (the default, also when empty): whether the model is sent images; <code>auto</code> lets Tenant test it (<a href="/tenant/docs/models/local#images">Images</a>)</td>
 </tr>
+<tr>
+<td><code>request_timeout</code></td>
+<td>a Go duration such as <code>90s</code>: the most one request to this endpoint may take, chat, tokenize or embed, before Tenant treats the endpoint as down and its fallbacks move on. Empty means no limit beyond the turn’s own. OpenAI-compatible kinds only; it applies to named helpers and fallback bindings on the provider too, and the <code>embed</code> block takes the same key</td>
+</tr>
 </tbody>
 </table>
 <p>The name of a provider is yours (<code>zai</code>, <code>local</code>, <code>gpu-box</code>); the kind is from the catalog.</p>
