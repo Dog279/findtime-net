@@ -8,10 +8,10 @@ area-url: /tenant/docs/models/providers
 ## Orchestrate: a team
 
 ```bash
-tenant orchestrate "<task>" [--await-timeout 3m]       # alias: tenant team
+tenant orchestrate "<task>" [--await-timeout 30m]      # alias: tenant team
 ```
 
-An orchestrator plans the task, spawns concurrent helpers (the built-in five or [yours](/tenant/docs/models/helpers)), and they coordinate over a live bus until the work self-resolves. The envelope is `budgets` in `config.json` ([defaults](/tenant/docs/models/tuning)): concurrent helpers, agents per run, tool calls, tokens, cost, wall time, browser instances. `--await-timeout` is how long the orchestrator waits for its helpers (default 3 minutes).
+An orchestrator plans the task, spawns concurrent helpers (the built-in five or [yours](/tenant/docs/models/helpers)), and they coordinate over a live bus until the work self-resolves. The envelope is `budgets` in `config.json` ([defaults](/tenant/docs/models/tuning)): concurrent helpers, agents per run, tool calls, tokens, cost, wall time, browser instances. The orchestrator waits with `team_await`, which returns as soon as there is news: a helper finished (its result comes back) or a helper messaged the orchestrator (the message comes back), and it says who is still running, so the orchestrator awaits again for the rest. Waiting costs nothing; only news costs a model call. `--await-timeout` is the ceiling with no news at all (default 30 minutes), after which it reports the current state and the orchestrator may await again; a helper that overruns is the budgets' job, and its cancel ends the wait.
 
 The terminal UI's feed shows each helper's lines prefixed with its name (`[writer] thought for 2.5s`); the `subagents` log keeps them.
 

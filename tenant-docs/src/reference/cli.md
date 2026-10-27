@@ -46,7 +46,7 @@ tenant serve [--dashboard-addr ADDR] [--dashboard=false] [--self-improve=false] 
 tenant attach [URL] [--follow] [--interval D] [--source NAME] [--level warn|error] [--trace ID] [--token T] [--since …]
 tenant service install [--print] [--system]
 tenant service status | start | stop | restart [--now] | uninstall
-tenant orchestrate "<task>" [--await-timeout 3m]        (alias: team)
+tenant orchestrate "<task>" [--await-timeout 30m]       (alias: team)
 tenant logs [query|show|trace|stats|export|verify|config|clear|debug|catalog|components|recover|alerts] …
 tenant log <source> "<msg>" [k=v …] [--level debug|info|warn|error] [--list] [--file] [--url U] [--token T]
 ```
