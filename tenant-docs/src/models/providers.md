@@ -61,6 +61,7 @@ Notes:
 | `auth.stored` | the key is in `credentials.json` under the provider's name |
 | `reasoning` | `""`, `high`, `xhigh` (Fugu), or `low` to `max` (Claude Code): the effort hint |
 | `vision` | `on`, `off`, or `auto` (the default, also when empty): whether the model is sent images; `auto` lets Tenant test it ([Images](/tenant/docs/models/local#images)) |
+| `request_timeout` | a Go duration such as `90s`: the most one request to this endpoint may take, chat, tokenize or embed, before Tenant treats the endpoint as down and its fallbacks move on. Empty means no limit beyond the turn's own. OpenAI-compatible kinds only; it applies to named helpers and fallback bindings on the provider too, and the `embed` block takes the same key |
 
 The name of a provider is yours (`zai`, `local`, `gpu-box`); the kind is from the catalog.
 
