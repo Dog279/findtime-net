@@ -83,7 +83,7 @@ A multi-agent run (`tenant orchestrate`, deep research) has a structural envelop
 }
 ```
 
-The cost rates are conservative hosted-model estimates used to compute `max_cost_usd`; set your own for a local or differently priced endpoint. `GET /api/status` reports the live `team_budget` during a run.
+The cost rates are conservative hosted-model estimates used to compute `max_cost_usd`; set your own for a local or differently priced endpoint. `GET /api/status` reports the live `team_budget` during a run. The orchestrator's `team_await` has no budget of its own: it returns when a helper finishes or writes to it, and a helper that overruns `max_wall_time` or the token and tool-call limits is cancelled, which ends the wait; only with no news at all does the await report after 30 minutes (`--await-timeout`).
 
 ## Turn admission in serve mode
 
