@@ -264,6 +264,7 @@
 /approve session     the same kind of action, until Tenant restarts (or you revoke it)
 /approve always      change the category to allow (for an exec prompt: save the command&#39;s family as a rule instead)
 /deny                refuse (alias /reject)</code></pre>
+<p>The card shows the request’s text exactly. A character that draws nothing or moves other text (a carriage return, a terminal escape, a right-to-left override, a zero-width character) shows as a marker like <code>⟨U+202E⟩</code>, the same markers the dashboard uses, so a command cannot keep part of itself out of your sight.</p>
 <p>The dashboard offers <strong>Allow once</strong>, <strong>Deny</strong> and, where the grant is safe to show, <strong>Allow for the rest of this session</strong>. Discord shows <strong>Approve</strong> / <strong>Deny</strong> buttons on a card; iMessage takes <code>Y &lt;nonce&gt;</code> or <code>deny &lt;nonce&gt;</code> from the operator handle. The first answer counts, wherever it came from.</p>
 <p>A request nobody answers is refused: a cron job’s after its run cap (15 minutes, <code>cron.per_run_minutes</code>), an alert investigation after 15 minutes, a Discord card after <code>relay.approval_timeout</code> (10 minutes), and every pending one when Tenant stops.</p>
 <h2 id="tool-rules">Tool rules</h2>

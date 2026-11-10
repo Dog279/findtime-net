@@ -67,6 +67,15 @@ The terminal app's own choices.
 | `mode` | `local` | how `tenant mcp-memory` is exposed: `local` (stdio) or `sse` | `tenant setup --gateway ADDR` / `--local` |
 | `sse_addr` | | the HTTP + SSE address when `mode` is `sse`. Every request to it needs the token in `gateway-auth-token`, a file beside `config.json` and not a key in it ([the SSE gateway's token](/tenant/docs/mcp/memory-server#the-sse-gateways-token)) | same |
 
+## `container`
+
+Where the [container sandbox backend](/tenant/docs/first-launch/sandbox) finds its engine. Leave it out to use the engine the `docker` CLI itself would: `DOCKER_HOST`, then the docker context, then the OS default.
+
+| Key | Default | Meaning | Changed by |
+|---|---|---|---|
+| `endpoint` | | the engine endpoint, passed to the CLI as `-H`: `npipe://` or `unix://` for a local engine, `ssh://` or `tcp://` for a remote one. A `tcp://` endpoint is used only with mutual TLS | editing `config.json` |
+| `tls_cert_dir` | | the folder holding `ca.pem`, `cert.pem` and `key.pem` for a `tcp://` endpoint. Without it, `DOCKER_CERT_PATH` then `~/.docker` are used, and only when `DOCKER_TLS_VERIFY` is set. A `tcp://` endpoint missing any of the three files is refused | same |
+
 ## `turn_scheduler`
 
 | Key | Default | Meaning |

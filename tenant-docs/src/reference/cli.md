@@ -132,6 +132,7 @@ tenant sandbox probe
 tenant sandbox selftest [--backend restricted|container]
 tenant sandbox redteam [--backend restricted|host]
 tenant sandbox run --surface S [--backend B] -- CMD
+tenant sandbox stop-all       remove every Tenant sandbox container on the engine (the emergency stop)
 ```
 
 ## Your data
