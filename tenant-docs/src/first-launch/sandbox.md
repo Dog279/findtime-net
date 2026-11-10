@@ -24,7 +24,22 @@ Sub-agents take their parent's surface.
 | `host` | no boundary: the command runs as the Tenant process, behind your approvals | every OS |
 | `restricted` | filesystem and network confinement (Seatbelt) | macOS only |
 | `jobobject` | resource caps and the environment allowlist only, no filesystem or network confinement | Windows, for local MCP servers |
-| `container` | a Docker container | planned |
+| `container` | a fresh, hardened Linux container per command, through the `docker` CLI: only the work dir and the profile's roots exist inside, no network unless the profile says `full`, non-root, no capabilities | every OS with Docker (Docker Desktop on Windows and macOS) |
+
+### What the container backend needs
+
+`container` fails closed: when any of these is missing, an enforcing profile runs nothing and says why (`tenant sandbox probe`, `tenant doctor`).
+
+- The `docker` CLI on `PATH`, and an engine it can reach over a local pipe or socket, `ssh://`, or mutual-TLS `tcp://`. A plain `tcp://` endpoint is refused, and so is running while anything answers on `127.0.0.1:2375` (Docker Desktop's "Expose daemon … without TLS" setting).
+- Docker Engine 29.4.3 or later, with runc and containerd at or past their fixed releases, and seccomp on. On Windows: Docker Desktop 4.44.3 or later (4.76.0 to clear the warning), WSL 2.7.10 or later with a kernel at or past 6.18.40 (`wsl --update`).
+- The sandbox image, built once with `tenant sandbox image build`; the backend never pulls.
+- An engine that can start a container. Before a surface first uses the backend, Tenant runs one check container through the same hardened arguments, with a 20-second limit. A Docker Desktop that is still starting answers `docker info` but starts nothing; the surface's commands are then refused with that reason, and the check is retried with back-off. The check also records whether a user namespace is in effect and the kernel containers run on.
+
+On Windows the kernel floor applies to the kernel that is **running**. `wsl --version` prints the installed kernel, and a WSL VM started before an update keeps the old one: below the floor the backend refuses; a running kernel that only trails the installed one is a warning. `wsl --shutdown`, then start Docker Desktop again, to run the installed kernel.
+
+A `container` profile has no dry run: `"enforce": false` on one is rejected when the settings load. So is a `container` profile whose `read_roots` or `write_roots` contain, equal or sit inside a folder a container may never mount: Tenant's config or data dir, its binary, a credential store, or the entry's own `deny_roots`. A container sees exactly its mounts, so it cannot mount a folder and hide part of it. The skipped entry is reported with the grant and the folder named (`tenant sandbox probe`, `tenant doctor`, the start-up feed).
+
+`tenant doctor`'s **container sandbox** row says whether the backend can run a command right now, and the fix when it cannot.
 
 ## The built-in defaults
 
@@ -72,7 +87,7 @@ Turning enforcement on, once the log shows only refusals you want:
 "exec_profiles": { "default": { "enforce": true } }
 ```
 
-With enforcement on, a refused command on an interactive surface raises a `sandbox` prompt: **approve** re-runs it outside the sandbox (`os_exec_unsandboxed`). Cron surfaces never escalate: with enforcement on, a refusal fails the job. An enforcing profile whose backend this machine lacks fails closed (`sandbox/3001`); a dry-run one runs on the host and logs `sandbox/2005`.
+With enforcement on, a refused command on an interactive surface raises a `sandbox` prompt (`os_exec_unsandboxed`) that shows the exact command, with control characters spelled out, and a line Tenant writes about what approving opens. On the `container` backend, **approve** re-runs the command in a fresh container with one more grant: the refused folder as a writable root, or the network for that one command. Only a Windows program a Linux container cannot run (`cmd.exe`, a `.exe`) is re-run on the host, as shown; a command written for `sh` is never handed to PowerShell. On `restricted`, approve re-runs the command outside the sandbox. Cron surfaces never escalate: with enforcement on, a refusal fails the job. An enforcing profile whose backend this machine lacks fails closed (`sandbox/3001`); a dry-run one runs on the host and logs `sandbox/2005`.
 
 ## Exceptions
 
@@ -112,7 +127,8 @@ The built-in `sandbox-unattended` alert rule banners violations from unattended 
 ## Known limits
 
 - A dry run misses refusals it cannot recognise, and those commands fail instead of re-running: on macOS a command that hides its errors (`2>/dev/null`), and services Seatbelt blocks such as the clipboard (`pbcopy`), `open`, `defaults` and `osascript`. Put a surface that needs them on the host.
-- Linux and Windows run on the host until the container backend ships.
+- Linux and Windows run on the host until a profile names the `container` backend.
+- Inside a container, Windows paths appear as `/mnt/c/...`; commands run under `sh`, so a cron shell job in `cmd` syntax belongs on the host.
 - The danger classifier in the OS plugin is a guardrail against accidents, not a security boundary. The real containment is keeping `exec` at `ask`, running Tenant as a least-privilege user, and an enforcing sandbox profile.
 
 Chrome, which the web plugin drives, keeps its own process sandbox. `"browser_no_sandbox": true` in `config.json` is accepted only inside a Linux container or user namespace; `tenant security audit` reports its effective state.

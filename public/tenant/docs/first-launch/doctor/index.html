@@ -193,6 +193,10 @@
 <td>what each surface’s commands really run under on this host</td>
 </tr>
 <tr>
+<td>container sandbox</td>
+<td>when a surface uses the <code>container</code> backend: the docker CLI is there, the engine answers and meets the version floors, the sandbox image is built, and a container starts. It starts one short-lived container. Skipped when no surface uses the backend</td>
+</tr>
+<tr>
 <td>log book location, integrity, size, housekeeper, mirror-only, losses</td>
 <td>the log book’s store and text files</td>
 </tr>
@@ -247,6 +251,7 @@
 <li><strong>generation endpoint FAIL</strong>: the endpoint or key. <code>tenant model models</code> lists what the provider serves; <code>/model reload</code> re-reads a rotated key.</li>
 <li><strong>secret storage protection WARN</strong>: run <code>tenant doctor --fix</code> from the account that owns the files (on a Windows service, an administrator window).</li>
 <li><strong>exec sandbox WARN</strong>: the surface runs commands on the host, or a profile names a backend this OS lacks. See <a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a>.</li>
+<li><strong>container sandbox FAIL</strong>: those surfaces’ commands do not run until it is fixed (the container backend never falls back to the host). The row’s fix line is the one for the reason it found: install Docker, start it, update Docker or WSL, build the image with <code>tenant sandbox image build</code>, or restart a Docker Desktop that answers but starts no container (<code>docker desktop status</code> stays at <code>starting</code>).</li>
 </ul>
 <p><code>tenant doctor --context-debug "what do I prefer"</code> traces which facts and episodes a query would retrieve, then exits: the fastest way to see whether memory recall works.</p>
 <div class="pagefoot">

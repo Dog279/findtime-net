@@ -35,6 +35,7 @@ Each check reports **OK**, **WARN**, **FAIL** or **SKIP** with a detail line and
 | research store | the research dir and its manifests |
 | soul | the soul TOML parses |
 | exec sandbox | what each surface's commands really run under on this host |
+| container sandbox | when a surface uses the `container` backend: the docker CLI is there, the engine answers and meets the version floors, the sandbox image is built, and a container starts. It starts one short-lived container. Skipped when no surface uses the backend |
 | log book location, integrity, size, housekeeper, mirror-only, losses | the log book's store and text files |
 | one check per plugin | for example `discord (if enabled)`: the token is resolvable and reachable |
 | dashboard (if configured) | reachability, and the bind policy (a non-loopback address needs TLS and a key) |
@@ -58,5 +59,6 @@ Only safe, reversible repairs: owner-only permissions on secret files and stores
 - **generation endpoint FAIL**: the endpoint or key. `tenant model models` lists what the provider serves; `/model reload` re-reads a rotated key.
 - **secret storage protection WARN**: run `tenant doctor --fix` from the account that owns the files (on a Windows service, an administrator window).
 - **exec sandbox WARN**: the surface runs commands on the host, or a profile names a backend this OS lacks. See [The execution sandbox](/tenant/docs/first-launch/sandbox).
+- **container sandbox FAIL**: those surfaces' commands do not run until it is fixed (the container backend never falls back to the host). The row's fix line is the one for the reason it found: install Docker, start it, update Docker or WSL, build the image with `tenant sandbox image build`, or restart a Docker Desktop that answers but starts no container (`docker desktop status` stays at `starting`).
 
 `tenant doctor --context-debug "what do I prefer"` traces which facts and episodes a query would retrieve, then exits: the fastest way to see whether memory recall works.
