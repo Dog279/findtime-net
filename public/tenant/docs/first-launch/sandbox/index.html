@@ -258,7 +258,7 @@
 <tr>
 <td><code>network</code></td>
 <td><code>inherit</code>, <code>none</code>, <code>full</code></td>
-<td>an allowlist is rejected until a backend enforces one</td>
+<td>an allowlist is rejected until a backend enforces one. On <code>container</code>, <code>full</code> puts the command on a network of Tenant’s own (<code>tenant-sbx</code>), made on first use: the command reaches the internet, but not your other containers and not another sandboxed command. It can still reach services listening on this computer itself, so give <code>full</code> only to a surface you would trust with that</td>
 </tr>
 <tr>
 <td><code>read_roots</code></td>

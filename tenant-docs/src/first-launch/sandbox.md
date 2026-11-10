@@ -83,7 +83,7 @@ In `settings.<agent>.json`, keyed by surface or `default` (every surface without
 |---|---|---|
 | `backend` | `host`, `restricted`, `container` | the backend; naming one also keeps the older defaults (enforce on, network inherited) |
 | `enforce` | `true`, `false` | `false` is a dry run; unset follows the built-in default |
-| `network` | `inherit`, `none`, `full` | an allowlist is rejected until a backend enforces one |
+| `network` | `inherit`, `none`, `full` | an allowlist is rejected until a backend enforces one. On `container`, `full` puts the command on a network of Tenant's own (`tenant-sbx`), made on first use: the command reaches the internet, but not your other containers and not another sandboxed command. It can still reach services listening on this computer itself, so give `full` only to a surface you would trust with that |
 | `read_roots` | paths | empty: the whole host is readable (deny roots still mask) |
 | `write_roots` | paths | writable, in addition to the work dir |
 | `deny_roots` | paths | added to the built-in deny set (Tenant's own dirs, its binary and the credential stores can never be removed from it) |
