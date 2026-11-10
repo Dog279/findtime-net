@@ -189,7 +189,7 @@
 </ol>
 <p><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a> covers steps 2 and 3; <a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a> steps 4 and 5.</p>
 <h2 id="tenant-as-a-server">Tenant as a server</h2>
-<p>Tenant can also <strong>be</strong> an MCP server: <code>tenant mcp-memory</code> serves its memory (and optionally its whole toolset) to another MCP client over stdio or HTTP + SSE. See <a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a>.</p>
+<p>Tenant can also <strong>be</strong> an MCP server: <code>tenant mcp-memory</code> serves its memory (and optionally its whole toolset) to another MCP client over stdio or HTTP + SSE. Over SSE every request needs the gateway’s own token, and a web page cannot reach it. See <a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a>.</p>
 <div class="pagefoot">
   <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/mcp/overview.mdtenant-docs/src/mcp/overview.md">Edit this page on GitHub</a>
   <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>

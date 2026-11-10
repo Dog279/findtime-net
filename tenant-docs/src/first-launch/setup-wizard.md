@@ -35,7 +35,7 @@ Skipped for `echo`. The default is a local Ollama at `http://localhost:11434` se
 
 ## Step 3: gateway
 
-How `tenant mcp-memory` exposes Tenant's memory to other MCP clients: **local** (stdio only, the default) or **sse** (HTTP + SSE on an address such as `127.0.0.1:8765`). See [Tenant as an MCP server](/tenant/docs/mcp/memory-server).
+How `tenant mcp-memory` exposes Tenant's memory to other MCP clients: **local** (stdio only, the default) or **sse** (HTTP + SSE on an address such as `127.0.0.1:8765`). With **sse**, every request a client makes must carry the gateway's own token, which is in `gateway-auth-token` in the config dir once the gateway has started. See [Tenant as an MCP server](/tenant/docs/mcp/memory-server).
 
 ## Step 4: skills (integrations)
 

@@ -119,7 +119,7 @@ tenant peer join <code> [--as <local-name>]
 tenant peer list | show <name> | rename <old> <new> | remove <name> | revoke <name> | rotate <name>
 tenant peer share <name> wiki=on|off memory=on|off [skills=…] [exec=…] [llm=…]
 tenant peer query <name> <wiki|memory> "<query>"
-tenant mcp-memory [--allow-writes] [--tools] [--sse-addr ADDR] [--insecure-lan] [--allow-no-memory]
+tenant mcp-memory [--allow-writes] [--tools] [--sse-addr ADDR] [--insecure-lan] [--allow-no-memory]   # over --sse-addr, clients send the token in gateway-auth-token
 ```
 
 ## Safety

@@ -44,4 +44,4 @@ Tool names are global: two servers offering the same tool name, and the first ke
 
 ## Tenant as a server
 
-Tenant can also **be** an MCP server: `tenant mcp-memory` serves its memory (and optionally its whole toolset) to another MCP client over stdio or HTTP + SSE. See [Tenant as an MCP server](/tenant/docs/mcp/memory-server).
+Tenant can also **be** an MCP server: `tenant mcp-memory` serves its memory (and optionally its whole toolset) to another MCP client over stdio or HTTP + SSE. Over SSE every request needs the gateway's own token, and a web page cannot reach it. See [Tenant as an MCP server](/tenant/docs/mcp/memory-server).

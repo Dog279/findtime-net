@@ -42,6 +42,8 @@ The choice persists in `settings.<agent>.json` (`tools`) and overrides the launc
 
 A permission mode saved on the dashboard or in `settings.<agent>.json` wins over an `--allow-*` flag. The keys and sign-ins each integration needs are on [Integrations](/tenant/docs/mcp/integrations).
 
+The **sql** tools work on the one database you configured and nothing else. `sql_query` is read-only in the database engine itself, not only by how the statement reads, so a statement that would change the database fails there. `ATTACH`, `DETACH` and `VACUUM INTO` are refused whatever the approval mode, with no request for your OK, because each reaches a file other than that database; a plain `VACUUM` is an ordinary statement you confirm.
+
 ## One-shot commands
 
 Each plugin has a shell command that runs **one agent turn scoped to that plugin**, read-only unless you pass its allow flag:
