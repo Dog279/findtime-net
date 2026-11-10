@@ -32,7 +32,7 @@ Sub-agents take their parent's surface.
 
 - The `docker` CLI on `PATH`, and an engine it can reach over a local pipe or socket, `ssh://`, or mutual-TLS `tcp://`. A plain `tcp://` endpoint is refused, and so is running while anything answers on `127.0.0.1:2375` (Docker Desktop's "Expose daemon … without TLS" setting).
 - Docker Engine 29.4.3 or later, with runc and containerd at or past their fixed releases, and seccomp on. On Windows: Docker Desktop 4.44.3 or later (4.76.0 to clear the warning), WSL 2.7.10 or later with a kernel at or past 6.18.40 (`wsl --update`).
-- The sandbox image, built once with `tenant sandbox image build`; the backend never pulls.
+- The sandbox image, built once with `tenant sandbox image build`; the backend never pulls. It is built from `debian:trixie-slim`, pinned by digest. **After updating Tenant across this change, build it again**: the base moved from bookworm, and the image now carries the folder HOME is mounted on.
 - An engine that can start a container. Before a surface first uses the backend, Tenant runs one check container through the same hardened arguments, with a 20-second limit. A Docker Desktop that is still starting answers `docker info` but starts nothing; the surface's commands are then refused with that reason, and the check is retried with back-off. The check also records whether a user namespace is in effect and the kernel containers run on.
 
 On Windows the kernel floor applies to the kernel that is **running**. `wsl --version` prints the installed kernel, and a WSL VM started before an update keeps the old one: below the floor the backend refuses; a running kernel that only trails the installed one is a warning. `wsl --shutdown`, then start Docker Desktop again, to run the installed kernel.
@@ -58,6 +58,8 @@ Every command a surface runs is a record in the Security log (**Logs** → Secur
 Any `exec_profiles` entry for an interactive surface opts it back into the sandbox. In a **dry run** the sandbox runs the command first; if it refuses something (a write outside the allowed folders, a read of a credential store, a network call with the network off) the command runs again outside the sandbox and the refusal is logged (`sandbox/2002`, "would have refused"). Nothing is blocked and no approval is asked; the log tells you what enforcement would stop. A dry run can therefore repeat a side effect: whatever ran before the refusal runs again.
 
 Every command, on any backend, gets a **clean environment**: `PATH`, `HOME`, `USER`, `SHELL`, `LANG`, `TZ`, `TERM`, `TMPDIR` and their Windows equivalents, plus what the profile's `env_pass` and `env_set` add. API keys, tokens and proxy passwords in Tenant's environment never reach a command.
+
+On `container`, `HOME` is `/home/sandbox`: a small in-memory folder (64 MB) that belongs to that one container. What a command leaves there (shell history, a tool's cache or config, a credential helper's file) is gone when the command ends. It does not land in your work folder and the next command does not see it. A command that needs a file to last writes it in the work dir.
 
 `env_pass` is the exception you write yourself. When a name in it looks like a credential (`…_TOKEN`, `…_API_KEY`, `…PASSWORD`, `SSH_AUTH_SOCK` and the like), `tenant sandbox probe` and `tenant doctor` point it out, per surface: a sandboxed command can read every variable it is passed, and with the network on it can send it anywhere. The name is still passed; this is a hint, and a secret under a plain name is not noticed.
 
@@ -87,7 +89,7 @@ In `settings.<agent>.json`, keyed by surface or `default` (every surface without
 | `deny_roots` | paths | added to the built-in deny set (Tenant's own dirs, its binary and the credential stores can never be removed from it) |
 | `env_pass` | names | environment variables forwarded beyond the safe base set |
 | `env_set` | map | fixed environment values |
-| `cpu_seconds`, `memory_mb`, `max_pids` | numbers | resource caps |
+| `cpu_seconds`, `memory_mb`, `max_pids` | numbers | resource caps. On `container`, `cpu_seconds` is a cap on each process (the kernel kills one that uses more CPU time), not on the command as a whole: a command that spreads its work over many processes is bounded by its time limit and by 2 CPUs. `tenant sandbox probe` reports limits there as `partial` for that reason |
 
 Turning enforcement on, once the log shows only refusals you want:
 
