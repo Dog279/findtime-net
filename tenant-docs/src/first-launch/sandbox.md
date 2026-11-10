@@ -39,11 +39,13 @@ On Windows the kernel floor applies to the kernel that is **running**. `wsl --ve
 
 A `container` profile has no dry run: `"enforce": false` on one is rejected when the settings load. So is a `container` profile whose `read_roots` or `write_roots` contain, equal or sit inside a folder a container may never mount: Tenant's config or data dir, its binary, a credential store, or the entry's own `deny_roots`. A container sees exactly its mounts, so it cannot mount a folder and hide part of it. The skipped entry is reported with the grant and the folder named (`tenant sandbox probe`, `tenant doctor`, the start-up feed).
 
+A command is also refused when its work dir or a `write_roots` folder is itself a git directory: a bare repository, or a checkout's `.git` given directly. Its `hooks` folder and `config` file would be the command's to write, and git runs them on the host the next time it is used there. Give the command a folder that holds a checkout, or grant the repository under `read_roots`.
+
 To use an engine other than the local default, name it in `config.json` under [`container`](/tenant/docs/reference/config#container): `endpoint`, and for a `tcp://` endpoint `tls_cert_dir`. A `tcp://` endpoint is always launched with mutual TLS (`--tlsverify`, with the CA, certificate and key from that folder).
 
 `tenant doctor`'s **container sandbox** row says whether the backend can run a command right now, and the fix when it cannot.
 
-Every command a surface runs is a record in the Security log (**Logs** → Security; `tenant logs query "log:security"`). On the `container` backend the record also says what the run was held to: the image and the id its tag resolved to, each folder mounted and whether it was writable, the network, the limits, how much the command wrote and whether that hit the output cap, and how long it took. The record of an approved re-run says where it ran: on the host, or in a container with one more grant.
+Every command a surface runs is a record in the Security log (**Logs** → Security; `tenant logs query "log:security"`). On the `container` backend the record also says what the run was held to: the image and the id its tag resolved to, each folder mounted and whether it was writable, the network, the limits, the names (never the values) of the environment variables passed in, how much the command wrote and whether that hit the output cap, and how long it took. The record of an approved re-run says where it ran: on the host, or in a container with one more grant.
 
 ## The built-in defaults
 

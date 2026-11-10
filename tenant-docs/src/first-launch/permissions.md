@@ -81,6 +81,8 @@ In the terminal UI a paused action shows a card:
 /deny                refuse (alias /reject)
 ```
 
+The card shows the request's text exactly. A character that draws nothing or moves other text (a carriage return, a terminal escape, a right-to-left override, a zero-width character) shows as a marker like `⟨U+202E⟩`, the same markers the dashboard uses, so a command cannot keep part of itself out of your sight.
+
 The dashboard offers **Allow once**, **Deny** and, where the grant is safe to show, **Allow for the rest of this session**. Discord shows **Approve** / **Deny** buttons on a card; iMessage takes `Y <nonce>` or `deny <nonce>` from the operator handle. The first answer counts, wherever it came from.
 
 A request nobody answers is refused: a cron job's after its run cap (15 minutes, `cron.per_run_minutes`), an alert investigation after 15 minutes, a Discord card after `relay.approval_timeout` (10 minutes), and every pending one when Tenant stops.
