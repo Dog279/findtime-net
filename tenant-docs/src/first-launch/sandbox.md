@@ -106,6 +106,7 @@ The prompt says in advance what it will save, or why nothing: a network refusal,
 ```bash
 tenant sandbox probe                       # what each surface's profile enforces on this host, its roots and exceptions
 tenant sandbox selftest [--backend restricted|container]   # the escape suite
+tenant sandbox stop-all                                     # remove every Tenant sandbox container now
 tenant sandbox redteam [--backend restricted|host]         # the model-in-the-loop containment eval
 tenant sandbox run --surface S [--backend B] -- CMD        # run one command under a surface's profile
 tenant security audit                      # execution.dry-run, execution.host, execution.unavailable findings

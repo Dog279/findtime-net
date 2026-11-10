@@ -298,11 +298,12 @@
 <h2 id="commands">Commands</h2>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox probe                       <span class="co"># what each surface&#39;s profile enforces on this host, its roots and exceptions</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox selftest [--backend restricted<span class="kw">|</span><span class="ex">container]</span>   <span class="co"># the escape suite</span></span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox redteam [--backend restricted<span class="kw">|</span><span class="ex">host]</span>         <span class="co"># the model-in-the-loop containment eval</span></span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox run <span class="at">--surface</span> S [--backend B] <span class="at">--</span> CMD        <span class="co"># run one command under a surface&#39;s profile</span></span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> security audit                      <span class="co"># execution.dry-run, execution.host, execution.unavailable findings</span></span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> permissions effective               <span class="co"># execution.profile per surface</span></span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> logs query <span class="st">&quot;log:sandbox id:2001-2003 since:7d&quot;</span>      <span class="co"># every violation of the last week</span></span></code></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox stop-all                                     <span class="co"># remove every Tenant sandbox container now</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox redteam [--backend restricted<span class="kw">|</span><span class="ex">host]</span>         <span class="co"># the model-in-the-loop containment eval</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox run <span class="at">--surface</span> S [--backend B] <span class="at">--</span> CMD        <span class="co"># run one command under a surface&#39;s profile</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> security audit                      <span class="co"># execution.dry-run, execution.host, execution.unavailable findings</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> permissions effective               <span class="co"># execution.profile per surface</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> logs query <span class="st">&quot;log:sandbox id:2001-2003 since:7d&quot;</span>      <span class="co"># every violation of the last week</span></span></code></pre></div>
 <table>
 <colgroup>
 <col style="width: 50%" />

@@ -239,7 +239,8 @@ tenant permissions preset safe|balanced|full [--surface S] [--agent ID]
 tenant sandbox probe
 tenant sandbox selftest [--backend restricted|container]
 tenant sandbox redteam [--backend restricted|host]
-tenant sandbox run --surface S [--backend B] -- CMD</code></pre>
+tenant sandbox run --surface S [--backend B] -- CMD
+tenant sandbox stop-all       remove every Tenant sandbox container on the engine (the emergency stop)</code></pre>
 <h2 id="your-data">Your data</h2>
 <pre class="text"><code>tenant backup [create] [--out FILE|DIR] [--encrypt] [--passphrase-file F] [--recipient age1…] [--recipients-file F] [--include-mirror] [--json]
 tenant backup verify FILE [--identity F] [--json]
