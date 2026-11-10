@@ -387,6 +387,38 @@
 </tr>
 </tbody>
 </table>
+<h2 id="container"><code>container</code></h2>
+<p>Where the <a href="/tenant/docs/first-launch/sandbox">container sandbox backend</a> finds its engine. Leave it out to use the engine the <code>docker</code> CLI itself would: <code>DOCKER_HOST</code>, then the docker context, then the OS default.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>endpoint</code></td>
+<td></td>
+<td>the engine endpoint, passed to the CLI as <code>-H</code>: <code>npipe://</code> or <code>unix://</code> for a local engine, <code>ssh://</code> or <code>tcp://</code> for a remote one. A <code>tcp://</code> endpoint is used only with mutual TLS</td>
+<td>editing <code>config.json</code></td>
+</tr>
+<tr>
+<td><code>tls_cert_dir</code></td>
+<td></td>
+<td>the folder holding <code>ca.pem</code>, <code>cert.pem</code> and <code>key.pem</code> for a <code>tcp://</code> endpoint. Without it, <code>DOCKER_CERT_PATH</code> then <code>~/.docker</code> are used, and only when <code>DOCKER_TLS_VERIFY</code> is set. A <code>tcp://</code> endpoint missing any of the three files is refused</td>
+<td>same</td>
+</tr>
+</tbody>
+</table>
 <h2 id="turn_scheduler"><code>turn_scheduler</code></h2>
 <table>
 <colgroup>
@@ -832,6 +864,7 @@
 <li><a href="#tailscale" id="toc-tailscale"><code>tailscale</code></a></li>
 <li><a href="#tui" id="toc-tui"><code>tui</code></a></li>
 <li><a href="#gateway" id="toc-gateway"><code>gateway</code></a></li>
+<li><a href="#container" id="toc-container"><code>container</code></a></li>
 <li><a href="#turn_scheduler" id="toc-turn_scheduler"><code>turn_scheduler</code></a></li>
 <li><a href="#relay-discord" id="toc-relay-discord"><code>relay</code> (Discord)</a></li>
 <li><a href="#imessage" id="toc-imessage"><code>imessage</code></a></li>

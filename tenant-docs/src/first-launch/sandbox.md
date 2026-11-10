@@ -39,6 +39,8 @@ On Windows the kernel floor applies to the kernel that is **running**. `wsl --ve
 
 A `container` profile has no dry run: `"enforce": false` on one is rejected when the settings load. So is a `container` profile whose `read_roots` or `write_roots` contain, equal or sit inside a folder a container may never mount: Tenant's config or data dir, its binary, a credential store, or the entry's own `deny_roots`. A container sees exactly its mounts, so it cannot mount a folder and hide part of it. The skipped entry is reported with the grant and the folder named (`tenant sandbox probe`, `tenant doctor`, the start-up feed).
 
+To use an engine other than the local default, name it in `config.json` under [`container`](/tenant/docs/reference/config#container): `endpoint`, and for a `tcp://` endpoint `tls_cert_dir`. A `tcp://` endpoint is always launched with mutual TLS (`--tlsverify`, with the CA, certificate and key from that folder).
+
 `tenant doctor`'s **container sandbox** row says whether the backend can run a command right now, and the fix when it cannot.
 
 ## The built-in defaults
@@ -87,7 +89,7 @@ Turning enforcement on, once the log shows only refusals you want:
 "exec_profiles": { "default": { "enforce": true } }
 ```
 
-With enforcement on, a refused command on an interactive surface raises a `sandbox` prompt (`os_exec_unsandboxed`) that shows the exact command, with control characters spelled out, and a line Tenant writes about what approving opens. On the `container` backend, **approve** re-runs the command in a fresh container with one more grant: the refused folder as a writable root, or the network for that one command. Only a Windows program a Linux container cannot run (`cmd.exe`, a `.exe`) is re-run on the host, as shown; a command written for `sh` is never handed to PowerShell. On `restricted`, approve re-runs the command outside the sandbox. Cron surfaces never escalate: with enforcement on, a refusal fails the job. An enforcing profile whose backend this machine lacks fails closed (`sandbox/3001`); a dry-run one runs on the host and logs `sandbox/2005`.
+With enforcement on, a refused command on an interactive surface raises a `sandbox` prompt (`os_exec_unsandboxed`) that shows the exact command, with control characters spelled out, and a line Tenant writes about what approving opens. On the `container` backend, **approve** re-runs the command in a fresh container with one more grant: the refused folder as a writable root, or the network for that one command. Only a Windows program a Linux container cannot run (`cmd.exe`, a `.exe`) is re-run on the host, as shown; a command written for `sh` is never handed to PowerShell. An approval on `container` covers the exact run you were shown: the command, the folders mounted, the network and the image. If any of those changes while the prompt waits (the image is rebuilt, a folder is re-pointed), nothing runs and the refusal says to ask again. On `restricted`, approve re-runs the command outside the sandbox. Cron surfaces never escalate: with enforcement on, a refusal fails the job. An enforcing profile whose backend this machine lacks fails closed (`sandbox/3001`); a dry-run one runs on the host and logs `sandbox/2005`.
 
 ## Exceptions
 
