@@ -34,7 +34,7 @@ Each check reports **OK**, **WARN**, **FAIL** or **SKIP** with a detail line and
 | skills store | `skills.db` opens |
 | research store | the research dir and its manifests |
 | soul | the soul TOML parses |
-| exec sandbox | what each surface's commands really run under on this host |
+| exec sandbox | what each surface's commands really run under on this host; a line for any `env_pass` name that looks like a credential (a hint, the row's status does not change) |
 | container sandbox | when a surface uses the `container` backend: the docker CLI is there, the engine answers and meets the version floors, the sandbox image is built, and a container starts. It starts one short-lived container. Skipped when no surface uses the backend |
 | log book location, integrity, size, housekeeper, mirror-only, losses | the log book's store and text files |
 | one check per plugin | for example `discord (if enabled)`: the token is resolvable and reachable |

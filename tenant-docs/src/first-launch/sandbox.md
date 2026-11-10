@@ -59,6 +59,8 @@ Any `exec_profiles` entry for an interactive surface opts it back into the sandb
 
 Every command, on any backend, gets a **clean environment**: `PATH`, `HOME`, `USER`, `SHELL`, `LANG`, `TZ`, `TERM`, `TMPDIR` and their Windows equivalents, plus what the profile's `env_pass` and `env_set` add. API keys, tokens and proxy passwords in Tenant's environment never reach a command.
 
+`env_pass` is the exception you write yourself. When a name in it looks like a credential (`…_TOKEN`, `…_API_KEY`, `…PASSWORD`, `SSH_AUTH_SOCK` and the like), `tenant sandbox probe` and `tenant doctor` point it out, per surface: a sandboxed command can read every variable it is passed, and with the network on it can send it anywhere. The name is still passed; this is a hint, and a secret under a plain name is not noticed.
+
 ## `os_exec` itself
 
 The tool takes `command`, `workdir` (default: your home folder, never Tenant's own directory), `timeout` (seconds; default 120, up to 600) and `background` (return at once with a process id). Long output keeps its start and its end, up to 30 KB. A command still running at its timeout on a host surface is moved to the background instead of killed; `os_process` lists, reads (`log`, paged), waits for, writes to and kills background processes, whose logs live under `<data>/proc/`. Processes die with Tenant, and a finished one is forgotten after an hour.
