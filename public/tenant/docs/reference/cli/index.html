@@ -231,7 +231,7 @@ tenant peer join &lt;code&gt; [--as &lt;local-name&gt;]
 tenant peer list | show &lt;name&gt; | rename &lt;old&gt; &lt;new&gt; | remove &lt;name&gt; | revoke &lt;name&gt; | rotate &lt;name&gt;
 tenant peer share &lt;name&gt; wiki=on|off memory=on|off [skills=…] [exec=…] [llm=…]
 tenant peer query &lt;name&gt; &lt;wiki|memory&gt; &quot;&lt;query&gt;&quot;
-tenant mcp-memory [--allow-writes] [--tools] [--sse-addr ADDR] [--insecure-lan] [--allow-no-memory]</code></pre>
+tenant mcp-memory [--allow-writes] [--tools] [--sse-addr ADDR] [--insecure-lan] [--allow-no-memory]   # over --sse-addr, clients send the token in gateway-auth-token</code></pre>
 <h2 id="safety">Safety</h2>
 <pre class="text"><code>tenant security audit [--json]
 tenant permissions effective [--surface local|discord|imessage] [--agent ID]

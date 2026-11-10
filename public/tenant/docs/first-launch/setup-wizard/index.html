@@ -144,7 +144,7 @@
 <h2 id="step-2-embeddings">Step 2: embeddings</h2>
 <p>Skipped for <code>echo</code>. The default is a local Ollama at <code>http://localhost:11434</code> serving <code>nomic-embed-text</code> (768 dimensions). The wizard probes the endpoint and prints a hint if it is down. Memory recall depends on this: see <a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a>.</p>
 <h2 id="step-3-gateway">Step 3: gateway</h2>
-<p>How <code>tenant mcp-memory</code> exposes Tenant’s memory to other MCP clients: <strong>local</strong> (stdio only, the default) or <strong>sse</strong> (HTTP + SSE on an address such as <code>127.0.0.1:8765</code>). See <a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a>.</p>
+<p>How <code>tenant mcp-memory</code> exposes Tenant’s memory to other MCP clients: <strong>local</strong> (stdio only, the default) or <strong>sse</strong> (HTTP + SSE on an address such as <code>127.0.0.1:8765</code>). With <strong>sse</strong>, every request a client makes must carry the gateway’s own token, which is in <code>gateway-auth-token</code> in the config dir once the gateway has started. See <a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a>.</p>
 <h2 id="step-4-skills-integrations">Step 4: skills (integrations)</h2>
 <p>Interactive runs end by offering each integration: Google Workspace, Discord, iMessage, X, GitHub, Atlassian, SimpleFIN, the web search keys, the SQL database path and the wiki folder. Each asks for its fields and probes the credentials. The same forms are <code>/configure &lt;id&gt;</code> in the terminal UI and <strong>Integrations</strong> on the dashboard; see <a href="/tenant/docs/mcp/integrations">Integrations</a>.</p>
 <h2 id="the-end">The end</h2>

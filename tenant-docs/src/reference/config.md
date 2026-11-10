@@ -65,7 +65,7 @@ The terminal app's own choices.
 | Key | Default | Meaning | Changed by |
 |---|---|---|---|
 | `mode` | `local` | how `tenant mcp-memory` is exposed: `local` (stdio) or `sse` | `tenant setup --gateway ADDR` / `--local` |
-| `sse_addr` | | the HTTP + SSE address when `mode` is `sse` | same |
+| `sse_addr` | | the HTTP + SSE address when `mode` is `sse`. Every request to it needs the token in `gateway-auth-token`, a file beside `config.json` and not a key in it ([the SSE gateway's token](/tenant/docs/mcp/memory-server#the-sse-gateways-token)) | same |
 
 ## `turn_scheduler`
 

@@ -130,11 +130,11 @@
 </tr>
 <tr>
 <td><code>--sse-addr ADDR</code></td>
-<td>serve over HTTP + SSE on this address instead of stdio</td>
+<td>serve over HTTP + SSE on this address instead of stdio; every request then needs <a href="#the-sse-gateways-token">the gateway’s token</a></td>
 </tr>
 <tr>
 <td><code>--insecure-lan</code></td>
-<td>let <code>--sse-addr</code> bind a non-loopback address. The SSE gateway has <strong>no authentication</strong>; this is the secure-by-default opt-out, for an overlay network only</td>
+<td>let <code>--sse-addr</code> bind a non-loopback address. The SSE gateway serves <strong>plain HTTP</strong>, so its token crosses that network unencrypted; this is the secure-by-default opt-out, for an overlay network only</td>
 </tr>
 <tr>
 <td><code>--allow-no-memory</code></td>
@@ -149,6 +149,24 @@
 <p>For an MCP client that launches servers over stdio (a coding assistant, an editor):</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span> <span class="dt">&quot;mcpServers&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;tenant-memory&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;command&quot;</span><span class="fu">:</span> <span class="st">&quot;tenant&quot;</span><span class="fu">,</span> <span class="dt">&quot;args&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;mcp-memory&quot;</span><span class="ot">,</span> <span class="st">&quot;--allow-writes&quot;</span><span class="ot">]</span> <span class="fu">}</span> <span class="fu">}</span> <span class="fu">}</span></span></code></pre></div>
 <p>The client then searches what Tenant remembers, and with <code>--allow-writes</code> can add facts that Tenant’s own turns recall.</p>
+<h2 id="the-sse-gateways-token">The SSE gateway’s token</h2>
+<p>Every request to the SSE gateway must carry the gateway’s token:</p>
+<pre><code>Authorization: Bearer &lt;token&gt;</code></pre>
+<p>The token is one long line in <code>&lt;config&gt;/gateway-auth-token</code>, created the first time the gateway starts. The gateway prints where the file is when it starts, never the token itself. It is a token of its own: a client you give the gateway does not hold the dashboard’s sign-in key.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/Library/Application\ Support/tenant/gateway-auth-token   <span class="co"># macOS</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.config/tenant/gateway-auth-token                        <span class="co"># Linux</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Content</span> <span class="op">-</span>LiteralPath <span class="st">&quot;</span><span class="va">$env</span><span class="op">:</span><span class="va">APPDATA</span><span class="st">\tenant\gateway-auth-token&quot;</span>   <span class="co"># Windows</span></span></code></pre></div>
+<p>An MCP client that connects over SSE takes the header in its server entry; the exact key depends on the client. For example:</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span> <span class="dt">&quot;mcpServers&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;tenant-memory&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;type&quot;</span><span class="fu">:</span> <span class="st">&quot;sse&quot;</span><span class="fu">,</span> <span class="dt">&quot;url&quot;</span><span class="fu">:</span> <span class="st">&quot;http://127.0.0.1:8765/sse&quot;</span><span class="fu">,</span> <span class="dt">&quot;headers&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;Authorization&quot;</span><span class="fu">:</span> <span class="st">&quot;Bearer &lt;token&gt;&quot;</span> <span class="fu">}</span> <span class="fu">}</span> <span class="fu">}</span> <span class="fu">}</span></span></code></pre></div>
+<p>Without the header the gateway answers <code>401</code>. A client that cannot send a header should launch <code>tenant mcp-memory</code> over stdio instead, as above. To change the token, stop the gateway, delete <code>gateway-auth-token</code>, start it again and give clients the new one. The file is one of Tenant’s secret files: <code>tenant doctor</code> checks its protection, the agent’s file tools refuse to read it, and an unencrypted backup leaves it out.</p>
+<h2 id="what-else-the-sse-gateway-checks">What else the SSE gateway checks</h2>
+<ul>
+<li><strong>A loopback gateway answers to loopback names only.</strong> A request must reach it as <code>localhost</code> or a loopback address (<code>127.0.0.1</code>, <code>[::1]</code>) on its own port. Any other host name is refused with <code>403</code>.</li>
+<li><strong>No web page can use it.</strong> A request that carries another site’s <code>Origin</code>, which is how a browser marks a request a page made, is refused with <code>403</code>, token or not. An MCP client is not a browser and sends no <code>Origin</code>.</li>
+<li><strong>Messages are JSON, in the stream’s own session.</strong> The stream’s first event names the address to post to, with a <code>sessionId</code>; a message without that id is refused with <code>403</code>, and one that is not <code>application/json</code> with <code>415</code>. MCP clients already post JSON to the address the stream names.</li>
+</ul>
+<p>The gateway serves plain HTTP. On a loopback address that stays on the machine. A gateway bound to a non-loopback address with <code>--insecure-lan</code> sends the token and everything a client reads across that network unencrypted, so use it on an overlay network only; such a gateway is reached by whatever name that network gives the machine, so its host name is not checked, and the token, <code>Origin</code> and message rules still apply.</p>
+<p>With <code>--tools</code> the gateway exposes the whole toolset, and it runs there with no request for your OK: whoever holds the token can do what those tools do.</p>
 <div class="pagefoot">
   <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/mcp/memory-server.mdtenant-docs/src/mcp/memory-server.md">Edit this page on GitHub</a>
   <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
@@ -161,6 +179,8 @@
 <div class="label">In this article</div>
 <ul>
 <li><a href="#a-client-configuration" id="toc-a-client-configuration">A client configuration</a></li>
+<li><a href="#the-sse-gateways-token" id="toc-the-sse-gateways-token">The SSE gateway’s token</a></li>
+<li><a href="#what-else-the-sse-gateway-checks" id="toc-what-else-the-sse-gateway-checks">What else the SSE gateway checks</a></li>
 </ul>
 </div>
 </aside>

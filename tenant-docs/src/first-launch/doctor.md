@@ -20,7 +20,7 @@ Each check reports **OK**, **WARN**, **FAIL** or **SKIP** with a detail line and
 | directories | the config and data dirs exist and are writable |
 | private data permissions | owner-only permissions on the stores; `--fix` applies them |
 | launch config | `config.json` parses, its schema version, the active provider exists |
-| secret storage protection | `credentials.json` and the token file: `0600` and a `0700` parent on Unix, a current-user-only DACL on Windows |
+| secret storage protection | `credentials.json`, `dashboard-auth-token`, `gateway-auth-token` and the other secret files: `0600` and a `0700` parent on Unix, a current-user-only DACL on Windows |
 | credentials | every keyed provider has a resolvable secret (an env var, or a stored key) |
 | profiles/router | every model role resolves to a provider |
 | fallback health gating | whether latency gating is on and has a chain to move to |

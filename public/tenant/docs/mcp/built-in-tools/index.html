@@ -227,6 +227,7 @@
 </tbody>
 </table>
 <p>A permission mode saved on the dashboard or in <code>settings.&lt;agent&gt;.json</code> wins over an <code>--allow-*</code> flag. The keys and sign-ins each integration needs are on <a href="/tenant/docs/mcp/integrations">Integrations</a>.</p>
+<p>The <strong>sql</strong> tools work on the one database you configured and nothing else. <code>sql_query</code> is read-only in the database engine itself, not only by how the statement reads, so a statement that would change the database fails there. <code>ATTACH</code>, <code>DETACH</code> and <code>VACUUM INTO</code> are refused whatever the approval mode, with no request for your OK, because each reaches a file other than that database; a plain <code>VACUUM</code> is an ordinary statement you confirm.</p>
 <h2 id="one-shot-commands">One-shot commands</h2>
 <p>Each plugin has a shell command that runs <strong>one agent turn scoped to that plugin</strong>, read-only unless you pass its allow flag:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> os <span class="st">&quot;what is using the most disk in my home dir?&quot;</span>          <span class="co"># --allow-exec, --allow-write to act</span></span>
