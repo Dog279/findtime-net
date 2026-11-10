@@ -43,6 +43,8 @@ To use an engine other than the local default, name it in `config.json` under [`
 
 `tenant doctor`'s **container sandbox** row says whether the backend can run a command right now, and the fix when it cannot.
 
+Every command a surface runs is a record in the Security log (**Logs** → Security; `tenant logs query "log:security"`). On the `container` backend the record also says what the run was held to: the image and the id its tag resolved to, each folder mounted and whether it was writable, the network, the limits, how much the command wrote and whether that hit the output cap, and how long it took. The record of an approved re-run says where it ran: on the host, or in a container with one more grant.
+
 ## The built-in defaults
 
 | Surface | macOS | Linux and Windows |
