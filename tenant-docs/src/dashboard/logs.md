@@ -104,6 +104,15 @@ Events from outside are filed under `ext.<name>` and marked `external`. A folder
 
 Secrets never reach the files: values are masked at the sink, `«sensitive»` in the API unless the request asks and is recorded.
 
+## Housekeeping
+
+Every Tenant process writes its own events. The work that keeps the log book in order is done by one process at a time: applying the size and age limits, archiving, checkpointing the store, reading in what was written from outside, noticing a process that died, the integrity check, anchoring the Security log and evaluating alert rules. `tenant serve` and the terminal UI can do it; a one-shot command such as `tenant logs query` never does.
+
+- **One at a time.** With serve and the terminal UI both running, whichever started first does the housekeeping. An alert rule is evaluated once, not once per process.
+- **Handover.** The process doing it confirms that every 30 seconds, for a minute at a time. When it stops or dies, another process takes over once that minute has run out, at its own next 30-second check. That is how a serve that crashes while the terminal UI is open gets reported.
+- **A late confirmation.** A process that could not confirm in time (a long write to the log book, the machine asleep) starts no further housekeeping task once its minute has run out, because another process may have taken over. The task it is in the middle of finishes; the rest is done by whichever process holds the turn next.
+- **Seeing it.** Each handover is an event in the `logbook` log: `logbook/1007` in the process that takes over, `logbook/1008` in one that lost its turn. `tenant doctor` names the current holder in its **log book housekeeper** row, and warns when the turn has run out while a process that keeps the log book is still running.
+
 ## Alerts
 
 An alert rule is a filter, an optional threshold, an action and a throttle. Built-in rules exist for `critical`, `unexpected-exit`, `audit-failures`, `sandbox-unattended` and `logbook-full`; an entry with the same name changes or disables the built-in.
