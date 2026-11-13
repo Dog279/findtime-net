@@ -40,7 +40,8 @@ Platform notes:
 
 - **macOS (TCC).** The install refuses a binary, config dir or data dir under `~/Desktop`, `~/Documents` or `~/Downloads`: macOS silently denies those to a background process. Good homes are `~/.local/bin`, `~/.config/tenant` and `~/Library/Application Support/tenant`. Under launchd Tenant fills in the login-shell `PATH` (`path_helper` plus Homebrew), so `brew`, `node` and the like resolve in commands.
 - **Linux (linger).** The user manager stops at logout unless the account lingers. `install` prints `loginctl enable-linger <user>` when it is off; run it once.
-- **Windows.** The task keeps a hidden console, which is how logoff and shutdown reach the process; `restart` and `stop` end the task hard, hence the 4-second budget. `--system` is a real service with a Stop control and `sc failure` restarts.
+- **Windows.** Installing the task needs no administrator: it is registered for your account alone and starts when you log on, with no time limit and no battery conditions. The task keeps a hidden console, which is how logoff and shutdown reach the process; `restart` and `stop` end the task hard, hence the 4-second budget. A Tenant that starts while the one it replaces is still letting go of the dashboard's address waits up to 10 seconds for it. `--system` is a real service with a Stop control and `sc failure` restarts; it needs an elevated terminal.
+- **Endpoint protection.** A program that starts hidden at logon is what some security products watch for. If yours blocks the task from starting, allow `tenant.exe` there; `tenant service status` then says "not reachable" although the task is installed.
 
 ## What runs in serve mode
 
