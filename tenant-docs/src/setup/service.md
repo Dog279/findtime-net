@@ -26,6 +26,8 @@ tenant service uninstall                      # stop, disable, remove the unit
 
 `tenant setup` offers the install at the end. `tenant doctor` reports the service and warns when the unit no longer matches the binary or the directories this command uses; `tenant doctor --fix` rewrites it.
 
+On Windows a machine can have both a `--system` service and your own logon task. Without `--system`, `status`, `start`, `stop`, `restart` and `uninstall` act on your own task when you have one, and on the service only when that is all your account has; add `--system` to name the service. `tenant service status` says when both are installed, and `tenant doctor` and `tenant update` follow the same rule.
+
 `stop` and `uninstall` work even when `config.json` does not load: they print the error as a warning and carry on, so a service that cannot start on a broken config can still be stopped and removed. The other verbs stop at the error, like every other command.
 
 ## What gets installed
@@ -79,13 +81,13 @@ Flags of `tenant serve` (also used by the unit):
 
 A stop has two speeds. The first seconds make the data safe on every OS: the turn gate closes, pending approvals are denied, and every turn in flight is cancelled at once (the model call ends, a running tool's child process dies with the process group or job object). Every message is already in the archive, the stores are WAL SQLite, and the file tools replace files by rename, so a kill at any instant leaves the old file or the new one, never a torn one. The stop budget then bounds the tidy teardown: stop intake (peer listener, Discord relay, dashboard), drain, close the stores last.
 
-A power cut is not a stop: nothing gets those first seconds. What protects the configuration then is how it is saved. `config.json`, an agent's settings file, the cron jobs, the Discord cursor and the interrupted-turn record are each written to a temporary file, flushed to the disk and only then renamed over the old one, so a cut leaves the old file or the new one. If `config.json` ever does not load, Tenant refuses to start on defaults and says where the file breaks (`config.json corrupt at line 1, column 1`): fix it, or move it aside and run `tenant setup`.
+A power cut is not a stop: nothing gets those first seconds. What protects the configuration then is how it is saved. `config.json`, an agent's settings file, the cron jobs, the Discord cursor, the interrupted-turn record, the user profile and the other files Tenant replaces whole are each written to a temporary file, flushed to the disk and only then renamed over the old one, so a cut leaves the old file or the new one. If `config.json` ever does not load, Tenant refuses to start on defaults and says where the file breaks (`config.json corrupt at line 1, column 1`): fix it, or move it aside and run `tenant setup`.
 
 What you see afterwards:
 
 - A Discord or iMessage turn the stop cut gets, within 2 seconds: "I was stopped mid-task by a system shutdown or restart. Say `continue` when I'm back." After boot each recorded channel gets one more line naming the time, the task and how many tool calls had run. The turn is **never re-run on its own**: say `continue` and the agent picks up from the archive.
 - Discord DMs sent while Tenant was down are routed after boot, oldest first (text only; attachments are not fetched). iMessage catches up through its `chat.db` cursor.
-- A cron run the stop cut is marked `interrupted: Tenant stopped` in its history; its next run is the next scheduled one.
+- A cron run the stop cut, a prompt or a shell command, is marked `interrupted: Tenant stopped` in its history; its next run is the next scheduled one.
 
 ## Health
 
