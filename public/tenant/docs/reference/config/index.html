@@ -104,7 +104,7 @@
 <h1>config.json</h1>
 <p class="lede">Every key of the machine-wide launch configuration, grouped by what it controls, with its default and the command or page that changes it.</p>
 <p><code>&lt;config&gt;/config.json</code> is written by <code>tenant setup</code> and read by every command; explicit flags win over it. Its shape is a documented operator interface: a field is added, never renamed, and a file from an older version loads and migrates forward. Secrets never live here (see <code>credentials.json</code> on <a href="/tenant/docs/setup/directories">Files &amp; directories</a>).</p>
-<p>Edits by hand need a restart, except where a page says the hub re-reads them live. Slash commands and the dashboard write the file for you.</p>
+<p>Edits by hand need a restart, except where a page says the hub re-reads them live. Slash commands and the dashboard write the file for you. Each save goes to a temporary file that is flushed to the disk and then renamed into place, so a crash or a power cut leaves the old file or the new one.</p>
 <h2 id="top-level">Top level</h2>
 <table>
 <colgroup>

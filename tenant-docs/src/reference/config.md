@@ -7,7 +7,7 @@ area-url: /tenant/docs/reference/config
 
 `<config>/config.json` is written by `tenant setup` and read by every command; explicit flags win over it. Its shape is a documented operator interface: a field is added, never renamed, and a file from an older version loads and migrates forward. Secrets never live here (see `credentials.json` on [Files &amp; directories](/tenant/docs/setup/directories)).
 
-Edits by hand need a restart, except where a page says the hub re-reads them live. Slash commands and the dashboard write the file for you.
+Edits by hand need a restart, except where a page says the hub re-reads them live. Slash commands and the dashboard write the file for you. Each save goes to a temporary file that is flushed to the disk and then renamed into place, so a crash or a power cut leaves the old file or the new one.
 
 ## Top level
 

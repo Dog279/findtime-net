@@ -26,6 +26,8 @@ tenant service uninstall                      # stop, disable, remove the unit
 
 `tenant setup` offers the install at the end. `tenant doctor` reports the service and warns when the unit no longer matches the binary or the directories this command uses; `tenant doctor --fix` rewrites it.
 
+`stop` and `uninstall` work even when `config.json` does not load: they print the error as a warning and carry on, so a service that cannot start on a broken config can still be stopped and removed. The other verbs stop at the error, like every other command.
+
 ## What gets installed
 
 | | macOS | Linux | Windows | Windows `--system` |
@@ -76,6 +78,8 @@ Flags of `tenant serve` (also used by the unit):
 ## Restarts and shutdowns lose nothing
 
 A stop has two speeds. The first seconds make the data safe on every OS: the turn gate closes, pending approvals are denied, and every turn in flight is cancelled at once (the model call ends, a running tool's child process dies with the process group or job object). Every message is already in the archive, the stores are WAL SQLite, and the file tools replace files by rename, so a kill at any instant leaves the old file or the new one, never a torn one. The stop budget then bounds the tidy teardown: stop intake (peer listener, Discord relay, dashboard), drain, close the stores last.
+
+A power cut is not a stop: nothing gets those first seconds. What protects the configuration then is how it is saved. `config.json`, an agent's settings file, the cron jobs, the Discord cursor and the interrupted-turn record are each written to a temporary file, flushed to the disk and only then renamed over the old one, so a cut leaves the old file or the new one. If `config.json` ever does not load, Tenant refuses to start on defaults and says where the file breaks (`config.json corrupt at line 1, column 1`): fix it, or move it aside and run `tenant setup`.
 
 What you see afterwards:
 
