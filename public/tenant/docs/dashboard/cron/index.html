@@ -227,7 +227,7 @@
 <li>A prompt job is one agent turn on the shared hub, queued behind the active turn with the <code>cron</code> source quota (<a href="/tenant/docs/models/tuning">turn admission</a>). Its tool calls show in the feed and the log views as <code>cron:&lt;tool&gt;</code>; its sensitive egress follows the <code>egress</code> permission (ask prompts you).</li>
 <li>A shell job runs on the <code>cron-shell</code> sandbox surface: on macOS the restricted backend in dry run with no network, elsewhere the host (<a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a>). A prompt job with <code>exec</code> runs commands on <code>cron-exec</code>. With enforcement on, a refusal fails the job; cron surfaces never escalate.</li>
 <li>A job’s summary starts with a sandbox banner when there were violations since its last run, and with a re-authorization banner while any remote MCP connector needs a sign-in.</li>
-<li>A run cut by a shutdown is marked <code>interrupted: Tenant stopped</code> in its history and is not re-run. Each run’s lines are in the <code>cron</code> log (<code>tenant logs query "log:cron"</code>).</li>
+<li>A run cut by a shutdown, a prompt or a shell command, is marked <code>interrupted: Tenant stopped</code> in its history and is not re-run. Each run’s lines are in the <code>cron</code> log (<code>tenant logs query "log:cron"</code>).</li>
 </ul>
 <h2 id="the-agents-cron-tools">The agent’s cron tools</h2>
 <p>In the terminal UI and serve (never inside a cron run), the agent has <code>cron_list</code>, <code>cron_add</code>, <code>cron_set_enabled</code>, <code>cron_run_now</code> and <code>cron_remove</code>, so “remind me every weekday at 9 to check the build” becomes a job. Changes are audit records in the log book.</p>

@@ -64,7 +64,7 @@ Out-of-range values, inverted ranges, zero steps and sub-minute intervals are re
 - A prompt job is one agent turn on the shared hub, queued behind the active turn with the `cron` source quota ([turn admission](/tenant/docs/models/tuning)). Its tool calls show in the feed and the log views as `cron:<tool>`; its sensitive egress follows the `egress` permission (ask prompts you).
 - A shell job runs on the `cron-shell` sandbox surface: on macOS the restricted backend in dry run with no network, elsewhere the host ([The execution sandbox](/tenant/docs/first-launch/sandbox)). A prompt job with `exec` runs commands on `cron-exec`. With enforcement on, a refusal fails the job; cron surfaces never escalate.
 - A job's summary starts with a sandbox banner when there were violations since its last run, and with a re-authorization banner while any remote MCP connector needs a sign-in.
-- A run cut by a shutdown is marked `interrupted: Tenant stopped` in its history and is not re-run. Each run's lines are in the `cron` log (`tenant logs query "log:cron"`).
+- A run cut by a shutdown, a prompt or a shell command, is marked `interrupted: Tenant stopped` in its history and is not re-run. Each run's lines are in the `cron` log (`tenant logs query "log:cron"`).
 
 ## The agent's cron tools
 
