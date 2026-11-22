@@ -7,7 +7,7 @@ area-url: /tenant/docs/models/providers
 
 The judge sits in front of your model and checks that a task was actually done before the answer reaches you. It is a **decision model**, not a chat model: it doesn't write text, it answers yes/no questions with probabilities, so it is fast and can't be argued with. Cloudflare's [Clef-flash](https://huggingface.co/Cloudflare/clef-flash) on your own server is the kind Tenant knows today (`clef`); any server with the System One API (`POST /v1/systemone`) answers the same way, and a hosted one needs only its address and key.
 
-The judge is off until you set it up. It is not the [Quality model](/tenant/docs/models/eval#the-quality-model), which grades eval answers, and not the [goal's check](/tenant/docs/models/teams#goals), which decides when `/goal` is finished.
+The judge is off until you set it up. It is not the [Quality model](/tenant/docs/models/eval#the-quality-model), which grades eval answers, and not the [goal's check](/tenant/docs/models/teams#goal-the-autonomous-loop), which decides when `/goal` is finished.
 
 ## What it does
 

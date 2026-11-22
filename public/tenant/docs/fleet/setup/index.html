@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Set up a fleet — Tenant docs — FindTime</title>
+<meta name="description" content="Make one Tenant a fleet master, give a new machine a one-time code, confirm it with the six digits it shows, and choose how your machines reach the master.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/fleet/setup">
+<meta property="og:title" content="Set up a fleet — Tenant docs">
+<meta property="og:description" content="Make one Tenant a fleet master, give a new machine a one-time code, confirm it with the six digits it shows, and choose how your machines reach the master.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/fleet/setup">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/fleet/overview">Fleet</a></p>
+<h1>Set up a fleet</h1>
+<p class="lede">Make one Tenant a fleet master, give a new machine a one-time code, confirm it with the six digits it shows, and choose how your machines reach the master.</p>
+<p>Setting up a fleet takes three steps: make a master once, then for each machine make a code on the master, paste one line on the machine, and confirm the machine on the master.</p>
+<h2 id="make-a-master">1. Make a master</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet init [--listen ADDR] [--address HOST:PORT]...</span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--listen ADDR</code></td>
+<td>where the fleet port binds; saved as <code>fleet.listen</code> in <code>config.json</code>. Default <code>0.0.0.0:9777</code>, every interface</td>
+</tr>
+<tr>
+<td><code>--address HOST:PORT</code></td>
+<td>an address the machines dial to reach this master (repeatable; replaces the list). Without it, <code>init</code> uses this computer’s name and its IPv4 addresses</td>
+</tr>
+<tr>
+<td><code>--wait</code></td>
+<td>how long to wait for a running Tenant to take the fleet</td>
+</tr>
+</tbody>
+</table>
+<p><code>init</code> makes the master’s certificate, the fleet key (which encrypts the machines’ memory) and the <strong>recovery identity</strong>. Run again on a master, it keeps the certificate and the keys it already has.</p>
+<p>Nothing restarts. A running <code>tenant serve</code> (or terminal app) sees the new master within a few seconds, takes the fleet and starts listening. Run the master as its service (<code>tenant service install</code>) so its machines stay connected.</p>
+<p>On a Windows master, Windows Firewall may ask about the first listener on an address that is not loopback. Allow it for the networks your machines are on.</p>
+<h3 id="the-recovery-identity">The recovery identity</h3>
+<p>At a terminal, <code>init</code> shows the fleet’s recovery identity once and asks you to type or paste it back. It is recorded only after you have given it back correctly. Tenant does not keep it and will not show it again.</p>
+<p>Save it away from the master: a password manager, or paper. With it, and only with it, a master rebuilt from nothing can read its machines’ memory again (<a href="/tenant/docs/fleet/memory">A machine’s memory</a>). Then clear the terminal’s scrollback.</p>
+<p>Without a terminal, <code>init</code> sets up everything else, shows no secret and exits 1. Run it again at a terminal.</p>
+<h2 id="make-a-code-for-a-machine">2. Make a code for a machine</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet enroll <span class="op">&lt;</span>name<span class="op">&gt;</span> [--ttl 15m] [--adopt ID]</span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--ttl</code></td>
+<td>how long the code can be spent; default 15 minutes, at most 24 hours</td>
+</tr>
+<tr>
+<td><code>--adopt ID</code></td>
+<td>give the new machine the id of a revoked one, and with it the approval scheme kept under that id</td>
+</tr>
+<tr>
+<td><code>--wait</code></td>
+<td>how long to wait for a running Tenant to take the fleet</td>
+</tr>
+</tbody>
+</table>
+<p><code>enroll</code> runs <code>init</code> first if this Tenant is not a master yet, but that does not make the recovery key: until you run <code>tenant fleet init</code> at a terminal, no machine’s memory is kept, and <code>enroll</code> says so. It prints the code alone on standard output, then on standard error: when the code expires, the addresses it carries, and one line to paste for each kind of machine. The code works once.</p>
+<p>The same output is <code>/fleet enroll &lt;name&gt;</code> in the terminal app. On the dashboard’s Fleet page, <strong>Add machine</strong> takes a name and whether the machine runs as you or from boot, and shows the lines with a Copy button, in that one answer only: not in the address bar, not after a reload, not in any log. Making a code there takes a signed-in browser; the API key cannot make one.</p>
+<h3 id="the-line-to-paste-on-the-machine">The line to paste on the machine</h3>
+<p>For a machine with nothing on it, the line fetches the install script from the latest release, which checks the download and goes straight on to <code>tenant child install</code>:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Linux, macOS: the child runs as you, from logon</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://github.com/<span class="op">&lt;</span>owner<span class="op">&gt;</span>/<span class="op">&lt;</span>repo<span class="op">&gt;</span>/releases/latest/download/install.sh <span class="kw">|</span> <span class="va">TENANT_CHILD</span><span class="op">=</span>user <span class="va">TENANT_ENROLL_CODE</span><span class="op">=</span><span class="st">&#39;&lt;code&gt;&#39;</span> <span class="fu">sh</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Linux, macOS: a service that runs as root from boot (sudo asks for your password)</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://github.com/<span class="op">&lt;</span>owner<span class="op">&gt;</span>/<span class="op">&lt;</span>repo<span class="op">&gt;</span>/releases/latest/download/install.sh <span class="kw">|</span> <span class="va">TENANT_CHILD</span><span class="op">=</span>system <span class="va">TENANT_ENROLL_CODE</span><span class="op">=</span><span class="st">&#39;&lt;code&gt;&#39;</span> <span class="fu">sudo</span> <span class="at">--preserve-env</span><span class="op">=</span>TENANT_CHILD,TENANT_ENROLL_CODE sh</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Windows: as you (PowerShell); for SYSTEM from boot, use &#39;system&#39; in a PowerShell run as administrator</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="va">$env</span><span class="op">:</span><span class="va">TENANT_CHILD</span><span class="op">=</span><span class="st">&#39;user&#39;</span><span class="op">;</span> <span class="va">$env</span><span class="op">:</span><span class="va">TENANT_ENROLL_CODE</span><span class="op">=</span><span class="st">&#39;&lt;code&gt;&#39;</span><span class="op">;</span> <span class="fu">irm</span> https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/&lt;</span>owner<span class="op">&gt;/&lt;</span>repo<span class="op">&gt;/</span>releases<span class="op">/</span>latest<span class="op">/</span>download<span class="op">/</span>install<span class="op">.</span><span class="fu">ps1</span> <span class="op">|</span> <span class="fu">iex</span></span></code></pre></div>
+<p>For a machine that has Tenant already:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">&#39;%s\n&#39;</span> <span class="st">&#39;&lt;code&gt;&#39;</span> <span class="kw">|</span> <span class="ex">tenant</span> child install            <span class="co"># Linux, macOS</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">&#39;%s\n&#39;</span> <span class="st">&#39;&lt;code&gt;&#39;</span> <span class="kw">|</span> <span class="ex">tenant</span> child install <span class="at">--system</span>   <span class="co"># in a root shell: a service from boot</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;&lt;code&gt;&#39;</span> <span class="op">|</span> tenant child install            <span class="co"># PowerShell</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="st">&#39;&lt;code&gt;&#39;</span> <span class="op">|</span> tenant child install <span class="op">--</span>system   <span class="co"># PowerShell run as administrator</span></span></code></pre></div>
+<p><code>enroll</code> prints these lines with the real code and repository filled in. A build of Tenant that names no release repository cannot print the install-script lines: it says so, and prints the others.</p>
+<p><strong>The code never travels as an argument.</strong> <code>tenant child install</code> reads it from standard input or from <code>TENANT_ENROLL_CODE</code>, and refuses a code given on the command line (exit 2), because an argument shows in the process list and stays in the shell’s history. The boot-time line for Linux and macOS keeps it off sudo’s command line with <code>--preserve-env</code>.</p>
+<p><code>tenant child install</code> also takes <code>--ceiling full|no-exec|read-only</code> and <code>--updates release|master</code>; <a href="/tenant/docs/fleet/machines">On a fleet machine</a> and <a href="/tenant/docs/fleet/updates">Update, move and recover</a> explain them.</p>
+<h2 id="confirm-the-machine">3. Confirm the machine</h2>
+<p>The machine makes its own key, prints <strong>six digits</strong>, and shows as <code>pending</code> on the master. Until you confirm it, the master sends it nothing.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet confirm <span class="op">&lt;</span>name<span class="op">&gt;</span> [--set category=mode]...</span></code></pre></div>
+<p><code>confirm</code> shows what the machine reported about itself (OS, account, version, sandbox, ceiling: its own words, not checked) and the approval scheme it will start with, then asks for the six digits. <code>--set exec=allow</code> sets a category for this machine alone. <a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a> explains the starting scheme.</p>
+<p>Compare the digits with the ones on the machine’s own screen. They tie the record on the master to that machine, and to no other machine that got hold of its code.</p>
+<p>Confirming takes a person at the master’s computer. It is accepted from:</p>
+<ul>
+<li><code>tenant fleet confirm</code> at a terminal (there is no flag for the digits);</li>
+<li><code>/fleet confirm &lt;name&gt; &lt;six digits&gt;</code> typed in the terminal app;</li>
+<li>the dashboard’s machine page, from a browser signed in on the computer running Tenant (its 127.0.0.1 address). A browser on another computer, the API key, or a proxy cannot confirm.</li>
+</ul>
+<p>No tool, relay command or approval card can confirm a machine.</p>
+<p>The enroll endpoint takes five attempts a minute from one address. A code presented a second time is refused and raises an alert.</p>
+<h2 id="joining-is-by-code-only">Joining is by code only</h2>
+<p>There is no discovery and no request to join. A machine joins with its one-time code and nothing else. The code carries the master’s certificate fingerprint, so the machine knows which master it is talking to before it sends anything.</p>
+<h2 id="the-addresses-a-code-carries">The addresses a code carries</h2>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet address [list <span class="kw">|</span> <span class="ex">add</span> HOST:PORT <span class="kw">|</span> <span class="ex">remove</span> HOST:PORT]</span></code></pre></div>
+<p>This changes the list one address at a time (<code>init --address</code> replaces it whole). A connected machine is told the new list over its link.</p>
+<p>When every IP address on the list is private, link-local or loopback, <code>init</code>, <code>enroll</code>, <code>address</code> and Add machine warn that a machine at another site cannot dial any of them. A host name is not judged. On one LAN the warning is expected and can be ignored.</p>
+<h2 id="three-ways-for-machines-to-reach-the-master">Three ways for machines to reach the master</h2>
+<p>Only the master must be reachable, on its one fleet port.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Route</th>
+<th>What to do</th>
+<th>What is exposed</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>One LAN</td>
+<td>nothing: the LAN address <code>init</code> offers (such as <code>192.168.1.5:9777</code>) is enough</td>
+<td>the fleet port, on your LAN</td>
+</tr>
+<tr>
+<td>An overlay network (WireGuard, Tailscale)</td>
+<td>make the master listen on its overlay address and give that address to the machines</td>
+<td>the fleet port, on the overlay only; the overlay is only a route and is not trusted for anything</td>
+</tr>
+<tr>
+<td>A public address or a forwarded port</td>
+<td>add that address with <code>tenant fleet address add</code></td>
+<td>the fleet port to the internet: its TLS 1.3 handshake, and the enroll endpoint’s check of a code</td>
+</tr>
+</tbody>
+</table>
+<p>For an overlay network, with the master’s overlay address <code>100.101.102.103</code>:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet init <span class="at">--listen</span> 100.101.102.103:9777</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet address add 100.101.102.103:9777</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet address remove 192.168.1.5:9777</span></code></pre></div>
+<p>A public address is a workable route: both ends are pinned by certificate, so someone who learns the address can do nothing with it but reach the handshake and the code check (five attempts a minute per address, refusals in the Security log). Because the default <code>--listen</code> is every interface, set <code>--listen</code> to the one interface you mean on a master with a public address.</p>
+<h2 id="other-fleet-commands">Other fleet commands</h2>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet list <span class="kw">|</span> <span class="ex">show</span> <span class="op">&lt;</span>name<span class="op">&gt;</span>       <span class="co"># the machines and which process holds the fleet; one machine in full</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet rename <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>new-name<span class="op">&gt;</span> <span class="co"># relabel; its id and what is kept under it stay</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet revoke <span class="op">&lt;</span>name<span class="op">&gt;</span> [--keep-scheme <span class="kw">|</span> <span class="ex">--delete-scheme]</span></span></code></pre></div>
+<p><code>tenant fleet list</code> in another process cannot tell online from offline: only the process that holds the fleet knows (<code>/fleet</code> there, or the dashboard’s Fleet page). Revoking is described in <a href="/tenant/docs/fleet/machines#when-a-machine-is-revoked">On a fleet machine</a>.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/fleet/setup.mdtenant-docs/src/fleet/setup.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#make-a-master" id="toc-make-a-master">1. Make a master</a></li>
+<li><a href="#make-a-code-for-a-machine" id="toc-make-a-code-for-a-machine">2. Make a code for a machine</a></li>
+<li><a href="#confirm-the-machine" id="toc-confirm-the-machine">3. Confirm the machine</a></li>
+<li><a href="#joining-is-by-code-only" id="toc-joining-is-by-code-only">Joining is by code only</a></li>
+<li><a href="#the-addresses-a-code-carries" id="toc-the-addresses-a-code-carries">The addresses a code carries</a></li>
+<li><a href="#three-ways-for-machines-to-reach-the-master" id="toc-three-ways-for-machines-to-reach-the-master">Three ways for machines to reach the master</a></li>
+<li><a href="#other-fleet-commands" id="toc-other-fleet-commands">Other fleet commands</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

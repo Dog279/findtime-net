@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -136,8 +145,23 @@
 </tr>
 <tr>
 <td><code>TENANT_UPDATE_REPO</code></td>
-<td><code>tenant update</code></td>
+<td><code>tenant update</code>, <code>tenant fleet update</code></td>
 <td><code>owner/name</code> of the repository to check for releases (a fork or mirror)</td>
+</tr>
+<tr>
+<td><code>GITHUB_TOKEN</code></td>
+<td><code>tenant update</code>, <code>tenant fleet update</code></td>
+<td>sent with the request for the release to GitHub’s API (the github integration reads it too)</td>
+</tr>
+<tr>
+<td><code>TENANT_ENROLL_CODE</code></td>
+<td><code>tenant child install</code>, <code>tenant child rehome</code>, the install scripts</td>
+<td>the one-time code from <code>tenant fleet enroll</code>; unset, the command reads it from standard input. Taken out of the environment at once, so nothing the command starts inherits it (<a href="/tenant/docs/fleet/setup">Fleet setup</a>)</td>
+</tr>
+<tr>
+<td><code>GOTRACEBACK</code></td>
+<td>the Go runtime; reported by <code>tenant doctor</code></td>
+<td><code>crash</code> (or <code>wer</code> on Windows) makes the runtime ask for a memory dump at a crash, which Tenant cannot lower; doctor points it out (<a href="/tenant/docs/setup/process-protection">Process protection</a>)</td>
 </tr>
 <tr>
 <td><code>TENANT_TRACE_ID</code>, <code>TENANT_ACTIVITY_ID</code></td>
@@ -184,6 +208,14 @@
 <tr>
 <td><code>TENANT_BASE_URL</code></td>
 <td>a directory URL that holds the archive and <code>checksums.txt</code></td>
+</tr>
+<tr>
+<td><code>TENANT_CHILD</code></td>
+<td>after installing, make this machine a child of a fleet: <code>user</code> (runs as this account) or <code>system</code> (as root or SYSTEM from boot; run the script as root, or from an elevated PowerShell)</td>
+</tr>
+<tr>
+<td><code>TENANT_ENROLL_CODE</code></td>
+<td>with <code>TENANT_CHILD</code>: the one-time code <code>tenant fleet enroll &lt;name&gt;</code> printed; unset, it is asked for at the terminal</td>
 </tr>
 </tbody>
 </table>

@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -196,6 +205,8 @@
 <p>When a conversation outgrows the model’s context, Tenant compacts it from the <strong>archive</strong>: old turns are summarized, the summary is reversible and auditable (not a lossy fold), and a persistent goal header resists drift.</p>
 <pre class="text"><code>/compress    (also /compact)   summarize old turns to free context now
 /expand                         bring the latest compacted span back from the archive</code></pre>
+<h2 id="fleet-machines">Fleet machines</h2>
+<p>On a fleet master, each machine has a memory of its own, apart from the master’s: the requests that worked on it and what it returned, and facts about it. It is kept encrypted, comes into a conversation with the first answer from that machine there, and is searched with <code>memory_search</code> and its <code>host</code>. See <a href="/tenant/docs/fleet/memory">A machine’s memory</a>.</p>
 <h2 id="privacy">Privacy</h2>
 <p><code>tenant privacy forget</code> deletes facts, episodes, sessions or any text for good, with a preview first; <code>tenant privacy retention set episodes 365</code> ages data out on its own. See <a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a>. <code>tenant backup</code> carries every tier.</p>
 <div class="pagefoot">
@@ -215,6 +226,7 @@
 <li><a href="#distillation-and-consolidation" id="toc-distillation-and-consolidation">Distillation and consolidation</a></li>
 <li><a href="#feedback" id="toc-feedback">Feedback</a></li>
 <li><a href="#context-compaction" id="toc-context-compaction">Context compaction</a></li>
+<li><a href="#fleet-machines" id="toc-fleet-machines">Fleet machines</a></li>
 <li><a href="#privacy" id="toc-privacy">Privacy</a></li>
 </ul>
 </div>

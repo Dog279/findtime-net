@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -181,6 +190,7 @@
 <h2 id="what-is-in-a-backup">What is in a backup</h2>
 <p>A tar.gz with <code>MANIFEST.json</code> first, then the config dir and the data dir: every SQLite store, the archive, the log book, research, the soul, <code>config.json</code> and <code>settings.&lt;agent&gt;.json</code>. The backup is consistent even while Tenant runs: it holds the data-dir lock shared, so a command cannot restore underneath it, and copies the databases through SQLite’s backup API.</p>
 <p><strong>Credentials are left out of an unencrypted backup.</strong> An encrypted one (<code>--encrypt</code> or <code>--recipient</code>) carries <code>credentials.json</code> too, so a restore on another machine is complete.</p>
+<p><strong>On a fleet master, encrypt.</strong> An unencrypted backup leaves out the fleet certificate, <code>fleet.json</code> and the fleet key, and <code>tenant backup</code> warns when it makes one. A master restored from it is a stranger to its machines: each needs <code>tenant child rehome</code>, and their memory cannot be read without the recovery identity. A master restored from an encrypted backup has all three back, and its machines reconnect by themselves. See <a href="/tenant/docs/fleet/overview">Fleet</a>.</p>
 <p><code>verify</code> checks every checksum in the manifest, opens every database and runs its integrity check, checks every log and schema. <code>restore</code> verifies first, then swaps the directories in, keeping the replaced ones beside them; it takes the data-dir lock exclusively, so stop the service first:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service stop</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> backup restore tenant-backup-20261008-090000.tar.gz <span class="at">--yes</span></span>

@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -140,6 +149,12 @@
 <p><code>tenant setup</code> offers the install at the end. <code>tenant doctor</code> reports the service and warns when the unit no longer matches the binary or the directories this command uses; <code>tenant doctor --fix</code> rewrites it.</p>
 <p>On Windows a machine can have both a <code>--system</code> service and your own logon task. Without <code>--system</code>, <code>status</code>, <code>start</code>, <code>stop</code>, <code>restart</code> and <code>uninstall</code> act on your own task when you have one, and on the service only when that is all your account has; add <code>--system</code> to name the service. <code>tenant service status</code> says when both are installed, and <code>tenant doctor</code> and <code>tenant update</code> follow the same rule.</p>
 <p><code>stop</code> and <code>uninstall</code> work even when <code>config.json</code> does not load: they print the error as a warning and carry on, so a service that cannot start on a broken config can still be stopped and removed. The other verbs stop at the error, like every other command.</p>
+<h3 id="process-protection">Process protection</h3>
+<p>The service has nobody to ask whether it may run without a <a href="/tenant/docs/setup/process-protection">process protection</a> the system refuses, so <code>install</code>, <code>start</code> and <code>restart</code> (and <code>tenant setup</code> when it installs the service) check first, at the terminal you typed them in. When a control cannot be applied they say which and what that leaves open, and ask <code>Continue without it? [y/N]</code>; a yes is recorded, and the service starts on it. Run from a script with no terminal, they stop with the reason. A service that meets an unacknowledged control does not start; the reason is in <code>tenant logs query "provider:system id:3030"</code> and in the system’s own log.</p>
+<ul>
+<li><strong>macOS.</strong> <code>install</code> also signs the binary with the hardened runtime before it writes the unit, when the binary does not carry the flag yet: a copy is signed ad hoc and checked, then moved into place. If signing fails, you get a warning and the service is installed with the binary as it was.</li>
+<li><strong>Windows.</strong> serve starts a small helper, <code>tenant __session-watch</code>, which owns the hidden window Windows sends a logoff or a shutdown to, so Task Manager shows a second <code>tenant.exe</code> under serve. If the helper is ended alone, serve keeps running, but a logoff, a shutdown or <code>tenant service stop</code> then ends it without a clean stop; restart Tenant to get the helper back.</li>
+</ul>
 <h2 id="what-gets-installed">What gets installed</h2>
 <table>
 <colgroup>
@@ -187,7 +202,7 @@
 <ul>
 <li><strong>macOS (TCC).</strong> The install refuses a binary, config dir or data dir under <code>~/Desktop</code>, <code>~/Documents</code> or <code>~/Downloads</code>: macOS silently denies those to a background process. Good homes are <code>~/.local/bin</code>, <code>~/.config/tenant</code> and <code>~/Library/Application Support/tenant</code>. Under launchd Tenant fills in the login-shell <code>PATH</code> (<code>path_helper</code> plus Homebrew), so <code>brew</code>, <code>node</code> and the like resolve in commands.</li>
 <li><strong>Linux (linger).</strong> The user manager stops at logout unless the account lingers. <code>install</code> prints <code>loginctl enable-linger &lt;user&gt;</code> when it is off; run it once.</li>
-<li><strong>Windows.</strong> Installing the task needs no administrator: it is registered for your account alone and starts when you log on, with no time limit and no battery conditions. Its console window is hidden. When you log off, restart or shut down, Windows tells Tenant through a window of its own that is never shown, and Tenant stops cleanly; Windows allows about five seconds for that. <code>tenant service restart</code>, <code>stop</code> and <code>uninstall</code>, and so <code>tenant update</code>, ask Tenant to stop the same way and wait up to 6 seconds; only a Tenant that is still running after that is ended the hard way. The stop budget is 4 seconds because that is about what a logoff allows. A Tenant that starts while the one it replaces is still letting go of the dashboard’s address waits up to 10 seconds for it. <code>--system</code> is a real service with a Stop control and <code>sc failure</code> restarts; it needs an elevated terminal.</li>
+<li><strong>Windows.</strong> Installing the task needs no administrator: it is registered for your account alone and starts when you log on, with no time limit and no battery conditions. Its console window is hidden. When you log off, restart or shut down, Windows tells Tenant through a window that is never shown (a small helper process owns it, see Process protection below), and Tenant stops cleanly; Windows allows about five seconds for that. <code>tenant service restart</code>, <code>stop</code> and <code>uninstall</code>, and so <code>tenant update</code>, ask Tenant to stop the same way and wait up to 6 seconds; only a Tenant that is still running after that is ended the hard way. The stop budget is 4 seconds because that is about what a logoff allows. A Tenant that starts while the one it replaces is still letting go of the dashboard’s address waits up to 10 seconds for it. <code>--system</code> is a real service with a Stop control and <code>sc failure</code> restarts; it needs an elevated terminal.</li>
 <li><strong>Endpoint protection.</strong> A program that starts hidden at logon is what some security products watch for. If yours blocks the task from starting, allow <code>tenant.exe</code> there; <code>tenant service status</code> then says “not reachable” although the task is installed.</li>
 </ul>
 <h2 id="what-runs-in-serve-mode">What runs in serve mode</h2>

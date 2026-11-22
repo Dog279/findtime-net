@@ -117,6 +117,20 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /github readonly <owner/name>         watch and report only
 ```
 
+## Fleet ([Fleet](/tenant/docs/fleet/overview), [Machines](/tenant/docs/fleet/machines))
+
+```text
+/fleet                                                    each machine: online or offline, OS, user, last seen; and which process holds the fleet
+/fleet show <name>                                        everything known about one machine, with what it reported marked as its own words
+/fleet enroll <name>                                      a one-time code for a new machine, and the line to paste there
+/fleet confirm <name>                                     the confirm screen of a pending machine: what it reported, the scheme it starts with
+/fleet confirm <name> <six digits> [category=mode ...]    confirm it with the digits it shows; a pair sets that category for this machine alone
+/fleet revoke <name> [keep|delete]                        end a machine; keep or delete its approval scheme
+/fleet relay [discord|imessage [on|off]]                  whether a relay's turns may reach the fleet at all (default off)
+```
+
+A machine's own approval scheme is `/permissions fleet <name>`, under Safety &amp; approvals. A line the app submits for you does not change the fleet: type these yourself.
+
 ## Skills ([Skills](/tenant/docs/first-launch/skills))
 
 ```text
@@ -154,6 +168,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /permissions set <cat> <mode>
 /permissions add <tool|pattern> <mode>    a per-tool rule: a name, an exact id, a glob, or os_exec(<glob>)
 /permissions rm <pattern>
+/permissions fleet <name> [set|add|rm …]  one fleet machine's own scheme, edited the same way; --defaults: the rules new machines start with
 /approve [session|always]                 approve a paused dangerous action (also /approve!)
 /deny                                     refuse it (also /reject)
 /relay [status]
@@ -179,6 +194,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /cron run <id>
 /cron rm <id>
 /cron exec on|off
+/cron fleet <id> <machine>... | none   the fleet machines a job may reach (none by default)
 ```
 
 ## Logs ([Logs &amp; alerts](/tenant/docs/dashboard/logs))

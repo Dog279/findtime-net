@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -147,6 +156,8 @@
 <p>There is no “always” button here. To stop being asked about a whole area, change its row (below): a deliberate step with a warning.</p>
 <p><strong>“This was already answered (here, in another tab, or in the terminal) or it timed out.”</strong> Someone got there first. The first answer counts.</p>
 <p><strong>Requests from a Discord conversation</strong> are answered on Discord, with the buttons on the card; the page only says they are there. <strong>Requests from iMessage</strong> are in the list, marked “from iMessage”, and are answered here (or by the operator’s text reply).</p>
+<h2 id="requests-for-a-fleet-machine">Requests for a fleet machine</h2>
+<p>A request for an action on one of your <a href="/tenant/docs/fleet/approvals">fleet</a> machines is answered here, on the master, like any other. Its headline names the machine first (<code>On the machine "web1": your agent wants to …</code>), and the line under it says “on the machine <code>&lt;id&gt;</code>, not this computer”. It never offers <strong>Allow for the rest of this session</strong>: a machine keeps no session grant. The rows below are this computer’s; each machine has its own, on the <strong>Fleet</strong> page.</p>
 <h2 id="if-nobody-answers">If nobody answers</h2>
 <table>
 <thead>
@@ -246,7 +257,7 @@
 <p><strong>Scheduled jobs that run commands</strong> follow their own switch on <strong>Scheduled jobs</strong>, not these rows. Everything else follows these rows: Chat, alerts, research, and scheduled jobs that do not run commands.</p>
 <p><strong>Approvals &amp; safety or Access?</strong> <strong>Access</strong> sets who may message the agent on Discord and iMessage and what those conversations may make it do. <strong>Approvals &amp; safety</strong> sets what it does for you and for its own jobs.</p>
 <h2 id="by-rest">By REST</h2>
-<pre class="http"><code>GET  /api/approvals                     [{id, category, action, detail, age_secs}]
+<pre class="http"><code>GET  /api/approvals                     [{id, category, action, detail, age_secs, host, host_name}]
 POST /api/approvals/{id}                {&quot;decision&quot;: &quot;approve&quot; | &quot;approve_session&quot; | &quot;approve_always&quot; | &quot;deny&quot;}</code></pre>
 <p><code>approve_always</code> exists only here; on the page a permanent change is an area’s row. See <a href="/tenant/docs/dashboard/api">REST API</a>.</p>
 <div class="pagefoot">
@@ -262,6 +273,7 @@ POST /api/approvals/{id}                {&quot;decision&quot;: &quot;approve&quo
 <ul>
 <li><a href="#where-a-request-appears" id="toc-where-a-request-appears">Where a request appears</a></li>
 <li><a href="#the-buttons" id="toc-the-buttons">The buttons</a></li>
+<li><a href="#requests-for-a-fleet-machine" id="toc-requests-for-a-fleet-machine">Requests for a fleet machine</a></li>
 <li><a href="#if-nobody-answers" id="toc-if-nobody-answers">If nobody answers</a></li>
 <li><a href="#what-the-agent-may-do-on-its-own" id="toc-what-the-agent-may-do-on-its-own">What the agent may do on its own</a></li>
 <li><a href="#by-rest" id="toc-by-rest">By REST</a></li>

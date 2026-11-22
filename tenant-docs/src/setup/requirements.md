@@ -47,4 +47,5 @@ Without a reachable embedder Tenant falls back to a hash stand-in: it starts, bu
 | iMessage on a Mac | Full Disk Access for the terminal (or the `tenant` binary): System Settings → Privacy &amp; Security → Full Disk Access. BlueBubbles works from any OS instead. |
 | Reaching the dashboard from your phone | [Tailscale](https://tailscale.com) on the machine; `/tailscale serve` publishes the dashboard on your tailnet over HTTPS. |
 | Signature verification on `tenant update` | `cosign` on `PATH`. Without it the SHA-256 is still checked. |
+| A fleet machine taking `tenant fleet update` on its default rule (`release`) | `cosign` on the machine's `PATH`, unless its Tenant carries the project key and the master sent the release's project signature. Without either, the machine refuses the update; `tenant child updates master` makes it take the master's hash instead ([Fleet updates](/tenant/docs/fleet/updates)). |
 | Building from source | Go 1.26 or newer. |

@@ -32,7 +32,8 @@ tenant tui                                   full-screen terminal UI
 tenant chat                                  the agent loop without the UI; one stdin line is one turn
 tenant doctor [--fix] [--json]               diagnose the setup; --fix repairs what it safely can
 tenant help | help all | help <command>
-tenant version                               the version and build provenance
+tenant version                               the version and build provenance; a build made with -tags debugattach says so
+tenant version --protection                  also this process's protection report, as one line of JSON (tenant update reads it from the new binary)
 tenant update [--version vX.Y.Z] [--yes] [--now] [--force]
 tenant update --check                        running vs latest; exit 10 when an update exists
 tenant update --rollback
@@ -120,7 +121,30 @@ tenant peer list | show <name> | rename <old> <new> | remove <name> | revoke <na
 tenant peer share <name> wiki=on|off memory=on|off [skills=…] [exec=…] [llm=…]
 tenant peer query <name> <wiki|memory> "<query>"
 tenant mcp-memory [--allow-writes] [--tools] [--sse-addr ADDR] [--insecure-lan] [--allow-no-memory]   # over --sse-addr, clients send the token in gateway-auth-token
+tenant fleet init [--listen ADDR] [--address HOST:PORT]...                    make this Tenant a fleet master (once)
+tenant fleet enroll <name> [--ttl 15m] [--adopt ID]                           a one-time code and the line to paste on the new machine
+tenant fleet address [list | add HOST:PORT | remove HOST:PORT]                the addresses a code tells a new machine to dial
+tenant fleet list | show <name>                                               the machines; one machine in full
+tenant fleet confirm <name> [--set category=mode]...                          confirm a pending machine with the six digits it shows
+tenant fleet rename <name> <new-name>                                         relabel a machine; its id stays
+tenant fleet revoke <name> [--keep-scheme | --delete-scheme]                  refuse its certificate from now on and close its link
+tenant fleet permissions <name> [set <category> <mode> | add <pattern> <mode> | rm <pattern>]   show or edit one machine's own approval scheme
+tenant fleet permissions <name> --from defaults|master                        lay the fleet's rules over it again, or copy the master's scheme again
+tenant fleet permissions --defaults [add <pattern> <mode> | rm <pattern>]     the rules every newly confirmed machine starts with
+tenant fleet relay [discord|imessage [on|off]]                                whether a turn from that relay may reach the fleet (off by default)
+tenant fleet update <name> | --all [--version vX.Y.Z] [--allow-older]         send machines a newer Tenant over their links
+tenant fleet recover <name> [--was ID]                                        read a machine's memory made under another fleet key, with the recovery identity
+tenant child install [--system] [--ceiling full|no-exec|read-only] [--updates release|master]   enroll this machine and install its service
+tenant child updates [release|master]        whose word an update from the master is taken on
+tenant child rehome                          trust another master, keeping this machine's key, ceiling, audit log and memory copies
+tenant child status                          connected, waiting for confirmation, paused, rejected, offline; exit 3 unless connected
+tenant child pause | resume                  stop serving the master at once, until resume
+tenant child audit                           check the chain of this machine's audit log
+tenant child uninstall                       remove the service and this machine's fleet key; the audit log stays
+tenant child run                             what the installed service runs: hold the link from this terminal
 ```
+
+`tenant fleet` runs on the master and `tenant child` on a machine it owns. `child install` and `child rehome` read the code from standard input or `$TENANT_ENROLL_CODE`, never from an argument. The walk-through is on [Fleet](/tenant/docs/fleet/overview).
 
 ## Safety
 

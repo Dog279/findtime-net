@@ -93,6 +93,10 @@ When a conversation outgrows the model's context, Tenant compacts it from the **
 /expand                         bring the latest compacted span back from the archive
 ```
 
+## Fleet machines
+
+On a fleet master, each machine has a memory of its own, apart from the master's: the requests that worked on it and what it returned, and facts about it. It is kept encrypted, comes into a conversation with the first answer from that machine there, and is searched with `memory_search` and its `host`. See [A machine's memory](/tenant/docs/fleet/memory).
+
 ## Privacy
 
 `tenant privacy forget` deletes facts, episodes, sessions or any text for good, with a preview first; `tenant privacy retention set episodes 365` ages data out on its own. See [Privacy &amp; retention](/tenant/docs/setup/privacy). `tenant backup` carries every tier.

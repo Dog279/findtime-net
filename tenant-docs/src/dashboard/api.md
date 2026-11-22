@@ -1,6 +1,6 @@
 ---
 title: REST API
-description: "The JSON API behind the dashboard, for scripts and monitors: status, tools, posture, approvals, memory, the log book, and the event stream. Bearer-token authenticated."
+description: "The JSON API behind the dashboard, for scripts and monitors: status, tools, posture, approvals, memory, the fleet, the log book, and the event stream. Bearer-token authenticated."
 area: Dashboard
 area-url: /tenant/docs/dashboard/overview
 ---
@@ -19,16 +19,26 @@ The browser never sends the token itself (it holds a session cookie); scripts us
 | Method | Path | Body / answer |
 |---|---|---|
 | `GET` | `/healthz` | `200` without a key; `HEAD` needs one |
-| `GET` | `/api/status` | `{status, version, plugins, tools_enabled, tools_total, turn_active, turn_age_secs, turn_queue_depth, turn_queue_age_secs, turn_queue: [{position, source, age_secs, eta_secs}], pending_approvals, team_budget}` |
+| `GET` | `/api/status` | `{status, version, process_protection, plugins, tools_enabled, tools_total, turn_active, turn_age_secs, turn_queue_depth, turn_queue_age_secs, turn_queue: [{position, source, age_secs, eta_secs}], pending_approvals, team_budget}` |
 | `GET` | `/api/tools` | `[{name, plugin, enabled, destructive}]` (`destructive` is the plugin's gate class) |
 | `POST` | `/api/tools/{name}` | `{"enabled": bool}` → `{changed, scope}` |
 | `POST` | `/api/plugins/{label}` | `{"enabled": bool}` → `{changed, scope}`: a whole plugin |
 | `GET` | `/api/posture` | `{allow_send}`: true when every gated tool is on |
 | `POST` | `/api/posture` | `{"allow_send": bool}` → `{allow_send, changed, skipped}`: flips every gated tool, best effort |
-| `GET` | `/api/approvals` | `[{id, category, action, detail, age_secs}]` |
+| `GET` | `/api/approvals` | `[{id, category, action, detail, age_secs, host, host_name}]`; `host` and `host_name` name the fleet machine the action lands on, absent for this computer |
 | `POST` | `/api/approvals/{id}` | `{"decision": "approve" \| "approve_session" \| "approve_always" \| "deny"}` |
 
-`tenant service status`, `tenant doctor` and `tenant update` read `/api/status` for the running version and liveness.
+`tenant service status`, `tenant doctor` and `tenant update` read `/api/status` for the running version and liveness. `process_protection` is the running process's [process protection](/tenant/docs/setup/process-protection) as it stands now, `{disabled, controls: [{id, name, ok, reason, detail, leaves, note, undone, as_at_start}], pid, system}`; `tenant doctor` reports it, and not its own, when a Tenant is running.
+
+## Fleet
+
+| Method | Path | Body / answer |
+|---|---|---|
+| `GET` | `/api/fleet` | read-only: `{master, holder, held_here, error, machines: [{id, name, state, online, link, link_version, calls_in_flight, certificate, enrolled, confirmed, revoked, reported_by_the_machine: {os, user, version, sandbox, ceiling}, memory, memory_detail, permissions, tool_rules, drift, update}], fleet_rules}` |
+| `POST` | `/fleet/add`, `/fleet/confirm`, `/fleet/rename`, `/fleet/revoke`, `/fleet/permission`, `/fleet/rules/add`, `/fleet/rules/remove`, `/fleet/scheme`, `/fleet/update` | the **Fleet** page's forms (CSRF-protected; use the page). `/fleet/add` takes a signed-in browser only; `/fleet/confirm` only a browser signed in on the computer running Tenant |
+| `POST` | `/fleet/recover?machine=ID&confirm=yes[&was=ID]` | what `tenant fleet recover` posts with the dashboard key: the recovery identity as the whole body, taken only from this computer or over HTTPS |
+
+`memory` is `in_step`, `behind`, `needs_recovery_key` or `not_available` (with the reason in `memory_detail`); `update.stage` is `fetching`, `sending`, `applying`, `done`, `rolled_back`, `failed` or `refused`. What a machine reports about itself is its own words, not checked by the master. Changes to the fleet are the **Fleet** page's forms ([Fleet](/tenant/docs/fleet/machines)); the API key makes no enrollment code and confirms no machine.
 
 ## Chat and streams
 

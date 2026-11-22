@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -198,6 +207,31 @@
 <td>the OAuth token cache for remote MCP connectors</td>
 <td>Tenant</td>
 </tr>
+<tr>
+<td><code>fleet.json</code></td>
+<td>on a fleet master: its machines (name, state, certificate fingerprint, what each reported), the addresses a code tells them to dial, the pending codes’ hashes and the recovery key’s public half; owner-only (<a href="/tenant/docs/fleet/overview">Fleet</a>)</td>
+<td><code>tenant fleet …</code>, <code>/fleet</code>, the <strong>Fleet</strong> page</td>
+</tr>
+<tr>
+<td><code>fleet-identity.pem</code></td>
+<td>on a fleet master: its key pair and self-signed certificate for the fleet link; owner-only</td>
+<td><code>tenant fleet init</code></td>
+</tr>
+<tr>
+<td><code>fleet-key</code></td>
+<td>on a fleet master: the fleet key every machine’s memory is encrypted to, sealed by the system’s secret protector where there is one (Windows’ data protection), an owner-only file elsewhere</td>
+<td><code>tenant fleet init</code></td>
+</tr>
+<tr>
+<td><code>fleet.holder</code></td>
+<td>on a fleet master: which process holds the fleet’s links</td>
+<td>Tenant</td>
+</tr>
+<tr>
+<td><code>child/</code></td>
+<td>on a fleet machine: the child’s directory (below)</td>
+<td><code>tenant child install</code></td>
+</tr>
 </tbody>
 </table>
 <p>Secrets never live in <code>config.json</code>. <code>tenant doctor</code> checks the permissions of every secret file and <code>tenant doctor --fix</code> repairs them. The file tools the agent uses refuse to read or write <code>credentials.json</code>, <code>settings.&lt;agent&gt;.json</code> and the token file.</p>
@@ -302,9 +336,58 @@
 <td><code>.tenant.lock</code></td>
 <td>held shared by every running command, exclusively by <code>tenant backup restore</code></td>
 </tr>
+<tr>
+<td><code>fleet/</code></td>
+<td>on a fleet master: each machine’s memory as encrypted snapshots, one folder per machine id, with the memory kept aside after it was replaced (30 days); <code>forgets.age</code>, the sealed record of forgets still to reach the machines</td>
+</tr>
+<tr>
+<td><code>fleet-updates/&lt;tag&gt;/&lt;os&gt;_&lt;arch&gt;/</code></td>
+<td>on a fleet master: the releases <code>tenant fleet update</code> fetched and verified for its machines</td>
+</tr>
 </tbody>
 </table>
 <p>Next to the data dir, <code>tenant update</code> keeps <code>&lt;data&gt;-backups/pre-update-&lt;version&gt;.tenant-backup</code>.</p>
+<h2 id="on-a-fleet-machine">On a fleet machine</h2>
+<p>A child keeps its files in its own directory: <code>&lt;config&gt;/child</code> for one that runs as you, or, with <code>tenant child install --system</code>, <code>/etc/tenant/child</code> (Linux), <code>/Library/Application Support/tenant/child</code> (macOS), <code>C:\ProgramData\tenant\child</code> (Windows). The file tools refuse it.</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Path</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>child.json</code></td>
+<td>the id and name the master gave the machine, the master’s addresses and certificate fingerprint, the sandbox, the ceiling (<code>full</code>, <code>no-exec</code>, <code>read-only</code>), <code>tools</code> (the only tools it serves), <code>secret_paths</code>, <code>updates</code>; owner-only, read from the disk on every call</td>
+</tr>
+<tr>
+<td><code>child-identity.pem</code></td>
+<td>the machine’s own key pair and certificate, minted at enrollment</td>
+</tr>
+<tr>
+<td><code>audit/audit.jsonl</code></td>
+<td>the hash-chained log of every call from the master, written before the call runs; <code>tenant child audit</code> checks it, <code>tenant child uninstall</code> leaves it</td>
+</tr>
+<tr>
+<td><code>memory/</code></td>
+<td>the last three encrypted copies of the machine’s memory the master sent; the machine cannot read them</td>
+</tr>
+<tr>
+<td><code>child-link.json</code>, <code>child-paused</code></td>
+<td>the link’s state, and present while the child is paused (<code>tenant child pause</code>); <code>tenant child status</code> reads both</td>
+</tr>
+<tr>
+<td><code>child-update.json</code></td>
+<td>how the last update over the link went (<code>tenant child status</code> shows it)</td>
+</tr>
+</tbody>
+</table>
+<p>Beside it, a folder of the same name ending in <code>-data</code> (<code>&lt;config&gt;/child-data</code>) holds the child’s <code>proc/</code> (background commands) and <code>screenshots/</code>. See <a href="/tenant/docs/fleet/machines">Machines</a>.</p>
 <h2 id="retention">Retention</h2>
 <p>Each class of data has its own retention: <code>tenant privacy</code> shows it and <code>tenant privacy retention set &lt;class&gt; &lt;days|forever&gt;</code> changes it. Logs are kept 30 days by default (<code>logs.retention_days</code>), run records 90 days (<code>runs.max_age_days</code>), route decisions 90 days (<code>route.log_retention_days</code>). See <a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a>.</p>
 <div class="pagefoot">
@@ -321,6 +404,7 @@
 <li><a href="#locations" id="toc-locations">Locations</a></li>
 <li><a href="#the-config-dir" id="toc-the-config-dir">The config dir</a></li>
 <li><a href="#the-data-dir" id="toc-the-data-dir">The data dir</a></li>
+<li><a href="#on-a-fleet-machine" id="toc-on-a-fleet-machine">On a fleet machine</a></li>
 <li><a href="#retention" id="toc-retention">Retention</a></li>
 </ul>
 </div>

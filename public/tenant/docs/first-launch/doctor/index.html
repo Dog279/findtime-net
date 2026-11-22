@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -135,6 +144,14 @@
 <tr>
 <td>secret storage protection</td>
 <td><code>credentials.json</code>, <code>dashboard-auth-token</code>, <code>gateway-auth-token</code> and the other secret files: <code>0600</code> and a <code>0700</code> parent on Unix, a current-user-only DACL on Windows</td>
+</tr>
+<tr>
+<td>process protection</td>
+<td>each <a href="/tenant/docs/setup/process-protection">process protection</a> control as on or off, with the system’s reason and whether it was acknowledged; what the system says about itself; what stays readable and what your other programs can still do; on macOS the hardened-runtime flag and the kind of signature. When a Tenant is running, it reports that process (asked over <code>/api/status</code>, named in the first line) and not its own; with none running, what a start would get</td>
+</tr>
+<tr>
+<td>fleet memory keys</td>
+<td>on a fleet master: the fleet key exists, is owner-only and is held in locked memory, and the recovery key is set and was proven. Skipped elsewhere</td>
 </tr>
 <tr>
 <td>credentials</td>
@@ -240,6 +257,10 @@
 <td>remote MCP auth</td>
 <td>a remote connector whose OAuth refresh token died, read offline from its cache</td>
 </tr>
+<tr>
+<td>fleet machine <code>&lt;name&gt;</code></td>
+<td>on a fleet master, one per machine that is not revoked, asked through the running Tenant: reachable, its version against the master’s, whether the master still serves its link version, how its last update went, and whether its memory is in step. With no running Tenant that holds the fleet, it is skipped. See <a href="/tenant/docs/fleet/overview">Fleet</a></td>
+</tr>
 </tbody>
 </table>
 <h2 id="what---fix-does">What <code>--fix</code> does</h2>
@@ -250,6 +271,7 @@
 <li><strong>embedding dimension consistency FAIL</strong>: you switched embedders after storing data. <code>tenant memory reembed</code> recomputes every vector with the current one.</li>
 <li><strong>generation endpoint FAIL</strong>: the endpoint or key. <code>tenant model models</code> lists what the provider serves; <code>/model reload</code> re-reads a rotated key.</li>
 <li><strong>secret storage protection WARN</strong>: run <code>tenant doctor --fix</code> from the account that owns the files (on a Windows service, an administrator window).</li>
+<li><strong>process protection WARN</strong>: a control is off. The reason is the system’s own. A control that was in force at start and was undone while Tenant ran comes back with a restart (<code>tenant service restart</code>); to run without one, <code>tenant serve</code> or <code>tenant service start</code> at a terminal asks and records your yes.</li>
 <li><strong>exec sandbox WARN</strong>: the surface runs commands on the host, or a profile names a backend this OS lacks. See <a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a>.</li>
 <li><strong>container sandbox FAIL</strong>: those surfaces’ commands do not run until it is fixed (the container backend never falls back to the host). The row’s fix line is the one for the reason it found: install Docker, start it, update Docker or WSL, build the image with <code>tenant sandbox image build</code>, or restart a Docker Desktop that answers but starts no container (<code>docker desktop status</code> stays at <code>starting</code>).</li>
 </ul>

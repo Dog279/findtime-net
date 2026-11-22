@@ -30,6 +30,13 @@ On Windows a machine can have both a `--system` service and your own logon task.
 
 `stop` and `uninstall` work even when `config.json` does not load: they print the error as a warning and carry on, so a service that cannot start on a broken config can still be stopped and removed. The other verbs stop at the error, like every other command.
 
+### Process protection
+
+The service has nobody to ask whether it may run without a [process protection](/tenant/docs/setup/process-protection) the system refuses, so `install`, `start` and `restart` (and `tenant setup` when it installs the service) check first, at the terminal you typed them in. When a control cannot be applied they say which and what that leaves open, and ask `Continue without it? [y/N]`; a yes is recorded, and the service starts on it. Run from a script with no terminal, they stop with the reason. A service that meets an unacknowledged control does not start; the reason is in `tenant logs query "provider:system id:3030"` and in the system's own log.
+
+- **macOS.** `install` also signs the binary with the hardened runtime before it writes the unit, when the binary does not carry the flag yet: a copy is signed ad hoc and checked, then moved into place. If signing fails, you get a warning and the service is installed with the binary as it was.
+- **Windows.** serve starts a small helper, `tenant __session-watch`, which owns the hidden window Windows sends a logoff or a shutdown to, so Task Manager shows a second `tenant.exe` under serve. If the helper is ended alone, serve keeps running, but a logoff, a shutdown or `tenant service stop` then ends it without a clean stop; restart Tenant to get the helper back.
+
 ## What gets installed
 
 | | macOS | Linux | Windows | Windows `--system` |
@@ -44,7 +51,7 @@ Platform notes:
 
 - **macOS (TCC).** The install refuses a binary, config dir or data dir under `~/Desktop`, `~/Documents` or `~/Downloads`: macOS silently denies those to a background process. Good homes are `~/.local/bin`, `~/.config/tenant` and `~/Library/Application Support/tenant`. Under launchd Tenant fills in the login-shell `PATH` (`path_helper` plus Homebrew), so `brew`, `node` and the like resolve in commands.
 - **Linux (linger).** The user manager stops at logout unless the account lingers. `install` prints `loginctl enable-linger <user>` when it is off; run it once.
-- **Windows.** Installing the task needs no administrator: it is registered for your account alone and starts when you log on, with no time limit and no battery conditions. Its console window is hidden. When you log off, restart or shut down, Windows tells Tenant through a window of its own that is never shown, and Tenant stops cleanly; Windows allows about five seconds for that. `tenant service restart`, `stop` and `uninstall`, and so `tenant update`, ask Tenant to stop the same way and wait up to 6 seconds; only a Tenant that is still running after that is ended the hard way. The stop budget is 4 seconds because that is about what a logoff allows. A Tenant that starts while the one it replaces is still letting go of the dashboard's address waits up to 10 seconds for it. `--system` is a real service with a Stop control and `sc failure` restarts; it needs an elevated terminal.
+- **Windows.** Installing the task needs no administrator: it is registered for your account alone and starts when you log on, with no time limit and no battery conditions. Its console window is hidden. When you log off, restart or shut down, Windows tells Tenant through a window that is never shown (a small helper process owns it, see Process protection below), and Tenant stops cleanly; Windows allows about five seconds for that. `tenant service restart`, `stop` and `uninstall`, and so `tenant update`, ask Tenant to stop the same way and wait up to 6 seconds; only a Tenant that is still running after that is ended the hard way. The stop budget is 4 seconds because that is about what a logoff allows. A Tenant that starts while the one it replaces is still letting go of the dashboard's address waits up to 10 seconds for it. `--system` is a real service with a Stop control and `sc failure` restarts; it needs an elevated terminal.
 - **Endpoint protection.** A program that starts hidden at logon is what some security products watch for. If yours blocks the task from starting, allow `tenant.exe` there; `tenant service status` then says "not reachable" although the task is installed.
 
 ## What runs in serve mode

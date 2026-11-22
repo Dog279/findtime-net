@@ -33,6 +33,8 @@ A tar.gz with `MANIFEST.json` first, then the config dir and the data dir: every
 
 **Credentials are left out of an unencrypted backup.** An encrypted one (`--encrypt` or `--recipient`) carries `credentials.json` too, so a restore on another machine is complete.
 
+**On a fleet master, encrypt.** An unencrypted backup leaves out the fleet certificate, `fleet.json` and the fleet key, and `tenant backup` warns when it makes one. A master restored from it is a stranger to its machines: each needs `tenant child rehome`, and their memory cannot be read without the recovery identity. A master restored from an encrypted backup has all three back, and its machines reconnect by themselves. See [Fleet](/tenant/docs/fleet/overview).
+
 `verify` checks every checksum in the manifest, opens every database and runs its integrity check, checks every log and schema. `restore` verifies first, then swaps the directories in, keeping the replaced ones beside them; it takes the data-dir lock exclusively, so stop the service first:
 
 ```bash

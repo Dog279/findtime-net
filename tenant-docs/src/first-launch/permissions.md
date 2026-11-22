@@ -119,13 +119,32 @@ The dashboard's **Tools** page has a **Tool rules** card. There is deliberately 
 A rule can decide a shell command by its text. Patterns are `os_exec(<glob>)`:
 
 ```text
-/permissions add "os_exec(brew install *)" allow
-/permissions add "os_exec(git push)" deny        # that command alone
+/permissions add os_exec(brew install *) allow
+/permissions add os_exec(git push) deny          # that command alone
 ```
 
 A compound command is judged per segment: any deny denies, else any ask asks, else allow when every segment matched. **Always** on an exec prompt saves the command's family as such a rule instead of opening all of `exec`.
 
-**Read-only commands run without a prompt** on the host and over Discord: `ls`, `cat`, `rg`, `git status`, `brew list`, `find` without `-delete` or `-exec`, and the like, when every segment of the command only looks, nothing redirects output and nothing escalates with `sudo`. iMessage stays deny-by-default. A category `deny` and your rules still bind. Separately, a **danger classifier** hard-blocks catastrophic commands whatever the mode (`mkfs`, `dd` to a device, disk erase, `shutdown`, a fork bomb, piping remote content to a shell, `tenant service` and `tenant update` from inside the agent).
+**Read-only commands run without a prompt** on the host and over Discord when `exec` is on `ask`. The check reads the line as sh and as PowerShell at once, and asks about whatever it cannot tell. What still runs unasked is a read-only word standing bare, with literal arguments: `ls`, `cat`, `head`, `grep`, `wc`, `pwd`, `echo`, `ps`, `Get-ChildItem`, `Get-Content`; `env`, `printenv`, `date`, `date +FORMAT`, `date -u`, `hostname`, `hostname -f`; `git status`, `git log`, `git diff`, `git show`; `brew list`; `ls -la | grep x`; `echo $(whoami)`. iMessage stays deny-by-default, and a category `deny` and your rules still bind.
+
+Many forms that used to run unasked now ask, among them:
+
+- a read-only word given by its path (`/usr/bin/grep`), after `VAR=value`, or in capitals (`LS`); PowerShell's own names such as `Get-ChildItem` are taken in any case
+- `env <command>`, `date -d`, `date -s`, `hostname NAME`
+- `$(…)` after any word but `echo` (`wc -l $(git ls-files)`), and a variable among the arguments of any word but `echo` and `Write-Output` (`cat $HOME/.profile`); single-quoted `'$x'` is text and still runs
+- `find`, `sort`, `git` and the other words with rules, when an argument is an unquoted glob (`find . -name *.go`: quote the pattern)
+- options that write or start another program: `sort -o`, `git log --output=FILE`, `rg --pre`, `git <command> --help`, `git branch NAME`
+- on Windows, a PowerShell method call or assignment, a script block, and a second statement after a lone carriage return
+
+A **network path** asks wherever it is written (`\\host\share\file`, `//host/share`), because reading one sends your Windows sign-in to that host; so does `/net/HOST`. `os_exec` refuses a network share or `/net/HOST` as its working directory: `cd` there inside the command instead, so that it is approved with the command. To let a form you use run unasked again, add a command rule:
+
+```text
+/permissions add os_exec(date -d *) allow
+```
+
+What the line does not show still runs unasked: what a program does of its own accord (git runs the hooks and filters a repository's config names, brew reads the network), where a local path leads (a mounted network folder, a link), and what a read hands the model (`env`, `cat ~/.ssh/id_ed25519`).
+
+Separately, a **danger classifier** files catastrophic commands (`mkfs`, `dd` to a device, disk erase, `shutdown`, a fork bomb, piping remote content to a shell) under `destructive`, so they ask even when `exec` is allowed. The agent's own `tenant service`, `tenant update`, `tenant child` and `tenant fleet` are marked the same way wherever they run in a line: after `;` or `&&`, behind `sudo`, `env`, `nohup`, `xargs`, `eval`, `iex` or `Start-Process`, or inside `sh -c`, `cmd /c` or `powershell -Command`. Text stays text: `grep "tenant service" x.log` and `echo tenant update` are not marked. This catches the plain spellings only. A variable, an alias or a script file still hides the command, and what holds then is the `exec` mode itself. For approvals on the machines of a fleet, see [Fleet approvals](/tenant/docs/fleet/approvals).
 
 ## Auditing the posture
 

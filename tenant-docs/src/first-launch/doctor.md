@@ -21,6 +21,8 @@ Each check reports **OK**, **WARN**, **FAIL** or **SKIP** with a detail line and
 | private data permissions | owner-only permissions on the stores; `--fix` applies them |
 | launch config | `config.json` parses, its schema version, the active provider exists |
 | secret storage protection | `credentials.json`, `dashboard-auth-token`, `gateway-auth-token` and the other secret files: `0600` and a `0700` parent on Unix, a current-user-only DACL on Windows |
+| process protection | each [process protection](/tenant/docs/setup/process-protection) control as on or off, with the system's reason and whether it was acknowledged; what the system says about itself; what stays readable and what your other programs can still do; on macOS the hardened-runtime flag and the kind of signature. When a Tenant is running, it reports that process (asked over `/api/status`, named in the first line) and not its own; with none running, what a start would get |
+| fleet memory keys | on a fleet master: the fleet key exists, is owner-only and is held in locked memory, and the recovery key is set and was proven. Skipped elsewhere |
 | credentials | every keyed provider has a resolvable secret (an env var, or a stored key) |
 | profiles/router | every model role resolves to a provider |
 | fallback health gating | whether latency gating is on and has a chain to move to |
@@ -47,6 +49,7 @@ Each check reports **OK**, **WARN**, **FAIL** or **SKIP** with a detail line and
 | tool-calling (deep) | one real tool-calling turn against the model |
 | mcp surface (deep) | the MCP memory server round-trips |
 | remote MCP auth | a remote connector whose OAuth refresh token died, read offline from its cache |
+| fleet machine `<name>` | on a fleet master, one per machine that is not revoked, asked through the running Tenant: reachable, its version against the master's, whether the master still serves its link version, how its last update went, and whether its memory is in step. With no running Tenant that holds the fleet, it is skipped. See [Fleet](/tenant/docs/fleet/overview) |
 
 ## What `--fix` does
 
@@ -58,6 +61,7 @@ Only safe, reversible repairs: owner-only permissions on secret files and stores
 - **embedding dimension consistency FAIL**: you switched embedders after storing data. `tenant memory reembed` recomputes every vector with the current one.
 - **generation endpoint FAIL**: the endpoint or key. `tenant model models` lists what the provider serves; `/model reload` re-reads a rotated key.
 - **secret storage protection WARN**: run `tenant doctor --fix` from the account that owns the files (on a Windows service, an administrator window).
+- **process protection WARN**: a control is off. The reason is the system's own. A control that was in force at start and was undone while Tenant ran comes back with a restart (`tenant service restart`); to run without one, `tenant serve` or `tenant service start` at a terminal asks and records your yes.
 - **exec sandbox WARN**: the surface runs commands on the host, or a profile names a backend this OS lacks. See [The execution sandbox](/tenant/docs/first-launch/sandbox).
 - **container sandbox FAIL**: those surfaces' commands do not run until it is fixed (the container backend never falls back to the host). The row's fix line is the one for the reason it found: install Docker, start it, update Docker or WSL, build the image with `tenant sandbox image build`, or restart a Docker Desktop that answers but starts no container (`docker desktop status` stays at `starting`).
 

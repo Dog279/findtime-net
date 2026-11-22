@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -163,6 +172,7 @@
 </tbody>
 </table>
 <p><code>forget</code> always shows what it would delete and asks, unless <code>--yes</code>. It deletes for real: rows, the search index and the archive events. (<code>/memory forget fact:&lt;id&gt;</code> in the terminal UI only hides a fact from recall.)</p>
+<p><strong>On a fleet master, <code>forget</code> reaches every machine’s <a href="/tenant/docs/fleet/memory">memory</a></strong> for <code>--session</code>, <code>--episode</code>, <code>--match</code>, <code>--before</code> and <code>--only-agent</code>. The Tenant that holds the fleet deletes it there and from the memory kept aside, sends each machine a new copy and tells it to delete its older ones; a machine that is offline is told when it is back. Copies a machine keeps under an earlier fleet key are not deleted, and the command says so: delete them on the machine. The request is kept, sealed, until every machine still in the fleet has had it, has dropped its older copies and keeps none under another fleet key, and then deleted. After that, a copy older than the forget that comes back from a backup of a machine’s own disk is not purged, and a memory rebuilt from it holds what was forgotten again. Retention pruning does not reach the machines’ memory.</p>
 <h2 id="retention-classes">Retention classes</h2>
 <table>
 <colgroup>
