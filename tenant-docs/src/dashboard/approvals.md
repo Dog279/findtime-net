@@ -33,6 +33,10 @@ There is no "always" button here. To stop being asked about a whole area, change
 
 **Requests from a Discord conversation** are answered on Discord, with the buttons on the card; the page only says they are there. **Requests from iMessage** are in the list, marked "from iMessage", and are answered here (or by the operator's text reply).
 
+## Requests for a fleet machine
+
+A request for an action on one of your [fleet](/tenant/docs/fleet/approvals) machines is answered here, on the master, like any other. Its headline names the machine first (`On the machine "web1": your agent wants to …`), and the line under it says "on the machine `<id>`, not this computer". It never offers **Allow for the rest of this session**: a machine keeps no session grant. The rows below are this computer's; each machine has its own, on the **Fleet** page.
+
 ## If nobody answers
 
 | Request from | Refused when |
@@ -73,7 +77,7 @@ One row per area, in words. Each says what the agent can do now.
 ## By REST
 
 ```http
-GET  /api/approvals                     [{id, category, action, detail, age_secs}]
+GET  /api/approvals                     [{id, category, action, detail, age_secs, host, host_name}]
 POST /api/approvals/{id}                {"decision": "approve" | "approve_session" | "approve_always" | "deny"}
 ```
 

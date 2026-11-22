@@ -27,6 +27,8 @@ The script downloads the release archive for your OS and CPU, checks its SHA-256
 | Rights needed | none (no sudo) | none (no administrator) |
 | Quarantine | none: a `curl` download carries no Gatekeeper mark | none: no SmartScreen prompt |
 
+On macOS the script signs the binary on your machine with the hardened runtime before it moves it into place (`/usr/bin/codesign --force --sign - --options runtime`, ad hoc, no entitlements), and checks the flag on the signed copy. This is what makes macOS refuse a debugger; see [Process protection](/tenant/docs/setup/process-protection). If signing fails, the script stops and a Tenant installed before stays as it was.
+
 If the directory is not on your `PATH`, the script prints the line to add. Confirm with:
 
 ```bash
@@ -48,6 +50,8 @@ Set these in the environment before running the script.
 TENANT_VERSION=0.1.0 TENANT_INSTALL_DIR=/opt/tenant/bin sh -c "$(curl -fsSL https://github.com/Dog279/TENANT/releases/latest/download/install.sh)"
 ```
 
+The same script can make the machine a child of a [fleet](/tenant/docs/fleet/setup): with `TENANT_CHILD` set it goes straight on to `tenant child install`. `TENANT_CHILD=user` runs the child as your account; `TENANT_CHILD=system` runs it as root (or SYSTEM on Windows) from boot, needs the script run as root (an elevated PowerShell on Windows), and puts the binary in `/usr/local/bin` (`%ProgramFiles%\Tenant`). `TENANT_ENROLL_CODE` is the one-time code `tenant fleet enroll <name>` printed on the master; left unset, the script asks for it at the terminal. `tenant fleet enroll` prints the full line to paste.
+
 ## Manual install
 
 Every release on the [Releases page](https://github.com/Dog279/TENANT/releases/latest) carries:
@@ -57,6 +61,7 @@ Every release on the [Releases page](https://github.com/Dog279/TENANT/releases/l
 | `tenant_<version>_<os>_<cpu>.tar.gz` (`.zip` on Windows) | the binary, `README.md` and `LICENSE`; `os` is `darwin`, `linux` or `windows`, `cpu` is `x86_64` or `aarch64` |
 | `checksums.txt` | SHA-256 of every archive |
 | `checksums.txt.sigstore.json` | a keyless cosign signature of the checksums, made by the release workflow through GitHub OIDC |
+| `checksums.txt.sig` | an Ed25519 signature of the checksums made with the project's key, on releases of the main repository; `tenant update` checks it (see [Update &amp; roll back](/tenant/docs/setup/update)) |
 | `*.spdx.json` | an SBOM per archive |
 | `install.sh`, `install.ps1` | the scripts above |
 

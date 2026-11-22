@@ -32,6 +32,11 @@ A Windows service runs as a service account, so its directories are that account
 | `soul/proposed/*.toml` | soul changes the self-improvement loop proposes for your review; never applied on their own | Tenant |
 | `profiles/*.yaml` | your overrides of the built-in model profiles (context budgets, reserves) | you |
 | `mcp/` | the OAuth token cache for remote MCP connectors | Tenant |
+| `fleet.json` | on a fleet master: its machines (name, state, certificate fingerprint, what each reported), the addresses a code tells them to dial, the pending codes' hashes and the recovery key's public half; owner-only ([Fleet](/tenant/docs/fleet/overview)) | `tenant fleet …`, `/fleet`, the **Fleet** page |
+| `fleet-identity.pem` | on a fleet master: its key pair and self-signed certificate for the fleet link; owner-only | `tenant fleet init` |
+| `fleet-key` | on a fleet master: the fleet key every machine's memory is encrypted to, sealed by the system's secret protector where there is one (Windows' data protection), an owner-only file elsewhere | `tenant fleet init` |
+| `fleet.holder` | on a fleet master: which process holds the fleet's links | Tenant |
+| `child/` | on a fleet machine: the child's directory (below) | `tenant child install` |
 
 Secrets never live in `config.json`. `tenant doctor` checks the permissions of every secret file and `tenant doctor --fix` repairs them. The file tools the agent uses refuse to read or write `credentials.json`, `settings.<agent>.json` and the token file.
 
@@ -61,8 +66,25 @@ Secrets never live in `config.json`. `tenant doctor` checks the permissions of e
 | `mcp/<name>/` | the work dir of each local MCP server |
 | `x-token.json` | the X (Twitter) OAuth token |
 | `.tenant.lock` | held shared by every running command, exclusively by `tenant backup restore` |
+| `fleet/` | on a fleet master: each machine's memory as encrypted snapshots, one folder per machine id, with the memory kept aside after it was replaced (30 days); `forgets.age`, the sealed record of forgets still to reach the machines |
+| `fleet-updates/<tag>/<os>_<arch>/` | on a fleet master: the releases `tenant fleet update` fetched and verified for its machines |
 
 Next to the data dir, `tenant update` keeps `<data>-backups/pre-update-<version>.tenant-backup`.
+
+## On a fleet machine
+
+A child keeps its files in its own directory: `<config>/child` for one that runs as you, or, with `tenant child install --system`, `/etc/tenant/child` (Linux), `/Library/Application Support/tenant/child` (macOS), `C:\ProgramData\tenant\child` (Windows). The file tools refuse it.
+
+| Path | What |
+|---|---|
+| `child.json` | the id and name the master gave the machine, the master's addresses and certificate fingerprint, the sandbox, the ceiling (`full`, `no-exec`, `read-only`), `tools` (the only tools it serves), `secret_paths`, `updates`; owner-only, read from the disk on every call |
+| `child-identity.pem` | the machine's own key pair and certificate, minted at enrollment |
+| `audit/audit.jsonl` | the hash-chained log of every call from the master, written before the call runs; `tenant child audit` checks it, `tenant child uninstall` leaves it |
+| `memory/` | the last three encrypted copies of the machine's memory the master sent; the machine cannot read them |
+| `child-link.json`, `child-paused` | the link's state, and present while the child is paused (`tenant child pause`); `tenant child status` reads both |
+| `child-update.json` | how the last update over the link went (`tenant child status` shows it) |
+
+Beside it, a folder of the same name ending in `-data` (`<config>/child-data`) holds the child's `proc/` (background commands) and `screenshots/`. See [Machines](/tenant/docs/fleet/machines).
 
 ## Retention
 

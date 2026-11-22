@@ -77,6 +77,8 @@ Three reviewer personas (shipped in the binary beside the built-in helpers) read
 
 Two Tenants can pair with mutual consent and share what each permits: the wiki, memory, skills, exec or an LLM.
 
+Peering is for a Tenant with a different operator, each with its own agent and its own approvals. A [fleet](/tenant/docs/fleet/overview) is for your own machines: each runs `tenant child`, with no model and no agent, serves its tools to one master, and every approval for it is decided on that master.
+
 ```text
 /peer                                list peers and their share policy (also /peer show|remove)
 /peer serve [addr]                   start the listener (default 0.0.0.0:9100, TLS)

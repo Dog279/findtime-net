@@ -34,6 +34,8 @@ tenant privacy export --out DIR [--no-archive] [--only-agent ID]
 
 `forget` always shows what it would delete and asks, unless `--yes`. It deletes for real: rows, the search index and the archive events. (`/memory forget fact:<id>` in the terminal UI only hides a fact from recall.)
 
+**On a fleet master, `forget` reaches every machine's [memory](/tenant/docs/fleet/memory)** for `--session`, `--episode`, `--match`, `--before` and `--only-agent`. The Tenant that holds the fleet deletes it there and from the memory kept aside, sends each machine a new copy and tells it to delete its older ones; a machine that is offline is told when it is back. Copies a machine keeps under an earlier fleet key are not deleted, and the command says so: delete them on the machine. The request is kept, sealed, until every machine still in the fleet has had it, has dropped its older copies and keeps none under another fleet key, and then deleted. After that, a copy older than the forget that comes back from a backup of a machine's own disk is not purged, and a memory rebuilt from it holds what was forgotten again. Retention pruning does not reach the machines' memory.
+
 ## Retention classes
 
 | Class | Data | Default |

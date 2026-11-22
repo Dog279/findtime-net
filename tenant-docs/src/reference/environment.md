@@ -14,7 +14,10 @@ An environment variable is read at launch (or by the script that reads it). A ke
 | `TENANT_LOG` | every command | lowers the log book's level floor for this launch (`debug`); serve also tees stderr at this level |
 | `TENANT_CHROME` | the web plugin | the Chrome or Chromium binary to drive |
 | `TENANT_CLAUDE_BIN` | the `claudecode` provider | the `claude` CLI binary, when it is not on `PATH` |
-| `TENANT_UPDATE_REPO` | `tenant update` | `owner/name` of the repository to check for releases (a fork or mirror) |
+| `TENANT_UPDATE_REPO` | `tenant update`, `tenant fleet update` | `owner/name` of the repository to check for releases (a fork or mirror) |
+| `GITHUB_TOKEN` | `tenant update`, `tenant fleet update` | sent with the request for the release to GitHub's API (the github integration reads it too) |
+| `TENANT_ENROLL_CODE` | `tenant child install`, `tenant child rehome`, the install scripts | the one-time code from `tenant fleet enroll`; unset, the command reads it from standard input. Taken out of the environment at once, so nothing the command starts inherits it ([Fleet setup](/tenant/docs/fleet/setup)) |
+| `GOTRACEBACK` | the Go runtime; reported by `tenant doctor` | `crash` (or `wer` on Windows) makes the runtime ask for a memory dump at a crash, which Tenant cannot lower; doctor points it out ([Process protection](/tenant/docs/setup/process-protection)) |
 | `TENANT_TRACE_ID`, `TENANT_ACTIVITY_ID` | programs Tenant starts | the turn and operation ids, so a line the program files joins the right timeline |
 | `XDG_CONFIG_HOME`, `XDG_DATA_HOME` | Linux | the parents of the config and data dirs |
 | `LOCALAPPDATA`, `APPDATA` | Windows | the parents of the data and config dirs |
@@ -27,6 +30,8 @@ An environment variable is read at launch (or by the script that reads it). A ke
 | `TENANT_INSTALL_DIR` | where the binary goes (default `~/.local/bin`, or `%LOCALAPPDATA%\Programs\tenant`) |
 | `TENANT_REPO` | the GitHub `owner/name` asked for the latest release |
 | `TENANT_BASE_URL` | a directory URL that holds the archive and `checksums.txt` |
+| `TENANT_CHILD` | after installing, make this machine a child of a fleet: `user` (runs as this account) or `system` (as root or SYSTEM from boot; run the script as root, or from an elevated PowerShell) |
+| `TENANT_ENROLL_CODE` | with `TENANT_CHILD`: the one-time code `tenant fleet enroll <name>` printed; unset, it is asked for at the terminal |
 
 ## Model providers
 

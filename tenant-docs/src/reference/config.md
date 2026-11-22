@@ -94,6 +94,7 @@ Where the [container sandbox backend](/tenant/docs/first-launch/sandbox) finds i
 | `known_categories` | | which categories you have chosen for | Tenant |
 | `approval_timeout` | `10m` | how long a card waits (30 s to 24 h) | `/relay timeout` |
 | `card_style` | `v2` | `v2` or `legacy` | by hand |
+| `allow_fleet` | false | a Discord turn may reach the [fleet](/tenant/docs/fleet/approvals); off, it reaches no machine, reads included | `tenant fleet relay discord on\|off`, `/fleet relay` |
 
 ## `imessage`
 
@@ -105,12 +106,13 @@ Where the [container sandbox backend](/tenant/docs/first-launch/sandbox) finds i
 | `operator` | | the handle whose `Y <nonce>` approves | by hand |
 | `permissions` | all `deny` | per-category modes for iMessage turns | `/imessage permissions set`, **Access** |
 | `known_categories` | | which categories you have chosen for | Tenant |
+| `allow_fleet` | false | an iMessage turn may reach the fleet; off, it reaches no machine, reads included | `tenant fleet relay imessage on\|off`, `/fleet relay` |
 
 ## `cron`
 
 | Key | Default | Meaning | Changed by |
 |---|---|---|---|
-| `jobs` | | `{id, name, spec, prompt, enabled, kind, exec, tz}` each ([Scheduled jobs](/tenant/docs/dashboard/cron)) | `/cron`, the `cron_*` tools, **Scheduled jobs** |
+| `jobs` | | `{id, name, spec, prompt, enabled, kind, exec, tz, fleet}` each ([Scheduled jobs](/tenant/docs/dashboard/cron)); `fleet` lists the ids of the fleet machines the job may reach, none by default | `/cron`, the `cron_*` tools, **Scheduled jobs**; `fleet`: `/cron fleet` |
 | `timezone` | local | the default IANA zone | by hand |
 | `allow_exec` | false | the kill-switch for shell and exec jobs | `/cron exec on\|off`, **Scheduled jobs** |
 | `catchup` | false | fire a missed safe job once at start-up | by hand |
@@ -159,6 +161,14 @@ Where the [container sandbox backend](/tenant/docs/first-launch/sandbox) finds i
 |---|---|---|
 | `listen` | off | the listener address; `/peer serve` defaults to `0.0.0.0:9100` with TLS |
 | `transport` | | `overlay` permits plain HTTP on a non-loopback bind (you run Tailscale or WireGuard) |
+
+## `fleet`
+
+The master's side of a [fleet](/tenant/docs/fleet/overview). The machines themselves, and the addresses a code tells them to dial, are in `fleet.json`, not here.
+
+| Key | Default | Meaning | Changed by |
+|---|---|---|---|
+| `listen` | `0.0.0.0:9777` | the `host:port` the fleet port binds; nothing listens until `tenant fleet init` has made this Tenant a master | `tenant fleet init --listen` |
 
 ## `logs`
 
