@@ -66,10 +66,11 @@ With `GOTRACEBACK=crash` (or `wer` on Windows) in its environment, the Go runtim
 
 ## What changes for you
 
-- **Debuggers and dump tools are refused to you too**: `gdb -p`, `dlv attach`, `strace -p`, `gcore`, Task Manager's "Create dump file" and `procdump` fail unless run as root or from an elevated prompt.
+- **Debuggers and dump tools are refused to you too.** On Linux `gdb -p`, `dlv attach`, `strace -p` and `gcore`, and on Windows Task Manager's "Create dump file" and `procdump`, fail unless run as root or from an elevated prompt. On macOS `lldb -p` is refused.
 - **Stopping Tenant still works.** `kill`, `systemctl stop` and `tenant service stop` are not affected. On Windows `taskkill /F` and `Stop-Process -Force` end it; plain `Stop-Process` and Python's `os.kill` ask for more and are refused.
 - **Windows: a second `tenant.exe` under serve.** `tenant __session-watch` is a small helper that owns the window Windows sends a logoff or a shutdown to; it has none of serve's environment. If it is ended alone, serve runs on, but a logoff, a shutdown or `tenant service stop` then ends serve without a clean stop; restart Tenant to get it back.
 - **Windows: one registry value stays.** `HKCU\Software\Microsoft\Windows\Windows Error Reporting\ExcludedApplications`, a value named `tenant.exe`, stays after an uninstall. Delete it to undo it.
 - **macOS: keys in environment variables are reported**, because macOS shows your programs each other's starting environment: system 5020 at start and the `process.secret-env` finding. Save keys with `/configure <plugin>` or the dashboard's keys page instead.
+- **macOS: a binary you built yourself does not carry the hardened-runtime flag.** A plain `go build` leaves only the Go linker's ad hoc signature. Tenant still denies a later attach and turns core files off at start, and asks nothing; doctor calls it "a source build without the hardened runtime". `tenant service install` signs it, or sign it yourself with `/usr/bin/codesign --force --sign - --options runtime <binary>`.
 - **macOS: the installed binary is signed on your machine.** The install script, `tenant service install` and `tenant update` sign a copy with `codesign --force --sign - --options runtime` (ad hoc, no entitlements), check the flag, and only then move it into place. Doctor shows the flag and the kind of signature.
 - **Commands the agent runs are ordinary processes**, not protected.

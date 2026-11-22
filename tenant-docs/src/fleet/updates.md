@@ -28,7 +28,7 @@ Each step is printed, and how it ended: back on the new version, rolled back (wi
 ## What the machine does
 
 1. It writes the archive to `<dir>-data/update/` (a dropped link resumes there) and touches nothing else until the archive is whole and hashes right.
-2. It unpacks the new binary beside the installed one and runs it once with `version`.
+2. It unpacks the new binary beside the installed one. On macOS it signs that binary with the hardened runtime first, as `tenant update` does; if signing fails, the update is refused and nothing has changed. Then it runs the new binary once with `version`.
 3. It drops its link and its background commands, and runs the new binary as a trial, beside the old one.
 4. When the trial reaches the master, the child stops it, swaps the binaries (the old one stays as `tenant.prev`), and restarts into the new one.
 5. If the new version does not reach the master by the deadline, the machine puts the old binary back itself. A trial that exits, or does not reach the master within a minute, is deleted, and the machine reconnects on the old version.

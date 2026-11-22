@@ -154,7 +154,7 @@
 <h2 id="what-the-machine-does">What the machine does</h2>
 <ol type="1">
 <li>It writes the archive to <code>&lt;dir&gt;-data/update/</code> (a dropped link resumes there) and touches nothing else until the archive is whole and hashes right.</li>
-<li>It unpacks the new binary beside the installed one and runs it once with <code>version</code>.</li>
+<li>It unpacks the new binary beside the installed one. On macOS it signs that binary with the hardened runtime first, as <code>tenant update</code> does; if signing fails, the update is refused and nothing has changed. Then it runs the new binary once with <code>version</code>.</li>
 <li>It drops its link and its background commands, and runs the new binary as a trial, beside the old one.</li>
 <li>When the trial reaches the master, the child stops it, swaps the binaries (the old one stays as <code>tenant.prev</code>), and restarts into the new one.</li>
 <li>If the new version does not reach the master by the deadline, the machine puts the old binary back itself. A trial that exits, or does not reach the master within a minute, is deleted, and the machine reconnects on the old version.</li>
