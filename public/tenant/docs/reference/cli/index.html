@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -169,7 +178,8 @@ tenant tui                                   full-screen terminal UI
 tenant chat                                  the agent loop without the UI; one stdin line is one turn
 tenant doctor [--fix] [--json]               diagnose the setup; --fix repairs what it safely can
 tenant help | help all | help &lt;command&gt;
-tenant version                               the version and build provenance
+tenant version                               the version and build provenance; a build made with -tags debugattach says so
+tenant version --protection                  also this process&#39;s protection report, as one line of JSON (tenant update reads it from the new binary)
 tenant update [--version vX.Y.Z] [--yes] [--now] [--force]
 tenant update --check                        running vs latest; exit 10 when an update exists
 tenant update --rollback
@@ -231,7 +241,29 @@ tenant peer join &lt;code&gt; [--as &lt;local-name&gt;]
 tenant peer list | show &lt;name&gt; | rename &lt;old&gt; &lt;new&gt; | remove &lt;name&gt; | revoke &lt;name&gt; | rotate &lt;name&gt;
 tenant peer share &lt;name&gt; wiki=on|off memory=on|off [skills=…] [exec=…] [llm=…]
 tenant peer query &lt;name&gt; &lt;wiki|memory&gt; &quot;&lt;query&gt;&quot;
-tenant mcp-memory [--allow-writes] [--tools] [--sse-addr ADDR] [--insecure-lan] [--allow-no-memory]   # over --sse-addr, clients send the token in gateway-auth-token</code></pre>
+tenant mcp-memory [--allow-writes] [--tools] [--sse-addr ADDR] [--insecure-lan] [--allow-no-memory]   # over --sse-addr, clients send the token in gateway-auth-token
+tenant fleet init [--listen ADDR] [--address HOST:PORT]...                    make this Tenant a fleet master (once)
+tenant fleet enroll &lt;name&gt; [--ttl 15m] [--adopt ID]                           a one-time code and the line to paste on the new machine
+tenant fleet address [list | add HOST:PORT | remove HOST:PORT]                the addresses a code tells a new machine to dial
+tenant fleet list | show &lt;name&gt;                                               the machines; one machine in full
+tenant fleet confirm &lt;name&gt; [--set category=mode]...                          confirm a pending machine with the six digits it shows
+tenant fleet rename &lt;name&gt; &lt;new-name&gt;                                         relabel a machine; its id stays
+tenant fleet revoke &lt;name&gt; [--keep-scheme | --delete-scheme]                  refuse its certificate from now on and close its link
+tenant fleet permissions &lt;name&gt; [set &lt;category&gt; &lt;mode&gt; | add &lt;pattern&gt; &lt;mode&gt; | rm &lt;pattern&gt;]   show or edit one machine&#39;s own approval scheme
+tenant fleet permissions &lt;name&gt; --from defaults|master                        lay the fleet&#39;s rules over it again, or copy the master&#39;s scheme again
+tenant fleet permissions --defaults [add &lt;pattern&gt; &lt;mode&gt; | rm &lt;pattern&gt;]     the rules every newly confirmed machine starts with
+tenant fleet relay [discord|imessage [on|off]]                                whether a turn from that relay may reach the fleet (off by default)
+tenant fleet update &lt;name&gt; | --all [--version vX.Y.Z] [--allow-older]         send machines a newer Tenant over their links
+tenant fleet recover &lt;name&gt; [--was ID]                                        read a machine&#39;s memory made under another fleet key, with the recovery identity
+tenant child install [--system] [--ceiling full|no-exec|read-only] [--updates release|master]   enroll this machine and install its service
+tenant child updates [release|master]        whose word an update from the master is taken on
+tenant child rehome                          trust another master, keeping this machine&#39;s key, ceiling, audit log and memory copies
+tenant child status                          connected, waiting for confirmation, paused, rejected, offline; exit 3 unless connected
+tenant child pause | resume                  stop serving the master at once, until resume
+tenant child audit                           check the chain of this machine&#39;s audit log
+tenant child uninstall                       remove the service and this machine&#39;s fleet key; the audit log stays
+tenant child run                             what the installed service runs: hold the link from this terminal</code></pre>
+<p><code>tenant fleet</code> runs on the master and <code>tenant child</code> on a machine it owns. <code>child install</code> and <code>child rehome</code> read the code from standard input or <code>$TENANT_ENROLL_CODE</code>, never from an argument. The walk-through is on <a href="/tenant/docs/fleet/overview">Fleet</a>.</p>
 <h2 id="safety">Safety</h2>
 <pre class="text"><code>tenant security audit [--json]
 tenant permissions effective [--surface local|discord|imessage] [--agent ID]

@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -307,12 +316,25 @@
 <p>The dashboard’s <strong>Tools</strong> page has a <strong>Tool rules</strong> card. There is deliberately no agent tool for rules: the model cannot grant itself permissions. Every rule decision and change is an audit line in the <code>approvals</code> log.</p>
 <h2 id="command-rules-os_exec">Command rules (<code>os_exec</code>)</h2>
 <p>A rule can decide a shell command by its text. Patterns are <code>os_exec(&lt;glob&gt;)</code>:</p>
-<pre class="text"><code>/permissions add &quot;os_exec(brew install *)&quot; allow
-/permissions add &quot;os_exec(git push)&quot; deny        # that command alone</code></pre>
+<pre class="text"><code>/permissions add os_exec(brew install *) allow
+/permissions add os_exec(git push) deny          # that command alone</code></pre>
 <p>A compound command is judged per segment: any deny denies, else any ask asks, else allow when every segment matched. <strong>Always</strong> on an exec prompt saves the command’s family as such a rule instead of opening all of <code>exec</code>.</p>
-<p><strong>Read-only commands run without a prompt</strong> on the host and over Discord: <code>ls</code>, <code>cat</code>, <code>rg</code>, <code>git status</code>, <code>brew list</code>, <code>find</code> without <code>-delete</code> or <code>-exec</code>, and the like, when every segment of the command only looks, nothing redirects output and nothing escalates with <code>sudo</code>. iMessage stays deny-by-default. A category <code>deny</code> and your rules still bind. Separately, a <strong>danger classifier</strong> hard-blocks catastrophic commands whatever the mode (<code>mkfs</code>, <code>dd</code> to a device, disk erase, <code>shutdown</code>, a fork bomb, piping remote content to a shell, <code>tenant service</code> and <code>tenant update</code> from inside the agent).</p>
+<p><strong>Read-only commands run without a prompt</strong> on the host and over Discord when <code>exec</code> is on <code>ask</code>. The check reads the line as sh and as PowerShell at once, and asks about whatever it cannot tell. What still runs unasked is a read-only word standing bare, with literal arguments: <code>ls</code>, <code>cat</code>, <code>head</code>, <code>grep</code>, <code>wc</code>, <code>pwd</code>, <code>echo</code>, <code>ps</code>, <code>Get-ChildItem</code>, <code>Get-Content</code>; <code>env</code>, <code>printenv</code>, <code>date</code>, <code>date +FORMAT</code>, <code>date -u</code>, <code>hostname</code>, <code>hostname -f</code>; <code>git status</code>, <code>git log</code>, <code>git diff</code>, <code>git show</code>; <code>brew list</code>; <code>ls -la | grep x</code>; <code>echo $(whoami)</code>. iMessage stays deny-by-default, and a category <code>deny</code> and your rules still bind.</p>
+<p>Many forms that used to run unasked now ask, among them:</p>
+<ul>
+<li>a read-only word given by its path (<code>/usr/bin/grep</code>), after <code>VAR=value</code>, or in capitals (<code>LS</code>); PowerShell’s own names such as <code>Get-ChildItem</code> are taken in any case</li>
+<li><code>env &lt;command&gt;</code>, <code>date -d</code>, <code>date -s</code>, <code>hostname NAME</code></li>
+<li><code>$(…)</code> after any word but <code>echo</code> (<code>wc -l $(git ls-files)</code>), and a variable among the arguments of any word but <code>echo</code> and <code>Write-Output</code> (<code>cat $HOME/.profile</code>); single-quoted <code>'$x'</code> is text and still runs</li>
+<li><code>find</code>, <code>sort</code>, <code>git</code> and the other words with rules, when an argument is an unquoted glob (<code>find . -name *.go</code>: quote the pattern)</li>
+<li>options that write or start another program: <code>sort -o</code>, <code>git log --output=FILE</code>, <code>rg --pre</code>, <code>git &lt;command&gt; --help</code>, <code>git branch NAME</code></li>
+<li>on Windows, a PowerShell method call or assignment, a script block, and a second statement after a lone carriage return</li>
+</ul>
+<p>A <strong>network path</strong> asks wherever it is written (<code>\\host\share\file</code>, <code>//host/share</code>), because reading one sends your Windows sign-in to that host; so does <code>/net/HOST</code>. <code>os_exec</code> refuses a network share or <code>/net/HOST</code> as its working directory: <code>cd</code> there inside the command instead, so that it is approved with the command. To let a form you use run unasked again, add a command rule:</p>
+<pre class="text"><code>/permissions add os_exec(date -d *) allow</code></pre>
+<p>What the line does not show still runs unasked: what a program does of its own accord (git runs the hooks and filters a repository’s config names, brew reads the network), where a local path leads (a mounted network folder, a link), and what a read hands the model (<code>env</code>, <code>cat ~/.ssh/id_ed25519</code>).</p>
+<p>Separately, a <strong>danger classifier</strong> files catastrophic commands (<code>mkfs</code>, <code>dd</code> to a device, disk erase, <code>shutdown</code>, a fork bomb, piping remote content to a shell) under <code>destructive</code>, so they ask even when <code>exec</code> is allowed. The agent’s own <code>tenant service</code>, <code>tenant update</code>, <code>tenant child</code> and <code>tenant fleet</code> are marked the same way wherever they run in a line: after <code>;</code> or <code>&amp;&amp;</code>, behind <code>sudo</code>, <code>env</code>, <code>nohup</code>, <code>xargs</code>, <code>eval</code>, <code>iex</code> or <code>Start-Process</code>, or inside <code>sh -c</code>, <code>cmd /c</code> or <code>powershell -Command</code>. Text stays text: <code>grep "tenant service" x.log</code> and <code>echo tenant update</code> are not marked. This catches the plain spellings only. A variable, an alias or a script file still hides the command, and what holds then is the <code>exec</code> mode itself. For approvals on the machines of a fleet, see <a href="/tenant/docs/fleet/approvals">Fleet approvals</a>.</p>
 <h2 id="auditing-the-posture">Auditing the posture</h2>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> security audit <span class="pp">[--</span><span class="ss">json</span><span class="pp">]</span>     <span class="co"># non-zero exit on a critical finding</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> security audit <span class="pp">[--</span><span class="ss">json</span><span class="pp">]</span>     <span class="co"># non-zero exit on a critical finding</span></span></code></pre></div>
 <p>Reports what each live surface may do without approval, the browser sandbox, listeners, secret-file protection and the execution profiles. Finding ids include <code>permissions.host-exec-allow</code> (exec allowed on a surface whose commands really run on the host), <code>permissions.destructive-allow</code>, <code>permissions.sandbox-allow</code>, <code>execution.dry-run</code>, <code>execution.host</code>, <code>execution.unavailable</code>, <code>mcp.trust-annotations</code>, <code>mcp.write-bypass</code>, <code>browser.no-sandbox</code>, <code>secret.dashboard-auth</code>, <code>web.remote-reader</code>.</p>
 <p>The Security log (<code>tenant logs query "log:security"</code>, or the dashboard’s <strong>Logs</strong>) records every request, who answered it and what they answered, and every change to a mode or rule, with where it was made. It can never be cleared.</p>
 <h2 id="related-settings">Related settings</h2>

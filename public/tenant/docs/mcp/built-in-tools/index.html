@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -213,6 +222,12 @@
 <td>the <code>mcp</code> category</td>
 </tr>
 <tr>
+<td><strong>fleet</strong></td>
+<td><code>fleet_list</code>, <code>fleet_exec</code>, <code>fleet_process</code>, <code>fleet_read</code>, <code>fleet_list_dir</code>, <code>fleet_write</code>, <code>fleet_edit</code>, <code>fleet_copy</code>, <code>fleet_tools</code>, <code>fleet_call</code>, <code>fleet_note</code></td>
+<td>on a fleet master, only while it has a confirmed or paused machine</td>
+<td>the machine’s own approval scheme (<code>fleet_exec</code>, <code>fleet_process</code> kill and write, <code>fleet_write</code>, <code>fleet_edit</code>, <code>fleet_copy</code>, <code>fleet_call</code>)</td>
+</tr>
+<tr>
 <td><strong>memory</strong></td>
 <td>the recall and <code>skill_save</code> tools</td>
 <td>always on</td>
@@ -246,6 +261,7 @@
 <li><strong>web.</strong> Drives a headless Chrome with its process sandbox on. Searches use Tavily or Brave when a key is set; page reading falls back to Jina Reader only if you turn that on (it sends failed-page URLs to a third party). Screenshots go to <code>&lt;data&gt;/screenshots/</code>, and <code>web_screenshot</code> shows a model that can see the top of the page.</li>
 <li><strong>github.</strong> Watched repositories are <code>/github</code>; <code>/github write owner/name</code> lets the agent modify one (each write still gated per action), <code>/github readonly owner/name</code> makes it watch-and-report only, with writes refused in code. A gated merge path checks readiness and CI first.</li>
 <li><strong>ui.</strong> The components the agent answers with. <code>ui_render</code> takes a kind, <code>table</code>, <code>steps</code>, <code>choices</code> or <code>form</code>, and the data; Tenant draws it from a fixed template in the terminal app and on the dashboard’s Chat page, in place of the tool card. The model never writes markup: every value is text, and a shape that breaks a cap (12 columns, 200 rows, 200 characters a cell, 50 steps, 32 KB a call) comes back as one line the model can act on. A <code>choices</code> tap or a filled <code>form</code> sends your next message, marked “via choices” or “via form”, and never a slash command. <code>/disable ui</code> turns it off.</li>
+<li><strong>fleet.</strong> The tools the master’s agent works on a <a href="/tenant/docs/fleet/machines">fleet machine</a> with; every one but <code>fleet_list</code> takes the machine’s name as <code>host</code>. <code>fleet_exec</code>, <code>fleet_process</code>, <code>fleet_read</code>, <code>fleet_list_dir</code>, <code>fleet_write</code> and <code>fleet_edit</code> are the machine’s shell and file tools; <code>fleet_copy</code> copies one text file (at most 3 MiB) between this computer and a machine; <code>fleet_tools</code> lists the other tools the machine serves and <code>fleet_call</code> calls one; <code>fleet_note</code> records a fact about a machine in that machine’s memory, in the agent’s words, and makes no call to the machine. What a machine returns is labelled untrusted. <code>memory_search</code> takes a <code>host</code> too: that machine’s <a href="/tenant/docs/fleet/memory">memory</a>, searched only in a conversation that has had an answer from it.</li>
 <li><strong>wiki.</strong> Plain Markdown in a folder you own; research reports are deposited there. The tools name the folder so the model does not search the disk for it.</li>
 <li><strong>imessage.</strong> On a Mac, reads Messages’ <code>chat.db</code> directly (Full Disk Access) and names senders from Contacts; set a BlueBubbles URL to use it from any OS. The responder (reply to texts on its own) is a separate switch: <a href="/tenant/docs/dashboard/access">Access</a>.</li>
 </ul>

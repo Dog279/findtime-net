@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>What a fleet is — Tenant docs — FindTime</title>
+<meta name="description" content="One Tenant, the master, works on the other machines you own. Each of them runs the same binary as a child that serves its tools to the master’s agent, and every approval is decided on the master.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/fleet/overview">
+<meta property="og:title" content="What a fleet is — Tenant docs">
+<meta property="og:description" content="One Tenant, the master, works on the other machines you own. Each of them runs the same binary as a child that serves its tools to the master’s agent, and every approval is decided on the master.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/fleet/overview">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/fleet/overview">Fleet</a></p>
+<h1>What a fleet is</h1>
+<p class="lede">One Tenant, the master, works on the other machines you own. Each of them runs the same binary as a child that serves its tools to the master’s agent, and every approval is decided on the master.</p>
+<p>A <strong>fleet</strong> is one Tenant that owns other machines of yours. That Tenant is the <strong>master</strong>: it has the model, the agent, the memory, the dashboard and your approvals. Each other machine runs the same <code>tenant</code> binary as a <strong>child</strong>.</p>
+<h2 id="what-a-child-is">What a child is</h2>
+<p>A child is <code>tenant child run</code>, installed as a service by <code>tenant child install</code>. It has no model, no agent loop and no dashboard. It dials the master, holds one link open, and serves that machine’s tools to the master’s agent: commands, files, and whatever else it is set up to serve (its browser, SQL, the wiki, local MCP servers).</p>
+<ul>
+<li>The child always dials the master. The master never dials a machine, so only the master needs to be reachable, on one port.</li>
+<li>The link is TLS 1.3 with both certificates pinned by fingerprint: no certificate authority and no token. A certificate that is not pinned is dropped before anything is answered.</li>
+<li>Idle, a link carries one ping and its answer every 30 seconds. A link that misses two pings is given up on, so a dead link is noticed within a minute, and the child dials again by itself.</li>
+<li>A call to a machine that is offline fails at once. Nothing is queued.</li>
+</ul>
+<p>A child does not think and does not decide. It runs what the master’s agent asks for, within the limits the machine sets on itself (<a href="/tenant/docs/fleet/machines">On a fleet machine</a>).</p>
+<h2 id="fleet-or-peering">Fleet or peering</h2>
+<p>Peering (<code>tenant peer</code>) is a separate feature and is unchanged by the fleet.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>Fleet child</th>
+<th>Peer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Who runs it</td>
+<td>you, the same person who runs the master</td>
+<td>another operator</td>
+</tr>
+<tr>
+<td>Model and agent</td>
+<td>none: the master’s agent does the work</td>
+<td>a full Tenant of its own</td>
+</tr>
+<tr>
+<td>Approvals</td>
+<td>decided on the master</td>
+<td>decided on the machine that runs the action</td>
+</tr>
+</tbody>
+</table>
+<p>A machine is a peer or a child, never both.</p>
+<h2 id="the-trust-model">The trust model</h2>
+<ul>
+<li><strong>Approvals are decided on the master.</strong> A tool on a child that needs an approval asks the master over the link, and you answer there. Each machine has its own approval scheme (<a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a>).</li>
+<li><strong>Whoever controls the master controls every child</strong>, with the rights each child was installed with. The master’s data and config directories, its dashboard sign-in and its relays are the keys to the fleet. Protect the master accordingly.</li>
+<li><strong>What a machine returns is untrusted.</strong> Command output, file contents, and what a machine says about itself (its OS, account, version) are that machine’s words. The master’s agent gets them framed and labelled as untrusted data, never instructions.</li>
+<li><strong>A machine limits itself.</strong> Its <code>child.json</code> holds a ceiling that the master cannot lift, and every call is written to an audit log on the machine before it runs.</li>
+</ul>
+<p>Run the master as <code>tenant serve</code>, as its service (<code>tenant service install</code>), so its machines stay connected. A terminal app alone holds the fleet only while it is open. One process holds the links; another process on the same directories says which one does.</p>
+<h2 id="an-install-with-no-fleet">An install with no fleet</h2>
+<p>Nothing of the fleet is active until you ask for it:</p>
+<ul>
+<li>The fleet port is off until <code>tenant fleet init</code>. After that it listens on <code>fleet.listen</code> in <code>config.json</code> (default <code>0.0.0.0:9777</code>), and nothing answers on it but the pinned link and the enroll endpoint.</li>
+<li>The <code>fleet_*</code> tools are registered only while a confirmed machine exists. With none, the agent has no fleet tools and is told about no machines.</li>
+<li>A relay (Discord, iMessage) or a cron job reaches no machine, reads included, until you open it.</li>
+</ul>
+<h2 id="what-the-agent-gets">What the agent gets</h2>
+<p>Once a confirmed machine exists, the agent’s context has one line per machine (name, OS, online or not) and these tools, each of which takes a <code>host</code>, the machine’s name:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Tool</th>
+<th>On the machine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>fleet_list</code></td>
+<td>the machines: OS, the account Tenant runs as there, online or offline and since when</td>
+</tr>
+<tr>
+<td><code>fleet_exec</code>, <code>fleet_process</code></td>
+<td>run a shell command; the commands it left running in the background</td>
+</tr>
+<tr>
+<td><code>fleet_read</code>, <code>fleet_list_dir</code></td>
+<td>read a text file, list a folder; the machine refuses its secret files</td>
+</tr>
+<tr>
+<td><code>fleet_write</code>, <code>fleet_edit</code>, <code>fleet_copy</code></td>
+<td>change a text file; copy one text file between the master and the machine</td>
+</tr>
+<tr>
+<td><code>fleet_tools</code>, <code>fleet_call</code></td>
+<td>the other tools the machine serves, and a call to one of them</td>
+</tr>
+<tr>
+<td><code>fleet_note</code></td>
+<td>record a fact about the machine in its memory; nothing is sent to the machine</td>
+</tr>
+</tbody>
+</table>
+<p>A picture a tool makes on a machine (a screenshot, an image file it reads) stays on that machine: the link carries text, and the result says so. Helpers, teams, research and goal runs do not get the fleet tools. <a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a> lists their arguments.</p>
+<h2 id="the-fleet-pages">The fleet pages</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Page</th>
+<th>Read it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/tenant/docs/fleet/setup">Set up a fleet</a></td>
+<td>you are making a master and adding machines, or choosing how they reach it</td>
+</tr>
+<tr>
+<td><a href="/tenant/docs/fleet/machines">On a fleet machine</a></td>
+<td>you are on the machine itself: its service, its ceiling, its audit log, pausing or removing it</td>
+</tr>
+<tr>
+<td><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></td>
+<td>you want to set what the agent may do on each machine, or open a relay or a cron job to the fleet</td>
+</tr>
+<tr>
+<td><a href="/tenant/docs/fleet/memory">A machine’s memory</a></td>
+<td>you want to know what the master remembers about a machine, where it is kept, and how forget reaches it</td>
+</tr>
+<tr>
+<td><a href="/tenant/docs/fleet/updates">Update, move and recover</a></td>
+<td>you are updating machines, or the master was lost and its machines need a new one</td>
+</tr>
+</tbody>
+</table>
+<p>The commands are also in <a href="/tenant/docs/reference/cli">CLI commands</a>, and the Fleet page of the dashboard in <a href="/tenant/docs/dashboard/pages">Page by page</a>.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/fleet/overview.mdtenant-docs/src/fleet/overview.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#what-a-child-is" id="toc-what-a-child-is">What a child is</a></li>
+<li><a href="#fleet-or-peering" id="toc-fleet-or-peering">Fleet or peering</a></li>
+<li><a href="#the-trust-model" id="toc-the-trust-model">The trust model</a></li>
+<li><a href="#an-install-with-no-fleet" id="toc-an-install-with-no-fleet">An install with no fleet</a></li>
+<li><a href="#what-the-agent-gets" id="toc-what-the-agent-gets">What the agent gets</a></li>
+<li><a href="#the-fleet-pages" id="toc-the-fleet-pages">The fleet pages</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

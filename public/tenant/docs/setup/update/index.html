@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -137,7 +146,7 @@
 </tr>
 <tr>
 <td><code>--force</code></td>
-<td>proceed past a warning (a version that is not newer, an unfinished previous update)</td>
+<td>proceed past a warning (a version that is not newer, an unfinished previous update), or update a development build</td>
 </tr>
 <tr>
 <td><code>--rollback</code></td>
@@ -148,15 +157,23 @@
 <p><code>TENANT_UPDATE_REPO=owner/name</code> points the check at another repository (a fork, or a private mirror).</p>
 <h2 id="what-an-update-does">What an update does</h2>
 <ol type="1">
-<li>Downloads the release archive for this OS and CPU, verifies its SHA-256 against <code>checksums.txt</code>, and verifies the cosign signature when <code>cosign</code> is on <code>PATH</code>.</li>
-<li>Runs the new binary’s <code>version</code> before touching anything.</li>
-<li>Asks (unless <code>--yes</code>).</li>
+<li>Downloads the release archive for this OS and CPU, checks the project key’s signature when this binary carries the key (see below), verifies the archive’s SHA-256 against <code>checksums.txt</code>, and verifies the cosign signature when <code>cosign</code> is on <code>PATH</code>.</li>
+<li>On macOS, signs the new binary with the hardened runtime before it first runs. If that fails, nothing has changed and the running version stays.</li>
+<li>Runs the new binary’s <code>version --protection</code> before touching anything, and asks about each <a href="/tenant/docs/setup/process-protection">process protection</a> the new version cannot apply on this system and nobody has acknowledged for it (<code>Continue without it? [y/N]</code>). <code>--yes</code> does not answer this question. With no terminal, the update stops here, exits 2 and the running version keeps running; run <code>tenant update</code> at a terminal once to acknowledge it.</li>
+<li>Asks whether to update (unless <code>--yes</code>).</li>
 <li>Writes an unencrypted backup of the config and data dirs to <code>&lt;data&gt;-backups/pre-update-&lt;old version&gt;.tenant-backup</code>. Credentials are left out; the previous pre-update backup is replaced.</li>
 <li>Swaps the binary in with no gap, keeping the old one as <code>tenant.prev</code> beside it.</li>
 <li>Restarts the service (<code>tenant service restart</code>, which waits for the running turn unless <code>--now</code>).</li>
 <li>Polls <code>/api/status</code> for up to 90 seconds until it reports the new version. If it never does, the old binary goes back and the service is restarted again.</li>
 </ol>
-<p>A dev build (one built from source without release stamping) refuses to update. Nothing is ever applied automatically: serve checks for a newer release once a day and files one log-book event per new tag, which <code>"update_check": false</code> in <code>config.json</code> turns off.</p>
+<p>A dev build (one built from source without release stamping) refuses to update unless you pass <code>--force</code>. Nothing is ever applied automatically: serve checks for a newer release once a day and files one log-book event per new tag, which <code>"update_check": false</code> in <code>config.json</code> turns off.</p>
+<h2 id="signatures">Signatures</h2>
+<p>A release carries up to two signatures over <code>checksums.txt</code>: <code>checksums.txt.sigstore.json</code>, a keyless cosign signature made by the release workflow, and <code>checksums.txt.sig</code>, an Ed25519 signature made with the project’s key. The public half of that key is built into the release binaries of the main repository, and checking it needs nothing installed.</p>
+<ul>
+<li><strong>A binary that carries the key</strong> takes only a release whose <code>checksums.txt.sig</code> verifies under it. A missing, malformed or wrong signature refuses the update and changes nothing, and no flag skips it. When <code>cosign</code> is installed it is checked as well, and then both must pass.</li>
+<li><strong>A fork’s binaries</strong> carry no key. For them <code>checksums.txt.sig</code> is not looked at, and the update checks the SHA-256 and, with <code>cosign</code> on <code>PATH</code>, the cosign signature, as before. Development builds carry no key either (and refuse to update without <code>--force</code>).</li>
+</ul>
+<p>The update prints which checks passed, for example <code>verified checksum and the project key's signature (install cosign to verify the release workflow's signature as well)</code>.</p>
 <h2 id="rolling-back">Rolling back</h2>
 <p>Schemas move forward only: once a new version has migrated a store, the old binary alone is not enough, and the log book refuses a database written by a newer version. Rollback is the old binary plus the pre-update backup, restored by hand:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> update <span class="at">--rollback</span></span>
@@ -175,6 +192,7 @@
 <ul>
 <li><a href="#commands" id="toc-commands">Commands</a></li>
 <li><a href="#what-an-update-does" id="toc-what-an-update-does">What an update does</a></li>
+<li><a href="#signatures" id="toc-signatures">Signatures</a></li>
 <li><a href="#rolling-back" id="toc-rolling-back">Rolling back</a></li>
 </ul>
 </div>

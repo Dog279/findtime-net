@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -104,7 +113,7 @@
 <h1>The Judge</h1>
 <p class="lede">A decision model that checks the agent’s work before an answer reaches you. What it checks, how to set it up with /judge use clef or the Model page, what you see, and what it never does.</p>
 <p>The judge sits in front of your model and checks that a task was actually done before the answer reaches you. It is a <strong>decision model</strong>, not a chat model: it doesn’t write text, it answers yes/no questions with probabilities, so it is fast and can’t be argued with. Cloudflare’s <a href="https://huggingface.co/Cloudflare/clef-flash">Clef-flash</a> on your own server is the kind Tenant knows today (<code>clef</code>); any server with the System One API (<code>POST /v1/systemone</code>) answers the same way, and a hosted one needs only its address and key.</p>
-<p>The judge is off until you set it up. It is not the <a href="/tenant/docs/models/eval#the-quality-model">Quality model</a>, which grades eval answers, and not the <a href="/tenant/docs/models/teams#goals">goal’s check</a>, which decides when <code>/goal</code> is finished.</p>
+<p>The judge is off until you set it up. It is not the <a href="/tenant/docs/models/eval#the-quality-model">Quality model</a>, which grades eval answers, and not the <a href="/tenant/docs/models/teams#goal-the-autonomous-loop">goal’s check</a>, which decides when <code>/goal</code> is finished.</p>
 <h2 id="what-it-does">What it does</h2>
 <ul>
 <li><strong>Triage.</strong> When a prompt comes in, the judge decides whether it is a task (do, change, look up or check something), a question or chat. This runs while the model is already working, so it adds no wait. Only tasks are checked.</li>

@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -140,6 +149,7 @@
 </tr>
 </tbody>
 </table>
+<p>On macOS the script signs the binary on your machine with the hardened runtime before it moves it into place (<code>/usr/bin/codesign --force --sign - --options runtime</code>, ad hoc, no entitlements), and checks the flag on the signed copy. This is what makes macOS refuse a debugger; see <a href="/tenant/docs/setup/process-protection">Process protection</a>. If signing fails, the script stops and a Tenant installed before stays as it was.</p>
 <p>If the directory is not on your <code>PATH</code>, the script prints the line to add. Confirm with:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> version</span></code></pre></div>
 <h3 id="script-options">Script options</h3>
@@ -181,6 +191,7 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">TENANT_VERSION</span><span class="op">=</span>0.1.0 <span class="va">TENANT_INSTALL_DIR</span><span class="op">=</span>/opt/tenant/bin <span class="fu">sh</span> <span class="at">-c</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://github.com/Dog279/TENANT/releases/latest/download/install.sh<span class="va">)</span><span class="st">&quot;</span></span></code></pre></div>
+<p>The same script can make the machine a child of a <a href="/tenant/docs/fleet/setup">fleet</a>: with <code>TENANT_CHILD</code> set it goes straight on to <code>tenant child install</code>. <code>TENANT_CHILD=user</code> runs the child as your account; <code>TENANT_CHILD=system</code> runs it as root (or SYSTEM on Windows) from boot, needs the script run as root (an elevated PowerShell on Windows), and puts the binary in <code>/usr/local/bin</code> (<code>%ProgramFiles%\Tenant</code>). <code>TENANT_ENROLL_CODE</code> is the one-time code <code>tenant fleet enroll &lt;name&gt;</code> printed on the master; left unset, the script asks for it at the terminal. <code>tenant fleet enroll</code> prints the full line to paste.</p>
 <h2 id="manual-install">Manual install</h2>
 <p>Every release on the <a href="https://github.com/Dog279/TENANT/releases/latest">Releases page</a> carries:</p>
 <table>
@@ -206,6 +217,10 @@
 <tr>
 <td><code>checksums.txt.sigstore.json</code></td>
 <td>a keyless cosign signature of the checksums, made by the release workflow through GitHub OIDC</td>
+</tr>
+<tr>
+<td><code>checksums.txt.sig</code></td>
+<td>an Ed25519 signature of the checksums made with the project’s key, on releases of the main repository; <code>tenant update</code> checks it (see <a href="/tenant/docs/setup/update">Update &amp; roll back</a>)</td>
 </tr>
 <tr>
 <td><code>*.spdx.json</code></td>

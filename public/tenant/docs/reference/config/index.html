@@ -48,6 +48,7 @@
   <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
   <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
   <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
   <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
   <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
 </ul></details>
@@ -59,6 +60,14 @@
   <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
 </ul></details>
 <details class="area"><summary>Models &amp; helpers</summary><ul>
   <li><a href="/tenant/docs/models/providers">Providers</a></li>
@@ -505,6 +514,12 @@
 <td><code>v2</code> or <code>legacy</code></td>
 <td>by hand</td>
 </tr>
+<tr>
+<td><code>allow_fleet</code></td>
+<td>false</td>
+<td>a Discord turn may reach the <a href="/tenant/docs/fleet/approvals">fleet</a>; off, it reaches no machine, reads included</td>
+<td><code>tenant fleet relay discord on\|off</code>, <code>/fleet relay</code></td>
+</tr>
 </tbody>
 </table>
 <h2 id="imessage"><code>imessage</code></h2>
@@ -560,6 +575,12 @@
 <td>which categories you have chosen for</td>
 <td>Tenant</td>
 </tr>
+<tr>
+<td><code>allow_fleet</code></td>
+<td>false</td>
+<td>an iMessage turn may reach the fleet; off, it reaches no machine, reads included</td>
+<td><code>tenant fleet relay imessage on\|off</code>, <code>/fleet relay</code></td>
+</tr>
 </tbody>
 </table>
 <h2 id="cron"><code>cron</code></h2>
@@ -582,8 +603,8 @@
 <tr>
 <td><code>jobs</code></td>
 <td></td>
-<td><code>{id, name, spec, prompt, enabled, kind, exec, tz}</code> each (<a href="/tenant/docs/dashboard/cron">Scheduled jobs</a>)</td>
-<td><code>/cron</code>, the <code>cron_*</code> tools, <strong>Scheduled jobs</strong></td>
+<td><code>{id, name, spec, prompt, enabled, kind, exec, tz, fleet}</code> each (<a href="/tenant/docs/dashboard/cron">Scheduled jobs</a>); <code>fleet</code> lists the ids of the fleet machines the job may reach, none by default</td>
+<td><code>/cron</code>, the <code>cron_*</code> tools, <strong>Scheduled jobs</strong>; <code>fleet</code>: <code>/cron fleet</code></td>
 </tr>
 <tr>
 <td><code>timezone</code></td>
@@ -824,6 +845,32 @@
 </tr>
 </tbody>
 </table>
+<h2 id="fleet"><code>fleet</code></h2>
+<p>The master’s side of a <a href="/tenant/docs/fleet/overview">fleet</a>. The machines themselves, and the addresses a code tells them to dial, are in <code>fleet.json</code>, not here.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Default</th>
+<th>Meaning</th>
+<th>Changed by</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>listen</code></td>
+<td><code>0.0.0.0:9777</code></td>
+<td>the <code>host:port</code> the fleet port binds; nothing listens until <code>tenant fleet init</code> has made this Tenant a master</td>
+<td><code>tenant fleet init --listen</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="logs"><code>logs</code></h2>
 <p>See <a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a> for <code>dir</code>, <code>retention_days</code>, <code>level</code>, <code>max_field_bytes</code>, <code>budget_mb</code>, <code>diagnostic</code>, <code>security</code>, <code>per_log</code>, <code>rate_limit</code> and <code>alerts</code>.</p>
 <h2 id="a-complete-example">A complete example</h2>
@@ -873,6 +920,7 @@
 <li><a href="#improve-self-improvement" id="toc-improve-self-improvement"><code>improve</code> (self-improvement)</a></li>
 <li><a href="#goal" id="toc-goal"><code>goal</code></a></li>
 <li><a href="#peer-federation" id="toc-peer-federation"><code>peer</code> (federation)</a></li>
+<li><a href="#fleet" id="toc-fleet"><code>fleet</code></a></li>
 <li><a href="#logs" id="toc-logs"><code>logs</code></a></li>
 <li><a href="#a-complete-example" id="toc-a-complete-example">A complete example</a></li>
 </ul>
