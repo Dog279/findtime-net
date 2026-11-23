@@ -256,6 +256,93 @@
 <li><strong>Tokenizing.</strong> Only vLLM exposes <code>/tokenize</code>; every other kind budgets context with a chars/4 estimate. <code>tenant doctor</code> says which one is in use.</li>
 <li><strong>Reasoning effort.</strong> <code>sakana</code> and <code>claudecode</code> accept a per-provider effort hint; see <a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a>.</li>
 </ul>
+<h2 id="models-validated-with-tenant">Models validated with Tenant</h2>
+<p>Any model behind a kind in the catalog can be used. The ones below are the models the maintainer runs day to day and has seen work well with Tenant: tool calls, memory and helpers. A model that is not listed is untested, not unsupported.</p>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Model</th>
+<th>Versions</th>
+<th>Reached through</th>
+<th>Used as</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gemma</td>
+<td>4</td>
+<td>a self-hosted server</td>
+<td>the agent’s model</td>
+</tr>
+<tr>
+<td>Qwen</td>
+<td>3.5, 3.6, 3.8</td>
+<td>a self-hosted server</td>
+<td>the agent’s model</td>
+</tr>
+<tr>
+<td>GLM Flash</td>
+<td>5.3</td>
+<td>a self-hosted server</td>
+<td>the agent’s model</td>
+</tr>
+<tr>
+<td>DeepSeek Flash</td>
+<td>V4.1</td>
+<td>a self-hosted server</td>
+<td>the agent’s model</td>
+</tr>
+<tr>
+<td>GLM</td>
+<td>4.5 and later</td>
+<td>the <code>zai</code> kinds</td>
+<td>the agent’s model</td>
+</tr>
+<tr>
+<td>Claude Fable</td>
+<td>5.x</td>
+<td><code>claudecode</code></td>
+<td>the agent’s model</td>
+</tr>
+<tr>
+<td>Claude Opus</td>
+<td>4.x, 5.x</td>
+<td><code>claudecode</code></td>
+<td>the agent’s model</td>
+</tr>
+<tr>
+<td>Claude Sonnet</td>
+<td>5.x</td>
+<td><code>claudecode</code></td>
+<td>the agent’s model</td>
+</tr>
+<tr>
+<td>Sakana Fugu</td>
+<td><code>fugu</code>, <code>fugu-ultra</code></td>
+<td><code>sakana</code></td>
+<td>the agent’s model</td>
+</tr>
+<tr>
+<td>Clef-flash</td>
+<td></td>
+<td>a self-hosted server</td>
+<td><a href="/tenant/docs/models/judge">the Judge</a></td>
+</tr>
+<tr>
+<td>Nomic Embed Text</td>
+<td><code>nomic-embed-text</code></td>
+<td><code>ollama</code></td>
+<td>the <a href="/tenant/docs/setup/requirements">embedding model</a></td>
+</tr>
+</tbody>
+</table>
+<p>For a self-hosted model, <a href="/tenant/docs/models/local">Local models</a> covers the server, the tool format and the profile.</p>
 <h2 id="a-provider-in-config.json">A provider in config.json</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;provider&quot;</span><span class="er">:</span> <span class="st">&quot;zai&quot;</span><span class="er">,</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;providers&quot;</span><span class="er">:</span> <span class="fu">{</span></span>
@@ -375,6 +462,7 @@
 <div class="label">In this article</div>
 <ul>
 <li><a href="#the-catalog" id="toc-the-catalog">The catalog</a></li>
+<li><a href="#models-validated-with-tenant" id="toc-models-validated-with-tenant">Models validated with Tenant</a></li>
 <li><a href="#a-provider-in-config.json" id="toc-a-provider-in-config.json">A provider in config.json</a></li>
 <li><a href="#keys" id="toc-keys">Keys</a></li>
 <li><a href="#add-a-provider" id="toc-add-a-provider">Add a provider</a></li>

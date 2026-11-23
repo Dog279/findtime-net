@@ -35,6 +35,26 @@ Notes:
 - **Tokenizing.** Only vLLM exposes `/tokenize`; every other kind budgets context with a chars/4 estimate. `tenant doctor` says which one is in use.
 - **Reasoning effort.** `sakana` and `claudecode` accept a per-provider effort hint; see [Reasoning, ceiling &amp; turns](/tenant/docs/models/tuning).
 
+## Models validated with Tenant
+
+Any model behind a kind in the catalog can be used. The ones below are the models the maintainer runs day to day and has seen work well with Tenant: tool calls, memory and helpers. A model that is not listed is untested, not unsupported.
+
+| Model | Versions | Reached through | Used as |
+|---|---|---|---|
+| Gemma | 4 | a self-hosted server | the agent's model |
+| Qwen | 3.5, 3.6, 3.8 | a self-hosted server | the agent's model |
+| GLM Flash | 5.3 | a self-hosted server | the agent's model |
+| DeepSeek Flash | V4.1 | a self-hosted server | the agent's model |
+| GLM | 4.5 and later | the `zai` kinds | the agent's model |
+| Claude Fable | 5.x | `claudecode` | the agent's model |
+| Claude Opus | 4.x, 5.x | `claudecode` | the agent's model |
+| Claude Sonnet | 5.x | `claudecode` | the agent's model |
+| Sakana Fugu | `fugu`, `fugu-ultra` | `sakana` | the agent's model |
+| Clef-flash | | a self-hosted server | [the Judge](/tenant/docs/models/judge) |
+| Nomic Embed Text | `nomic-embed-text` | `ollama` | the [embedding model](/tenant/docs/setup/requirements) |
+
+For a self-hosted model, [Local models](/tenant/docs/models/local) covers the server, the tool format and the profile.
+
 ## A provider in config.json
 
 ```json
