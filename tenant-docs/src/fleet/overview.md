@@ -62,6 +62,31 @@ Once a confirmed machine exists, the agent's context has one line per machine (n
 
 A picture a tool makes on a machine (a screenshot, an image file it reads) stays on that machine: the link carries text, and the result says so. Helpers, teams, research and goal runs do not get the fleet tools. [Built-in tools](/tenant/docs/mcp/built-in-tools) lists their arguments.
 
+## The fleet log
+
+The master's fleet has a log of its own, `fleet`. It starts the moment a Tenant becomes a master; a Tenant with no fleet has none.
+
+```bash
+tenant logs query log:fleet
+```
+
+The same is `/logs log:fleet` in the terminal UI and the **Logs** page of the dashboard ([Logs &amp; alerts](/tenant/docs/dashboard/logs)).
+
+| What | Events |
+|---|---|
+| this Tenant became a master; the addresses machines dial; the relay switch | `fleet/1001`, `5001`, `5002` |
+| the fleet port open and closed, held by another process, or not started and why | `fleet/1`, `2`, `3001` |
+| a code issued; a machine enrolled, confirmed, renamed or revoked | `fleet/1002`, `1003` |
+| an enrollment or confirmation refused; a spent code presented again | `fleet/2101`, `2102`, `3101` |
+| a machine connected, and disconnected with why | `fleet/1101`, `1102` |
+| each call on a machine, with its outcome and the hash of the machine's own audit record | `fleet/1201` |
+| each step of an update, and one that did not go through | `fleet/1301`, `2301` |
+| the machines' memory: open or unavailable, copies, forgets, and what went wrong | `fleet/3`, `2003`, `1401`–`1407`, `2401`–`2414` |
+
+The Security log keeps the audit record of each operator change and each refusal (`security/4321`–`4324`): who made it, and from where. No line in either log holds an enrollment code or the recovery identity. A change made with a `tenant fleet` command is in the fleet log even when no Tenant is running. `tenant logs catalog` has every event's meaning, cause and what to do.
+
+A fleet machine's own process has no log book: it keeps its [audit log](/tenant/docs/fleet/machines#the-audit-log) and writes to its own log and the system's.
+
 ## The fleet pages
 
 | Page | Read it when |
