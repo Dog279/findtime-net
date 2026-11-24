@@ -26,7 +26,7 @@ An environment variable is read at launch (or by the script that reads it). A ke
 
 | Variable | Meaning |
 |---|---|
-| `TENANT_VERSION` | the version to install, without the leading `v` (default: the latest release) |
+| `TENANT_VERSION` | the version to install, without the leading `v` (default: the release the script came from) |
 | `TENANT_INSTALL_DIR` | where the binary goes (default `~/.local/bin`, or `%LOCALAPPDATA%\Programs\tenant`) |
 | `TENANT_REPO` | the GitHub `owner/name` asked for the latest release |
 | `TENANT_BASE_URL` | a directory URL that holds the archive and `checksums.txt` |

@@ -117,6 +117,8 @@
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">curl</span> <span class="at">-fsSL</span> https://github.com/Dog279/TENANT/releases/latest/download/install.sh <span class="kw">|</span> <span class="fu">sh</span></span></code></pre></div>
 <p>Windows (PowerShell):</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">irm</span> https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/</span>Dog279<span class="op">/</span>TENANT<span class="op">/</span>releases<span class="op">/</span>latest<span class="op">/</span>download<span class="op">/</span>install<span class="op">.</span><span class="fu">ps1</span> <span class="op">|</span> <span class="fu">iex</span></span></code></pre></div>
+<p>These lines install the latest full release. GitHub’s <code>latest</code> skips prereleases, so to install a prerelease, take the script from that release’s own page, where the release notes give the line: a script taken from a release installs that release, unless <code>TENANT_VERSION</code> says otherwise.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">irm</span> https<span class="op">://</span>github<span class="op">.</span><span class="fu">com</span><span class="op">/</span>Dog279<span class="op">/</span>TENANT<span class="op">/</span>releases<span class="op">/</span>download<span class="op">/</span>v0<span class="op">.</span><span class="dv">2.0</span><span class="op">-</span>rc<span class="op">.</span><span class="dv">6</span><span class="op">/</span>install<span class="op">.</span><span class="fu">ps1</span> <span class="op">|</span> <span class="fu">iex</span></span></code></pre></div>
 <p>The script downloads the release archive for your OS and CPU, checks its SHA-256 against the release’s <code>checksums.txt</code>, and installs the binary for the current user:</p>
 <table>
 <colgroup>
@@ -151,7 +153,7 @@
 </table>
 <p>On macOS the script signs the binary on your machine with the hardened runtime before it moves it into place (<code>/usr/bin/codesign --force --sign - --options runtime</code>, ad hoc, no entitlements), and checks the flag on the signed copy. This is what makes macOS refuse a debugger; see <a href="/tenant/docs/setup/process-protection">Process protection</a>. If signing fails, the script stops and a Tenant installed before stays as it was.</p>
 <p>If the directory is not on your <code>PATH</code>, the script prints the line to add. Confirm with:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> version</span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> version</span></code></pre></div>
 <h3 id="script-options">Script options</h3>
 <p>Set these in the environment before running the script.</p>
 <table>
@@ -170,7 +172,7 @@
 <tbody>
 <tr>
 <td><code>TENANT_VERSION</code></td>
-<td>the latest release</td>
+<td>the release the script came from</td>
 <td>Install this version, written without the leading <code>v</code> (<code>0.2.0</code>).</td>
 </tr>
 <tr>
@@ -190,7 +192,7 @@
 </tr>
 </tbody>
 </table>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="va">TENANT_VERSION</span><span class="op">=</span>0.1.0 <span class="va">TENANT_INSTALL_DIR</span><span class="op">=</span>/opt/tenant/bin <span class="fu">sh</span> <span class="at">-c</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://github.com/Dog279/TENANT/releases/latest/download/install.sh<span class="va">)</span><span class="st">&quot;</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="va">TENANT_VERSION</span><span class="op">=</span>0.1.0 <span class="va">TENANT_INSTALL_DIR</span><span class="op">=</span>/opt/tenant/bin <span class="fu">sh</span> <span class="at">-c</span> <span class="st">&quot;</span><span class="va">$(</span><span class="ex">curl</span> <span class="at">-fsSL</span> https://github.com/Dog279/TENANT/releases/latest/download/install.sh<span class="va">)</span><span class="st">&quot;</span></span></code></pre></div>
 <p>The same script can make the machine a child of a <a href="/tenant/docs/fleet/setup">fleet</a>: with <code>TENANT_CHILD</code> set it goes straight on to <code>tenant child install</code>. <code>TENANT_CHILD=user</code> runs the child as your account; <code>TENANT_CHILD=system</code> runs it as root (or SYSTEM on Windows) from boot, needs the script run as root (an elevated PowerShell on Windows), and puts the binary in <code>/usr/local/bin</code> (<code>%ProgramFiles%\Tenant</code>). <code>TENANT_ENROLL_CODE</code> is the one-time code <code>tenant fleet enroll &lt;name&gt;</code> printed on the master; left unset, the script asks for it at the terminal. <code>tenant fleet enroll</code> prints the full line to paste.</p>
 <h2 id="manual-install">Manual install</h2>
 <p>Every release on the <a href="https://github.com/Dog279/TENANT/releases/latest">Releases page</a> carries:</p>
@@ -233,15 +235,15 @@
 </tbody>
 </table>
 <p>Download the archive, verify it, and put <code>tenant</code> (<code>tenant.exe</code>) on your <code>PATH</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">shasum</span> <span class="at">-a</span> 256 <span class="at">-c</span> <span class="at">--ignore-missing</span> checksums.txt</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> tenant_0.1.0_darwin_aarch64.tar.gz tenant</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> tenant ~/.local/bin/</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">shasum</span> <span class="at">-a</span> 256 <span class="at">-c</span> <span class="at">--ignore-missing</span> checksums.txt</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">tar</span> <span class="at">-xzf</span> tenant_0.1.0_darwin_aarch64.tar.gz tenant</span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mv</span> tenant ~/.local/bin/</span></code></pre></div>
 <p>A browser download on macOS carries a quarantine mark; <code>xattr -d com.apple.quarantine ~/.local/bin/tenant</code> clears it.</p>
 <h2 id="build-from-source">Build from source</h2>
-<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/Dog279/TENANT.git</span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> TENANT</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> build ./cmd/tenant        <span class="co"># needs Go 1.26+; produces ./tenant</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> test ./...                <span class="co"># optional</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone https://github.com/Dog279/TENANT.git</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> TENANT</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> build ./cmd/tenant        <span class="co"># needs Go 1.26+; produces ./tenant</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> test ./...                <span class="co"># optional</span></span></code></pre></div>
 <p>A build without release stamping reports itself as a dev build, and <code>tenant update</code> refuses to replace a dev build.</p>
 <h2 id="after-installing">After installing</h2>
 <ol type="1">
@@ -250,13 +252,13 @@
 <li><code>tenant tui</code> opens the terminal UI, or <code>tenant service install</code> runs Tenant in the background. See <a href="/tenant/docs/setup/service">Run in the background</a>.</li>
 </ol>
 <p>Tab completion:</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="op">&lt;(</span><span class="ex">tenant</span> completion bash<span class="op">)</span>      <span class="co"># ~/.bashrc</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="op">&lt;(</span><span class="ex">tenant</span> completion zsh<span class="op">)</span>       <span class="co"># ~/.zshrc, after compinit</span></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> completion fish <span class="kw">|</span> <span class="bu">source</span>       <span class="co"># or save to ~/.config/fish/completions/tenant.fish</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>tenant completion powershell <span class="op">|</span> <span class="fu">Out-String</span> <span class="op">|</span> <span class="fu">Invoke-Expression</span>   <span class="co"># in $PROFILE</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="op">&lt;(</span><span class="ex">tenant</span> completion bash<span class="op">)</span>      <span class="co"># ~/.bashrc</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> <span class="op">&lt;(</span><span class="ex">tenant</span> completion zsh<span class="op">)</span>       <span class="co"># ~/.zshrc, after compinit</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> completion fish <span class="kw">|</span> <span class="bu">source</span>       <span class="co"># or save to ~/.config/fish/completions/tenant.fish</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>tenant completion powershell <span class="op">|</span> <span class="fu">Out-String</span> <span class="op">|</span> <span class="fu">Invoke-Expression</span>   <span class="co"># in $PROFILE</span></span></code></pre></div>
 <h2 id="uninstall">Uninstall</h2>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service uninstall     <span class="co"># if you installed the background service</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ~/.local/bin/tenant       <span class="co"># the binary (and tenant.prev, if an update left one)</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service uninstall     <span class="co"># if you installed the background service</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a><span class="fu">rm</span> ~/.local/bin/tenant       <span class="co"># the binary (and tenant.prev, if an update left one)</span></span></code></pre></div>
 <p>Your config and data stay where <a href="/tenant/docs/setup/directories">Files &amp; directories</a> says. <code>tenant privacy export --out DIR</code> writes everything as readable files first if you want to keep it; delete the two directories to remove it.</p>
 <div class="pagefoot">
   <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/setup/install.mdtenant-docs/src/setup/install.md">Edit this page on GitHub</a>

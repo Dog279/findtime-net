@@ -19,6 +19,12 @@ Windows (PowerShell):
 irm https://github.com/Dog279/TENANT/releases/latest/download/install.ps1 | iex
 ```
 
+These lines install the latest full release. GitHub's `latest` skips prereleases, so to install a prerelease, take the script from that release's own page, where the release notes give the line: a script taken from a release installs that release, unless `TENANT_VERSION` says otherwise.
+
+```powershell
+irm https://github.com/Dog279/TENANT/releases/download/v0.2.0-rc.6/install.ps1 | iex
+```
+
 The script downloads the release archive for your OS and CPU, checks its SHA-256 against the release's `checksums.txt`, and installs the binary for the current user:
 
 | | macOS and Linux | Windows |
@@ -41,7 +47,7 @@ Set these in the environment before running the script.
 
 | Variable | Default | Effect |
 |---|---|---|
-| `TENANT_VERSION` | the latest release | Install this version, written without the leading `v` (`0.2.0`). |
+| `TENANT_VERSION` | the release the script came from | Install this version, written without the leading `v` (`0.2.0`). |
 | `TENANT_INSTALL_DIR` | `~/.local/bin` or `%LOCALAPPDATA%\Programs\tenant` | Where the binary goes. |
 | `TENANT_REPO` | `Dog279/TENANT` | The GitHub repository asked for the latest release. |
 | `TENANT_BASE_URL` | the release's download URL | A directory URL that holds the archive and `checksums.txt` (a mirror). |
