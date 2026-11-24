@@ -106,7 +106,7 @@ The id, name, addresses and fingerprint are written at enrollment; leave them al
 
 Every call from the master is written to `<child dir>/audit/audit.jsonl` before it runs, and again when it has ended. Each record carries the SHA-256 of the one before it, and each also goes to the system log: syslog (the journal on a systemd machine) or, on Windows, the Application event log under the source `TenantChild`. If the record cannot be written, the call is not run.
 
-`tenant child audit` checks the chain. The chain shows a change inside the log; it cannot show records cut off its end. For that, the master keeps the hash of each record with its own record of the call (the `fleet` log), so the two can be compared, and the system log has a line per record.
+`tenant child audit` checks the chain. The chain shows a change inside the log; it cannot show records cut off its end. For that, the master keeps the hash of each record with its own record of the call (event `fleet/1201` in [the fleet log](/tenant/docs/fleet/overview#the-fleet-log)), so the two can be compared, and the system log has a line per record.
 
 ## Pausing
 
