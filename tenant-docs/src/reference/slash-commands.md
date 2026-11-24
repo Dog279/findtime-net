@@ -221,6 +221,8 @@ A machine's own approval scheme is `/permissions fleet <name>`, under Safety &am
 /help | /help <category> | /help all
 /whoami                               agent id, backend and model (also /who)
 /dashboard [on|off|status]
+/dashboard serve lan [HOST:PORT]      also serve it to the local network over HTTPS (off by default; default 0.0.0.0:9771)
+/dashboard serve off                  stop serving the local network
 /tailscale [serve|serve off|status]   (also /ts)
 /clear                                fresh conversation and screen; memory is kept
 /cls                                  clear the screen only
