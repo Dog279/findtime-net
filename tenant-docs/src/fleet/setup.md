@@ -65,22 +65,22 @@ The same output is `/fleet enroll <name>` in the terminal app. On the dashboard'
 
 ### The line to paste on the machine
 
-For a machine with nothing on it, the line fetches the install script from the latest release, which checks the download and goes straight on to `tenant child install`:
+For a machine with nothing on it, the line fetches the install script from the master's own release, so the new machine gets the version the master runs, a prerelease included. The script checks the download and goes straight on to `tenant child install`. (A development build of Tenant is no release, and its lines fetch the latest one.)
 
 ```bash
 # Linux, macOS: the child runs as you, from logon
-curl -fsSL https://github.com/<owner>/<repo>/releases/latest/download/install.sh | TENANT_CHILD=user TENANT_ENROLL_CODE='<code>' sh
+curl -fsSL https://github.com/<owner>/<repo>/releases/download/v<version>/install.sh | TENANT_CHILD=user TENANT_ENROLL_CODE='<code>' sh
 
 # Linux, macOS: a service that runs as root from boot (sudo asks for your password)
-curl -fsSL https://github.com/<owner>/<repo>/releases/latest/download/install.sh | TENANT_CHILD=system TENANT_ENROLL_CODE='<code>' sudo --preserve-env=TENANT_CHILD,TENANT_ENROLL_CODE sh
+curl -fsSL https://github.com/<owner>/<repo>/releases/download/v<version>/install.sh | TENANT_CHILD=system TENANT_ENROLL_CODE='<code>' sudo --preserve-env=TENANT_CHILD,TENANT_ENROLL_CODE sh
 ```
 
 ```powershell
 # Windows: as you (PowerShell); for SYSTEM from boot, use 'system' in a PowerShell run as administrator
-$env:TENANT_CHILD='user'; $env:TENANT_ENROLL_CODE='<code>'; irm https://github.com/<owner>/<repo>/releases/latest/download/install.ps1 | iex
+$env:TENANT_CHILD='user'; $env:TENANT_ENROLL_CODE='<code>'; irm https://github.com/<owner>/<repo>/releases/download/v<version>/install.ps1 | iex
 ```
 
-For a machine that has Tenant already:
+For a machine that has Tenant already (0.2.0 or later: 0.1.0 has no `tenant child`):
 
 ```bash
 printf '%s\n' '<code>' | tenant child install            # Linux, macOS
@@ -92,7 +92,7 @@ printf '%s\n' '<code>' | tenant child install --system   # in a root shell: a se
 '<code>' | tenant child install --system   # PowerShell run as administrator
 ```
 
-`enroll` prints these lines with the real code and repository filled in. A build of Tenant that names no release repository cannot print the install-script lines: it says so, and prints the others.
+`enroll` prints these lines with the real code, repository and version filled in. A build of Tenant that names no release repository cannot print the install-script lines: it says so, and prints the others.
 
 **The code never travels as an argument.** `tenant child install` reads it from standard input or from `TENANT_ENROLL_CODE`, and refuses a code given on the command line (exit 2), because an argument shows in the process list and stays in the shell's history. The boot-time line for Linux and macOS keeps it off sudo's command line with `--preserve-env`.
 
