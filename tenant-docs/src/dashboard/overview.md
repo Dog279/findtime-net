@@ -42,6 +42,7 @@ Get-Content -LiteralPath "$env:APPDATA\tenant\dashboard-auth-token"   # Windows,
 |---|---|
 | This computer only (default) | `http://127.0.0.1:9770` |
 | Your phone or another device | Tailscale: `/tailscale serve` in the terminal UI, or `"tailscale": {"serve": true}` in `config.json` so the background service publishes it at every start. Tenant trusts the Tailscale name on its own and the tailnet carries HTTPS. |
+| Another computer on your network, with no VPN | `/dashboard serve lan` in the terminal UI: a second listener over HTTPS, off until you turn it on ([below](#on-your-local-network)) |
 | Behind a reverse proxy on the same computer | add the name the proxy uses to `dashboard.allowed_hosts` |
 | On a network address (`--dashboard-addr 0.0.0.0:9770`) | refused at start unless **both** `dashboard.tls_cert` + `dashboard.tls_key` and `dashboard.auth` are set |
 | The internet | never forward the port |
@@ -50,8 +51,36 @@ Get-Content -LiteralPath "$env:APPDATA\tenant\dashboard-auth-token"   # Windows,
 "dashboard": { "addr": "127.0.0.1:9770", "allowed_hosts": ["tenant.internal"], "tls_cert": "", "tls_key": "", "auth": "" }
 ```
 
+### On your local network
+
+For a site that cannot run Tailscale or any VPN, Tenant can serve the dashboard a second time, to the local network. It is off by default.
+
+```text
+/dashboard serve lan [HOST:PORT]     turn it on (default 0.0.0.0:9771, every interface)
+/dashboard serve off                 turn it off
+```
+
+Type it yourself: a line the app submits for you does not change who can reach the dashboard. The same is `tenant serve --dashboard-lan` (or `--dashboard-lan=HOST:PORT`) for one run, and `"dashboard": {"lan": {"enabled": true}}` in `config.json`. Nothing restarts, and `http://127.0.0.1:9770` keeps working beside it. There is no page and no API for turning it on.
+
+```text
+dashboard: also serving the local network at https://192.168.1.5:9771 (listening on 0.0.0.0:9771)
+  certificate: self-signed, SHA-256 fingerprint 7C:32:6C:…
+```
+
+| | |
+|---|---|
+| Encryption | HTTPS always; plain HTTP is refused on this listener |
+| The certificate | Tenant makes one and keeps it in the config directory, owner-only, good for two years. No authority signed it, so the browser warns the first time: compare the SHA-256 fingerprint in that warning with the one Tenant printed (`/dashboard` prints it again). `dashboard.tls_cert` and `tls_key` put your own in its place |
+| Sign-in | the same key as on this computer |
+| Who may connect | this computer, and private or link-local addresses; other networks only if listed in `dashboard.lan.allow`. Anything else gets 403 before sign-in, and a Security record |
+| The address you type | the address you connect to, or this computer's own name; another name must be in `allowed_hosts` |
+| Stays at this computer | [confirming a fleet machine](/tenant/docs/fleet/setup), and turning this listener on or off |
+
+On macOS and Windows the firewall may ask about the first listener that is not loopback. To serve one interface only, give its address: `/dashboard serve lan 192.168.1.5:9771`.
+
 | Page says | Meaning | Do |
 |---|---|---|
+| the dashboard is served to the local network only | you reached the LAN listener from an address that is not private | use a computer on the local network, or list your network in `dashboard.lan.allow` |
 | unrecognized dashboard host | the address you typed is not one Tenant trusts | use 127.0.0.1, localhost, your Tailscale name, or add the name to `allowed_hosts` |
 | cross-origin request rejected | the request came from another site, tab or port | use the dashboard's own buttons |
 | CSRF validation failed | an extension or privacy setting removed the header that proves the request came from the dashboard | turn it off for this address |

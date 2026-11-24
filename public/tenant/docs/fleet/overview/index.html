@@ -167,7 +167,7 @@
 <h2 id="an-install-with-no-fleet">An install with no fleet</h2>
 <p>Nothing of the fleet is active until you ask for it:</p>
 <ul>
-<li>The fleet port is off until <code>tenant fleet init</code>. After that it listens on <code>fleet.listen</code> in <code>config.json</code> (default <code>0.0.0.0:9777</code>), and nothing answers on it but the pinned link and the enroll endpoint.</li>
+<li>The fleet port is off until this Tenant is made a master (<code>tenant fleet init</code>, <code>/fleet init</code> in the terminal app, or <strong>Set up the fleet</strong> on the dashboard). After that it listens on <code>fleet.listen</code> in <code>config.json</code> (default <code>0.0.0.0:9777</code>), and nothing answers on it but the pinned link and the enroll endpoint.</li>
 <li>The <code>fleet_*</code> tools are registered only while a confirmed machine exists. With none, the agent has no fleet tools and is told about no machines.</li>
 <li>A relay (Discord, iMessage) or a cron job reaches no machine, reads included, until you open it.</li>
 </ul>

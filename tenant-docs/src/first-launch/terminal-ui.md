@@ -45,6 +45,7 @@ Text the app did not write (the model's words, a tool's arguments and output, a 
 | `/mouse on\|off` | on (default): the wheel scrolls the TUI; off: plain-drag selection, the wheel scrolls the terminal |
 | `/feed on\|off` | show or hide the activity feed on the right (<kbd>Alt</kbd>+<kbd>F</kbd> too); the choice persists across launches |
 | `/dashboard [on\|off\|status]` | start or stop the web control panel; it launches by default and the choice persists |
+| `/dashboard serve lan [HOST:PORT]`, `/dashboard serve off` | also serve the dashboard to the [local network](/tenant/docs/dashboard/overview#on-your-local-network) over HTTPS, for a site with no VPN; off by default |
 | `/tailscale [serve\|serve off\|status]` | publish the dashboard on your tailnet over HTTPS with `tailscale serve` |
 | `/compress` (`/compact`) | summarize old turns to free context now; `/expand` brings the latest compacted span back from the archive |
 | `/image <path>` (`/img`) | attach an image file to your next message ([Images](#images)) |

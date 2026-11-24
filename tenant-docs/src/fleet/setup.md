@@ -33,6 +33,20 @@ Save it away from the master: a password manager, or paper. With it, and only wi
 
 Without a terminal, `init` sets up everything else, shows no secret and exits 1. Run it again at a terminal.
 
+### From the terminal app or the dashboard
+
+A running Tenant can make itself a master from its own screens. Both run the same `init`.
+
+```text
+/fleet init [--listen ADDR] [--address HOST:PORT]...
+```
+
+In the terminal app, `/fleet init` takes the same two flags. The app steps aside while the recovery identity is shown on the terminal and typed back, then returns and says what `init` says. The identity is never in the app's chat, its transcript or a log. If you cancel, the fleet is made without a recovery key and `/fleet init` offers the step again. Like every change to the fleet, type it yourself: a line the app submits for you does not run it.
+
+On the dashboard, the **Fleet** page of a Tenant with no fleet has **Set up the fleet**: the address the fleet port listens on and the addresses machines dial, filled in as `init` would choose them, and **Make this Tenant a fleet master**. It takes a signed-in browser; the API key cannot make a fleet. It makes everything but the recovery key, because the recovery identity is not shown in a browser. Until you run `tenant fleet init` or `/fleet init` at a terminal, the page says the fleet has no recovery key and no machine's memory is kept.
+
+An address that is not a `host:port` is refused before anything is made, on all three.
+
 ## 2. Make a code for a machine
 
 ```bash
@@ -45,7 +59,7 @@ tenant fleet enroll <name> [--ttl 15m] [--adopt ID]
 | `--adopt ID` | give the new machine the id of a revoked one, and with it the approval scheme kept under that id |
 | `--wait` | how long to wait for a running Tenant to take the fleet |
 
-`enroll` runs `init` first if this Tenant is not a master yet, but that does not make the recovery key: until you run `tenant fleet init` at a terminal, no machine's memory is kept, and `enroll` says so. It prints the code alone on standard output, then on standard error: when the code expires, the addresses it carries, and one line to paste for each kind of machine. The code works once.
+`enroll` runs `init` first if this Tenant is not a master yet, but that does not make the recovery key: until you run `tenant fleet init` (or `/fleet init`) at a terminal, no machine's memory is kept, and `enroll` says so. It prints the code alone on standard output, then on standard error: when the code expires, the addresses it carries, and one line to paste for each kind of machine. The code works once.
 
 The same output is `/fleet enroll <name>` in the terminal app. On the dashboard's Fleet page, **Add machine** takes a name and whether the machine runs as you or from boot, and shows the lines with a Copy button, in that one answer only: not in the address bar, not after a reload, not in any log. Making a code there takes a signed-in browser; the API key cannot make one.
 

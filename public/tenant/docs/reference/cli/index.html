@@ -185,7 +185,7 @@ tenant update --check                        running vs latest; exit 10 when an 
 tenant update --rollback
 tenant completion bash|zsh|fish|powershell</code></pre>
 <h2 id="run-tenant">Run Tenant</h2>
-<pre class="text"><code>tenant serve [--dashboard-addr ADDR] [--dashboard=false] [--self-improve=false] [--distill-every D] [--profile-every D] [--eval-every D] [--allow-no-memory] [--stop-budget D]
+<pre class="text"><code>tenant serve [--dashboard-addr ADDR] [--dashboard=false] [--dashboard-lan[=HOST:PORT]] [--self-improve=false] [--distill-every D] [--profile-every D] [--eval-every D] [--allow-no-memory] [--stop-budget D]
 tenant attach [URL] [--follow] [--interval D] [--source NAME] [--level warn|error] [--trace ID] [--token T] [--since …]
 tenant service install [--print] [--system]
 tenant service status | start | stop | restart [--now] | uninstall

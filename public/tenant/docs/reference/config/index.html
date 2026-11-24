@@ -312,6 +312,24 @@
 <td>extra <code>Host</code> names a reverse proxy sends; loopback names and the Tailscale name are trusted on their own</td>
 <td>by hand</td>
 </tr>
+<tr>
+<td><code>lan.enabled</code></td>
+<td>off</td>
+<td>also serve the dashboard to the <a href="/tenant/docs/dashboard/overview#on-your-local-network">local network</a> over HTTPS, on a second listener</td>
+<td><code>/dashboard serve lan</code>, <code>/dashboard serve off</code></td>
+</tr>
+<tr>
+<td><code>lan.addr</code></td>
+<td><code>0.0.0.0:9771</code></td>
+<td>where that listener binds</td>
+<td><code>/dashboard serve lan HOST:PORT</code></td>
+</tr>
+<tr>
+<td><code>lan.allow</code></td>
+<td></td>
+<td>networks (CIDR, like <code>100.64.0.0/10</code>) that may connect to it besides this computer and private and link-local addresses</td>
+<td>by hand</td>
+</tr>
 </tbody>
 </table>
 <h2 id="tailscale"><code>tailscale</code></h2>

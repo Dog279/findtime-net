@@ -45,6 +45,9 @@ Edits by hand need a restart, except where a page says the hub re-reads them liv
 | `tls_cert`, `tls_key` | | serve HTTPS | by hand |
 | `auth` | the generated token file | your own sign-in key (32+ characters) | by hand |
 | `allowed_hosts` | | extra `Host` names a reverse proxy sends; loopback names and the Tailscale name are trusted on their own | by hand |
+| `lan.enabled` | off | also serve the dashboard to the [local network](/tenant/docs/dashboard/overview#on-your-local-network) over HTTPS, on a second listener | `/dashboard serve lan`, `/dashboard serve off` |
+| `lan.addr` | `0.0.0.0:9771` | where that listener binds | `/dashboard serve lan HOST:PORT` |
+| `lan.allow` | | networks (CIDR, like `100.64.0.0/10`) that may connect to it besides this computer and private and link-local addresses | by hand |
 
 ## `tailscale`
 

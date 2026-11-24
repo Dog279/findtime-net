@@ -154,6 +154,10 @@
 <td>Tailscale: <code>/tailscale serve</code> in the terminal UI, or <code>"tailscale": {"serve": true}</code> in <code>config.json</code> so the background service publishes it at every start. Tenant trusts the Tailscale name on its own and the tailnet carries HTTPS.</td>
 </tr>
 <tr>
+<td>Another computer on your network, with no VPN</td>
+<td><code>/dashboard serve lan</code> in the terminal UI: a second listener over HTTPS, off until you turn it on (<a href="#on-your-local-network">below</a>)</td>
+</tr>
+<tr>
 <td>Behind a reverse proxy on the same computer</td>
 <td>add the name the proxy uses to <code>dashboard.allowed_hosts</code></td>
 </tr>
@@ -168,6 +172,46 @@
 </tbody>
 </table>
 <div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;dashboard&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;addr&quot;</span><span class="fu">:</span> <span class="st">&quot;127.0.0.1:9770&quot;</span><span class="fu">,</span> <span class="dt">&quot;allowed_hosts&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;tenant.internal&quot;</span><span class="ot">]</span><span class="fu">,</span> <span class="dt">&quot;tls_cert&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span> <span class="dt">&quot;tls_key&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span> <span class="dt">&quot;auth&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span> <span class="fu">}</span></span></code></pre></div>
+<h3 id="on-your-local-network">On your local network</h3>
+<p>For a site that cannot run Tailscale or any VPN, Tenant can serve the dashboard a second time, to the local network. It is off by default.</p>
+<pre class="text"><code>/dashboard serve lan [HOST:PORT]     turn it on (default 0.0.0.0:9771, every interface)
+/dashboard serve off                 turn it off</code></pre>
+<p>Type it yourself: a line the app submits for you does not change who can reach the dashboard. The same is <code>tenant serve --dashboard-lan</code> (or <code>--dashboard-lan=HOST:PORT</code>) for one run, and <code>"dashboard": {"lan": {"enabled": true}}</code> in <code>config.json</code>. Nothing restarts, and <code>http://127.0.0.1:9770</code> keeps working beside it. There is no page and no API for turning it on.</p>
+<pre class="text"><code>dashboard: also serving the local network at https://192.168.1.5:9771 (listening on 0.0.0.0:9771)
+  certificate: self-signed, SHA-256 fingerprint 7C:32:6C:…</code></pre>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td>Encryption</td>
+<td>HTTPS always; plain HTTP is refused on this listener</td>
+</tr>
+<tr>
+<td>The certificate</td>
+<td>Tenant makes one and keeps it in the config directory, owner-only, good for two years. No authority signed it, so the browser warns the first time: compare the SHA-256 fingerprint in that warning with the one Tenant printed (<code>/dashboard</code> prints it again). <code>dashboard.tls_cert</code> and <code>tls_key</code> put your own in its place</td>
+</tr>
+<tr>
+<td>Sign-in</td>
+<td>the same key as on this computer</td>
+</tr>
+<tr>
+<td>Who may connect</td>
+<td>this computer, and private or link-local addresses; other networks only if listed in <code>dashboard.lan.allow</code>. Anything else gets 403 before sign-in, and a Security record</td>
+</tr>
+<tr>
+<td>The address you type</td>
+<td>the address you connect to, or this computer’s own name; another name must be in <code>allowed_hosts</code></td>
+</tr>
+<tr>
+<td>Stays at this computer</td>
+<td><a href="/tenant/docs/fleet/setup">confirming a fleet machine</a>, and turning this listener on or off</td>
+</tr>
+</tbody>
+</table>
+<p>On macOS and Windows the firewall may ask about the first listener that is not loopback. To serve one interface only, give its address: <code>/dashboard serve lan 192.168.1.5:9771</code>.</p>
 <table>
 <colgroup>
 <col style="width: 33%" />
@@ -182,6 +226,11 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>the dashboard is served to the local network only</td>
+<td>you reached the LAN listener from an address that is not private</td>
+<td>use a computer on the local network, or list your network in <code>dashboard.lan.allow</code></td>
+</tr>
 <tr>
 <td>unrecognized dashboard host</td>
 <td>the address you typed is not one Tenant trusts</td>

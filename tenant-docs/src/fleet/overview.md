@@ -43,7 +43,7 @@ Run the master as `tenant serve`, as its service (`tenant service install`), so 
 
 Nothing of the fleet is active until you ask for it:
 
-- The fleet port is off until `tenant fleet init`. After that it listens on `fleet.listen` in `config.json` (default `0.0.0.0:9777`), and nothing answers on it but the pinned link and the enroll endpoint.
+- The fleet port is off until this Tenant is made a master (`tenant fleet init`, `/fleet init` in the terminal app, or **Set up the fleet** on the dashboard). After that it listens on `fleet.listen` in `config.json` (default `0.0.0.0:9777`), and nothing answers on it but the pinned link and the enroll endpoint.
 - The `fleet_*` tools are registered only while a confirmed machine exists. With none, the agent has no fleet tools and is told about no machines.
 - A relay (Discord, iMessage) or a cron job reaches no machine, reads included, until you open it.
 

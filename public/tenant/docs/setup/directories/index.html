@@ -183,6 +183,11 @@
 <td>Tenant</td>
 </tr>
 <tr>
+<td><code>dashboard-lan-cert.pem</code>, <code>dashboard-lan-key.pem</code></td>
+<td>the self-signed certificate and key of the dashboard’s <a href="/tenant/docs/dashboard/overview#on-your-local-network">local-network listener</a>; owner-only, made the first time that listener starts</td>
+<td><code>/dashboard serve lan</code></td>
+</tr>
+<tr>
 <td><code>gateway-auth-token</code></td>
 <td>the token an MCP client sends to the <a href="/tenant/docs/mcp/memory-server#the-sse-gateways-token">SSE gateway</a>, created the first time <code>tenant mcp-memory --sse-addr</code> starts</td>
 <td>Tenant</td>

@@ -43,7 +43,7 @@ tenant completion bash|zsh|fish|powershell
 ## Run Tenant
 
 ```text
-tenant serve [--dashboard-addr ADDR] [--dashboard=false] [--self-improve=false] [--distill-every D] [--profile-every D] [--eval-every D] [--allow-no-memory] [--stop-budget D]
+tenant serve [--dashboard-addr ADDR] [--dashboard=false] [--dashboard-lan[=HOST:PORT]] [--self-improve=false] [--distill-every D] [--profile-every D] [--eval-every D] [--allow-no-memory] [--stop-budget D]
 tenant attach [URL] [--follow] [--interval D] [--source NAME] [--level warn|error] [--trace ID] [--token T] [--since …]
 tenant service install [--print] [--system]
 tenant service status | start | stop | restart [--now] | uninstall
