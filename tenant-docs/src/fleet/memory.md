@@ -27,7 +27,7 @@ Every snapshot ends with an authenticator that only the fleet key's secret can m
 
 **The fleet key** is made by `tenant fleet init`, in the master's config directory (`<config>/fleet-key`). On Windows it is sealed by the system's data protection; elsewhere it is an owner-only file. Every machine's memory is encrypted to it.
 
-**The recovery identity** is shown once by `tenant fleet init` at a terminal and recorded only after you have typed it back ([Set up a fleet](/tenant/docs/fleet/setup)). Tenant keeps only its public half. Keep the identity itself away from the master, in a password manager or on paper: with it, and only with it, a master rebuilt from nothing, or restored from a plain backup, can read its machines' memory again (`tenant fleet recover`, in [Update, move and recover](/tenant/docs/fleet/updates)). Kept on the master, it would be lost with the master.
+**The recovery identity** is shown once by `tenant fleet init` at a terminal (or by `/fleet init`, which hands the terminal over for that step; never by the dashboard) and recorded only after you have typed it back ([Set up a fleet](/tenant/docs/fleet/setup)). Tenant keeps only its public half. Keep the identity itself away from the master, in a password manager or on paper: with it, and only with it, a master rebuilt from nothing, or restored from a plain backup, can read its machines' memory again (`tenant fleet recover`, in [Update, move and recover](/tenant/docs/fleet/updates)). Kept on the master, it would be lost with the master.
 
 `tenant doctor` checks the fleet key (and that it is held in memory kept out of the swap file) and that the recovery key was proven. A recovery key that was never proven names `tenant fleet init`, which asks at a terminal for the identity you kept.
 

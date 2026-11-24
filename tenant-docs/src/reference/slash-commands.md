@@ -121,6 +121,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 
 ```text
 /fleet                                                    each machine: online or offline, OS, user, last seen; and which process holds the fleet
+/fleet init [--listen ADDR] [--address HOST:PORT]...      make this Tenant a fleet master (once); the app steps aside while the recovery identity is shown on the terminal and typed back
 /fleet show <name>                                        everything known about one machine, with what it reported marked as its own words
 /fleet enroll <name>                                      a one-time code for a new machine, and the line to paste there
 /fleet confirm <name>                                     the confirm screen of a pending machine: what it reported, the scheme it starts with
