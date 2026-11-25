@@ -8,12 +8,13 @@ area-url: /tenant/docs/fleet/overview
 ## Updating machines
 
 ```bash
-tenant fleet update <name> | --all [--version vX.Y.Z] [--allow-older]
+tenant fleet update <name> | --all | --group <group> [--version vX.Y.Z] [--allow-older]
 ```
 
 | Flag | Effect |
 |---|---|
 | `--all` | every confirmed machine, one after the other |
+| `--group <group>` | every member of that group, one after the other ([Groups](/tenant/docs/fleet/approvals#groups)) |
 | `--version vX.Y.Z` | that release instead of the latest |
 | `--allow-older` | send a version older than the machine runs |
 | `--arch ARCH` | the machine's processor, `amd64` or `arm64`, for a machine too old to report it |
@@ -23,7 +24,19 @@ The command asks the running Tenant that holds the fleet, through its dashboard,
 
 On the dashboard, a machine's page on the Fleet page has **Update this machine**, with a version (empty for the latest) and a box to allow an older one.
 
-Each step is printed, and how it ended: back on the new version, rolled back (with the machine's reason), refused, or failed. An offline machine is refused; nothing is queued. The exit status is 0 only when every machine runs the version asked for.
+Each step is printed, and how it ended: back on the new version, rolled back (with the machine's reason), refused, or failed. An offline machine is refused; nothing is queued. `--all` and `--group` update one machine after the other and go on past a failure. The exit status is 0 only when every machine runs the version asked for.
+
+### A rollout: many machines, a few at a time
+
+On the dashboard's Fleet page, tick machines (or narrow the list to a group and choose everyone shown), pick **Update**, a version (empty is the latest release) and how many update at once, 1 to 8. The page first says how many machines it will update and names them, with those it leaves out and why (pending, revoked, offline: nothing is queued). After the second button, the running Tenant that holds the fleet starts that many machines, in the list's order, and starts the next each time one ends:
+
+- a machine that ends **done** is updated;
+- a machine that is **refused** (offline, not confirmed, the same or a newer version without "allow older") is skipped with its reason, and the rollout goes on;
+- the first machine that **rolls back or fails stops the rollout**: no further machine is started, those already updating finish, and the rest show as not started.
+
+The Fleet page shows the rollout while it runs and afterwards (reload it): each machine as waiting, its live stage, done, skipped and why, rolled back, failed or not started. **Stop** starts no more machines; those updating finish. The rollout also stops when the fleet port goes down or another process takes the fleet: it starts nothing over links it no longer holds.
+
+One rollout runs at a time. It is kept in the running Tenant's memory: a restart of the master forgets it, though each machine still finishes or rolls back by itself. A rollout takes a signed-in browser; the API key cannot start or stop one.
 
 ## What the machine does
 

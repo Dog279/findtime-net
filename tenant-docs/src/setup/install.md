@@ -19,10 +19,10 @@ Windows (PowerShell):
 irm https://github.com/Dog279/TENANT/releases/latest/download/install.ps1 | iex
 ```
 
-These lines install the latest full release. GitHub's `latest` skips prereleases, so to install a prerelease, take the script from that release's own page, where the release notes give the line: a script taken from a release installs that release, unless `TENANT_VERSION` says otherwise.
+These lines install the latest full release. GitHub's `latest` skips prereleases, so to install a prerelease, or any one release, take the script from that release's own page, where the release notes give the line: a script taken from a release installs that release, unless `TENANT_VERSION` says otherwise.
 
 ```powershell
-irm https://github.com/Dog279/TENANT/releases/download/v0.2.0-rc.6/install.ps1 | iex
+irm https://github.com/Dog279/TENANT/releases/download/v0.2.0/install.ps1 | iex
 ```
 
 The script downloads the release archive for your OS and CPU, checks its SHA-256 against the release's `checksums.txt`, and installs the binary for the current user:
@@ -75,7 +75,7 @@ Download the archive, verify it, and put `tenant` (`tenant.exe`) on your `PATH`:
 
 ```bash
 shasum -a 256 -c --ignore-missing checksums.txt
-tar -xzf tenant_0.1.0_darwin_aarch64.tar.gz tenant
+tar -xzf tenant_0.2.0_darwin_aarch64.tar.gz tenant
 mv tenant ~/.local/bin/
 ```
 

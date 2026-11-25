@@ -124,7 +124,7 @@ tenant fleet revoke <name> --delete-scheme  # both go, and the machine's memory 
 
 From then on the master refuses the machine's certificate. If the machine is online, the master sends it a "revoked" notice and closes its link within a second; the child stops and does not start again, and `tenant child status` says it is revoked. A machine revoked while it was offline is refused at its next handshake: its status says the master rejected it, and it keeps trying, slowly, until it is uninstalled.
 
-A kept scheme can be given to a machine enrolled later with `tenant fleet enroll <name> --adopt <id>`. Otherwise a new machine under an old name starts clean.
+A kept scheme can be given to a machine enrolled later with `tenant fleet enroll <name> --adopt <id>`; `--keep-scheme` also keeps the machine in its [groups](/tenant/docs/fleet/approvals#groups), and `--delete-scheme` takes it out of every one. Otherwise a new machine under an old name starts clean.
 
 To use a revoked machine again, uninstall it and enroll it anew, or give it a code with `tenant child rehome`.
 

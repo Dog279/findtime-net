@@ -129,10 +129,16 @@ tenant fleet confirm <name> [--set category=mode]...                          co
 tenant fleet rename <name> <new-name>                                         relabel a machine; its id stays
 tenant fleet revoke <name> [--keep-scheme | --delete-scheme]                  refuse its certificate from now on and close its link
 tenant fleet permissions <name> [set <category> <mode> | add <pattern> <mode> | rm <pattern>]   show or edit one machine's own approval scheme
-tenant fleet permissions <name> --from defaults|master                        lay the fleet's rules over it again, or copy the master's scheme again
-tenant fleet permissions --defaults [add <pattern> <mode> | rm <pattern>]     the rules every newly confirmed machine starts with
+tenant fleet permissions <name> --from defaults|master                        lay the fleet's rules and the machine's groups' rules over it again, or copy the master's scheme again
+tenant fleet permissions --group <group> | --all [set <category> <mode> | add <pattern> <mode> | rm <pattern> | --from defaults|master]   the same change to each member of a group, or every confirmed machine; exit 1 if any was not changed
+tenant fleet permissions --defaults [set <category> <mode> | unset <category> | add <pattern> <mode> | rm <pattern>]   the categories and rules every newly confirmed machine starts with
+tenant fleet group [show <group> | create <group> | delete <group>]           named groups of machines, each with rules; changing a group moves no machine
+tenant fleet group add|remove <group> <machine>...                            put machines (by name or id) into a group, or take them out
+tenant fleet group rules <group> [add <pattern> <mode> | rm <pattern>]        a group's rules, laid after the fleet's rules, groups in name order
+tenant fleet group apply <group>                                              lay the fleet's rules and each member's groups' rules over every confirmed member
 tenant fleet relay [discord|imessage [on|off]]                                whether a turn from that relay may reach the fleet (off by default)
-tenant fleet update <name> | --all [--version vX.Y.Z] [--allow-older]         send machines a newer Tenant over their links
+tenant fleet remote-confirm [on|off]                                          whether a signed-in dashboard browser on another computer may confirm a machine (off by default)
+tenant fleet update <name> | --all | --group <group> [--version vX.Y.Z] [--allow-older]   send machines a newer Tenant over their links
 tenant fleet recover <name> [--was ID]                                        read a machine's memory made under another fleet key, with the recovery identity
 tenant child install [--system] [--ceiling full|no-exec|read-only] [--updates release|master]   enroll this machine and install its service
 tenant child updates [release|master]        whose word an update from the master is taken on
@@ -144,7 +150,7 @@ tenant child uninstall                       remove the service and this machine
 tenant child run                             what the installed service runs: hold the link from this terminal
 ```
 
-`tenant fleet` runs on the master and `tenant child` on a machine it owns. `child install` and `child rehome` read the code from standard input or `$TENANT_ENROLL_CODE`, never from an argument. The walk-through is on [Fleet](/tenant/docs/fleet/overview).
+`tenant fleet` runs on the master and `tenant child` on a machine it owns. `child install` and `child rehome` read the code from standard input or `$TENANT_ENROLL_CODE`, never from an argument. `fleet remote-confirm on` asks at a terminal and refuses when its input is not one. The walk-through is on [Fleet](/tenant/docs/fleet/overview); groups and the defaults are in [Fleet approvals](/tenant/docs/fleet/approvals).
 
 ## Safety
 

@@ -128,9 +128,14 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /fleet confirm <name> <six digits> [category=mode ...]    confirm it with the digits it shows; a pair sets that category for this machine alone
 /fleet revoke <name> [keep|delete]                        end a machine; keep or delete its approval scheme
 /fleet relay [discord|imessage [on|off]]                  whether a relay's turns may reach the fleet at all (default off)
+/fleet group [show <group> | create <group> | delete <group>]      named groups of machines, each with rules laid over its members; changing a group moves no machine
+/fleet group add|remove <group> <machine>...              put machines (by name or id) into a group, or take them out
+/fleet group rules <group> [add <pattern> <mode> | rm <pattern>]   a group's rules: laid after the fleet's rules, groups in name order, each winning over the one before
+/fleet group apply <group>                                lay the fleet's rules and each member's groups' rules over every confirmed member's scheme; its categories stay
+/fleet remote-confirm [on|off]                            whether a signed-in dashboard browser on another computer may confirm a machine, with the sign-in key again (default off)
 ```
 
-A machine's own approval scheme is `/permissions fleet <name>`, under Safety &amp; approvals. A line the app submits for you does not change the fleet: type these yourself.
+A machine's own approval scheme is `/permissions fleet <name>`, and the fleet's defaults for new machines `/permissions fleet --defaults`, under Safety &amp; approvals. A line the app submits for you does not change the fleet: type these yourself. A form that only shows something (the list, a machine, the confirm screen, a switch's state, the groups, a group or its rules) needs no typing. Groups are explained in [Fleet approvals](/tenant/docs/fleet/approvals#groups).
 
 ## Skills ([Skills](/tenant/docs/first-launch/skills))
 
@@ -169,7 +174,8 @@ A machine's own approval scheme is `/permissions fleet <name>`, under Safety &am
 /permissions set <cat> <mode>
 /permissions add <tool|pattern> <mode>    a per-tool rule: a name, an exact id, a glob, or os_exec(<glob>)
 /permissions rm <pattern>
-/permissions fleet <name> [set|add|rm …]  one fleet machine's own scheme, edited the same way; --defaults: the rules new machines start with
+/permissions fleet <name> [set|add|rm …]  one fleet machine's own scheme, edited the same way; --defaults: the categories and rules new machines start with
+/permissions fleet --defaults [set <category> <mode> | unset <category> | add <pattern> <mode> | rm <pattern>]   unset: that category comes from the master's copy again
 /approve [session|always]                 approve a paused dangerous action (also /approve!)
 /deny                                     refuse it (also /reject)
 /relay [status]
