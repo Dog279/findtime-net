@@ -24,7 +24,7 @@ Then anything you set at confirmation with `--set category=mode`. The confirm sc
 
 A rule laid over a scheme replaces every rule of the machine's that it answers for (the same pattern, a narrower command under its prefix, a tool its glob covers), and leaves the machine's categories alone.
 
-Once laid, the scheme is the machine's. An edit made to it (a category, a rule, an **always** on its card) stands, over every layer, until a layer is laid over it again. A later change to the master's own scheme, to a default or to a group moves no machine; the answer says so and names the step that does.
+Once laid, the scheme is the machine's. An edit made to it (a category, a rule, an **always** on its card) stands, over every layer, until a layer is laid over it again. A later change to the master's own scheme, to a default or to a group moves no machine; when you change a default or a group, the answer says so and names the step that does.
 
 The schemes are kept in `settings.<agent>.json`, under `fleet_schemes` (by machine id), with the layers beside them: `fleet_permissions` (the default categories), `fleet_rules` and `fleet_groups` ([settings.&lt;agent&gt;.json](/tenant/docs/reference/settings)). An entry that cannot be read leaves that machine with no scheme, and every call to it is refused, reads included, until `tenant fleet permissions <name> --from master` writes it again.
 
@@ -121,7 +121,7 @@ On the dashboard's Fleet page you can tick machines, or narrow the list to a gro
 
 ## What is recorded
 
-Every step that changes a machine's scheme leaves one Security record per machine (`security/4323`): a confirmation names the defaults and the groups it laid, and an Apply names the rules of the machine's own it replaced, with the mode each had. A change to a default, to the fleet's rules or to a group is `security/4325` in the Security log and `fleet/5003` in the fleet log; it moves no machine, and says so. Each record says where you were: `cli`, `tui`, `dashboard`, or `dashboard-remote` for a machine confirmed from a browser on another computer.
+Confirming a machine, copying its scheme again and applying each leave one Security record per machine (`security/4323`): a confirmation names the defaults and the groups it laid, and an Apply names the rules of the machine's own it replaced, with the mode each had. A change to many machines is recorded once per machine, never once for the batch: a category by the record a change of that category on one machine leaves, a rule as `security/4323`. A change to a default, to the fleet's rules or to a group is `security/4325` in the Security log and `fleet/5003` in the fleet log; it moves no machine, and says so. Each record says where you were: `cli`, `tui`, `dashboard`, or `dashboard-remote` for a machine confirmed from a browser on another computer.
 
 ## Relays and cron jobs are closed until you open them
 

@@ -30,8 +30,8 @@ Each step is printed, and how it ended: back on the new version, rolled back (wi
 
 On the dashboard's Fleet page, tick machines (or narrow the list to a group and choose everyone shown), pick **Update**, a version (empty is the latest release) and how many update at once, 1 to 8. The page first says how many machines it will update and names them, with those it leaves out and why (pending, revoked, offline: nothing is queued). After the second button, the running Tenant that holds the fleet starts that many machines, in the list's order, and starts the next each time one ends:
 
-- a machine that ends **done** is updated;
-- a machine that is **refused** (offline, not confirmed, the same or a newer version without "allow older") is skipped with its reason, and the rollout goes on;
+- a machine that ends **done** is updated; one that already runs the version asked for counts as done, and nothing is sent to it;
+- a machine that is **refused** (offline, not confirmed, or the version asked for is older than the one it runs and "allow an older version" is not ticked) is skipped with its reason, and the rollout goes on;
 - the first machine that **rolls back or fails stops the rollout**: no further machine is started, those already updating finish, and the rest show as not started.
 
 The Fleet page shows the rollout while it runs and afterwards (reload it): each machine as waiting, its live stage, done, skipped and why, rolled back, failed or not started. **Stop** starts no more machines; those updating finish. The rollout also stops when the fleet port goes down or another process takes the fleet: it starts nothing over links it no longer holds.

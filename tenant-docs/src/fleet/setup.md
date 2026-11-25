@@ -143,7 +143,7 @@ While it is on:
 
 - the pending machine's page offers the confirm form to a signed-in browser elsewhere, with one more field: **the dashboard's sign-in key, again**. A wrong key changes nothing, counts against that address as a wrong sign-in does, and leaves a Security record;
 - a request that carries only the API key is still refused, and the wait after wrong digits is the same;
-- the Security and fleet logs record the confirmation and every refusal with the surface `dashboard-remote`, and the session and address that asked. Behind `tailscale serve` or a proxy that address is always this computer's own, so the record also quotes what the proxy said of who it passed on (the tailnet login), marked as not checked. Turning the setting on or off is a Security record too.
+- the Security log records the confirmation and every refusal with the surface `dashboard-remote`, and the session and address that asked; the fleet log has the confirmation and refused digits too. Behind `tailscale serve` or a proxy that address is always this computer's own, so the record also quotes what the proxy said of who it passed on (the tailnet login), marked as not checked. Turning the setting on or off is a Security record too.
 
 What you give up:
 
