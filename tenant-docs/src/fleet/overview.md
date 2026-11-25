@@ -76,14 +76,15 @@ The same is `/logs log:fleet` in the terminal UI and the **Logs** page of the da
 |---|---|
 | this Tenant became a master; the addresses machines dial; the relay switch | `fleet/1001`, `5001`, `5002` |
 | the fleet port open and closed, held by another process, or not started and why | `fleet/1`, `2`, `3001` |
-| a code issued; a machine enrolled, confirmed, renamed or revoked | `fleet/1002`, `1003` |
+| a code issued; a machine enrolled, confirmed, renamed or revoked; its settings copied again or applied | `fleet/1002`, `1003` |
+| a group, the fleet's default categories or its rules changed (no machine moves with it) | `fleet/5003` |
 | an enrollment or confirmation refused; a spent code presented again | `fleet/2101`, `2102`, `3101` |
 | a machine connected, and disconnected with why | `fleet/1101`, `1102` |
 | each call on a machine, with its outcome and the hash of the machine's own audit record | `fleet/1201` |
 | each step of an update, and one that did not go through | `fleet/1301`, `2301` |
 | the machines' memory: open or unavailable, copies, forgets, and what went wrong | `fleet/3`, `2003`, `1401`–`1407`, `2401`–`2414` |
 
-The Security log keeps the audit record of each operator change and each refusal (`security/4321`–`4324`): who made it, and from where. No line in either log holds an enrollment code or the recovery identity. A change made with a `tenant fleet` command is in the fleet log even when no Tenant is running. `tenant logs catalog` has every event's meaning, cause and what to do.
+The Security log keeps the audit record of each operator change and each refusal (`security/4321`–`4325`): who made it, and from where. A change to many machines at once has one record per machine. No line in either log holds an enrollment code or the recovery identity. A change made with a `tenant fleet` command is in the fleet log even when no Tenant is running. `tenant logs catalog` has every event's meaning, cause and what to do.
 
 A fleet machine's own process has no log book: it keeps its [audit log](/tenant/docs/fleet/machines#the-audit-log) and writes to its own log and the system's.
 
@@ -93,8 +94,8 @@ A fleet machine's own process has no log book: it keeps its [audit log](/tenant/
 |---|---|
 | [Set up a fleet](/tenant/docs/fleet/setup) | you are making a master and adding machines, or choosing how they reach it |
 | [On a fleet machine](/tenant/docs/fleet/machines) | you are on the machine itself: its service, its ceiling, its audit log, pausing or removing it |
-| [Approvals on fleet machines](/tenant/docs/fleet/approvals) | you want to set what the agent may do on each machine, or open a relay or a cron job to the fleet |
+| [Approvals on fleet machines](/tenant/docs/fleet/approvals) | you want to set what the agent may do on each machine, set the fleet's defaults and groups, change many machines at once, or open a relay or a cron job to the fleet |
 | [A machine's memory](/tenant/docs/fleet/memory) | you want to know what the master remembers about a machine, where it is kept, and how forget reaches it |
-| [Update, move and recover](/tenant/docs/fleet/updates) | you are updating machines, or the master was lost and its machines need a new one |
+| [Update, move and recover](/tenant/docs/fleet/updates) | you are updating machines, one, a group or a rollout of many, or the master was lost and its machines need a new one |
 
 The commands are also in [CLI commands](/tenant/docs/reference/cli), and the Fleet page of the dashboard in [Page by page](/tenant/docs/dashboard/pages).

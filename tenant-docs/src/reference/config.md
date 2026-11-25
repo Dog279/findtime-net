@@ -172,6 +172,7 @@ The master's side of a [fleet](/tenant/docs/fleet/overview). The machines themse
 | Key | Default | Meaning | Changed by |
 |---|---|---|---|
 | `listen` | `0.0.0.0:9777` | the `host:port` the fleet port binds; nothing listens until `tenant fleet init` has made this Tenant a master | `tenant fleet init --listen` |
+| `remote_confirm` | false | a signed-in dashboard browser on another computer may confirm a pending machine, once it gives the sign-in key again ([Confirming from another computer](/tenant/docs/fleet/setup#confirming-from-another-computer)). Read at each confirmation; a file that can't be read counts as off. Whoever holds the sign-in key can then confirm a machine from anywhere the dashboard is reached | `tenant fleet remote-confirm on\|off` (on asks at a terminal), `/fleet remote-confirm`; no dashboard switch |
 
 ## `logs`
 

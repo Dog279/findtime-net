@@ -202,7 +202,12 @@
 <tr>
 <td><code>POST</code></td>
 <td><code>/fleet/init</code>, <code>/fleet/add</code>, <code>/fleet/confirm</code>, <code>/fleet/rename</code>, <code>/fleet/revoke</code>, <code>/fleet/permission</code>, <code>/fleet/rules/add</code>, <code>/fleet/rules/remove</code>, <code>/fleet/scheme</code>, <code>/fleet/update</code></td>
-<td>the <strong>Fleet</strong> page’s forms (CSRF-protected; use the page). <code>/fleet/init</code> and <code>/fleet/add</code> take a signed-in browser only; <code>/fleet/confirm</code> only a browser signed in on the computer running Tenant</td>
+<td>the <strong>Fleet</strong> page’s forms for one machine (CSRF-protected; use the page). <code>/fleet/init</code> and <code>/fleet/add</code> take a signed-in browser only; <code>/fleet/confirm</code> only a browser signed in on the computer running Tenant, or, with <a href="/tenant/docs/fleet/setup#confirming-from-another-computer">remote confirmation</a> on, a signed-in browser elsewhere that gives the sign-in key again; never the API key. <code>/fleet/update</code> still takes the API key: <code>tenant fleet update</code> uses it</td>
+</tr>
+<tr>
+<td><code>POST</code></td>
+<td><code>/fleet/defaults/permission</code>, <code>/fleet/defaults/rules/add</code>, <code>/fleet/defaults/rules/remove</code>, <code>/fleet/groups/create</code>, <code>/fleet/groups/delete</code>, <code>/fleet/groups/members/add</code>, <code>/fleet/groups/members/remove</code>, <code>/fleet/groups/rules/add</code>, <code>/fleet/groups/rules/remove</code>, <code>/fleet/groups/apply</code>, <code>/fleet/bulk</code>, <code>/fleet/rollout/stop</code></td>
+<td>the fleet’s defaults, its groups, one change to many machines and the rollout: a signed-in browser’s own form only. The API key gets 403 and a Security record</td>
 </tr>
 <tr>
 <td><code>POST</code></td>
@@ -211,7 +216,7 @@
 </tr>
 </tbody>
 </table>
-<p><code>memory</code> is <code>in_step</code>, <code>behind</code>, <code>needs_recovery_key</code> or <code>not_available</code> (with the reason in <code>memory_detail</code>); <code>update.stage</code> is <code>fetching</code>, <code>sending</code>, <code>applying</code>, <code>done</code>, <code>rolled_back</code>, <code>failed</code> or <code>refused</code>. What a machine reports about itself is its own words, not checked by the master. Changes to the fleet are the <strong>Fleet</strong> page’s forms (<a href="/tenant/docs/fleet/machines">Fleet</a>); the API key makes no enrollment code and confirms no machine.</p>
+<p><code>memory</code> is <code>in_step</code>, <code>behind</code>, <code>needs_recovery_key</code> or <code>not_available</code> (with the reason in <code>memory_detail</code>); <code>update.stage</code> is <code>fetching</code>, <code>sending</code>, <code>applying</code>, <code>done</code>, <code>rolled_back</code>, <code>failed</code> or <code>refused</code>. What a machine reports about itself is its own words, not checked by the master. <code>/api/fleet</code> stays read-only, and no <code>/api/</code> route changes the fleet. Changes to the fleet are the <strong>Fleet</strong> page’s forms (<a href="/tenant/docs/fleet/machines">Fleet</a>); the API key makes no enrollment code, confirms no machine, and changes no default, group or many machines at once.</p>
 <h2 id="chat-and-streams">Chat and streams</h2>
 <table>
 <colgroup>

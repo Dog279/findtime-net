@@ -74,7 +74,7 @@ dashboard: also serving the local network at https://192.168.1.5:9771 (listening
 | Sign-in | the same key as on this computer |
 | Who may connect | this computer, and private or link-local addresses; other networks only if listed in `dashboard.lan.allow`. Anything else gets 403 before sign-in, and a Security record |
 | The address you type | the address you connect to, or this computer's own name; another name must be in `allowed_hosts` |
-| Stays at this computer | [confirming a fleet machine](/tenant/docs/fleet/setup), and turning this listener on or off |
+| Stays at this computer | turning this listener on or off; [confirming a fleet machine](/tenant/docs/fleet/setup), unless you turned [remote confirmation](/tenant/docs/fleet/setup#confirming-from-another-computer) on at this computer's terminal |
 
 On macOS and Windows the firewall may ask about the first listener that is not loopback. To serve one interface only, give its address: `/dashboard serve lan 192.168.1.5:9771`.
 

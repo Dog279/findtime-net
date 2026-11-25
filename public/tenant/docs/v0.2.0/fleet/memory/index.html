@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>A machine’s memory — Tenant docs — FindTime</title>
+<meta name="description" content="The master keeps a memory for each fleet machine, encrypted on its own disk and copied, encrypted, to the machine. What goes into it, how it comes back into a conversation, the keys that protect it, and how forget reaches it.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/fleet/memory">
+<meta property="og:title" content="A machine’s memory — Tenant docs">
+<meta property="og:description" content="The master keeps a memory for each fleet machine, encrypted on its own disk and copied, encrypted, to the machine. What goes into it, how it comes back into a conversation, the keys that protect it, and how forget reaches it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/fleet/memory">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/v0.2.0/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/v0.2.0/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/v0.2.0/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/fleet/overview">Fleet</a></p>
+<h1>A machine’s memory</h1>
+<p class="lede">The master keeps a memory for each fleet machine, encrypted on its own disk and copied, encrypted, to the machine. What goes into it, how it comes back into a conversation, the keys that protect it, and how forget reaches it.</p>
+<p>Each fleet machine has a memory of its own, kept by the master. A child has no memory it can read: it only stores encrypted copies for its master.</p>
+<h2 id="where-it-lives">Where it lives</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Where</th>
+<th>What</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The master’s RAM</td>
+<td>the machine’s memory while the master works with it</td>
+</tr>
+<tr>
+<td>The master’s disk, under <code>&lt;data&gt;/fleet/</code></td>
+<td>only an encrypted snapshot of it</td>
+</tr>
+<tr>
+<td>The machine, in the <code>memory</code> folder of its child directory</td>
+<td>the last three copies, encrypted; the machine cannot read them</td>
+</tr>
+</tbody>
+</table>
+<p>Every five minutes a memory that changed becomes a new generation, encrypted to the fleet key and to the recovery key, and goes to the machine.</p>
+<p>Each time a machine connects, the two sides compare. The newer copy wins, so a machine’s copy rebuilds a master that lost or damaged its own. A copy made under another fleet key marks the machine <strong>needs recovery key</strong>, and nothing is overwritten. A memory that was replaced is kept aside on the master for thirty days.</p>
+<p>Every snapshot ends with an authenticator that only the fleet key’s secret can make. A copy that names this master’s key and does not carry it is refused unread, so knowing the public half of the fleet key or of the recovery key is not enough to put a memory on the master.</p>
+<p><code>/fleet</code>, <code>tenant fleet show &lt;name&gt;</code>, the dashboard’s Fleet page and <code>tenant doctor</code> say each machine’s memory: in step, behind, needs recovery key, or not known, with the reason.</p>
+<h2 id="the-two-keys">The two keys</h2>
+<p><strong>The fleet key</strong> is made by <code>tenant fleet init</code>, in the master’s config directory (<code>&lt;config&gt;/fleet-key</code>). On Windows it is sealed by the system’s data protection; elsewhere it is an owner-only file. Every machine’s memory is encrypted to it.</p>
+<p><strong>The recovery identity</strong> is shown once by <code>tenant fleet init</code> at a terminal (or by <code>/fleet init</code>, which hands the terminal over for that step; never by the dashboard) and recorded only after you have typed it back (<a href="/tenant/docs/v0.2.0/fleet/setup">Set up a fleet</a>). Tenant keeps only its public half. Keep the identity itself away from the master, in a password manager or on paper: with it, and only with it, a master rebuilt from nothing, or restored from a plain backup, can read its machines’ memory again (<code>tenant fleet recover</code>, in <a href="/tenant/docs/v0.2.0/fleet/updates">Update, move and recover</a>). Kept on the master, it would be lost with the master.</p>
+<p><code>tenant doctor</code> checks the fleet key (and that it is held in memory kept out of the swap file) and that the recovery key was proven. A recovery key that was never proven names <code>tenant fleet init</code>, which asks at a terminal for the identity you kept.</p>
+<h2 id="what-goes-into-a-machines-memory">What goes into a machine’s memory</h2>
+<ul>
+<li><strong>The turns that worked on it.</strong> A turn’s episode stays in the master’s memory, tagged with the machines it worked on. Each of those machines gets the request and its own calls with what came back. Never another machine’s output, the agent’s answer, or the master’s own memory.</li>
+<li><strong>An inventory.</strong> At confirmation the master records the machine’s OS, account, version, sandbox and ceiling as facts, each from a field it checked.</li>
+<li><strong>Notes.</strong> <code>fleet_note</code> records a fact about a machine in the agent’s own words: one sentence, at most 1000 characters. Nothing is sent to the machine. A note that quotes a machine’s output asks first.</li>
+<li><strong>Distilled facts.</strong> Distillation runs over each machine’s own turns, into that machine’s facts.</li>
+</ul>
+<p>A machine’s memory needs an embedder on the master, as the master’s own memory does (<a href="/tenant/docs/v0.2.0/first-launch/memory">Memory &amp; soul</a>).</p>
+<h2 id="how-it-comes-back-into-a-conversation">How it comes back into a conversation</h2>
+<p>A machine’s memory comes into a conversation with the first answer from that machine there. After that, <code>memory_search</code> takes a <code>host</code> to search that machine’s memory.</p>
+<p>What is recalled has two parts. The master’s own records (the inventory, notes) are quoted lines. Everything else came from the machine and is shown inside that machine’s frame, escaped and labelled untrusted, so the egress check covers it as it covers a live result (<a href="/tenant/docs/v0.2.0/fleet/approvals">Approvals on fleet machines</a>).</p>
+<p>A relay or a cron job that may not reach a machine gets none of its memory. Neither does a helper, team, research or goal run, which has no fleet tools.</p>
+<h2 id="forget">Forget</h2>
+<p><code>tenant privacy forget</code> reaches every machine’s memory. The Tenant that holds the fleet deletes what is forgotten from each machine’s memory and from the memory kept aside, sends the machine a new copy, and tells it to delete its older ones. A machine that is offline is told when it is back. A memory later rebuilt from a copy older than the forget has it applied again.</p>
+<p>The request names what is forgotten, so it is kept sealed to the fleet key and the recovery key. It is kept until every machine still in the fleet has had it, has dropped its older copies and keeps no copy under another fleet key; then it is deleted.</p>
+<p>The limits, stated plainly:</p>
+<ul>
+<li><strong>A machine restored from an older backup.</strong> Once the request is deleted, a copy older than the forget that comes back (from a backup of the machine’s own disk) is not purged. If the master then loses its own memory of that machine while that copy is the machine’s newest, the memory is rebuilt from it and holds what was forgotten. Forget again then.</li>
+<li><strong>Copies under another fleet key</strong> are not deleted by a forget, and you are told. Delete them on the machine, in the <code>memory</code> folder of its child directory.</li>
+<li>Retention pruning does not reach the machines’ memory.</li>
+</ul>
+<p><a href="/tenant/docs/v0.2.0/setup/privacy">Privacy &amp; retention</a> covers forget on the master itself.</p>
+<h2 id="backups">Backups</h2>
+<ul>
+<li>A master restored from an <strong>encrypted</strong> <code>tenant backup</code> has its certificate, <code>fleet.json</code> and the fleet key back. Its machines reconnect by themselves, and their memory is read as before.</li>
+<li>A <strong>plain</strong> backup leaves those out, and <code>tenant backup</code> warns when it makes one on a fleet master. A master restored from it, or rebuilt from nothing, is a stranger to its machines: re-home each one, then bring the recovery identity (<a href="/tenant/docs/v0.2.0/fleet/updates">Update, move and recover</a>).</li>
+</ul>
+<p>Use encrypted backups on a master (<a href="/tenant/docs/v0.2.0/setup/backup">Backup &amp; restore</a>). <code>tenant fleet revoke &lt;name&gt; --delete-scheme</code> deletes that machine’s memory as well.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/fleet/memory.mdtenant-docs/src/fleet/memory.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#where-it-lives" id="toc-where-it-lives">Where it lives</a></li>
+<li><a href="#the-two-keys" id="toc-the-two-keys">The two keys</a></li>
+<li><a href="#what-goes-into-a-machines-memory" id="toc-what-goes-into-a-machines-memory">What goes into a machine’s memory</a></li>
+<li><a href="#how-it-comes-back-into-a-conversation" id="toc-how-it-comes-back-into-a-conversation">How it comes back into a conversation</a></li>
+<li><a href="#forget" id="toc-forget">Forget</a></li>
+<li><a href="#backups" id="toc-backups">Backups</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/v0.2.0/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

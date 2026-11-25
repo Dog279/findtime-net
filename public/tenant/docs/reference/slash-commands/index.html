@@ -207,8 +207,13 @@
 /fleet confirm &lt;name&gt;                                     the confirm screen of a pending machine: what it reported, the scheme it starts with
 /fleet confirm &lt;name&gt; &lt;six digits&gt; [category=mode ...]    confirm it with the digits it shows; a pair sets that category for this machine alone
 /fleet revoke &lt;name&gt; [keep|delete]                        end a machine; keep or delete its approval scheme
-/fleet relay [discord|imessage [on|off]]                  whether a relay&#39;s turns may reach the fleet at all (default off)</code></pre>
-<p>A machine’s own approval scheme is <code>/permissions fleet &lt;name&gt;</code>, under Safety &amp; approvals. A line the app submits for you does not change the fleet: type these yourself.</p>
+/fleet relay [discord|imessage [on|off]]                  whether a relay&#39;s turns may reach the fleet at all (default off)
+/fleet group [show &lt;group&gt; | create &lt;group&gt; | delete &lt;group&gt;]      named groups of machines, each with rules laid over its members; changing a group moves no machine
+/fleet group add|remove &lt;group&gt; &lt;machine&gt;...              put machines (by name or id) into a group, or take them out
+/fleet group rules &lt;group&gt; [add &lt;pattern&gt; &lt;mode&gt; | rm &lt;pattern&gt;]   a group&#39;s rules: laid after the fleet&#39;s rules, groups in name order, each winning over the one before
+/fleet group apply &lt;group&gt;                                lay the fleet&#39;s rules and each member&#39;s groups&#39; rules over every confirmed member&#39;s scheme; its categories stay
+/fleet remote-confirm [on|off]                            whether a signed-in dashboard browser on another computer may confirm a machine, with the sign-in key again (default off)</code></pre>
+<p>A machine’s own approval scheme is <code>/permissions fleet &lt;name&gt;</code>, and the fleet’s defaults for new machines <code>/permissions fleet --defaults</code>, under Safety &amp; approvals. A line the app submits for you does not change the fleet: type these yourself. A form that only shows something (the list, a machine, the confirm screen, a switch’s state, the groups, a group or its rules) needs no typing. Groups are explained in <a href="/tenant/docs/fleet/approvals#groups">Fleet approvals</a>.</p>
 <h2 id="skills-skills">Skills (<a href="/tenant/docs/first-launch/skills">Skills</a>)</h2>
 <pre class="text"><code>/skills                                   list reusable skill recipes
 /skills add &lt;name&gt; | &lt;desc&gt; | &lt;recipe&gt;    save a skill
@@ -236,7 +241,8 @@
 /permissions set &lt;cat&gt; &lt;mode&gt;
 /permissions add &lt;tool|pattern&gt; &lt;mode&gt;    a per-tool rule: a name, an exact id, a glob, or os_exec(&lt;glob&gt;)
 /permissions rm &lt;pattern&gt;
-/permissions fleet &lt;name&gt; [set|add|rm …]  one fleet machine&#39;s own scheme, edited the same way; --defaults: the rules new machines start with
+/permissions fleet &lt;name&gt; [set|add|rm …]  one fleet machine&#39;s own scheme, edited the same way; --defaults: the categories and rules new machines start with
+/permissions fleet --defaults [set &lt;category&gt; &lt;mode&gt; | unset &lt;category&gt; | add &lt;pattern&gt; &lt;mode&gt; | rm &lt;pattern&gt;]   unset: that category comes from the master&#39;s copy again
 /approve [session|always]                 approve a paused dangerous action (also /approve!)
 /deny                                     refuse it (also /reject)
 /relay [status]

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Run in the background — Tenant docs — FindTime</title>
+<meta name="description" content="tenant service installs Tenant under launchd, systemd or Windows so it starts at login, restarts after a crash, and survives reboots without losing a task.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/setup/service">
+<meta property="og:title" content="Run in the background — Tenant docs">
+<meta property="og:description" content="tenant service installs Tenant under launchd, systemd or Windows so it starts at login, restarts after a crash, and survives reboots without losing a task.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/setup/service">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/v0.2.0/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/v0.2.0/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/v0.2.0/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/setup/install">Setup &amp; install</a></p>
+<h1>Run in the background</h1>
+<p class="lede">tenant service installs Tenant under launchd, systemd or Windows so it starts at login, restarts after a crash, and survives reboots without losing a task.</p>
+<p><code>tenant serve</code> is the headless 24/7 hub: the same agent, memory, tools, approvals and self-improvement as the terminal UI, driven from the <a href="/tenant/docs/v0.2.0/dashboard/overview">dashboard</a> instead of a terminal. <code>tenant service</code> runs it under the operating system.</p>
+<h2 id="commands">Commands</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service install <span class="pp">[--</span><span class="ss">print</span><span class="pp">]</span> <span class="pp">[--</span><span class="ss">system</span><span class="pp">]</span>   <span class="co"># write the unit, enable it, start it</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service status                         <span class="co"># installed? running (version, turn_active)? where the logs are</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service start</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service stop</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service restart <span class="pp">[--</span><span class="ss">now</span><span class="pp">]</span>                <span class="co"># waits for the running turn unless --now</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service uninstall                      <span class="co"># stop, disable, remove the unit</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--print</code></td>
+<td>print the unit instead of installing it</td>
+</tr>
+<tr>
+<td><code>--system</code></td>
+<td>Windows only: a real Windows service running as SYSTEM, from an elevated terminal</td>
+</tr>
+<tr>
+<td><code>--now</code></td>
+<td>on <code>restart</code>: do not wait for the running turn to finish (15 minutes is the ceiling otherwise)</td>
+</tr>
+</tbody>
+</table>
+<p><code>tenant setup</code> offers the install at the end. <code>tenant doctor</code> reports the service and warns when the unit no longer matches the binary or the directories this command uses; <code>tenant doctor --fix</code> rewrites it.</p>
+<p>On Windows a machine can have both a <code>--system</code> service and your own logon task. Without <code>--system</code>, <code>status</code>, <code>start</code>, <code>stop</code>, <code>restart</code> and <code>uninstall</code> act on your own task when you have one, and on the service only when that is all your account has; add <code>--system</code> to name the service. <code>tenant service status</code> says when both are installed, and <code>tenant doctor</code> and <code>tenant update</code> follow the same rule.</p>
+<p><code>stop</code> and <code>uninstall</code> work even when <code>config.json</code> does not load: they print the error as a warning and carry on, so a service that cannot start on a broken config can still be stopped and removed. The other verbs stop at the error, like every other command.</p>
+<h3 id="process-protection">Process protection</h3>
+<p>The service has nobody to ask whether it may run without a <a href="/tenant/docs/v0.2.0/setup/process-protection">process protection</a> the system refuses, so <code>install</code>, <code>start</code> and <code>restart</code> (and <code>tenant setup</code> when it installs the service) check first, at the terminal you typed them in. When a control cannot be applied they say which and what that leaves open, and ask <code>Continue without it? [y/N]</code>; a yes is recorded, and the service starts on it. Run from a script with no terminal, they stop with the reason. A service that meets an unacknowledged control does not start; the reason is in <code>tenant logs query "provider:system id:3030"</code> and in the system’s own log.</p>
+<ul>
+<li><strong>macOS.</strong> <code>install</code> also signs the binary with the hardened runtime before it writes the unit, when the binary does not carry the flag yet: a copy is signed ad hoc and checked, then moved into place. If signing fails, you get a warning and the service is installed with the binary as it was.</li>
+<li><strong>Windows.</strong> serve starts a small helper, <code>tenant __session-watch</code>, which owns the hidden window Windows sends a logoff or a shutdown to, so Task Manager shows a second <code>tenant.exe</code> under serve. If the helper is ended alone, serve keeps running, but a logoff, a shutdown or <code>tenant service stop</code> then ends it without a clean stop; restart Tenant to get the helper back.</li>
+</ul>
+<h2 id="what-gets-installed">What gets installed</h2>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>macOS</th>
+<th>Linux</th>
+<th>Windows</th>
+<th>Windows <code>--system</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unit</td>
+<td>LaunchAgent <code>~/Library/LaunchAgents/com.tenant.serve.plist</code></td>
+<td>systemd user unit <code>~/.config/systemd/user/tenant.service</code></td>
+<td>Scheduled task <code>\Tenant\Serve</code> at logon, as you</td>
+<td>Windows service <code>Tenant</code>, as SYSTEM</td>
+</tr>
+<tr>
+<td>Logs</td>
+<td><code>~/Library/Logs/tenant/serve.log</code> and <code>serve.err.log</code></td>
+<td><code>journalctl --user -u tenant -f</code></td>
+<td>none for stdout (the log book has everything)</td>
+<td>none for stdout</td>
+</tr>
+<tr>
+<td>Stop budget</td>
+<td>90 s</td>
+<td>90 s</td>
+<td>4 s</td>
+<td>120 s</td>
+</tr>
+</tbody>
+</table>
+<p>The unit pins <code>--config</code> and <code>--data</code> to the directories the install ran with and passes <code>--stop-budget</code>, the grace the OS grants a stop.</p>
+<p>Platform notes:</p>
+<ul>
+<li><strong>macOS (TCC).</strong> The install refuses a binary, config dir or data dir under <code>~/Desktop</code>, <code>~/Documents</code> or <code>~/Downloads</code>: macOS silently denies those to a background process. Good homes are <code>~/.local/bin</code>, <code>~/.config/tenant</code> and <code>~/Library/Application Support/tenant</code>. Under launchd Tenant fills in the login-shell <code>PATH</code> (<code>path_helper</code> plus Homebrew), so <code>brew</code>, <code>node</code> and the like resolve in commands.</li>
+<li><strong>Linux (linger).</strong> The user manager stops at logout unless the account lingers. <code>install</code> prints <code>loginctl enable-linger &lt;user&gt;</code> when it is off; run it once.</li>
+<li><strong>Windows.</strong> Installing the task needs no administrator: it is registered for your account alone and starts when you log on, with no time limit and no battery conditions. Its console window is hidden. When you log off, restart or shut down, Windows tells Tenant through a window that is never shown (a small helper process owns it, see Process protection below), and Tenant stops cleanly; Windows allows about five seconds for that. <code>tenant service restart</code>, <code>stop</code> and <code>uninstall</code>, and so <code>tenant update</code>, ask Tenant to stop the same way and wait up to 6 seconds; only a Tenant that is still running after that is ended the hard way. The stop budget is 4 seconds because that is about what a logoff allows. A Tenant that starts while the one it replaces is still letting go of the dashboard’s address waits up to 10 seconds for it. <code>--system</code> is a real service with a Stop control and <code>sc failure</code> restarts; it needs an elevated terminal.</li>
+<li><strong>Endpoint protection.</strong> A program that starts hidden at logon is what some security products watch for. If yours blocks the task from starting, allow <code>tenant.exe</code> there; <code>tenant service status</code> then says “not reachable” although the task is installed.</li>
+</ul>
+<h2 id="what-runs-in-serve-mode">What runs in serve mode</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Subsystem</th>
+<th>Default</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Agent and the full tool surface</td>
+<td>on</td>
+<td>memory, skills, recall, helpers</td>
+</tr>
+<tr>
+<td>Web dashboard</td>
+<td>on</td>
+<td>the control surface: chat, tools, approvals, models, memory, logs</td>
+</tr>
+<tr>
+<td>Headless approval queue</td>
+<td>on</td>
+<td>gated <strong>ask</strong> actions wait on the dashboard’s Approvals page and at <code>/api/approvals</code></td>
+</tr>
+<tr>
+<td>Self-improvement scheduler</td>
+<td>on</td>
+<td>distill, skill induction, consolidate, user profile; <code>--self-improve=false</code> turns it off</td>
+</tr>
+<tr>
+<td>Scheduled jobs (cron)</td>
+<td>on</td>
+<td>honours <code>cron.allow_exec</code> and <code>cron.timezone</code></td>
+</tr>
+<tr>
+<td>Remote and local MCP connectors</td>
+<td>on</td>
+<td>reconnect silently at start</td>
+</tr>
+<tr>
+<td>Federation peer listener</td>
+<td>if <code>peer.listen</code> is set</td>
+<td></td>
+</tr>
+<tr>
+<td>Discord relay</td>
+<td>if a bot token is configured and <code>relay.enabled</code></td>
+<td>drive the hub from your phone</td>
+</tr>
+<tr>
+<td>iMessage responder</td>
+<td>if <code>imessage.enabled</code></td>
+<td>macOS Messages or BlueBubbles</td>
+</tr>
+<tr>
+<td>Nightly eval, soul nudge, reflection</td>
+<td>off</td>
+<td><code>improve.eval_every</code>, <code>improve.soul_nudge_every</code>, <code>improve.reflect_every</code></td>
+</tr>
+<tr>
+<td>Daily update check</td>
+<td>on</td>
+<td>one log line when a newer release exists; <code>"update_check": false</code> turns it off</td>
+</tr>
+</tbody>
+</table>
+<p>While the model is unreachable Tenant degrades to the offline echo backend and suspends every autonomous job (cron, self-improvement, relay turns). The reconnect monitor restores the model without a restart once the endpoint answers again.</p>
+<p>Flags of <code>tenant serve</code> (also used by the unit):</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--dashboard-addr ADDR</code></td>
+<td><code>127.0.0.1:9770</code></td>
+<td>listen elsewhere; a non-loopback address is refused without TLS and a key (<a href="/tenant/docs/v0.2.0/dashboard/overview">dashboard</a>)</td>
+</tr>
+<tr>
+<td><code>--dashboard=false</code></td>
+<td></td>
+<td>run without the panel</td>
+</tr>
+<tr>
+<td><code>--self-improve=false</code></td>
+<td></td>
+<td>no background distill, consolidate or profile jobs</td>
+</tr>
+<tr>
+<td><code>--distill-every 10m</code>, <code>--profile-every 15m</code></td>
+<td></td>
+<td>cadences of the self-improvement jobs</td>
+</tr>
+<tr>
+<td><code>--eval-every 24h</code></td>
+<td>off</td>
+<td>the nightly eval (also <code>improve.eval_every</code> / <code>improve.eval_at</code>)</td>
+</tr>
+<tr>
+<td><code>--allow-no-memory</code></td>
+<td></td>
+<td>start even when embeddings are down</td>
+</tr>
+<tr>
+<td><code>--stop-budget 90s</code></td>
+<td>5 s hand-run</td>
+<td>how long a stop may take before the teardown is cut short</td>
+</tr>
+</tbody>
+</table>
+<h2 id="restarts-and-shutdowns-lose-nothing">Restarts and shutdowns lose nothing</h2>
+<p>A stop has two speeds. The first seconds make the data safe on every OS: the turn gate closes, pending approvals are denied, and every turn in flight is cancelled at once (the model call ends, a running tool’s child process dies with the process group or job object). Every message is already in the archive, the stores are WAL SQLite, and the file tools replace files by rename, so a kill at any instant leaves the old file or the new one, never a torn one. The stop budget then bounds the tidy teardown: stop intake (peer listener, Discord relay, dashboard), drain, close the stores last.</p>
+<p>A power cut is not a stop: nothing gets those first seconds. What protects the configuration then is how it is saved. <code>config.json</code>, an agent’s settings file, the cron jobs, the Discord cursor, the interrupted-turn record, the user profile and the other files Tenant replaces whole are each written to a temporary file, flushed to the disk and only then renamed over the old one, so a cut leaves the old file or the new one. If <code>config.json</code> ever does not load, Tenant refuses to start on defaults and says where the file breaks (<code>config.json corrupt at line 1, column 1</code>): fix it, or move it aside and run <code>tenant setup</code>.</p>
+<p>What you see afterwards:</p>
+<ul>
+<li>A Discord or iMessage turn the stop cut gets, within 2 seconds: “I was stopped mid-task by a system shutdown or restart. Say <code>continue</code> when I’m back.” After boot each recorded channel gets one more line naming the time, the task and how many tool calls had run. The turn is <strong>never re-run on its own</strong>: say <code>continue</code> and the agent picks up from the archive.</li>
+<li>Discord DMs sent while Tenant was down are routed after boot, oldest first (text only; attachments are not fetched). iMessage catches up through its <code>chat.db</code> cursor.</li>
+<li>A cron run the stop cut, a prompt or a shell command, is marked <code>interrupted: Tenant stopped</code> in its history; its next run is the next scheduled one.</li>
+</ul>
+<h2 id="health">Health</h2>
+<p><code>tenant doctor</code> probes a running hub’s <code>/api/status</code> and warns on a stuck turn or a waiting approval queue; it skips silently when no hub is running. <code>GET /healthz</code> answers without the sign-in key, for an uptime monitor.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> attach <span class="at">--follow</span>                 <span class="co"># tail the running hub&#39;s activity feed</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> attach <span class="at">--follow</span> <span class="at">--source</span> cron   <span class="co"># one log folder only</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> logs query <span class="st">&quot;level&gt;=warning since:24h&quot;</span></span></code></pre></div>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/setup/service.mdtenant-docs/src/setup/service.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#commands" id="toc-commands">Commands</a></li>
+<li><a href="#what-gets-installed" id="toc-what-gets-installed">What gets installed</a></li>
+<li><a href="#what-runs-in-serve-mode" id="toc-what-runs-in-serve-mode">What runs in serve mode</a></li>
+<li><a href="#restarts-and-shutdowns-lose-nothing" id="toc-restarts-and-shutdowns-lose-nothing">Restarts and shutdowns lose nothing</a></li>
+<li><a href="#health" id="toc-health">Health</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/v0.2.0/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>
