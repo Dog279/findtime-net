@@ -237,8 +237,12 @@
 <td><code>fleet/1</code>, <code>2</code>, <code>3001</code></td>
 </tr>
 <tr>
-<td>a code issued; a machine enrolled, confirmed, renamed or revoked</td>
+<td>a code issued; a machine enrolled, confirmed, renamed or revoked; its settings copied again or applied</td>
 <td><code>fleet/1002</code>, <code>1003</code></td>
+</tr>
+<tr>
+<td>a group, the fleet’s default categories or its rules changed (no machine moves with it)</td>
+<td><code>fleet/5003</code></td>
 </tr>
 <tr>
 <td>an enrollment or confirmation refused; a spent code presented again</td>
@@ -262,7 +266,7 @@
 </tr>
 </tbody>
 </table>
-<p>The Security log keeps the audit record of each operator change and each refusal (<code>security/4321</code>–<code>4324</code>): who made it, and from where. No line in either log holds an enrollment code or the recovery identity. A change made with a <code>tenant fleet</code> command is in the fleet log even when no Tenant is running. <code>tenant logs catalog</code> has every event’s meaning, cause and what to do.</p>
+<p>The Security log keeps the audit record of each operator change and each refusal (<code>security/4321</code>–<code>4325</code>): who made it, and from where. A change to many machines at once has one record per machine. No line in either log holds an enrollment code or the recovery identity. A change made with a <code>tenant fleet</code> command is in the fleet log even when no Tenant is running. <code>tenant logs catalog</code> has every event’s meaning, cause and what to do.</p>
 <p>A fleet machine’s own process has no log book: it keeps its <a href="/tenant/docs/fleet/machines#the-audit-log">audit log</a> and writes to its own log and the system’s.</p>
 <h2 id="the-fleet-pages">The fleet pages</h2>
 <table>
@@ -287,7 +291,7 @@
 </tr>
 <tr>
 <td><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></td>
-<td>you want to set what the agent may do on each machine, or open a relay or a cron job to the fleet</td>
+<td>you want to set what the agent may do on each machine, set the fleet’s defaults and groups, change many machines at once, or open a relay or a cron job to the fleet</td>
 </tr>
 <tr>
 <td><a href="/tenant/docs/fleet/memory">A machine’s memory</a></td>
@@ -295,7 +299,7 @@
 </tr>
 <tr>
 <td><a href="/tenant/docs/fleet/updates">Update, move and recover</a></td>
-<td>you are updating machines, or the master was lost and its machines need a new one</td>
+<td>you are updating machines, one, a group or a rollout of many, or the master was lost and its machines need a new one</td>
 </tr>
 </tbody>
 </table>

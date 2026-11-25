@@ -887,6 +887,12 @@
 <td>the <code>host:port</code> the fleet port binds; nothing listens until <code>tenant fleet init</code> has made this Tenant a master</td>
 <td><code>tenant fleet init --listen</code></td>
 </tr>
+<tr>
+<td><code>remote_confirm</code></td>
+<td>false</td>
+<td>a signed-in dashboard browser on another computer may confirm a pending machine, once it gives the sign-in key again (<a href="/tenant/docs/fleet/setup#confirming-from-another-computer">Confirming from another computer</a>). Read at each confirmation; a file that can’t be read counts as off. Whoever holds the sign-in key can then confirm a machine from anywhere the dashboard is reached</td>
+<td><code>tenant fleet remote-confirm on\|off</code> (on asks at a terminal), <code>/fleet remote-confirm</code>; no dashboard switch</td>
+</tr>
 </tbody>
 </table>
 <h2 id="logs"><code>logs</code></h2>

@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080808">
 <title>Approvals on fleet machines — Tenant docs — FindTime</title>
-<meta name="description" content="Each fleet machine has its own approval scheme, decided on the master. What it starts with, how to change it, how relays and cron jobs are kept off the fleet, and why a machine’s results are treated as untrusted.">
+<meta name="description" content="Each fleet machine has its own approval scheme, decided on the master. What it starts with, how to change it, the fleet’s defaults and groups, changes to many machines, how relays and cron jobs are kept off the fleet, and why a machine’s results are treated as untrusted.">
 <link rel="canonical" href="https://findtime.net/tenant/docs/fleet/approvals">
 <meta property="og:title" content="Approvals on fleet machines — Tenant docs">
-<meta property="og:description" content="Each fleet machine has its own approval scheme, decided on the master. What it starts with, how to change it, how relays and cron jobs are kept off the fleet, and why a machine’s results are treated as untrusted.">
+<meta property="og:description" content="Each fleet machine has its own approval scheme, decided on the master. What it starts with, how to change it, the fleet’s defaults and groups, changes to many machines, how relays and cron jobs are kept off the fleet, and why a machine’s results are treated as untrusted.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://findtime.net/tenant/docs/fleet/approvals">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -111,18 +111,22 @@
 <main id="main" class="content" tabindex="-1">
 <p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/fleet/overview">Fleet</a></p>
 <h1>Approvals on fleet machines</h1>
-<p class="lede">Each fleet machine has its own approval scheme, decided on the master. What it starts with, how to change it, how relays and cron jobs are kept off the fleet, and why a machine’s results are treated as untrusted.</p>
+<p class="lede">Each fleet machine has its own approval scheme, decided on the master. What it starts with, how to change it, the fleet’s defaults and groups, changes to many machines, how relays and cron jobs are kept off the fleet, and why a machine’s results are treated as untrusted.</p>
 <p>Every approval for a fleet machine is decided on the master. A tool on the machine that needs one asks the master over the link, and the card comes up where any card of the master’s does: the terminal app, the dashboard, or a relay that has been opened to the fleet. The categories and modes are the ones in <a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a>.</p>
 <p>Before the master is asked at all, the machine applies its own ceiling from <code>child.json</code> (<a href="/tenant/docs/fleet/machines">On a fleet machine</a>). The master cannot lift it.</p>
 <h2 id="each-machine-has-its-own-scheme">Each machine has its own scheme</h2>
-<p>A machine’s scheme is set when you confirm it, and is built in three layers:</p>
+<p>A call on a machine is decided by that machine’s own stored scheme and nothing else. The fleet’s defaults and its groups are never read when a call is decided: they are laid over a scheme on purpose, at a step you take, and each such step leaves one Security record per machine.</p>
+<p>A machine’s <strong>fresh copy</strong>, what it gets when you confirm it or copy it again with <code>--from master</code>, is built in this order, each layer winning over the one before it where they disagree:</p>
 <ol type="1">
-<li><strong>A copy of the master’s local scheme</strong> as its settings file holds it: category modes, tool rules and command rules. Launch-flag grants and session grants are not copied.</li>
-<li><strong>A floor.</strong> <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>send</code> and <code>sandbox</code> start no looser than <code>ask</code>, whatever the master allows. Every copied allow rule that could reach those categories becomes <code>ask</code> too.</li>
-<li><strong>The fleet’s rules for new machines</strong> (<code>tenant fleet permissions --defaults</code>) laid over the copy; they win. Then anything you set at confirmation with <code>--set category=mode</code>.</li>
+<li><strong>A copy of the master’s local scheme</strong> as its settings file holds it: category modes, tool rules and command rules. Launch-flag grants and session grants are not copied. <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>send</code> and <code>sandbox</code> start no looser than <code>ask</code>, whatever the master allows, and every copied allow rule that could reach those categories becomes <code>ask</code> too.</li>
+<li><strong>The fleet’s default categories</strong>: each category you set for new machines replaces the copy’s mode. A category you did not set comes from the copy.</li>
+<li><strong>The fleet’s rules</strong> for new machines.</li>
+<li><strong>The rules of each group the machine is in</strong>, groups in name order (compared without case): a later group wins over an earlier one, and any group wins over a fleet rule.</li>
 </ol>
-<p>After that the master’s scheme and the machine’s are independent: a later change on the master does not move the machine.</p>
-<p>The schemes are kept in <code>settings.&lt;agent&gt;.json</code>, under <code>fleet_schemes</code> (by machine id) and <code>fleet_rules</code> (the rules for new machines). An entry that cannot be read leaves that machine with no scheme, and every call to it is refused, reads included, until <code>tenant fleet permissions &lt;name&gt; --from master</code> writes it again.</p>
+<p>Then anything you set at confirmation with <code>--set category=mode</code>. The confirm screen marks each line that came from a layer (<code>fleet default</code>, <code>fleet rule</code>, <code>group &lt;name&gt;</code>).</p>
+<p>A rule laid over a scheme replaces every rule of the machine’s that it answers for (the same pattern, a narrower command under its prefix, a tool its glob covers), and leaves the machine’s categories alone.</p>
+<p>Once laid, the scheme is the machine’s. An edit made to it (a category, a rule, an <strong>always</strong> on its card) stands, over every layer, until a layer is laid over it again. A later change to the master’s own scheme, to a default or to a group moves no machine; when you change a default or a group, the answer says so and names the step that does.</p>
+<p>The schemes are kept in <code>settings.&lt;agent&gt;.json</code>, under <code>fleet_schemes</code> (by machine id), with the layers beside them: <code>fleet_permissions</code> (the default categories), <code>fleet_rules</code> and <code>fleet_groups</code> (<a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a>). An entry that cannot be read leaves that machine with no scheme, and every call to it is refused, reads included, until <code>tenant fleet permissions &lt;name&gt; --from master</code> writes it again.</p>
 <h2 id="what-asks">What asks</h2>
 <ul>
 <li><code>fleet_list</code>, <code>fleet_tools</code>, <code>fleet_list_dir</code> and <code>fleet_read</code> ask nobody. The machine refuses its secret files.</li>
@@ -134,8 +138,7 @@
 <p><strong>Always</strong> saves a rule in that machine’s scheme alone. It does not carry to another machine or to the master.</p>
 <h2 id="changing-a-machines-scheme">Changing a machine’s scheme</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet permissions <span class="op">&lt;</span>name<span class="op">&gt;</span> [set <span class="op">&lt;</span>category<span class="op">&gt;</span> <span class="op">&lt;</span>mode<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">add</span> <span class="op">&lt;</span>pattern<span class="op">&gt;</span> <span class="op">&lt;</span>mode<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">rm</span> <span class="op">&lt;</span>pattern<span class="op">&gt;</span>]</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet permissions <span class="op">&lt;</span>name<span class="op">&gt;</span> --from defaults<span class="kw">|</span><span class="ex">master</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet permissions <span class="at">--defaults</span> [add <span class="op">&lt;</span>pattern<span class="op">&gt;</span> <span class="op">&lt;</span>mode<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">rm</span> <span class="op">&lt;</span>pattern<span class="op">&gt;</span>]</span></code></pre></div>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet permissions <span class="op">&lt;</span>name<span class="op">&gt;</span> --from defaults<span class="kw">|</span><span class="ex">master</span></span></code></pre></div>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -162,23 +165,114 @@
 </tr>
 <tr>
 <td><code>... web1 --from defaults</code></td>
-<td>lay the fleet’s rules over the machine’s scheme again</td>
+<td><strong>Apply</strong>: lay the fleet’s rules, then the rules of each of the machine’s groups, over the scheme it has; its categories stay</td>
 </tr>
 <tr>
 <td><code>... web1 --from master</code></td>
-<td>copy the master’s local scheme again, with the floor</td>
+<td>copy the master’s local scheme again, with the floor, the fleet’s defaults and its groups: a fresh copy</td>
+</tr>
+</tbody>
+</table>
+<p>A laid rule replaces every rule of the machine’s own that it answers for, <strong>a block included</strong>: a group rule <code>os_exec(git *)</code> allow removes the machine’s <code>os_exec(git status)</code> deny. The answer and the machine’s Security record say which rules were replaced and what they were.</p>
+<p>In the terminal app the same edits are <code>/permissions fleet &lt;name&gt; [set|add|rm …]</code>. The dashboard’s Fleet page shows and changes each machine’s settings (<a href="/tenant/docs/dashboard/pages">Page by page</a>).</p>
+<h2 id="the-defaults-for-new-machines">The defaults for new machines</h2>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet permissions <span class="at">--defaults</span> [set <span class="op">&lt;</span>category<span class="op">&gt;</span> <span class="op">&lt;</span>mode<span class="op">&gt;</span> <span class="kw">|</span> <span class="bu">unset</span> <span class="op">&lt;</span>category<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">add</span> <span class="op">&lt;</span>pattern<span class="op">&gt;</span> <span class="op">&lt;</span>mode<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">rm</span> <span class="op">&lt;</span>pattern<span class="op">&gt;</span>]</span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Form</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tenant fleet permissions --defaults</code></td>
+<td>show the categories you set for new machines and the fleet’s rules</td>
+</tr>
+<tr>
+<td><code>... --defaults set web deny</code></td>
+<td>a category every newly confirmed machine starts with: <code>ask</code>, <code>allow</code> or <code>deny</code></td>
+</tr>
+<tr>
+<td><code>... --defaults unset web</code></td>
+<td>back to the master’s copy for that category</td>
 </tr>
 <tr>
 <td><code>... --defaults add "os_exec(uptime)" allow</code></td>
 <td>a rule every newly confirmed machine starts with</td>
 </tr>
+<tr>
+<td><code>... --defaults rm "os_exec(uptime)"</code></td>
+<td>remove that rule</td>
+</tr>
 </tbody>
 </table>
-<p>Changing the fleet’s rules does not touch machines already confirmed. In the terminal app the same edits are <code>/permissions fleet &lt;name&gt; [set|add|rm …]</code> and <code>/permissions fleet --defaults …</code>. The dashboard’s Fleet page shows and changes each machine’s settings (<a href="/tenant/docs/dashboard/pages">Page by page</a>).</p>
+<p>A default reaches a machine only when it is confirmed or copied again; the fleet’s rules also when it is applied. In the terminal app the same is <code>/permissions fleet --defaults [set &lt;category&gt; &lt;mode&gt; | unset &lt;category&gt; | add &lt;pattern&gt; &lt;mode&gt; | rm &lt;pattern&gt;]</code>.</p>
+<h2 id="groups">Groups</h2>
+<p>A group is a name, the machines in it and rules. It has no categories. A machine may be in any number of groups, in any state; members are kept by id, so a rename does not take a machine out.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet group [show <span class="op">&lt;</span>group<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">create</span> <span class="op">&lt;</span>group<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">delete</span> <span class="op">&lt;</span>group<span class="op">&gt;</span>]</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet group add<span class="kw">|</span><span class="ex">remove</span> <span class="op">&lt;</span>group<span class="op">&gt;</span> <span class="op">&lt;</span>machine<span class="op">&gt;</span>...</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet group rules <span class="op">&lt;</span>group<span class="op">&gt;</span> [add <span class="op">&lt;</span>pattern<span class="op">&gt;</span> <span class="op">&lt;</span>mode<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">rm</span> <span class="op">&lt;</span>pattern<span class="op">&gt;</span>]</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet group apply <span class="op">&lt;</span>group<span class="op">&gt;</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Form</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tenant fleet group</code></td>
+<td>the groups; <code>show web</code> for one</td>
+</tr>
+<tr>
+<td><code>... group create web</code></td>
+<td>a new group. A name is 1 to 63 letters, digits, dots, dashes or underscores, starting with a letter or a digit; not <code>all</code>, not the shape of a machine id, and not another group’s name in any case</td>
+</tr>
+<tr>
+<td><code>... group add web web1 web2</code></td>
+<td>put machines in it, by name or id; <code>remove</code> takes them out</td>
+</tr>
+<tr>
+<td><code>... group rules web add "os_exec(systemctl restart nginx)" allow</code></td>
+<td>a rule of the group’s; <code>rm</code> removes one</td>
+</tr>
+<tr>
+<td><code>... group apply web</code></td>
+<td>lay the fleet’s rules, then each member’s groups’ rules, over each confirmed member’s scheme; categories stay</td>
+</tr>
+<tr>
+<td><code>... group delete web</code></td>
+<td>the group goes; its members keep what it laid</td>
+</tr>
+</tbody>
+</table>
+<p>Changing a group, its rules or its machines moves no machine: <strong>Apply</strong> is the step that does. A member that is pending, revoked or whose scheme cannot be read is skipped and named in the answer, and the command exits 1.</p>
+<p>A pending machine in a group starts with the group’s rules when it is confirmed, and its confirm screen shows them. Revoking a machine with <code>--delete-scheme</code> takes it out of every group; <code>--keep-scheme</code> keeps its memberships, for a machine that adopts its id.</p>
+<p>In the terminal app the same verbs are <code>/fleet group …</code>. The command line and the terminal app take a loosening (an allow) without a second step, as for one machine.</p>
+<h2 id="many-machines-at-once">Many machines at once</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet permissions <span class="at">--group</span> <span class="op">&lt;</span>group<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">--all</span> [set <span class="op">&lt;</span>category<span class="op">&gt;</span> <span class="op">&lt;</span>mode<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">add</span> <span class="op">&lt;</span>pattern<span class="op">&gt;</span> <span class="op">&lt;</span>mode<span class="op">&gt;</span> <span class="kw">|</span> <span class="fu">rm</span> <span class="op">&lt;</span>pattern<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">--from</span> defaults<span class="kw">|</span><span class="ex">master]</span></span></code></pre></div>
+<p>The same edits as for one machine, made to each member of a group, or with <code>--all</code> to every confirmed machine, one machine at a time through the one-machine path. Each machine gets one line in the answer and one Security record; the batch gets none. It never stops at a failure, and exits 1 if any machine was not changed.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet permissions <span class="at">--group</span> web set exec ask</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet permissions <span class="at">--all</span> <span class="at">--from</span> defaults</span></code></pre></div>
+<p>On the dashboard’s Fleet page you can tick machines, or narrow the list to a group and choose everyone shown, and make one change to all of them (<a href="/tenant/docs/dashboard/pages">Page by page</a>).</p>
+<h2 id="when-the-defaults-or-the-groups-cant-be-read">When the defaults or the groups can’t be read</h2>
+<p><code>fleet_permissions</code> and <code>fleet_groups</code> are read strictly, as <code>fleet_rules</code> is: an unknown category, a mode that is not <code>ask</code>, <code>allow</code> or <code>deny</code>, a key twice (group names that differ only in case are the same name), <code>null</code>, trailing text, a member that is not a machine id, or more than 256 groups, 4096 machines or 512 rules in a group makes the whole key unreadable. Then no machine can be confirmed or copied again (and, for <code>fleet_groups</code>, no group applied or changed), you are told once, and the text is kept as written for you to fix. Machines that have a scheme keep deciding by it.</p>
+<h2 id="what-is-recorded">What is recorded</h2>
+<p>Confirming a machine, copying its scheme again and applying each leave one Security record per machine (<code>security/4323</code>): a confirmation names the defaults and the groups it laid, and an Apply names the rules of the machine’s own it replaced, with the mode each had. A change to many machines is recorded once per machine, never once for the batch: a category by the record a change of that category on one machine leaves, a rule as <code>security/4323</code>. A change to a default, to the fleet’s rules or to a group is <code>security/4325</code> in the Security log and <code>fleet/5003</code> in the fleet log; it moves no machine, and says so. Each record says where you were: <code>cli</code>, <code>tui</code>, <code>dashboard</code>, or <code>dashboard-remote</code> for a machine confirmed from a browser on another computer.</p>
 <h2 id="relays-and-cron-jobs-are-closed-until-you-open-them">Relays and cron jobs are closed until you open them</h2>
 <p>A turn that came from a relay or a cron job reaches no machine, reads included, until you open it.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet relay                         <span class="co"># each relay&#39;s switch</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet relay discord on              <span class="co"># or imessage; off by default</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet relay                         <span class="co"># each relay&#39;s switch</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet relay discord on              <span class="co"># or imessage; off by default</span></span></code></pre></div>
 <pre class="text"><code>/fleet relay [discord|imessage [on|off]]
 /cron fleet &lt;id&gt; &lt;machine&gt;... | none       the machines a job may reach; none by default</code></pre>
 <p>The relay switches are <code>relay.allow_fleet</code> and <code>imessage.allow_fleet</code> in <code>config.json</code> (<a href="/tenant/docs/reference/config">config.json</a>). An opened relay keeps its own rules as well: each call must pass both the relay’s rules and the machine’s scheme. A cron job reaches only the machines on its own list (<code>cron.jobs[].fleet</code>), and nobody is there to answer, so an action the machine’s scheme would ask about is refused.</p>
@@ -205,6 +299,11 @@
 <li><a href="#each-machine-has-its-own-scheme" id="toc-each-machine-has-its-own-scheme">Each machine has its own scheme</a></li>
 <li><a href="#what-asks" id="toc-what-asks">What asks</a></li>
 <li><a href="#changing-a-machines-scheme" id="toc-changing-a-machines-scheme">Changing a machine’s scheme</a></li>
+<li><a href="#the-defaults-for-new-machines" id="toc-the-defaults-for-new-machines">The defaults for new machines</a></li>
+<li><a href="#groups" id="toc-groups">Groups</a></li>
+<li><a href="#many-machines-at-once" id="toc-many-machines-at-once">Many machines at once</a></li>
+<li><a href="#when-the-defaults-or-the-groups-cant-be-read" id="toc-when-the-defaults-or-the-groups-cant-be-read">When the defaults or the groups can’t be read</a></li>
+<li><a href="#what-is-recorded" id="toc-what-is-recorded">What is recorded</a></li>
 <li><a href="#relays-and-cron-jobs-are-closed-until-you-open-them" id="toc-relays-and-cron-jobs-are-closed-until-you-open-them">Relays and cron jobs are closed until you open them</a></li>
 <li><a href="#a-machines-results-are-untrusted" id="toc-a-machines-results-are-untrusted">A machine’s results are untrusted</a></li>
 </ul>
