@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>On a fleet machine — Tenant docs — FindTime</title>
+<meta name="description" content="The tenant child commands, the service a child installs on each system, child.json and its ceiling, the machine’s own audit log, and what happens when the master revokes a machine.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/fleet/machines">
+<meta property="og:title" content="On a fleet machine — Tenant docs">
+<meta property="og:description" content="The tenant child commands, the service a child installs on each system, child.json and its ceiling, the machine’s own audit log, and what happens when the master revokes a machine.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/fleet/machines">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/v0.2.0/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/v0.2.0/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/v0.2.0/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/fleet/overview">Fleet</a></p>
+<h1>On a fleet machine</h1>
+<p class="lede">The tenant child commands, the service a child installs on each system, child.json and its ceiling, the machine’s own audit log, and what happens when the master revokes a machine.</p>
+<p>Everything on this page runs on the machine itself, not on the master.</p>
+<h2 id="commands">Commands</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> child install <span class="pp">[--</span><span class="ss">system</span><span class="pp">]</span> [--ceiling full<span class="kw">|</span><span class="ex">no-exec</span><span class="kw">|</span><span class="ex">read-only]</span> [--updates release<span class="kw">|</span><span class="ex">master]</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> child updates [release<span class="kw">|</span><span class="ex">master]</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> child rehome</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> child status</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> child pause <span class="kw">|</span> <span class="ex">resume</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> child audit</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> child uninstall</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> child run</span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Command</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>install</code></td>
+<td>enrolls this machine with the code from <code>tenant fleet enroll</code> (read from standard input or <code>TENANT_ENROLL_CODE</code>, never an argument), shows the six digits to type on the master, and installs the service</td>
+</tr>
+<tr>
+<td><code>updates</code></td>
+<td>whose word an update from the master is taken on; see <a href="/tenant/docs/v0.2.0/fleet/updates">Update, move and recover</a></td>
+</tr>
+<tr>
+<td><code>rehome</code></td>
+<td>trust another master; see <a href="/tenant/docs/v0.2.0/fleet/updates#move-a-machine-to-another-master">Update, move and recover</a></td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>where this machine stands: connected, waiting for confirmation (with the six digits), paused, rejected, offline. Exit 3 unless connected</td>
+</tr>
+<tr>
+<td><code>pause</code></td>
+<td>stop serving the master at once: the link drops, and running calls and background commands end. It lasts across restarts, until <code>resume</code></td>
+</tr>
+<tr>
+<td><code>resume</code></td>
+<td>serve the master again</td>
+</tr>
+<tr>
+<td><code>audit</code></td>
+<td>check the chain of this machine’s audit log</td>
+</tr>
+<tr>
+<td><code>uninstall</code></td>
+<td>remove the service and this machine’s fleet key; the audit log stays</td>
+</tr>
+<tr>
+<td><code>run</code></td>
+<td>what the installed service runs: hold the link from this terminal</td>
+</tr>
+</tbody>
+</table>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--system</code></td>
+<td><code>install</code>: a service that runs as root or SYSTEM from boot, with the child’s files in the machine’s own location. Needs a root shell or a PowerShell run as administrator</td>
+</tr>
+<tr>
+<td><code>--ceiling</code></td>
+<td><code>install</code>: what this machine lets its master do: <code>full</code> (default), <code>no-exec</code> or <code>read-only</code></td>
+</tr>
+<tr>
+<td><code>--updates</code></td>
+<td><code>install</code>: <code>release</code> (default) or <code>master</code></td>
+</tr>
+<tr>
+<td><code>--sandbox</code></td>
+<td><code>install</code>: the sandbox backend this machine runs commands through (default <code>host</code>)</td>
+</tr>
+<tr>
+<td><code>--dir</code></td>
+<td>the child’s directory, instead of this account’s or (with <code>--system</code>) the machine’s</td>
+</tr>
+</tbody>
+</table>
+<p>Exit codes: 0 done, 1 an error, 2 refused before anything changed (a code given as an argument, a machine that is already enrolled, <code>--system</code> without elevation), 3 from <code>status</code> when the machine is not connected.</p>
+<h2 id="where-a-child-keeps-its-files">Where a child keeps its files</h2>
+<p>The child’s directory is <code>&lt;config&gt;/child</code> for your own account. With <code>--system</code> it is the machine’s:</p>
+<table>
+<thead>
+<tr>
+<th>System</th>
+<th><code>--system</code> directory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td><code>%ProgramData%\tenant\child</code></td>
+</tr>
+<tr>
+<td>Linux</td>
+<td><code>/etc/tenant/child</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td><code>/Library/Application Support/tenant/child</code></td>
+</tr>
+</tbody>
+</table>
+<p>It holds <code>child.json</code>, the machine’s key (<code>child-identity.pem</code>), the link’s state (<code>child-link.json</code>) and the <code>audit</code> folder. What the child’s tools work with goes beside it, in <code>&lt;dir&gt;-data</code>.</p>
+<h2 id="the-service-on-each-system">The service on each system</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>System</th>
+<th>As you (from logon)</th>
+<th>With <code>--system</code> (from boot)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>scheduled task <code>\Tenant\Child</code>, started at logon</td>
+<td>service <code>TenantChild</code>, started automatically</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>systemd user unit <code>tenant-child.service</code></td>
+<td>system unit <code>/etc/systemd/system/tenant-child.service</code></td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>LaunchAgent <code>com.tenant.child</code> in <code>~/Library/LaunchAgents</code></td>
+<td>LaunchDaemon <code>com.tenant.child</code> in <code>/Library/LaunchDaemons</code></td>
+</tr>
+</tbody>
+</table>
+<p>On Linux, a user unit stops when you log out unless lingering is on; <code>install</code> prints the <code>loginctl enable-linger</code> command when it is off. The child’s labels differ from <code>tenant service</code>’s, so a child can be installed beside a full Tenant on the same machine.</p>
+<h2 id="child.json-and-the-ceiling">child.json and the ceiling</h2>
+<p><code>child.json</code> is what the machine lets its master do. It is owner-only, and it is read from the disk on every call, so an edit takes effect on the next call with no restart.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">{</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;version&quot;</span><span class="fu">:</span> <span class="dv">1</span><span class="fu">,</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;id&quot;</span><span class="fu">:</span> <span class="st">&quot;m0123456789abcdef&quot;</span><span class="fu">,</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;name&quot;</span><span class="fu">:</span> <span class="st">&quot;web1&quot;</span><span class="fu">,</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;master_addresses&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;192.168.1.5:9777&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;master_fingerprint&quot;</span><span class="fu">:</span> <span class="st">&quot;…&quot;</span><span class="fu">,</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;sandbox&quot;</span><span class="fu">:</span> <span class="st">&quot;host&quot;</span><span class="fu">,</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;ceiling&quot;</span><span class="fu">:</span> <span class="st">&quot;no-exec&quot;</span><span class="fu">,</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;tools&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;os_read_file&quot;</span><span class="ot">,</span> <span class="st">&quot;os_list_dir&quot;</span><span class="ot">]</span><span class="fu">,</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;secret_paths&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;/srv/app/secrets&quot;</span><span class="ot">]</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ceiling</code></td>
+<td><code>full</code>, <code>no-exec</code> or <code>read-only</code> (below)</td>
+</tr>
+<tr>
+<td><code>tools</code></td>
+<td>when present, the only tools this machine serves. An empty list is an error, not “none”</td>
+</tr>
+<tr>
+<td><code>secret_paths</code></td>
+<td>absolute paths of files or folders that this machine’s file tools never read or write, added to the built-in list (the child’s own directory, the machine’s password databases and key stores, every account’s credential stores and browser profiles)</td>
+</tr>
+<tr>
+<td><code>sandbox</code></td>
+<td>the backend commands run through; a backend the machine does not have runs nothing</td>
+</tr>
+<tr>
+<td><code>updates</code></td>
+<td><code>master</code> when set so; left out means the default, <code>release</code></td>
+</tr>
+</tbody>
+</table>
+<p>The id, name, addresses and fingerprint are written at enrollment; leave them alone.</p>
+<h3 id="what-each-ceiling-guarantees">What each ceiling guarantees</h3>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Ceiling</th>
+<th>The machine refuses, without asking the master</th>
+<th>How firm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>full</code></td>
+<td>nothing: the master’s approvals decide</td>
+<td>with the <code>host</code> sandbox, a command runs as the account that owns <code>child.json</code></td>
+</tr>
+<tr>
+<td><code>no-exec</code></td>
+<td>every action that runs a command: the <code>os_exec</code> family, and any action Tenant does not declare, such as a local MCP server’s tool</td>
+<td>not a firm guarantee: file writes the master approves still happen, and a written file can be one that something on the machine runs later</td>
+</tr>
+<tr>
+<td><code>read-only</code></td>
+<td>every action that would need an approval</td>
+<td>firm: nothing that changes the machine is done</td>
+</tr>
+</tbody>
+</table>
+<p><code>no-exec</code> and <code>read-only</code> are limits the master cannot lift. A refusal the machine makes by itself ends the result with <code>[fleet: this machine refused, without asking its master: os_exec (ceiling read-only)]</code>, and nobody on the master is asked.</p>
+<h2 id="the-audit-log">The audit log</h2>
+<p>Every call from the master is written to <code>&lt;child dir&gt;/audit/audit.jsonl</code> before it runs, and again when it has ended. Each record carries the SHA-256 of the one before it, and each also goes to the system log: syslog (the journal on a systemd machine) or, on Windows, the Application event log under the source <code>TenantChild</code>. If the record cannot be written, the call is not run.</p>
+<p><code>tenant child audit</code> checks the chain. The chain shows a change inside the log; it cannot show records cut off its end. For that, the master keeps the hash of each record with its own record of the call (event <code>fleet/1201</code> in <a href="/tenant/docs/v0.2.0/fleet/overview#the-fleet-log">the fleet log</a>), so the two can be compared, and the system log has a line per record.</p>
+<h2 id="pausing">Pausing</h2>
+<p><code>tenant child pause</code> drops the link and ends running calls and background commands. While paused the machine serves nothing. The pause lasts across restarts; <code>tenant child resume</code> reconnects.</p>
+<h2 id="when-a-machine-is-revoked">When a machine is revoked</h2>
+<p>On the master:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet revoke <span class="op">&lt;</span>name<span class="op">&gt;</span>                  <span class="co"># at a terminal: asks whether to keep or delete its scheme</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet revoke <span class="op">&lt;</span>name<span class="op">&gt;</span> --keep-scheme    <span class="co"># the record and the approval scheme stay under its id</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet revoke <span class="op">&lt;</span>name<span class="op">&gt;</span> --delete-scheme  <span class="co"># both go, and the machine&#39;s memory with them</span></span></code></pre></div>
+<p>From then on the master refuses the machine’s certificate. If the machine is online, the master sends it a “revoked” notice and closes its link within a second; the child stops and does not start again, and <code>tenant child status</code> says it is revoked. A machine revoked while it was offline is refused at its next handshake: its status says the master rejected it, and it keeps trying, slowly, until it is uninstalled.</p>
+<p>A kept scheme can be given to a machine enrolled later with <code>tenant fleet enroll &lt;name&gt; --adopt &lt;id&gt;</code>; <code>--keep-scheme</code> also keeps the machine in its <a href="/tenant/docs/v0.2.0/fleet/approvals#groups">groups</a>, and <code>--delete-scheme</code> takes it out of every one. Otherwise a new machine under an old name starts clean.</p>
+<p>To use a revoked machine again, uninstall it and enroll it anew, or give it a code with <code>tenant child rehome</code>.</p>
+<h2 id="uninstalling">Uninstalling</h2>
+<p><code>tenant child uninstall</code> (from an elevated terminal for a <code>--system</code> child) removes the service, the machine’s key and <code>child.json</code>, and the child’s working files. It keeps the audit log, the record of what the master did on this machine. Revoke the machine on the master too.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/fleet/machines.mdtenant-docs/src/fleet/machines.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#commands" id="toc-commands">Commands</a></li>
+<li><a href="#where-a-child-keeps-its-files" id="toc-where-a-child-keeps-its-files">Where a child keeps its files</a></li>
+<li><a href="#the-service-on-each-system" id="toc-the-service-on-each-system">The service on each system</a></li>
+<li><a href="#child.json-and-the-ceiling" id="toc-child.json-and-the-ceiling">child.json and the ceiling</a></li>
+<li><a href="#the-audit-log" id="toc-the-audit-log">The audit log</a></li>
+<li><a href="#pausing" id="toc-pausing">Pausing</a></li>
+<li><a href="#when-a-machine-is-revoked" id="toc-when-a-machine-is-revoked">When a machine is revoked</a></li>
+<li><a href="#uninstalling" id="toc-uninstalling">Uninstalling</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/v0.2.0/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

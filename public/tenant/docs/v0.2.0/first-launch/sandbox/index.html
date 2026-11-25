@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>The execution sandbox — Tenant docs — FindTime</title>
+<meta name="description" content="Where os_exec commands run on each OS, the exec_profiles that confine them, dry run vs enforcement, exceptions, and the sandbox commands.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/first-launch/sandbox">
+<meta property="og:title" content="The execution sandbox — Tenant docs">
+<meta property="og:description" content="Where os_exec commands run on each OS, the exec_profiles that confine them, dry run vs enforcement, exceptions, and the sandbox commands.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/first-launch/sandbox">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/v0.2.0/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/v0.2.0/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/v0.2.0/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/first-launch/setup-wizard">First launch</a></p>
+<h1>The execution sandbox</h1>
+<p class="lede">Where os_exec commands run on each OS, the exec_profiles that confine them, dry run vs enforcement, exceptions, and the sandbox commands.</p>
+<p>Every command the agent runs goes through the execution sandbox seam. What that seam does depends on the OS, the <strong>surface</strong> the command came from, and your <code>exec_profiles</code>.</p>
+<h2 id="surfaces-and-backends">Surfaces and backends</h2>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Commands from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>local</code></td>
+<td>the terminal UI, the dashboard, serve chat</td>
+</tr>
+<tr>
+<td><code>discord</code></td>
+<td>the Discord relay</td>
+</tr>
+<tr>
+<td><code>imessage</code></td>
+<td>the iMessage responder</td>
+</tr>
+<tr>
+<td><code>cron-exec</code></td>
+<td>a scheduled prompt job with <code>exec</code> on</td>
+</tr>
+<tr>
+<td><code>cron-shell</code></td>
+<td>a scheduled shell job</td>
+</tr>
+</tbody>
+</table>
+<p>Sub-agents take their parent’s surface.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Backend</th>
+<th>What it does</th>
+<th>Where</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>host</code></td>
+<td>no boundary: the command runs as the Tenant process, behind your approvals</td>
+<td>every OS</td>
+</tr>
+<tr>
+<td><code>restricted</code></td>
+<td>filesystem and network confinement (Seatbelt)</td>
+<td>macOS only</td>
+</tr>
+<tr>
+<td><code>jobobject</code></td>
+<td>resource caps and the environment allowlist only, no filesystem or network confinement</td>
+<td>Windows, for local MCP servers</td>
+</tr>
+<tr>
+<td><code>container</code></td>
+<td>a fresh, hardened Linux container per command, through the <code>docker</code> CLI: only the work dir and the profile’s roots exist inside, no network unless the profile says <code>full</code>, non-root, no capabilities</td>
+<td>every OS with Docker (Docker Desktop on Windows and macOS)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="what-the-container-backend-needs">What the container backend needs</h3>
+<p><code>container</code> fails closed: when any of these is missing, an enforcing profile runs nothing and says why (<code>tenant sandbox probe</code>, <code>tenant doctor</code>).</p>
+<ul>
+<li>The <code>docker</code> CLI on <code>PATH</code>, and an engine it can reach over a local pipe or socket, <code>ssh://</code>, or mutual-TLS <code>tcp://</code>. A plain <code>tcp://</code> endpoint is refused, and so is running while anything answers on <code>127.0.0.1:2375</code> (Docker Desktop’s “Expose daemon … without TLS” setting).</li>
+<li>Docker Engine 29.4.3 or later, with runc and containerd at or past their fixed releases, and seccomp on. On Windows: Docker Desktop 4.44.3 or later (4.76.0 to clear the warning), WSL 2.7.10 or later with a kernel at or past 6.18.40 (<code>wsl --update</code>).</li>
+<li>The sandbox image, built once with <code>tenant sandbox image build</code>; the backend never pulls. It is built from <code>debian:trixie-slim</code>, pinned by digest. <strong>After updating Tenant across this change, build it again</strong>: the base moved from bookworm, and the image now carries the folder HOME is mounted on.</li>
+<li>An engine that can start a container. Before a surface first uses the backend, Tenant runs one check container through the same hardened arguments, with a 20-second limit. A Docker Desktop that is still starting answers <code>docker info</code> but starts nothing; the surface’s commands are then refused with that reason, and the check is retried with back-off. The check also records whether a user namespace is in effect and the kernel containers run on.</li>
+</ul>
+<p>On Windows the kernel floor applies to the kernel that is <strong>running</strong>. <code>wsl --version</code> prints the installed kernel, and a WSL VM started before an update keeps the old one: below the floor the backend refuses; a running kernel that only trails the installed one is a warning. <code>wsl --shutdown</code>, then start Docker Desktop again, to run the installed kernel.</p>
+<p>A <code>container</code> profile has no dry run: <code>"enforce": false</code> on one is rejected when the settings load. So is a <code>container</code> profile whose <code>read_roots</code> or <code>write_roots</code> contain, equal or sit inside a folder a container may never mount: Tenant’s config or data dir, its binary, a credential store, or the entry’s own <code>deny_roots</code>. A container sees exactly its mounts, so it cannot mount a folder and hide part of it. The skipped entry is reported with the grant and the folder named (<code>tenant sandbox probe</code>, <code>tenant doctor</code>, the start-up feed).</p>
+<p>A command is also refused when its work dir or a <code>write_roots</code> folder is itself a git directory: a bare repository, or a checkout’s <code>.git</code> given directly. Its <code>hooks</code> folder and <code>config</code> file would be the command’s to write, and git runs them on the host the next time it is used there. Give the command a folder that holds a checkout, or grant the repository under <code>read_roots</code>.</p>
+<p>To use an engine other than the local default, name it in <code>config.json</code> under <a href="/tenant/docs/v0.2.0/reference/config#container"><code>container</code></a>: <code>endpoint</code>, and for a <code>tcp://</code> endpoint <code>tls_cert_dir</code>. A <code>tcp://</code> endpoint is always launched with mutual TLS (<code>--tlsverify</code>, with the CA, certificate and key from that folder).</p>
+<p><code>tenant doctor</code>’s <strong>container sandbox</strong> row says whether the backend can run a command right now, and the fix when it cannot.</p>
+<p>Every command a surface runs is a record in the Security log (<strong>Logs</strong> → Security; <code>tenant logs query "log:security"</code>). On the <code>container</code> backend the record also says what the run was held to: the image and the id its tag resolved to, each folder mounted and whether it was writable, the network, the limits, the names (never the values) of the environment variables passed in, how much the command wrote and whether that hit the output cap, and how long it took. The record of an approved re-run says where it ran: on the host, or in a container with one more grant.</p>
+<h2 id="the-built-in-defaults">The built-in defaults</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Surface</th>
+<th>macOS</th>
+<th>Linux and Windows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>local</code>, <code>discord</code>, <code>imessage</code></td>
+<td><strong>host</strong>, behind approvals (like a coding assistant without a sandbox)</td>
+<td>host</td>
+</tr>
+<tr>
+<td><code>cron-exec</code></td>
+<td><code>restricted</code> in <strong>dry run</strong></td>
+<td>host</td>
+</tr>
+<tr>
+<td><code>cron-shell</code></td>
+<td><code>restricted</code> in dry run, network <code>none</code></td>
+<td>host</td>
+</tr>
+</tbody>
+</table>
+<p>Any <code>exec_profiles</code> entry for an interactive surface opts it back into the sandbox. In a <strong>dry run</strong> the sandbox runs the command first; if it refuses something (a write outside the allowed folders, a read of a credential store, a network call with the network off) the command runs again outside the sandbox and the refusal is logged (<code>sandbox/2002</code>, “would have refused”). Nothing is blocked and no approval is asked; the log tells you what enforcement would stop. A dry run can therefore repeat a side effect: whatever ran before the refusal runs again.</p>
+<p>Every command, on any backend, gets a <strong>clean environment</strong>: <code>PATH</code>, <code>HOME</code>, <code>USER</code>, <code>SHELL</code>, <code>LANG</code>, <code>TZ</code>, <code>TERM</code>, <code>TMPDIR</code> and their Windows equivalents, plus what the profile’s <code>env_pass</code> and <code>env_set</code> add. API keys, tokens and proxy passwords in Tenant’s environment never reach a command.</p>
+<p>On <code>container</code>, <code>HOME</code> is <code>/home/sandbox</code>: a small in-memory folder (64 MB) that belongs to that one container. What a command leaves there (shell history, a tool’s cache or config, a credential helper’s file) is gone when the command ends. It does not land in your work folder and the next command does not see it. A command that needs a file to last writes it in the work dir.</p>
+<p><code>env_pass</code> is the exception you write yourself. When a name in it looks like a credential (<code>…_TOKEN</code>, <code>…_API_KEY</code>, <code>…PASSWORD</code>, <code>SSH_AUTH_SOCK</code> and the like), <code>tenant sandbox probe</code> and <code>tenant doctor</code> point it out, per surface: a sandboxed command can read every variable it is passed, and with the network on it can send it anywhere. The name is still passed; this is a hint, and a secret under a plain name is not noticed.</p>
+<h2 id="os_exec-itself"><code>os_exec</code> itself</h2>
+<p>The tool takes <code>command</code>, <code>workdir</code> (default: your home folder, never Tenant’s own directory), <code>timeout</code> (seconds; default 120, up to 600) and <code>background</code> (return at once with a process id). Long output keeps its start and its end, up to 30 KB. A command still running at its timeout on a host surface is moved to the background instead of killed; <code>os_process</code> lists, reads (<code>log</code>, paged), waits for, writes to and kills background processes, whose logs live under <code>&lt;data&gt;/proc/</code>. Processes die with Tenant, and a finished one is forgotten after an hour.</p>
+<h2 id="exec_profiles"><code>exec_profiles</code></h2>
+<p>In <code>settings.&lt;agent&gt;.json</code>, keyed by surface or <code>default</code> (every surface without its own entry). The running hub re-reads the file within about 3 seconds. No agent tool can write it, and the file tools refuse the settings file.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;exec_profiles&quot;</span><span class="er">:</span> <span class="fu">{</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;default&quot;</span><span class="fu">:</span>    <span class="fu">{</span> <span class="dt">&quot;enforce&quot;</span><span class="fu">:</span> <span class="kw">true</span><span class="fu">,</span> <span class="dt">&quot;env_pass&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;JAVA_HOME&quot;</span><span class="ot">,</span> <span class="st">&quot;HTTPS_PROXY&quot;</span><span class="ot">]</span> <span class="fu">},</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;cron-shell&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;backend&quot;</span><span class="fu">:</span> <span class="st">&quot;host&quot;</span> <span class="fu">},</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="dt">&quot;local&quot;</span><span class="fu">:</span>      <span class="fu">{</span> <span class="dt">&quot;backend&quot;</span><span class="fu">:</span> <span class="st">&quot;restricted&quot;</span><span class="fu">,</span> <span class="dt">&quot;network&quot;</span><span class="fu">:</span> <span class="st">&quot;none&quot;</span><span class="fu">,</span> <span class="dt">&quot;write_roots&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;~/projects&quot;</span><span class="ot">]</span> <span class="fu">}</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">}</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Field</th>
+<th>Values</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>backend</code></td>
+<td><code>host</code>, <code>restricted</code>, <code>container</code></td>
+<td>the backend; naming one also keeps the older defaults (enforce on, network inherited)</td>
+</tr>
+<tr>
+<td><code>enforce</code></td>
+<td><code>true</code>, <code>false</code></td>
+<td><code>false</code> is a dry run; unset follows the built-in default</td>
+</tr>
+<tr>
+<td><code>network</code></td>
+<td><code>inherit</code>, <code>none</code>, <code>full</code></td>
+<td>an allowlist is rejected until a backend enforces one. On <code>container</code>, <code>full</code> puts the command on a network of Tenant’s own (<code>tenant-sbx</code>), made on first use: the command reaches the internet, but not your other containers and not another sandboxed command. It can still reach services listening on this computer itself, so give <code>full</code> only to a surface you would trust with that</td>
+</tr>
+<tr>
+<td><code>read_roots</code></td>
+<td>paths</td>
+<td>empty: the whole host is readable (deny roots still mask)</td>
+</tr>
+<tr>
+<td><code>write_roots</code></td>
+<td>paths</td>
+<td>writable, in addition to the work dir</td>
+</tr>
+<tr>
+<td><code>deny_roots</code></td>
+<td>paths</td>
+<td>added to the built-in deny set (Tenant’s own dirs, its binary and the credential stores can never be removed from it)</td>
+</tr>
+<tr>
+<td><code>env_pass</code></td>
+<td>names</td>
+<td>environment variables forwarded beyond the safe base set</td>
+</tr>
+<tr>
+<td><code>env_set</code></td>
+<td>map</td>
+<td>fixed environment values</td>
+</tr>
+<tr>
+<td><code>cpu_seconds</code>, <code>memory_mb</code>, <code>max_pids</code></td>
+<td>numbers</td>
+<td>resource caps. On <code>container</code>, <code>cpu_seconds</code> is a cap on each process (the kernel kills one that uses more CPU time), not on the command as a whole: a command that spreads its work over many processes is bounded by its time limit and by 2 CPUs. <code>tenant sandbox probe</code> reports limits there as <code>partial</code> for that reason</td>
+</tr>
+</tbody>
+</table>
+<p>Turning enforcement on, once the log shows only refusals you want:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;exec_profiles&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;default&quot;</span><span class="fu">:</span> <span class="fu">{</span> <span class="dt">&quot;enforce&quot;</span><span class="fu">:</span> <span class="kw">true</span> <span class="fu">}</span> <span class="fu">}</span></span></code></pre></div>
+<p>With enforcement on, a refused command on an interactive surface raises a <code>sandbox</code> prompt (<code>os_exec_unsandboxed</code>) that shows the exact command, with control characters spelled out, and a line Tenant writes about what approving opens. On the <code>container</code> backend, <strong>approve</strong> re-runs the command in a fresh container with one more grant: the refused folder as a writable root, or the network for that one command. Only a Windows program a Linux container cannot run (<code>cmd.exe</code>, a <code>.exe</code>) is re-run on the host, as shown; a command written for <code>sh</code> is never handed to PowerShell. An approval on <code>container</code> covers the exact run you were shown: the command, the folders mounted, the network and the image. If any of those changes while the prompt waits (the image is rebuilt, a folder is re-pointed), nothing runs and the refusal says to ask again. The approved run is started from that same description, with the image named by its id, not its tag, so a tag moved at the last instant changes nothing. On <code>restricted</code>, approve re-runs the command outside the sandbox. Cron surfaces never escalate: with enforcement on, a refusal fails the job. An enforcing profile whose backend this machine lacks fails closed (<code>sandbox/3001</code>); a dry-run one runs on the host and logs <code>sandbox/2005</code>.</p>
+<h2 id="exceptions">Exceptions</h2>
+<p><strong>Always</strong> on a sandbox prompt does not open the category. It saves the one folder that was refused as an exception for that surface, under <code>exec_exceptions</code>, and nothing else:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;exec_exceptions&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;local&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;~/projects&quot;</span><span class="ot">]</span><span class="fu">,</span> <span class="dt">&quot;cron-shell&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;C:</span><span class="ch">\\</span><span class="st">Tenant</span><span class="ch">\\</span><span class="st">reports&quot;</span><span class="ot">]</span> <span class="fu">}</span></span></code></pre></div>
+<p>The prompt says in advance what it will save, or why nothing: a network refusal, a refusal inside Tenant’s folders or a credential store, your home folder or anything above it, a system folder or a volume root, a path that does not exist, or output that names no absolute path. Exceptions are saved as real paths with symlinks resolved; one that later stops being that folder is not used and <code>sandbox/2006</code> says why.</p>
+<h2 id="commands">Commands</h2>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox probe                       <span class="co"># what each surface&#39;s profile enforces on this host, its roots and exceptions</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox selftest [--backend restricted<span class="kw">|</span><span class="ex">container]</span>   <span class="co"># the escape suite</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox stop-all                                     <span class="co"># remove every Tenant sandbox container now</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox redteam [--backend restricted<span class="kw">|</span><span class="ex">host]</span>         <span class="co"># the model-in-the-loop containment eval</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox run <span class="at">--surface</span> S [--backend B] <span class="at">--</span> CMD        <span class="co"># run one command under a surface&#39;s profile</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> security audit                      <span class="co"># execution.dry-run, execution.host, execution.unavailable findings</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> permissions effective               <span class="co"># execution.profile per surface</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> logs query <span class="st">&quot;log:sandbox id:2001-2003 since:7d&quot;</span>      <span class="co"># every violation of the last week</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Sandbox event</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sandbox/1</code>, <code>sandbox/1001</code></td>
+<td>every command, with its backend, surface and exit</td>
+</tr>
+<tr>
+<td><code>sandbox/2001</code></td>
+<td>refused (enforcing)</td>
+</tr>
+<tr>
+<td><code>sandbox/2002</code></td>
+<td>dry run: would have refused</td>
+</tr>
+<tr>
+<td><code>sandbox/2003</code></td>
+<td>approved to run outside the sandbox</td>
+</tr>
+<tr>
+<td><code>sandbox/2004</code></td>
+<td>an exception saved</td>
+</tr>
+<tr>
+<td><code>sandbox/2005</code></td>
+<td>backend unavailable, so a dry run ran on the host</td>
+</tr>
+<tr>
+<td><code>sandbox/2006</code></td>
+<td>an exception not used (gone, or a symlink now)</td>
+</tr>
+<tr>
+<td><code>sandbox/3001</code></td>
+<td>backend unavailable and the profile enforces, so nothing ran</td>
+</tr>
+</tbody>
+</table>
+<p>The built-in <code>sandbox-unattended</code> alert rule banners violations from unattended surfaces, and every cron prompt job’s summary starts with <code>🛡 SANDBOX: N sandbox violation(s) since the last run</code> when there were any.</p>
+<h2 id="known-limits">Known limits</h2>
+<ul>
+<li>A dry run misses refusals it cannot recognise, and those commands fail instead of re-running: on macOS a command that hides its errors (<code>2&gt;/dev/null</code>), and services Seatbelt blocks such as the clipboard (<code>pbcopy</code>), <code>open</code>, <code>defaults</code> and <code>osascript</code>. Put a surface that needs them on the host.</li>
+<li>Linux and Windows run on the host until a profile names the <code>container</code> backend.</li>
+<li>Inside a container, Windows paths appear as <code>/mnt/c/...</code>; commands run under <code>sh</code>, so a cron shell job in <code>cmd</code> syntax belongs on the host.</li>
+<li>The danger classifier in the OS plugin is a guardrail against accidents, not a security boundary. The real containment is keeping <code>exec</code> at <code>ask</code>, running Tenant as a least-privilege user, and an enforcing sandbox profile.</li>
+</ul>
+<p>Chrome, which the web plugin drives, keeps its own process sandbox. <code>"browser_no_sandbox": true</code> in <code>config.json</code> is accepted only inside a Linux container or user namespace; <code>tenant security audit</code> reports its effective state.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/first-launch/sandbox.mdtenant-docs/src/first-launch/sandbox.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#surfaces-and-backends" id="toc-surfaces-and-backends">Surfaces and backends</a></li>
+<li><a href="#the-built-in-defaults" id="toc-the-built-in-defaults">The built-in defaults</a></li>
+<li><a href="#os_exec-itself" id="toc-os_exec-itself"><code>os_exec</code> itself</a></li>
+<li><a href="#exec_profiles" id="toc-exec_profiles"><code>exec_profiles</code></a></li>
+<li><a href="#exceptions" id="toc-exceptions">Exceptions</a></li>
+<li><a href="#commands" id="toc-commands">Commands</a></li>
+<li><a href="#known-limits" id="toc-known-limits">Known limits</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/v0.2.0/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

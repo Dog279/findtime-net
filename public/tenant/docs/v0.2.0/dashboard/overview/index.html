@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Turn it on &amp; sign in — Tenant docs — FindTime</title>
+<meta name="description" content="The dashboard is the agent’s control panel in a browser. Where it listens, the sign-in key, reaching it from your phone, and the rules that keep it private.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/dashboard/overview">
+<meta property="og:title" content="Turn it on &amp; sign in — Tenant docs">
+<meta property="og:description" content="The dashboard is the agent’s control panel in a browser. Where it listens, the sign-in key, reaching it from your phone, and the rules that keep it private.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/dashboard/overview">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/v0.2.0/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/v0.2.0/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/v0.2.0/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/dashboard/overview">Dashboard</a></p>
+<h1>Turn it on &amp; sign in</h1>
+<p class="lede">The dashboard is the agent’s control panel in a browser. Where it listens, the sign-in key, reaching it from your phone, and the rules that keep it private.</p>
+<p>From the dashboard you watch what the agent does, answer its requests, chat with it, and change what it may do on its own. It is server-rendered (no JavaScript build step) and lives inside the Tenant binary.</p>
+<h2 id="turn-it-on">Turn it on</h2>
+<ul>
+<li>Under <code>tenant serve</code> (the <a href="/tenant/docs/v0.2.0/setup/service">background service</a>) it is always on: it is the only control surface.</li>
+<li>In the terminal UI it launches by default; <code>/dashboard off</code> stops it and persists the choice (<code>dashboard.enabled: false</code>), <code>/dashboard on</code> brings it back, <code>/dashboard status</code> shows the address. <code>tenant tui --dashboard=false</code> for one launch.</li>
+<li>The address is <strong>http://127.0.0.1:9770</strong> on the machine running Tenant (<code>dashboard.addr</code>, or <code>--dashboard-addr</code>). <code>http://localhost:9770</code> works too.</li>
+</ul>
+<h2 id="sign-in">Sign in</h2>
+<p>The first visit shows a <strong>Sign in</strong> page asking for the key. The key is one long line in <code>&lt;config&gt;/dashboard-auth-token</code>, created on first start:</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/Library/Application\ Support/tenant/dashboard-auth-token   <span class="co"># macOS</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> ~/.config/tenant/dashboard-auth-token                        <span class="co"># Linux</span></span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode powershell"><code class="sourceCode powershell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Get-Content</span> <span class="op">-</span>LiteralPath <span class="st">&quot;</span><span class="va">$env</span><span class="op">:</span><span class="va">APPDATA</span><span class="st">\tenant\dashboard-auth-token&quot;</span>   <span class="co"># Windows, as you</span></span></code></pre></div>
+<p><code>tenant serve</code> prints the key at start-up only when stdout is a terminal; under launchd or systemd it writes “the auth token is in <path>” to the <code>system</code> log instead. Paste it into the form, never into the address bar: a key in a URL is refused, because browsers keep addresses in their history.</p>
+<ul>
+<li>The browser gets a random session id in a cookie, not the key. A session lasts 7 days, ends on <strong>Log out</strong> (bottom of the menu), and every session ends when Tenant restarts.</li>
+<li>Five wrong keys from one address and that address waits before it may try again (the wait doubles each time, up to a minute).</li>
+<li><code>GET /healthz</code> is the one path that needs no key, for an uptime monitor. <code>HEAD /healthz</code> needs it like everything else.</li>
+</ul>
+<p><strong>Your own key:</strong> set <code>dashboard.auth</code> in <code>config.json</code> to 32 or more random characters and restart; <code>tenant doctor</code> warns when it is shorter. <strong>Rotate the key:</strong> stop Tenant, delete <code>dashboard-auth-token</code> (or change <code>dashboard.auth</code>), start Tenant. Every browser then signs in again.</p>
+<p><strong>On a Windows service</strong> the key is in the service account’s folder (<code>C:\Windows\System32\config\systemprofile\AppData\Roaming\tenant</code> for SYSTEM, <code>C:\Windows\ServiceProfiles\LocalService\AppData\Roaming\tenant</code> for LOCAL SERVICE); read it from an administrator PowerShell with <code>Get-Content -LiteralPath</code>. If access is denied, <code>icacls</code> on the folder must list <code>BUILTIN\Administrators</code> and <code>tenant doctor</code> run as administrator must report the DACL as shared with administrators; otherwise upgrade.</p>
+<h2 id="where-it-can-be-reached">Where it can be reached</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th></th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>This computer only (default)</td>
+<td><code>http://127.0.0.1:9770</code></td>
+</tr>
+<tr>
+<td>Your phone or another device</td>
+<td>Tailscale: <code>/tailscale serve</code> in the terminal UI, or <code>"tailscale": {"serve": true}</code> in <code>config.json</code> so the background service publishes it at every start. Tenant trusts the Tailscale name on its own and the tailnet carries HTTPS.</td>
+</tr>
+<tr>
+<td>Another computer on your network, with no VPN</td>
+<td><code>/dashboard serve lan</code> in the terminal UI: a second listener over HTTPS, off until you turn it on (<a href="#on-your-local-network">below</a>)</td>
+</tr>
+<tr>
+<td>Behind a reverse proxy on the same computer</td>
+<td>add the name the proxy uses to <code>dashboard.allowed_hosts</code></td>
+</tr>
+<tr>
+<td>On a network address (<code>--dashboard-addr 0.0.0.0:9770</code>)</td>
+<td>refused at start unless <strong>both</strong> <code>dashboard.tls_cert</code> + <code>dashboard.tls_key</code> and <code>dashboard.auth</code> are set</td>
+</tr>
+<tr>
+<td>The internet</td>
+<td>never forward the port</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb3"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="st">&quot;dashboard&quot;</span><span class="er">:</span> <span class="fu">{</span> <span class="dt">&quot;addr&quot;</span><span class="fu">:</span> <span class="st">&quot;127.0.0.1:9770&quot;</span><span class="fu">,</span> <span class="dt">&quot;allowed_hosts&quot;</span><span class="fu">:</span> <span class="ot">[</span><span class="st">&quot;tenant.internal&quot;</span><span class="ot">]</span><span class="fu">,</span> <span class="dt">&quot;tls_cert&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span> <span class="dt">&quot;tls_key&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span><span class="fu">,</span> <span class="dt">&quot;auth&quot;</span><span class="fu">:</span> <span class="st">&quot;&quot;</span> <span class="fu">}</span></span></code></pre></div>
+<h3 id="on-your-local-network">On your local network</h3>
+<p>For a site that cannot run Tailscale or any VPN, Tenant can serve the dashboard a second time, to the local network. It is off by default.</p>
+<pre class="text"><code>/dashboard serve lan [HOST:PORT]     turn it on (default 0.0.0.0:9771, every interface)
+/dashboard serve off                 turn it off</code></pre>
+<p>Type it yourself: a line the app submits for you does not change who can reach the dashboard. The same is <code>tenant serve --dashboard-lan</code> (or <code>--dashboard-lan=HOST:PORT</code>) for one run, and <code>"dashboard": {"lan": {"enabled": true}}</code> in <code>config.json</code>. Nothing restarts, and <code>http://127.0.0.1:9770</code> keeps working beside it. There is no page and no API for turning it on.</p>
+<pre class="text"><code>dashboard: also serving the local network at https://192.168.1.5:9771 (listening on 0.0.0.0:9771)
+  certificate: self-signed, SHA-256 fingerprint 7C:32:6C:…</code></pre>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<tbody>
+<tr>
+<td>Encryption</td>
+<td>HTTPS always; plain HTTP is refused on this listener</td>
+</tr>
+<tr>
+<td>The certificate</td>
+<td>Tenant makes one and keeps it in the config directory, owner-only, good for two years. No authority signed it, so the browser warns the first time: compare the SHA-256 fingerprint in that warning with the one Tenant printed (<code>/dashboard</code> prints it again). <code>dashboard.tls_cert</code> and <code>tls_key</code> put your own in its place</td>
+</tr>
+<tr>
+<td>Sign-in</td>
+<td>the same key as on this computer</td>
+</tr>
+<tr>
+<td>Who may connect</td>
+<td>this computer, and private or link-local addresses; other networks only if listed in <code>dashboard.lan.allow</code>. Anything else gets 403 before sign-in, and a Security record</td>
+</tr>
+<tr>
+<td>The address you type</td>
+<td>the address you connect to, or this computer’s own name; another name must be in <code>allowed_hosts</code></td>
+</tr>
+<tr>
+<td>Stays at this computer</td>
+<td>turning this listener on or off; <a href="/tenant/docs/v0.2.0/fleet/setup">confirming a fleet machine</a>, unless you turned <a href="/tenant/docs/v0.2.0/fleet/setup#confirming-from-another-computer">remote confirmation</a> on at this computer’s terminal</td>
+</tr>
+</tbody>
+</table>
+<p>On macOS and Windows the firewall may ask about the first listener that is not loopback. To serve one interface only, give its address: <code>/dashboard serve lan 192.168.1.5:9771</code>.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Page says</th>
+<th>Meaning</th>
+<th>Do</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>the dashboard is served to the local network only</td>
+<td>you reached the LAN listener from an address that is not private</td>
+<td>use a computer on the local network, or list your network in <code>dashboard.lan.allow</code></td>
+</tr>
+<tr>
+<td>unrecognized dashboard host</td>
+<td>the address you typed is not one Tenant trusts</td>
+<td>use 127.0.0.1, localhost, your Tailscale name, or add the name to <code>allowed_hosts</code></td>
+</tr>
+<tr>
+<td>cross-origin request rejected</td>
+<td>the request came from another site, tab or port</td>
+<td>use the dashboard’s own buttons</td>
+</tr>
+<tr>
+<td>CSRF validation failed</td>
+<td>an extension or privacy setting removed the header that proves the request came from the dashboard</td>
+<td>turn it off for this address</td>
+</tr>
+<tr>
+<td>Nothing changed: that needs a second click to confirm</td>
+<td>a change that asks first was sent without its second step</td>
+<td>open the step again and press <strong>Yes</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="keep-the-sign-in-to-itself">Keep the sign-in to itself</h2>
+<p>Browsers do not keep a sign-in apart by port: every other web service on this computer’s address (or your Tailscale name) receives the dashboard’s cookie when that browser opens it. So in the browser you use for the dashboard, do not open links to other services on 127.0.0.1 or your Tailscale name, above all ones the agent suggests. The dashboard itself never links there: a research source on your own network shows as plain text.</p>
+<h2 id="what-is-recorded">What is recorded</h2>
+<p>The Security log (<strong>Logs</strong> → Security; <code>tenant logs query "log:security"</code>) records every sign-in, sign-out, failed sign-in and refused request with the time and the address; every request for your OK, who answered it and what; every change to what the agent may do and where it was made; every reveal of a hidden value, export and clear of a log; every key stored or removed, by name only. It can never be cleared or switched off.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/dashboard/overview.mdtenant-docs/src/dashboard/overview.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#turn-it-on" id="toc-turn-it-on">Turn it on</a></li>
+<li><a href="#sign-in" id="toc-sign-in">Sign in</a></li>
+<li><a href="#where-it-can-be-reached" id="toc-where-it-can-be-reached">Where it can be reached</a></li>
+<li><a href="#keep-the-sign-in-to-itself" id="toc-keep-the-sign-in-to-itself">Keep the sign-in to itself</a></li>
+<li><a href="#what-is-recorded" id="toc-what-is-recorded">What is recorded</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/v0.2.0/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

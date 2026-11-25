@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>The terminal UI — Tenant docs — FindTime</title>
+<meta name="description" content="tenant tui is a full-screen chat with a live activity feed. Keys, the slash commands, steering a running turn, and the launch flags.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/first-launch/terminal-ui">
+<meta property="og:title" content="The terminal UI — Tenant docs">
+<meta property="og:description" content="tenant tui is a full-screen chat with a live activity feed. Keys, the slash commands, steering a running turn, and the launch flags.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/first-launch/terminal-ui">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/v0.2.0/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/v0.2.0/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/v0.2.0/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/v0.2.0/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/v0.2.0/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/v0.2.0/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/v0.2.0/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/v0.2.0/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/v0.2.0/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/v0.2.0/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/v0.2.0/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/v0.2.0/first-launch/setup-wizard">First launch</a></p>
+<h1>The terminal UI</h1>
+<p class="lede">tenant tui is a full-screen chat with a live activity feed. Keys, the slash commands, steering a running turn, and the launch flags.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> tui</span></code></pre></div>
+<p>The left pane is the conversation; the right pane is the activity feed: every tool call and result, approvals, route decisions, cron runs, sub-agents. A timer under the input reads <code>⏱ 1:05 · thinking… 45.0s</code> while the model answers and <code>· tools… 3.1s</code> while tools run. Type <code>/help</code> for the command index.</p>
+<p>Each exchange is a block: a header line with who wrote it, the time and, for the agent, the model; then the text, rendered from Markdown (headings, lists, code panels, tables, task boxes) and wrapped at the pane’s width, never mid-word. A tool the agent calls shows as one line inside the block where it happened, <code>⏺ web_search("…") ✓ 1.2s · …</code>; <kbd>Ctrl</kbd>+<kbd>O</kbd> opens every row to its arguments and result, and a failed call is open already. While the agent works, the line under its answer says what it is doing and for how long. In the feed, a turn’s lines sit indented under a header with the time and the first words of your message; <code>/feed off</code> or <kbd>Alt</kbd>+<kbd>F</kbd> hides the feed for a wider reading column, and the choice is kept for the next launch.</p>
+<p>Text the app did not write (the model’s words, a tool’s arguments and output, a sub-agent’s lines) never reaches your terminal as it came. A tool’s colors and other whole escape sequences are removed, a carriage return becomes a line break, and any other control character shows as a marker like <code>⟨U+001B⟩</code>. What a slash command prints from stored text (a memory fact, a skill, a job’s name) is treated the same way. An approval card is stricter and removes nothing: see <a href="/tenant/docs/v0.2.0/first-launch/permissions">Permissions &amp; approvals</a>.</p>
+<h2 id="keys">Keys</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Key</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><kbd>Enter</kbd></td>
+<td>send; a line starting with <code>/</code> is a command</td>
+</tr>
+<tr>
+<td>typing mid-turn</td>
+<td>steers the agent: it addresses your message, then resumes</td>
+</tr>
+<tr>
+<td><kbd>Esc</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd></td>
+<td>hard-stop the running turn (a stuck or looping agent); with a <code>/goal</code> active, clears the goal; never closes the app</td>
+</tr>
+<tr>
+<td><kbd>↑</kbd> / <kbd>↓</kbd></td>
+<td>recall previous prompts and commands (cursor on the first or last input line)</td>
+</tr>
+<tr>
+<td><kbd>PgUp</kbd>/<kbd>PgDn</kbd>, <kbd>Shift</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd></td>
+<td>scroll the chat pane</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>PgUp</kbd>/<kbd>PgDn</kbd>, <kbd>Alt</kbd>+<kbd>↑</kbd>/<kbd>↓</kbd></td>
+<td>scroll the activity feed (<kbd>Ctrl</kbd>+<kbd>PgUp</kbd>/<kbd>PgDn</kbd> too)</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>S</kbd></td>
+<td>select mode: plain drag highlights text for copying in any terminal; <kbd>Ctrl</kbd>+<kbd>S</kbd> or <kbd>Esc</kbd> returns</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>Y</kbd></td>
+<td>copy the transcript to the clipboard and a file</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>O</kbd></td>
+<td>open or close the tool rows in every turn (arguments and results)</td>
+</tr>
+<tr>
+<td><kbd>Alt</kbd>+<kbd>F</kbd></td>
+<td>hide or show the activity feed (same as <code>/feed off</code> and <code>/feed on</code>); the choice persists</td>
+</tr>
+<tr>
+<td><kbd>Ctrl</kbd>+<kbd>V</kbd> (<kbd>Alt</kbd>+<kbd>V</kbd> on Windows)</td>
+<td>paste the clipboard’s image into your message; with no image there, pastes text as usual (<a href="#images">Images</a>)</td>
+</tr>
+<tr>
+<td>in <code>/logs</code></td>
+<td><kbd>Enter</kbd> opens an event’s detail, <kbd>c</kbd> its correlated timeline, <kbd>Esc</kbd> or <kbd>q</kbd> goes back</td>
+</tr>
+</tbody>
+</table>
+<p><code>/exit</code> or <code>/quit</code> is the only way out.</p>
+<h2 id="session-commands">Session commands</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/help</code></td>
+<td>the categories; <code>/help &lt;category&gt;</code> one of them (<code>/help models</code>, <code>/help safety</code>); <code>/help all</code> everything</td>
+</tr>
+<tr>
+<td><code>/whoami</code></td>
+<td>the agent id, active backend and model, from the configuration (the model’s own answer is unreliable)</td>
+</tr>
+<tr>
+<td><code>/clear</code></td>
+<td>start a fresh conversation and screen; facts, episodes and the archive are kept</td>
+</tr>
+<tr>
+<td><code>/cls</code></td>
+<td>clear the screen only</td>
+</tr>
+<tr>
+<td><code>/mouse on\|off</code></td>
+<td>on (default): the wheel scrolls the TUI; off: plain-drag selection, the wheel scrolls the terminal</td>
+</tr>
+<tr>
+<td><code>/feed on\|off</code></td>
+<td>show or hide the activity feed on the right (<kbd>Alt</kbd>+<kbd>F</kbd> too); the choice persists across launches</td>
+</tr>
+<tr>
+<td><code>/dashboard [on\|off\|status]</code></td>
+<td>start or stop the web control panel; it launches by default and the choice persists</td>
+</tr>
+<tr>
+<td><code>/dashboard serve lan [HOST:PORT]</code>, <code>/dashboard serve off</code></td>
+<td>also serve the dashboard to the <a href="/tenant/docs/v0.2.0/dashboard/overview#on-your-local-network">local network</a> over HTTPS, for a site with no VPN; off by default</td>
+</tr>
+<tr>
+<td><code>/tailscale [serve\|serve off\|status]</code></td>
+<td>publish the dashboard on your tailnet over HTTPS with <code>tailscale serve</code></td>
+</tr>
+<tr>
+<td><code>/compress</code> (<code>/compact</code>)</td>
+<td>summarize old turns to free context now; <code>/expand</code> brings the latest compacted span back from the archive</td>
+</tr>
+<tr>
+<td><code>/image &lt;path&gt;</code> (<code>/img</code>)</td>
+<td>attach an image file to your next message (<a href="#images">Images</a>)</td>
+</tr>
+<tr>
+<td><code>/exit</code>, <code>/quit</code></td>
+<td>close the app</td>
+</tr>
+</tbody>
+</table>
+<h2 id="images">Images</h2>
+<p>Show the model a picture without pointing it at a file:</p>
+<ul>
+<li><strong>Paste</strong> a screenshot or a copied picture with <kbd>Ctrl</kbd>+<kbd>V</kbd>. On Windows it is <kbd>Alt</kbd>+<kbd>V</kbd>, since Windows Terminal keeps <kbd>Ctrl</kbd>+<kbd>V</kbd> for text. On Linux it needs <code>wl-paste</code> (Wayland) or <code>xclip</code> (X11). On a Mac use <kbd>Ctrl</kbd>+<kbd>V</kbd> too: terminals keep <kbd>Cmd</kbd>+<kbd>V</kbd> for their own text paste and send nothing for an image.</li>
+<li><strong>Drag</strong> image files into the terminal (macOS and Linux terminals).</li>
+<li><strong><code>/image &lt;path&gt;</code></strong> attaches a file by its path.</li>
+</ul>
+<p>Each image shows in the input as <code>[image 1: name W×H]</code>, and the footer counts what’s attached. <kbd>Backspace</kbd> right after a tag removes it, and the image with it. Send it with or without a question. PNG, JPEG, GIF and webp work everywhere, HEIC on macOS. Images are saved under <code>&lt;data&gt;/attachments/</code> (<a href="/tenant/docs/v0.2.0/setup/directories">directories</a>), scaled to at most 1568 pixels on the long side, and kept as long as the archive keeps the conversation.</p>
+<p>The model sees the images of the last three exchanges, at most 8 per request; older ones become a short note with the saved file’s path. A model that can’t see images gets that note instead of the picture. Which models can see, and how to say so yourself, is on <a href="/tenant/docs/v0.2.0/models/local#images">Local models</a>.</p>
+<p>Photos you send over <a href="/tenant/docs/v0.2.0/dashboard/access">Discord or iMessage</a> reach the model the same way, and the <code>os_read_image</code> and <code>web_screenshot</code> tools show it the picture they read.</p>
+<h2 id="components">Components</h2>
+<p>When the answer is a table or a list of steps, the agent can draw it instead of describing it: the <code>ui_render</code> tool names the kind and hands Tenant the data, and the terminal app draws a boxed table (a caption above, a source line below) or a checklist with <kbd>✓</kbd> done, <kbd>◐</kbd> in progress and <kbd>○</kbd> to-do marks. Two kinds answer back: <strong>choices</strong> are numbered options, and typing the number sends that message; a <strong>form</strong> asks for each field in turn (a pick list for a choice, a typed value otherwise), with the default in the hint, and sends the filled message; <kbd>Esc</kbd> or <code>/cancel</code> leaves it with nothing sent. Those messages show “via choices” or “via form” in their header, and a component can never send a slash command. A component is the answer, so it is always open; <kbd>Ctrl</kbd>+<kbd>O</kbd> folds the other tool rows around it. The dashboard’s Chat page draws the same components. The model writes no markup, only data, so a component is always plain text in your terminal. <code>/disable ui</code> turns the tool off.</p>
+<h2 id="command-categories">Command categories</h2>
+<p>Every slash command belongs to one <code>/help</code> category. The full list with syntax is on <a href="/tenant/docs/v0.2.0/reference/slash-commands">Slash commands</a>.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Category</th>
+<th>Commands</th>
+<th>Covered in</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Models</td>
+<td><code>/model</code>, <code>/ceiling</code>, <code>/reasoning</code>, <code>/route</code>, <code>/setup</code>, <code>/judge</code></td>
+<td><a href="/tenant/docs/v0.2.0/models/providers">Models &amp; helpers</a></td>
+</tr>
+<tr>
+<td>Sub-agents</td>
+<td><code>/agents</code></td>
+<td><a href="/tenant/docs/v0.2.0/models/helpers">Helpers</a></td>
+</tr>
+<tr>
+<td>Deep research</td>
+<td><code>/research</code>, <code>/cancel-clarify</code></td>
+<td><a href="/tenant/docs/v0.2.0/models/teams">Teams, research &amp; goals</a></td>
+</tr>
+<tr>
+<td>Memory</td>
+<td><code>/memory</code>, <code>/compress</code>, <code>/expand</code></td>
+<td><a href="/tenant/docs/v0.2.0/first-launch/memory">Memory &amp; soul</a></td>
+</tr>
+<tr>
+<td>Tools &amp; plugins</td>
+<td><code>/tools</code>, <code>/enable</code>, <code>/disable</code>, <code>/skill</code>, <code>/configure</code>, <code>/cancel</code></td>
+<td><a href="/tenant/docs/v0.2.0/mcp/built-in-tools">Built-in tools</a>, <a href="/tenant/docs/v0.2.0/mcp/integrations">Integrations</a></td>
+</tr>
+<tr>
+<td>MCP connectors</td>
+<td><code>/mcp</code>, <code>/peer</code>, <code>/github</code></td>
+<td><a href="/tenant/docs/v0.2.0/mcp/overview">MCPs &amp; tools</a></td>
+</tr>
+<tr>
+<td>Skills</td>
+<td><code>/skills</code>, <code>/ack</code>, <code>/undo</code></td>
+<td><a href="/tenant/docs/v0.2.0/first-launch/skills">Skills</a></td>
+</tr>
+<tr>
+<td>Eval &amp; quality</td>
+<td><code>/eval</code></td>
+<td><a href="/tenant/docs/v0.2.0/models/eval">Quality evals</a></td>
+</tr>
+<tr>
+<td>Safety &amp; approvals</td>
+<td><code>/permissions</code>, <code>/approve</code>, <code>/deny</code>, <code>/relay</code>, <code>/imessage</code></td>
+<td><a href="/tenant/docs/v0.2.0/first-launch/permissions">Permissions &amp; approvals</a>, <a href="/tenant/docs/v0.2.0/dashboard/access">Access</a></td>
+</tr>
+<tr>
+<td>Automation</td>
+<td><code>/cron</code></td>
+<td><a href="/tenant/docs/v0.2.0/dashboard/cron">Scheduled jobs</a></td>
+</tr>
+<tr>
+<td>Logs</td>
+<td><code>/logs</code></td>
+<td><a href="/tenant/docs/v0.2.0/dashboard/logs">Logs &amp; alerts</a></td>
+</tr>
+<tr>
+<td>Goal</td>
+<td><code>/goal</code></td>
+<td><a href="/tenant/docs/v0.2.0/models/teams">Teams, research &amp; goals</a></td>
+</tr>
+<tr>
+<td>Plan review</td>
+<td><code>/review</code></td>
+<td><a href="/tenant/docs/v0.2.0/models/teams">Teams, research &amp; goals</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="launch-flags">Launch flags</h2>
+<p><code>tenant tui</code> takes the common flags every command takes, plus its own:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>Flag</th>
+<th>Default</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--backend echo\|vllm\|anthropic\|claudecode</code></td>
+<td>the configured provider, else <code>echo</code></td>
+<td>the inference backend; <code>echo</code> is offline and deterministic</td>
+</tr>
+<tr>
+<td><code>--agent ID</code></td>
+<td><code>main</code></td>
+<td>the agent id: its soul, settings file and memory</td>
+</tr>
+<tr>
+<td><code>--config DIR</code>, <code>--data DIR</code></td>
+<td>the OS dirs</td>
+<td>where config and data live</td>
+</tr>
+<tr>
+<td><code>--log-dir DIR</code></td>
+<td><code>&lt;data&gt;/logs</code></td>
+<td>the log book root</td>
+</tr>
+<tr>
+<td><code>--plan-loop-ceiling N</code></td>
+<td>16</td>
+<td>max planner↔︎tool iterations per turn</td>
+</tr>
+<tr>
+<td><code>--api-key KEY</code></td>
+<td></td>
+<td>a hosted provider’s key for this launch only</td>
+</tr>
+<tr>
+<td><code>--self-improve=false</code></td>
+<td>on</td>
+<td>no background distillation while the TUI is up</td>
+</tr>
+<tr>
+<td><code>--distill-every 10m</code>, <code>--profile-every 15m</code>, <code>--eval-every 24h</code></td>
+<td></td>
+<td>self-improvement cadences; eval is off until set</td>
+</tr>
+<tr>
+<td><code>--dashboard</code>, <code>--dashboard-addr ADDR</code></td>
+<td>on, <code>127.0.0.1:9770</code></td>
+<td>the web control panel</td>
+</tr>
+<tr>
+<td><code>--allow-no-memory</code></td>
+<td></td>
+<td>start even when embeddings are down</td>
+</tr>
+</tbody>
+</table>
+<p>Plugin flags (<code>--os</code>, <code>--os-allow-exec</code>, <code>--web</code>, <code>--gsuite</code>, …) are on <a href="/tenant/docs/v0.2.0/mcp/built-in-tools">Built-in tools</a>. A permission mode saved in <code>settings.&lt;agent&gt;.json</code> wins over an <code>--allow-*</code> flag.</p>
+<h2 id="without-the-ui">Without the UI</h2>
+<p><code>tenant chat</code> runs the same agent on stdin: one line is one turn, the answer goes to stdout. It takes the same flags.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">&#39;remember I prefer Go\nwhat do I prefer?\n&#39;</span> <span class="kw">|</span> <span class="ex">tenant</span> chat</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> web <span class="st">&quot;summarize the top story on Hacker News&quot;</span>     <span class="co"># one-shot turns scoped to one plugin</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> os <span class="st">&quot;what is using the most disk in my home dir?&quot;</span></span></code></pre></div>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/first-launch/terminal-ui.mdtenant-docs/src/first-launch/terminal-ui.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#keys" id="toc-keys">Keys</a></li>
+<li><a href="#session-commands" id="toc-session-commands">Session commands</a></li>
+<li><a href="#images" id="toc-images">Images</a></li>
+<li><a href="#components" id="toc-components">Components</a></li>
+<li><a href="#command-categories" id="toc-command-categories">Command categories</a></li>
+<li><a href="#launch-flags" id="toc-launch-flags">Launch flags</a></li>
+<li><a href="#without-the-ui" id="toc-without-the-ui">Without the UI</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/v0.2.0/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>
