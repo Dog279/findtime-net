@@ -115,7 +115,9 @@ Every Tenant process writes its own events. The work that keeps the log book in 
 
 ## Alerts
 
-An alert rule is a filter, an optional threshold, an action and a throttle. Built-in rules exist for `critical`, `unexpected-exit`, `audit-failures`, `sandbox-unattended` and `logbook-full`; an entry with the same name changes or disables the built-in.
+An alert rule is a filter, an optional threshold, an action and a throttle. Built-in rules exist for `critical`, `unexpected-exit`, `audit-failures`, `sandbox-unattended`, `logbook-full` and `embedder-silent`; an entry with the same name changes or disables the built-in.
+
+`embedder-silent` fires when the embedder has returned no embedding for five minutes (event `system/3110`, written again every 30 minutes while it lasts). Memory recall and wiki search wait for an embedding, so they fail or time out meanwhile, behind a Tenant that otherwise looks up. To know, serve and the terminal UI ask the embedder for one small embedding every five minutes while they run, which also keeps the embedding model loaded. `system/1110` records when it answers again. `tenant logs alerts disable embedder-silent` turns the alert off; the questions go on.
 
 ```bash
 tenant logs alerts [list]

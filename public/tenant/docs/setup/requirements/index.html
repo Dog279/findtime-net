@@ -161,6 +161,7 @@
 <p>Memory recall needs an embedding model. The default is a local Ollama serving <code>nomic-embed-text</code> (768 dimensions) at <code>http://localhost:11434</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">ollama</span> pull nomic-embed-text</span></code></pre></div>
 <p>Without a reachable embedder Tenant falls back to a hash stand-in: it starts, but it cannot recall past episodes or stored facts. <code>tenant doctor</code> flags it; <code>tenant tui --allow-no-memory</code> and <code>tenant serve --allow-no-memory</code> let you run amnesiac on purpose.</p>
+<p>An embedder can also be up and not answering: its model list loads while an embedding never comes back. So at start Tenant asks it for one small embedding and says <code>embeddings OK</code> with the time that took, <code>embeddings SLOW</code> when it was more than 5 seconds, or <code>EMBEDDINGS NOT ANSWERING</code> after 30 seconds. Start-up does not wait for the answer. While Tenant runs it asks again every five minutes, and the <a href="/tenant/docs/dashboard/logs"><code>embedder-silent</code> alert</a> fires when no embedding has come back for five.</p>
 <h2 id="optional">Optional</h2>
 <table>
 <colgroup>

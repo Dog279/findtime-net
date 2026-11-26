@@ -39,6 +39,8 @@ ollama pull nomic-embed-text
 
 Without a reachable embedder Tenant falls back to a hash stand-in: it starts, but it cannot recall past episodes or stored facts. `tenant doctor` flags it; `tenant tui --allow-no-memory` and `tenant serve --allow-no-memory` let you run amnesiac on purpose.
 
+An embedder can also be up and not answering: its model list loads while an embedding never comes back. So at start Tenant asks it for one small embedding and says `embeddings OK` with the time that took, `embeddings SLOW` when it was more than 5 seconds, or `EMBEDDINGS NOT ANSWERING` after 30 seconds. Start-up does not wait for the answer. While Tenant runs it asks again every five minutes, and the [`embedder-silent` alert](/tenant/docs/dashboard/logs) fires when no embedding has come back for five.
+
 ## Optional
 
 | For | You need |

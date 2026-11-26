@@ -30,12 +30,26 @@ tenant update --rollback                         # put the previous binary back
 2. On macOS, signs the new binary with the hardened runtime before it first runs. If that fails, nothing has changed and the running version stays.
 3. Runs the new binary's `version --protection` before touching anything, and asks about each [process protection](/tenant/docs/setup/process-protection) the new version cannot apply on this system and nobody has acknowledged for it (`Continue without it? [y/N]`). `--yes` does not answer this question. With no terminal, the update stops here, exits 2 and the running version keeps running; run `tenant update` at a terminal once to acknowledge it.
 4. Asks whether to update (unless `--yes`).
-5. Writes an unencrypted backup of the config and data dirs to `<data>-backups/pre-update-<old version>.tenant-backup`. Credentials are left out; the previous pre-update backup is replaced.
+5. Writes an unencrypted backup of the config and data dirs to `<data>-backups/pre-update-<old version>.tenant-backup`. Credentials are left out; the previous pre-update backup is replaced. The backup is taken beside a running Tenant: nothing has to be stopped for it.
 6. Swaps the binary in with no gap, keeping the old one as `tenant.prev` beside it.
 7. Restarts the service (`tenant service restart`, which waits for the running turn unless `--now`).
 8. Polls `/api/status` for up to 90 seconds until it reports the new version. If it never does, the old binary goes back and the service is restarted again.
 
-A dev build (one built from source without release stamping) refuses to update unless you pass `--force`. Nothing is ever applied automatically: serve checks for a newer release once a day and files one log-book event per new tag, which `"update_check": false` in `config.json` turns off.
+Steps 7 and 8 need a service that `tenant service` installed. When Tenant was started another way (a scheduled task or unit of your own, a terminal), the update restarts nothing and says what still runs the old version: each process that runs the old binary (with its command line on Linux and macOS; Windows shows only its number), and on Windows the scheduled tasks whose action names the binary, with their arguments:
+
+```
+updated 0.2.0 -> 0.3.0; restart Tenant to finish the update. Still running 0.2.0:
+  pid 4312
+  pid 5120
+Scheduled tasks that start this binary (`tenant service` installed none of them, so it restarts none):
+  \TenantServe  serve --config "C:\Tenant\cfg" --data "C:\Tenant\data" --hidden
+  \TenantMCP  mcp-memory
+Restart each one: schtasks /End /TN "<task>", then schtasks /Run /TN "<task>"
+```
+
+Ending a task is a hard stop, so let a running turn finish first. Until they are restarted the old version keeps running. On Windows it also holds `tenant.prev`, so the next update is refused until then. A process of another account that this account may not open is not listed.
+
+A dev build (one built from source without release stamping, or by `scripts/devbuild`) refuses to update and names the build that is running; `tenant update --force` replaces it with the latest release, and `--force --version vX.Y.Z` with that one. Nothing is ever applied automatically: serve checks for a newer release once a day and files one log-book event per new tag, which `"update_check": false` in `config.json` turns off.
 
 ## Signatures
 

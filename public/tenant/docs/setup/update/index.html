@@ -161,12 +161,21 @@
 <li>On macOS, signs the new binary with the hardened runtime before it first runs. If that fails, nothing has changed and the running version stays.</li>
 <li>Runs the new binary’s <code>version --protection</code> before touching anything, and asks about each <a href="/tenant/docs/setup/process-protection">process protection</a> the new version cannot apply on this system and nobody has acknowledged for it (<code>Continue without it? [y/N]</code>). <code>--yes</code> does not answer this question. With no terminal, the update stops here, exits 2 and the running version keeps running; run <code>tenant update</code> at a terminal once to acknowledge it.</li>
 <li>Asks whether to update (unless <code>--yes</code>).</li>
-<li>Writes an unencrypted backup of the config and data dirs to <code>&lt;data&gt;-backups/pre-update-&lt;old version&gt;.tenant-backup</code>. Credentials are left out; the previous pre-update backup is replaced.</li>
+<li>Writes an unencrypted backup of the config and data dirs to <code>&lt;data&gt;-backups/pre-update-&lt;old version&gt;.tenant-backup</code>. Credentials are left out; the previous pre-update backup is replaced. The backup is taken beside a running Tenant: nothing has to be stopped for it.</li>
 <li>Swaps the binary in with no gap, keeping the old one as <code>tenant.prev</code> beside it.</li>
 <li>Restarts the service (<code>tenant service restart</code>, which waits for the running turn unless <code>--now</code>).</li>
 <li>Polls <code>/api/status</code> for up to 90 seconds until it reports the new version. If it never does, the old binary goes back and the service is restarted again.</li>
 </ol>
-<p>A dev build (one built from source without release stamping) refuses to update unless you pass <code>--force</code>. Nothing is ever applied automatically: serve checks for a newer release once a day and files one log-book event per new tag, which <code>"update_check": false</code> in <code>config.json</code> turns off.</p>
+<p>Steps 7 and 8 need a service that <code>tenant service</code> installed. When Tenant was started another way (a scheduled task or unit of your own, a terminal), the update restarts nothing and says what still runs the old version: each process that runs the old binary (with its command line on Linux and macOS; Windows shows only its number), and on Windows the scheduled tasks whose action names the binary, with their arguments:</p>
+<pre><code>updated 0.2.0 -&gt; 0.3.0; restart Tenant to finish the update. Still running 0.2.0:
+  pid 4312
+  pid 5120
+Scheduled tasks that start this binary (`tenant service` installed none of them, so it restarts none):
+  \TenantServe  serve --config &quot;C:\Tenant\cfg&quot; --data &quot;C:\Tenant\data&quot; --hidden
+  \TenantMCP  mcp-memory
+Restart each one: schtasks /End /TN &quot;&lt;task&gt;&quot;, then schtasks /Run /TN &quot;&lt;task&gt;&quot;</code></pre>
+<p>Ending a task is a hard stop, so let a running turn finish first. Until they are restarted the old version keeps running. On Windows it also holds <code>tenant.prev</code>, so the next update is refused until then. A process of another account that this account may not open is not listed.</p>
+<p>A dev build (one built from source without release stamping, or by <code>scripts/devbuild</code>) refuses to update and names the build that is running; <code>tenant update --force</code> replaces it with the latest release, and <code>--force --version vX.Y.Z</code> with that one. Nothing is ever applied automatically: serve checks for a newer release once a day and files one log-book event per new tag, which <code>"update_check": false</code> in <code>config.json</code> turns off.</p>
 <h2 id="signatures">Signatures</h2>
 <p>A release carries up to two signatures over <code>checksums.txt</code>: <code>checksums.txt.sigstore.json</code>, a keyless cosign signature made by the release workflow, and <code>checksums.txt.sig</code>, an Ed25519 signature made with the project’s key. The public half of that key is built into the release binaries of the main repository, and checking it needs nothing installed.</p>
 <ul>
@@ -176,8 +185,8 @@
 <p>The update prints which checks passed, for example <code>verified checksum and the project key's signature (install cosign to verify the release workflow's signature as well)</code>.</p>
 <h2 id="rolling-back">Rolling back</h2>
 <p>Schemas move forward only: once a new version has migrated a store, the old binary alone is not enough, and the log book refuses a database written by a newer version. Rollback is the old binary plus the pre-update backup, restored by hand:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> update <span class="at">--rollback</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service stop <span class="kw">&amp;&amp;</span> <span class="ex">tenant</span> backup restore <span class="st">&quot;&lt;data&gt;-backups/pre-update-&lt;old version&gt;.tenant-backup&quot;</span> <span class="at">--yes</span> <span class="kw">&amp;&amp;</span> <span class="ex">tenant</span> service start</span></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> update <span class="at">--rollback</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> service stop <span class="kw">&amp;&amp;</span> <span class="ex">tenant</span> backup restore <span class="st">&quot;&lt;data&gt;-backups/pre-update-&lt;old version&gt;.tenant-backup&quot;</span> <span class="at">--yes</span> <span class="kw">&amp;&amp;</span> <span class="ex">tenant</span> service start</span></code></pre></div>
 <p>An OS stop in the middle of an update leaves <code>&lt;data&gt;/update-state.json</code>: serve logs it at boot, <code>tenant doctor</code> warns, and the next <code>tenant update</code> clears it when the new version is what runs, or offers <code>--rollback</code>.</p>
 <div class="pagefoot">
   <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/setup/update.mdtenant-docs/src/setup/update.md">Edit this page on GitHub</a>
