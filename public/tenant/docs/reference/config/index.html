@@ -61,6 +61,13 @@
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
 </ul></details>
+<details class="area"><summary>Security</summary><ul>
+  <li><a href="/tenant/docs/security/overview">How Tenant is kept safe</a></li>
+  <li><a href="/tenant/docs/security/permissions">The permission categories</a></li>
+  <li><a href="/tenant/docs/security/commands">Security commands</a></li>
+  <li><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></li>
+  <li><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></li>
+</ul></details>
 <details class="area"><summary>Fleet</summary><ul>
   <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
   <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
@@ -888,9 +895,15 @@
 <td><code>tenant fleet init --listen</code></td>
 </tr>
 <tr>
+<td><code>confirm</code></td>
+<td>empty</td>
+<td>how a machine that enrolled becomes a confirmed one. Empty or <code>auto</code>: at once, by its one-time code. <code>digits</code>: it waits until a person types the six digits it shows (<a href="/tenant/docs/fleet/setup#the-six-digits-as-a-second-step">The six digits</a>). Any other value counts as <code>digits</code>, and so does a file that can’t be read. Read at each enrollment</td>
+<td><code>tenant fleet digits on</code> or <code>off</code> (off asks at a terminal); no slash command and no dashboard switch</td>
+</tr>
+<tr>
 <td><code>remote_confirm</code></td>
 <td>false</td>
-<td>a signed-in dashboard browser on another computer may confirm a pending machine, once it gives the sign-in key again (<a href="/tenant/docs/fleet/setup#confirming-from-another-computer">Confirming from another computer</a>). Read at each confirmation; a file that can’t be read counts as off. Whoever holds the sign-in key can then confirm a machine from anywhere the dashboard is reached</td>
+<td>with <code>confirm</code> set to <code>digits</code>: a signed-in dashboard browser on another computer may confirm a pending machine, once it gives the sign-in key again (<a href="/tenant/docs/fleet/setup#confirming-from-another-computer">Confirming from another computer</a>). Read at each confirmation; a file that can’t be read counts as off. Whoever holds the sign-in key can then confirm a machine from anywhere the dashboard is reached</td>
 <td><code>tenant fleet remote-confirm on\|off</code> (on asks at a terminal), <code>/fleet remote-confirm</code>; no dashboard switch</td>
 </tr>
 </tbody>

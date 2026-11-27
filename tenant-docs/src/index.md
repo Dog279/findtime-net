@@ -15,6 +15,10 @@ Tenant is one static binary you run yourself. It keeps a memory that learns from
 <h3>First launch</h3>
 <p>The setup wizard, doctor, the terminal UI, permissions, the sandbox, memory and skills.</p>
 </a>
+<a class="card" href="/tenant/docs/security/overview">
+<h3>Security</h3>
+<p>How the layers fit: the permission categories and where each surface starts, the commands that change them, sandbox defaults, and fleet and relay permissions.</p>
+</a>
 <a class="card" href="/tenant/docs/fleet/overview">
 <h3>Fleet</h3>
 <p>One Tenant working on your other machines: enrolling them, their limits and audit log, approvals per machine, their memory, updates and recovery.</p>
@@ -55,6 +59,7 @@ No model yet? `tenant tui --backend echo` runs an offline, deterministic stand-i
 |---|---|
 | [Setup &amp; install](/tenant/docs/setup/install) | you are installing, upgrading, backing up, or wondering where a file went |
 | [First launch](/tenant/docs/first-launch/setup-wizard) | you have a binary and want a working, safely-permissioned agent |
+| [Security](/tenant/docs/security/overview) | you want to know what the agent may do without asking, on which surface, and how to change it |
 | [Fleet](/tenant/docs/fleet/overview) | you want one Tenant to work on the other machines you own |
 | [Models &amp; helpers](/tenant/docs/models/providers) | you want to change which model answers, add a fallback, have a judge check the work, or hand work to specialists |
 | [MCPs &amp; tools](/tenant/docs/mcp/overview) | you want the agent to do more: connect an MCP server, turn on Gmail, run commands |

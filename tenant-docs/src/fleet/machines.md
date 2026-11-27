@@ -25,7 +25,7 @@ tenant child run
 | `install` | enrolls this machine with the code from `tenant fleet enroll` (read from standard input or `TENANT_ENROLL_CODE`, never an argument), shows the six digits to type on the master, and installs the service |
 | `updates` | whose word an update from the master is taken on; see [Update, move and recover](/tenant/docs/fleet/updates) |
 | `rehome` | trust another master; see [Update, move and recover](/tenant/docs/fleet/updates#move-a-machine-to-another-master) |
-| `status` | where this machine stands: connected, waiting for confirmation (with the six digits), paused, rejected, offline. Exit 3 unless connected |
+| `status` | where this machine stands: connected, waiting for confirmation (with the six digits, on a fleet that asks for them), paused here or on the master, rejected, offline. Exit 3 unless connected |
 | `pause` | stop serving the master at once: the link drops, and running calls and background commands end. It lasts across restarts, until `resume` |
 | `resume` | serve the master again |
 | `audit` | check the chain of this machine's audit log |
@@ -111,6 +111,8 @@ Every call from the master is written to `<child dir>/audit/audit.jsonl` before 
 ## Pausing
 
 `tenant child pause` drops the link and ends running calls and background commands. While paused the machine serves nothing. The pause lasts across restarts; `tenant child resume` reconnects.
+
+The master can pause a machine from its side too, with `tenant fleet pause <name>`: no call goes to the machine and its link is refused, and `tenant child status` says it is paused on the master. That pause is undone on the master, with `tenant fleet resume <name>`.
 
 ## When a machine is revoked
 

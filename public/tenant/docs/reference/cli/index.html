@@ -61,6 +61,13 @@
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
 </ul></details>
+<details class="area"><summary>Security</summary><ul>
+  <li><a href="/tenant/docs/security/overview">How Tenant is kept safe</a></li>
+  <li><a href="/tenant/docs/security/permissions">The permission categories</a></li>
+  <li><a href="/tenant/docs/security/commands">Security commands</a></li>
+  <li><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></li>
+  <li><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></li>
+</ul></details>
 <details class="area"><summary>Fleet</summary><ul>
   <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
   <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
@@ -246,7 +253,7 @@ tenant fleet init [--listen ADDR] [--address HOST:PORT]...                    ma
 tenant fleet enroll &lt;name&gt; [--ttl 15m] [--adopt ID]                           a one-time code and the line to paste on the new machine
 tenant fleet address [list | add HOST:PORT | remove HOST:PORT]                the addresses a code tells a new machine to dial
 tenant fleet list | show &lt;name&gt;                                               the machines; one machine in full
-tenant fleet confirm &lt;name&gt; [--set category=mode]...                          confirm a pending machine with the six digits it shows
+tenant fleet confirm &lt;name&gt; [--set category=mode]...                          confirm a pending machine with the six digits it shows (a machine waits only with fleet digits on)
 tenant fleet rename &lt;name&gt; &lt;new-name&gt;                                         relabel a machine; its id stays
 tenant fleet revoke &lt;name&gt; [--keep-scheme | --delete-scheme]                  refuse its certificate from now on and close its link
 tenant fleet permissions &lt;name&gt; [set &lt;category&gt; &lt;mode&gt; | add &lt;pattern&gt; &lt;mode&gt; | rm &lt;pattern&gt;]   show or edit one machine&#39;s own approval scheme
@@ -258,6 +265,8 @@ tenant fleet group add|remove &lt;group&gt; &lt;machine&gt;...                  
 tenant fleet group rules &lt;group&gt; [add &lt;pattern&gt; &lt;mode&gt; | rm &lt;pattern&gt;]        a group&#39;s rules, laid after the fleet&#39;s rules, groups in name order
 tenant fleet group apply &lt;group&gt;                                              lay the fleet&#39;s rules and each member&#39;s groups&#39; rules over every confirmed member
 tenant fleet relay [discord|imessage [on|off]]                                whether a turn from that relay may reach the fleet (off by default)
+tenant fleet pause &lt;name&gt; | resume &lt;name&gt;                                     switch a confirmed machine off for now (no call goes to it and its link is refused), or on again
+tenant fleet digits [on|off]                                                  whether a machine that enrolls waits for you to type the six digits it shows (off by default: its one-time code confirms it)
 tenant fleet remote-confirm [on|off]                                          whether a signed-in dashboard browser on another computer may confirm a machine (off by default)
 tenant fleet update &lt;name&gt; | --all | --group &lt;group&gt; [--version vX.Y.Z | --build ARCHIVE] [--allow-older]   send machines a newer Tenant over their links, or with --build a build of your own, to machines set to updates master
 tenant fleet recover &lt;name&gt; [--was ID]                                        read a machine&#39;s memory made under another fleet key, with the recovery identity
@@ -269,7 +278,7 @@ tenant child pause | resume                  stop serving the master at once, un
 tenant child audit                           check the chain of this machine&#39;s audit log
 tenant child uninstall                       remove the service and this machine&#39;s fleet key; the audit log stays
 tenant child run                             what the installed service runs: hold the link from this terminal</code></pre>
-<p><code>tenant fleet</code> runs on the master and <code>tenant child</code> on a machine it owns. <code>child install</code> and <code>child rehome</code> read the code from standard input or <code>$TENANT_ENROLL_CODE</code>, never from an argument. <code>fleet remote-confirm on</code> asks at a terminal and refuses when its input is not one. The walk-through is on <a href="/tenant/docs/fleet/overview">Fleet</a>; groups and the defaults are in <a href="/tenant/docs/fleet/approvals">Fleet approvals</a>.</p>
+<p><code>tenant fleet</code> runs on the master and <code>tenant child</code> on a machine it owns. <code>child install</code> and <code>child rehome</code> read the code from standard input or <code>$TENANT_ENROLL_CODE</code>, never from an argument. <code>fleet remote-confirm on</code> and <code>fleet digits off</code> ask at a terminal and refuse when their input is not one. The walk-through is on <a href="/tenant/docs/fleet/overview">Fleet</a>; groups and the defaults are in <a href="/tenant/docs/fleet/approvals">Fleet approvals</a>.</p>
 <h2 id="safety">Safety</h2>
 <pre class="text"><code>tenant security audit [--json]
 tenant permissions effective [--surface local|discord|imessage] [--agent ID]

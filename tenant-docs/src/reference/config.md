@@ -172,7 +172,8 @@ The master's side of a [fleet](/tenant/docs/fleet/overview). The machines themse
 | Key | Default | Meaning | Changed by |
 |---|---|---|---|
 | `listen` | `0.0.0.0:9777` | the `host:port` the fleet port binds; nothing listens until `tenant fleet init` has made this Tenant a master | `tenant fleet init --listen` |
-| `remote_confirm` | false | a signed-in dashboard browser on another computer may confirm a pending machine, once it gives the sign-in key again ([Confirming from another computer](/tenant/docs/fleet/setup#confirming-from-another-computer)). Read at each confirmation; a file that can't be read counts as off. Whoever holds the sign-in key can then confirm a machine from anywhere the dashboard is reached | `tenant fleet remote-confirm on\|off` (on asks at a terminal), `/fleet remote-confirm`; no dashboard switch |
+| `confirm` | empty | how a machine that enrolled becomes a confirmed one. Empty or `auto`: at once, by its one-time code. `digits`: it waits until a person types the six digits it shows ([The six digits](/tenant/docs/fleet/setup#the-six-digits-as-a-second-step)). Any other value counts as `digits`, and so does a file that can't be read. Read at each enrollment | `tenant fleet digits on` or `off` (off asks at a terminal); no slash command and no dashboard switch |
+| `remote_confirm` | false | with `confirm` set to `digits`: a signed-in dashboard browser on another computer may confirm a pending machine, once it gives the sign-in key again ([Confirming from another computer](/tenant/docs/fleet/setup#confirming-from-another-computer)). Read at each confirmation; a file that can't be read counts as off. Whoever holds the sign-in key can then confirm a machine from anywhere the dashboard is reached | `tenant fleet remote-confirm on\|off` (on asks at a terminal), `/fleet remote-confirm`; no dashboard switch |
 
 ## `logs`
 

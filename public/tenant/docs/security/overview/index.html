@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>How Tenant is kept safe — Tenant docs — FindTime</title>
+<meta name="description" content="The layers between your agent and your computer, in the order an action meets them: who may give it work, what needs your approval, where commands run, what protects Tenant itself and what is recorded. Every default is in one table.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/security/overview">
+<meta property="og:title" content="How Tenant is kept safe — Tenant docs">
+<meta property="og:description" content="The layers between your agent and your computer, in the order an action meets them: who may give it work, what needs your approval, where commands run, what protects Tenant itself and what is recorded. Every default is in one table.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/security/overview">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Security</summary><ul>
+  <li><a href="/tenant/docs/security/overview">How Tenant is kept safe</a></li>
+  <li><a href="/tenant/docs/security/permissions">The permission categories</a></li>
+  <li><a href="/tenant/docs/security/commands">Security commands</a></li>
+  <li><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></li>
+  <li><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/security/overview">Security</a></p>
+<h1>How Tenant is kept safe</h1>
+<p class="lede">The layers between your agent and your computer, in the order an action meets them: who may give it work, what needs your approval, where commands run, what protects Tenant itself and what is recorded. Every default is in one table.</p>
+<p>Tenant’s agent runs as your account, on your computer, with your files in reach. What keeps that safe is a set of layers, and each is a separate thing you can read and set. This area explains how they fit together and what each one starts as. The pages it links to have every key, flag and exception.</p>
+<h2 id="the-layers">The layers</h2>
+<table>
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr>
+<th>Layer</th>
+<th>What it decides</th>
+<th>Starts as</th>
+<th>In full</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Surfaces</td>
+<td>who can give the agent work</td>
+<td>the terminal UI and the dashboard, on this computer only; Discord, iMessage and the fleet are off</td>
+<td><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a>, <a href="/tenant/docs/dashboard/access">Access</a></td>
+</tr>
+<tr>
+<td>Approvals</td>
+<td>which actions run, which are refused and which wait for you</td>
+<td>every category asks</td>
+<td><a href="/tenant/docs/security/permissions">The permission categories</a></td>
+</tr>
+<tr>
+<td>Rules and trust</td>
+<td>the same, for one tool, one command or one MCP server</td>
+<td>no rules; every server asks</td>
+<td><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></td>
+</tr>
+<tr>
+<td>The sandbox</td>
+<td>where a command runs and what it can touch</td>
+<td>the host, behind your approvals</td>
+<td><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></td>
+</tr>
+<tr>
+<td>The fleet</td>
+<td>what the agent may do on your other machines</td>
+<td>nothing: there is no fleet until you make one</td>
+<td><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></td>
+</tr>
+<tr>
+<td>Process protection</td>
+<td>whether your other programs can read Tenant’s memory while it runs</td>
+<td>on, with no switch</td>
+<td><a href="/tenant/docs/setup/process-protection">Process protection</a></td>
+</tr>
+<tr>
+<td>Secret files</td>
+<td>where keys are kept and what can read them</td>
+<td>owner-only files that the agent’s file tools refuse</td>
+<td><a href="/tenant/docs/setup/directories">Files &amp; directories</a></td>
+</tr>
+<tr>
+<td>The Security log</td>
+<td>what was asked, who answered and what was changed</td>
+<td>always on, and it cannot be cleared</td>
+<td><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-happens-to-one-action">What happens to one action</h2>
+<ol type="1">
+<li><strong>Reading is not gated.</strong> Tools read by default. A tool that changes something (runs a command, writes a file, sends a message, clicks a form) goes to the approval broker first.</li>
+<li><strong>Where the turn came from picks the settings.</strong> A turn from the terminal UI, the dashboard or a scheduled job uses the host’s. A turn from Discord uses the relay’s, and one from iMessage the responder’s. A call on a fleet machine uses that machine’s own scheme.</li>
+<li><strong>The action resolves to one of eight categories</strong>, such as <code>exec</code> or <code>write</code>. An action that no table knows is <code>destructive</code>.</li>
+<li><strong>A rule decides first, when one matches</strong> the tool or the command. Otherwise the category’s mode does: <code>allow</code> runs it, <code>deny</code> refuses it, and <code>ask</code> raises a request and waits. A tool of an MCP server also passes that server’s trust mode.</li>
+<li><strong>You answer where you are:</strong> in the terminal UI, on the dashboard, on a Discord card or by an iMessage text. The first answer counts, and no answer is a refusal.</li>
+<li><strong>A command then goes through the execution sandbox</strong>, which for that surface is the host or a confined backend.</li>
+<li><strong>The request, the answer and who gave it are written to the Security log.</strong></li>
+</ol>
+<h2 id="defaults-at-a-glance">Defaults at a glance</h2>
+<p>What a fresh install does before you change anything.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>What</th>
+<th>Default</th>
+<th>Change it with</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>The host’s categories (terminal UI, dashboard, scheduled jobs)</td>
+<td><code>ask</code>, all eight</td>
+<td><code>/permissions set</code>, the dashboard’s <strong>Approvals &amp; safety</strong> page</td>
+</tr>
+<tr>
+<td>Read-only commands such as <code>ls</code> and <code>git status</code></td>
+<td>run unasked on the host and over Discord while <code>exec</code> is <code>ask</code></td>
+<td>a command rule</td>
+</tr>
+<tr>
+<td>The Discord relay</td>
+<td>off. Once on: <code>ask</code>, with <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>sandbox</code> and <code>send</code> refused until <code>/relay exec on</code></td>
+<td><code>/relay</code></td>
+</tr>
+<tr>
+<td>The iMessage responder</td>
+<td>off, with nobody on its allowlist. Once on: <code>deny</code> for every category</td>
+<td><code>/imessage</code></td>
+</tr>
+<tr>
+<td>Scheduled jobs</td>
+<td>shell jobs and commands in prompt jobs are off (<code>cron.allow_exec</code>); a request a job raises is refused when its run ends</td>
+<td><code>/cron exec</code></td>
+</tr>
+<tr>
+<td>A new MCP server</td>
+<td>trust <code>ask</code>: every gated call prompts</td>
+<td><code>/mcp trust</code></td>
+</tr>
+<tr>
+<td>Where commands run</td>
+<td>the host on the interactive surfaces. Scheduled jobs on macOS: confined, in a dry run. Scheduled jobs on Linux and Windows: the host</td>
+<td><code>exec_profiles</code></td>
+</tr>
+<tr>
+<td>A command’s environment</td>
+<td>a short allowlist (<code>PATH</code>, <code>HOME</code> and the like), with none of Tenant’s API keys or tokens</td>
+<td><code>env_pass</code></td>
+</tr>
+<tr>
+<td>The dashboard</td>
+<td><code>127.0.0.1:9770</code> behind a sign-in key; the local-network listener is off</td>
+<td><code>/dashboard</code>, <code>dashboard</code> in <code>config.json</code></td>
+</tr>
+<tr>
+<td>The fleet</td>
+<td>no port open and no fleet tools until <code>tenant fleet init</code></td>
+<td></td>
+</tr>
+<tr>
+<td>A new fleet machine</td>
+<td>a copy of the host’s categories and rules</td>
+<td><code>tenant fleet permissions --defaults</code></td>
+</tr>
+<tr>
+<td>Discord, iMessage and scheduled jobs on the fleet</td>
+<td>closed, reads included</td>
+<td><code>/fleet relay</code>, <code>/cron fleet</code></td>
+</tr>
+<tr>
+<td>What a fleet machine lets its master do</td>
+<td><code>full</code>: the master’s approvals decide</td>
+<td><code>--ceiling</code> at <code>tenant child install</code></td>
+</tr>
+<tr>
+<td>Process protection</td>
+<td>on</td>
+<td>there is no switch</td>
+</tr>
+</tbody>
+</table>
+<h2 id="what-the-model-cannot-change">What the model cannot change</h2>
+<p>Some settings have no tool on purpose, so that the agent cannot widen its own reach.</p>
+<ul>
+<li>No agent tool writes a category’s mode or a tool rule. Those change from a slash command you type, the dashboard, the command line or the settings file.</li>
+<li>The agent’s file tools refuse <code>credentials.json</code>, <code>settings.&lt;agent&gt;.json</code> and the dashboard’s key file. <code>exec_profiles</code> live in that settings file, so no tool can write them either.</li>
+<li>Adopting an MCP server, or changing its trust, is itself a gated action, in the <code>mcp</code> category.</li>
+<li>The agent’s own <code>tenant service</code>, <code>tenant update</code>, <code>tenant child</code> and <code>tenant fleet</code>, written plainly in a command, are filed under <code>destructive</code> and ask even when <code>exec</code> is allowed.</li>
+<li><code>tenant fleet remote-confirm on</code> and <code>tenant fleet digits off</code> ask you to type the word at a terminal, and refuse when their input is not one.</li>
+</ul>
+<p>These hold while commands cannot reach Tenant’s own files. With <code>exec</code> on <code>allow</code> and commands running on the host, a command can change Tenant’s settings, and the agent could then answer its own requests. Keep <code>exec</code> at <code>ask</code> unless your commands run under an enforcing sandbox profile.</p>
+<h2 id="what-is-not-a-boundary">What is not a boundary</h2>
+<ul>
+<li><strong>The danger classifier</strong> catches the plain spellings of catastrophic commands. It is a guardrail against accidents. A variable, an alias or a script file still hides a command from it.</li>
+<li><strong>The <code>host</code> backend</strong> confines nothing: a command runs as the account Tenant runs as. The real containment is <code>exec</code> at <code>ask</code>, an enforcing sandbox profile, and running Tenant as a user with no more rights than it needs.</li>
+<li><strong>Reads are not asked about.</strong> What a read hands the model (<code>env</code>, a private key file under your home folder) reaches the model. The sandbox’s deny list and the file tools cover Tenant’s own secrets, not all of yours.</li>
+<li><strong>Process protection</strong> covers the running process. It does not cover the files on disk, and it does not stop an administrator or root.</li>
+<li><strong>Whoever controls a fleet’s master controls every machine in it</strong>, with the rights each child was installed with.</li>
+</ul>
+<h2 id="check-what-is-in-force">Check what is in force</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> security audit              <span class="co"># what each surface may do unasked, listeners, secret files, the sandbox; non-zero exit on a critical finding</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> permissions effective       <span class="co"># the composed result, by agent and surface</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> sandbox probe               <span class="co"># what each surface&#39;s profile enforces on this machine</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> doctor                      <span class="co"># process protection, secret-file permissions, the container sandbox</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> logs query <span class="st">&quot;log:security&quot;</span>   <span class="co"># every request, every answer and every change</span></span></code></pre></div>
+<h2 id="the-pages-in-this-area">The pages in this area</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Page</th>
+<th>Read it when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="/tenant/docs/security/permissions">The permission categories</a></td>
+<td>you want to know what each category covers, where each surface starts, and what a rule or a trusted server changes</td>
+</tr>
+<tr>
+<td><a href="/tenant/docs/security/commands">Security commands</a></td>
+<td>you know what you want to change and need the slash command or the shell command</td>
+</tr>
+<tr>
+<td><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></td>
+<td>you want to know where a command runs on your system today, and what turning enforcement on changes</td>
+</tr>
+<tr>
+<td><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></td>
+<td>you run a fleet, or want Discord, iMessage or a scheduled job to reach it</td>
+</tr>
+</tbody>
+</table>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/security/overview.mdtenant-docs/src/security/overview.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#the-layers" id="toc-the-layers">The layers</a></li>
+<li><a href="#what-happens-to-one-action" id="toc-what-happens-to-one-action">What happens to one action</a></li>
+<li><a href="#defaults-at-a-glance" id="toc-defaults-at-a-glance">Defaults at a glance</a></li>
+<li><a href="#what-the-model-cannot-change" id="toc-what-the-model-cannot-change">What the model cannot change</a></li>
+<li><a href="#what-is-not-a-boundary" id="toc-what-is-not-a-boundary">What is not a boundary</a></li>
+<li><a href="#check-what-is-in-force" id="toc-check-what-is-in-force">Check what is in force</a></li>
+<li><a href="#the-pages-in-this-area" id="toc-the-pages-in-this-area">The pages in this area</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

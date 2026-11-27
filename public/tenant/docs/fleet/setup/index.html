@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#080808">
 <title>Set up a fleet — Tenant docs — FindTime</title>
-<meta name="description" content="Make one Tenant a fleet master, give a new machine a one-time code, confirm it with the six digits it shows, and choose how your machines reach the master.">
+<meta name="description" content="Make one Tenant a fleet master, give a new machine a one-time code and paste one line on it, and choose how your machines reach the master. Typing six digits on the master is a second step you can turn on.">
 <link rel="canonical" href="https://findtime.net/tenant/docs/fleet/setup">
 <meta property="og:title" content="Set up a fleet — Tenant docs">
-<meta property="og:description" content="Make one Tenant a fleet master, give a new machine a one-time code, confirm it with the six digits it shows, and choose how your machines reach the master.">
+<meta property="og:description" content="Make one Tenant a fleet master, give a new machine a one-time code and paste one line on it, and choose how your machines reach the master. Typing six digits on the master is a second step you can turn on.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://findtime.net/tenant/docs/fleet/setup">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -61,6 +61,13 @@
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
 </ul></details>
+<details class="area"><summary>Security</summary><ul>
+  <li><a href="/tenant/docs/security/overview">How Tenant is kept safe</a></li>
+  <li><a href="/tenant/docs/security/permissions">The permission categories</a></li>
+  <li><a href="/tenant/docs/security/commands">Security commands</a></li>
+  <li><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></li>
+  <li><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></li>
+</ul></details>
 <details class="area"><summary>Fleet</summary><ul>
   <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
   <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
@@ -111,8 +118,8 @@
 <main id="main" class="content" tabindex="-1">
 <p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/fleet/overview">Fleet</a></p>
 <h1>Set up a fleet</h1>
-<p class="lede">Make one Tenant a fleet master, give a new machine a one-time code, confirm it with the six digits it shows, and choose how your machines reach the master.</p>
-<p>Setting up a fleet takes three steps: make a master once, then for each machine make a code on the master, paste one line on the machine, and confirm the machine on the master.</p>
+<p class="lede">Make one Tenant a fleet master, give a new machine a one-time code and paste one line on it, and choose how your machines reach the master. Typing six digits on the master is a second step you can turn on.</p>
+<p>Setting up a fleet takes a master, made once, and then two steps for each machine: make a code on the master, and paste one line on the machine. The code confirms the machine. A fleet that wants a second check can ask for <a href="/tenant/docs/fleet/setup#the-six-digits-as-a-second-step">six digits</a> typed on the master as well.</p>
 <h2 id="make-a-master">1. Make a master</h2>
 <div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet init [--listen ADDR] [--address HOST:PORT]...</span></code></pre></div>
 <table>
@@ -201,10 +208,47 @@
 <p><code>enroll</code> prints these lines with the real code, repository and version filled in. A build of Tenant that names no release repository cannot print the install-script lines: it says so, and prints the others.</p>
 <p><strong>The code never travels as an argument.</strong> <code>tenant child install</code> reads it from standard input or from <code>TENANT_ENROLL_CODE</code>, and refuses a code given on the command line (exit 2), because an argument shows in the process list and stays in the shell’s history. The boot-time line for Linux and macOS keeps it off sudo’s command line with <code>--preserve-env</code>.</p>
 <p><code>tenant child install</code> also takes <code>--ceiling full|no-exec|read-only</code> and <code>--updates release|master</code>; <a href="/tenant/docs/fleet/machines">On a fleet machine</a> and <a href="/tenant/docs/fleet/updates">Update, move and recover</a> explain them.</p>
-<h2 id="confirm-the-machine">3. Confirm the machine</h2>
-<p>The machine makes its own key, prints <strong>six digits</strong>, and shows as <code>pending</code> on the master. Until you confirm it, the master sends it nothing.</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet confirm <span class="op">&lt;</span>name<span class="op">&gt;</span> [--set category=mode]...</span></code></pre></div>
-<p><code>confirm</code> shows what the machine reported about itself (OS, account, version, sandbox, ceiling: its own words, not checked) and the approval scheme it will start with, then asks for the six digits. <code>--set exec=allow</code> sets a category for this machine alone. Each line of the scheme says where its value came from when it is not the master’s own: <code>set by you</code>, <code>fleet default</code>, <code>fleet rule</code>, <code>group &lt;name&gt;</code>, or <code>(this master: allow)</code> for a category the copy made stricter. <a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a> explains the starting scheme.</p>
+<h2 id="the-machine-joins">3. The machine joins</h2>
+<p>There is nothing more to do. A code that is valid, unused and not expired confirms the machine as it enrolls: the machine makes its own key, says that its master confirmed it with the enrollment code, and is online.</p>
+<p>On the master you are told where you look, in the terminal app’s feed or in serve’s log: the machine’s name and id, the address it came from, what it reports about itself (system, account, version: its own words, not checked), and the command that undoes it, <code>tenant fleet revoke &lt;name&gt;</code>. The Security log has the record, with <code>enroll-code</code> as where it was made, and the fleet log has <code>fleet/1003</code>.</p>
+<p>The machine starts with the approval scheme every new machine gets: a copy of the master’s, with the fleet’s defaults, its rules and the rules of the machine’s groups laid over it (<a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a>). To start machines tighter, set a default before they join (<code>tenant fleet permissions --defaults set exec ask</code>); to change one machine, edit its scheme once it has joined (<code>tenant fleet permissions &lt;name&gt; set exec ask</code>).</p>
+<p><strong>The code is the whole check.</strong> Treat it as a password for as long as it lasts: paste it on the one machine it is for, and nowhere a second person or a log can read it. Whoever uses it first joins under that name.</p>
+<p><strong>A code presented a second time is refused</strong>, and you are alerted: someone other than the machine it enrolled holds that code, or held it first. The machine the code enrolled is <strong>paused</strong> until you have looked. If it is yours, <code>tenant fleet resume &lt;name&gt;</code>. If it is not, <code>tenant fleet revoke &lt;name&gt;</code> and enroll yours again. The alert is an error in the Security log (<code>security/4322</code>) and in the fleet log (<code>fleet/3101</code>).</p>
+<p>The enroll endpoint takes five attempts a minute from one address.</p>
+<p>If the master cannot confirm a machine by its code alone, for example because the fleet’s defaults cannot be read, the machine waits as <code>pending</code> and you are told to confirm it with its six digits, as below.</p>
+<h2 id="the-six-digits-as-a-second-step">The six digits, as a second step</h2>
+<p>For a fleet where a code may pass through hands you do not trust, turn the second step on. A machine that enrolls then shows six digits and waits until a person types them on the master.</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet digits [on<span class="kw">|</span><span class="ex">off]</span></span></code></pre></div>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Command</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tenant fleet digits</code></td>
+<td>says whether it is on</td>
+</tr>
+<tr>
+<td><code>tenant fleet digits on</code></td>
+<td>every machine that enrolls from now on waits for its six digits. It asks nothing</td>
+</tr>
+<tr>
+<td><code>tenant fleet digits off</code></td>
+<td>back to the code alone. It says what that allows and asks you to type <code>off</code>; it refuses when its input is not a terminal</td>
+</tr>
+</tbody>
+</table>
+<p>Turning it on needs nobody. Turning it off takes a person at a terminal, so a script or the agent cannot take the second step away with this command. There is no slash command and no dashboard switch for it. The setting is <code>fleet.confirm</code> in <code>config.json</code> (<a href="/tenant/docs/reference/config">config.json</a>); the running Tenant reads it at each enrollment, so nothing restarts. Each change is a Security record.</p>
+<p>With the digits on, the machine makes its own key, prints <strong>six digits</strong>, and shows as <code>pending</code> on the master. Until you confirm it, the master sends it nothing.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet confirm <span class="op">&lt;</span>name<span class="op">&gt;</span> [--set category=mode]...</span></code></pre></div>
+<p><code>confirm</code> shows what the machine reported about itself (OS, account, version, sandbox, ceiling: its own words, not checked) and the approval scheme it will start with, then asks for the six digits. <code>--set exec=allow</code> sets a category for this machine alone. Each line of the scheme says where its value came from when it is not the master’s own: <code>set by you</code>, <code>fleet default</code>, <code>fleet rule</code> or <code>group &lt;name&gt;</code>.</p>
 <p>Compare the digits with the ones on the machine’s own screen. They tie the record on the master to that machine, and to no other machine that got hold of its code.</p>
 <p>What is confirmed is what the screen showed. If one of the fleet’s defaults, its rules or one of the machine’s groups is edited between the screen and the digits, <code>tenant fleet confirm</code> and the dashboard’s form confirm nothing and say to read the screen again. <code>/fleet confirm &lt;name&gt; &lt;six digits&gt;</code> in the terminal app is one line with no screen before it, so it is not held to one: read <code>/fleet confirm &lt;name&gt;</code> just before.</p>
 <p>Confirming takes a person. It is accepted from:</p>
@@ -215,10 +259,10 @@
 <li>a signed-in browser on another computer, only once you have turned on <a href="/tenant/docs/fleet/setup#confirming-from-another-computer">remote confirmation</a>.</li>
 </ul>
 <p>A request that carries only the API key is refused, whatever the setting. No tool, relay command or approval card can confirm a machine.</p>
-<p>The enroll endpoint takes five attempts a minute from one address. A code presented a second time is refused and raises an alert.</p>
+<p>With the digits on, a code presented a second time is still refused and still raises the alert, but no machine is paused: compare the six digits on the machine’s own screen before you confirm it.</p>
 <h3 id="confirming-from-another-computer">Confirming from another computer</h3>
-<p>A browser that reaches the dashboard over the local network, by a Tailscale name or through a proxy is not on the master: its Fleet page shows the pending machine and says where to confirm it. On a master with no screen (Windows Server Core, a headless box) that means a console for every machine. You can let a signed-in browser elsewhere confirm instead. It is off until you turn it on, at the master’s terminal:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet remote-confirm [on<span class="kw">|</span><span class="ex">off]</span></span></code></pre></div>
+<p>This applies only with the six digits on; with the code alone there is nothing to confirm. A browser that reaches the dashboard over the local network, by a Tailscale name or through a proxy is not on the master: its Fleet page shows the pending machine and says where to confirm it. On a master with no screen (Windows Server Core, a headless box) that means a console for every machine. You can let a signed-in browser elsewhere confirm instead. It is off until you turn it on, at the master’s terminal:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet remote-confirm [on<span class="kw">|</span><span class="ex">off]</span></span></code></pre></div>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -261,7 +305,7 @@
 <h2 id="joining-is-by-code-only">Joining is by code only</h2>
 <p>There is no discovery and no request to join. A machine joins with its one-time code and nothing else. The code carries the master’s certificate fingerprint, so the machine knows which master it is talking to before it sends anything.</p>
 <h2 id="the-addresses-a-code-carries">The addresses a code carries</h2>
-<div class="sourceCode" id="cb10"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet address [list <span class="kw">|</span> <span class="ex">add</span> HOST:PORT <span class="kw">|</span> <span class="ex">remove</span> HOST:PORT]</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet address [list <span class="kw">|</span> <span class="ex">add</span> HOST:PORT <span class="kw">|</span> <span class="ex">remove</span> HOST:PORT]</span></code></pre></div>
 <p>This changes the list one address at a time (<code>init --address</code> replaces it whole). A connected machine is told the new list over its link.</p>
 <p>When every IP address on the list is private, link-local or loopback, <code>init</code>, <code>enroll</code>, <code>address</code> and Add machine warn that a machine at another site cannot dial any of them. A host name is not judged. On one LAN the warning is expected and can be ignored.</p>
 <h2 id="three-ways-for-machines-to-reach-the-master">Three ways for machines to reach the master</h2>
@@ -298,14 +342,17 @@
 </tbody>
 </table>
 <p>For an overlay network, with the master’s overlay address <code>100.101.102.103</code>:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet init <span class="at">--listen</span> 100.101.102.103:9777</span>
-<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet address add 100.101.102.103:9777</span>
-<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet address remove 192.168.1.5:9777</span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet init <span class="at">--listen</span> 100.101.102.103:9777</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet address add 100.101.102.103:9777</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet address remove 192.168.1.5:9777</span></code></pre></div>
 <p>A public address is a workable route: both ends are pinned by certificate, so someone who learns the address can do nothing with it but reach the handshake and the code check (five attempts a minute per address, refusals in the Security log). Because the default <code>--listen</code> is every interface, set <code>--listen</code> to the one interface you mean on a master with a public address.</p>
 <h2 id="other-fleet-commands">Other fleet commands</h2>
-<div class="sourceCode" id="cb12"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet list <span class="kw">|</span> <span class="ex">show</span> <span class="op">&lt;</span>name<span class="op">&gt;</span>       <span class="co"># the machines and which process holds the fleet; one machine in full</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet rename <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>new-name<span class="op">&gt;</span> <span class="co"># relabel; its id and what is kept under it stay</span></span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet revoke <span class="op">&lt;</span>name<span class="op">&gt;</span> [--keep-scheme <span class="kw">|</span> <span class="ex">--delete-scheme]</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet list <span class="kw">|</span> <span class="ex">show</span> <span class="op">&lt;</span>name<span class="op">&gt;</span>       <span class="co"># the machines and which process holds the fleet; one machine in full</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet rename <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="op">&lt;</span>new-name<span class="op">&gt;</span> <span class="co"># relabel; its id and what is kept under it stay</span></span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet revoke <span class="op">&lt;</span>name<span class="op">&gt;</span> [--keep-scheme <span class="kw">|</span> <span class="ex">--delete-scheme]</span></span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet pause <span class="op">&lt;</span>name<span class="op">&gt;</span>             <span class="co"># no call goes to the machine and its link is refused</span></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet resume <span class="op">&lt;</span>name<span class="op">&gt;</span>            <span class="co"># calls go to it again, and it may link</span></span></code></pre></div>
+<p>A paused machine keeps its certificate, its approval scheme and its memory, and <code>tenant child status</code> on it says it is paused on the master. Pausing and resuming are shell commands and each is recorded; the dashboard’s Fleet page shows the state.</p>
 <p><code>tenant fleet list</code> in another process cannot tell online from offline: only the process that holds the fleet knows (<code>/fleet</code> there, or the dashboard’s Fleet page). Revoking is described in <a href="/tenant/docs/fleet/machines#when-a-machine-is-revoked">On a fleet machine</a>.</p>
 <div class="pagefoot">
   <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/fleet/setup.mdtenant-docs/src/fleet/setup.md">Edit this page on GitHub</a>
@@ -320,7 +367,8 @@
 <ul>
 <li><a href="#make-a-master" id="toc-make-a-master">1. Make a master</a></li>
 <li><a href="#make-a-code-for-a-machine" id="toc-make-a-code-for-a-machine">2. Make a code for a machine</a></li>
-<li><a href="#confirm-the-machine" id="toc-confirm-the-machine">3. Confirm the machine</a></li>
+<li><a href="#the-machine-joins" id="toc-the-machine-joins">3. The machine joins</a></li>
+<li><a href="#the-six-digits-as-a-second-step" id="toc-the-six-digits-as-a-second-step">The six digits, as a second step</a></li>
 <li><a href="#joining-is-by-code-only" id="toc-joining-is-by-code-only">Joining is by code only</a></li>
 <li><a href="#the-addresses-a-code-carries" id="toc-the-addresses-a-code-carries">The addresses a code carries</a></li>
 <li><a href="#three-ways-for-machines-to-reach-the-master" id="toc-three-ways-for-machines-to-reach-the-master">Three ways for machines to reach the master</a></li>
