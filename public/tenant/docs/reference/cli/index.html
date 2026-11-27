@@ -259,7 +259,7 @@ tenant fleet group rules &lt;group&gt; [add &lt;pattern&gt; &lt;mode&gt; | rm &l
 tenant fleet group apply &lt;group&gt;                                              lay the fleet&#39;s rules and each member&#39;s groups&#39; rules over every confirmed member
 tenant fleet relay [discord|imessage [on|off]]                                whether a turn from that relay may reach the fleet (off by default)
 tenant fleet remote-confirm [on|off]                                          whether a signed-in dashboard browser on another computer may confirm a machine (off by default)
-tenant fleet update &lt;name&gt; | --all | --group &lt;group&gt; [--version vX.Y.Z] [--allow-older]   send machines a newer Tenant over their links
+tenant fleet update &lt;name&gt; | --all | --group &lt;group&gt; [--version vX.Y.Z | --build ARCHIVE] [--allow-older]   send machines a newer Tenant over their links, or with --build a build of your own, to machines set to updates master
 tenant fleet recover &lt;name&gt; [--was ID]                                        read a machine&#39;s memory made under another fleet key, with the recovery identity
 tenant child install [--system] [--ceiling full|no-exec|read-only] [--updates release|master]   enroll this machine and install its service
 tenant child updates [release|master]        whose word an update from the master is taken on
