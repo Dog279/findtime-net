@@ -349,6 +349,10 @@
 <td><code>fleet-updates/&lt;tag&gt;/&lt;os&gt;_&lt;arch&gt;/</code></td>
 <td>on a fleet master: the releases <code>tenant fleet update</code> fetched and verified for its machines</td>
 </tr>
+<tr>
+<td><code>fleet-updates.json</code></td>
+<td>on a fleet master: each machine’s last update and the last rollout, written at every step so that a restart of Tenant still shows them (<a href="/tenant/docs/fleet/updates#when-the-master-restarts">Fleet updates</a>); owner-only</td>
+</tr>
 </tbody>
 </table>
 <p>Next to the data dir, <code>tenant update</code> keeps <code>&lt;data&gt;-backups/pre-update-&lt;version&gt;.tenant-backup</code>.</p>

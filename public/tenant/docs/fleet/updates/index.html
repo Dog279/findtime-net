@@ -163,7 +163,85 @@
 <li>the first machine that <strong>rolls back or fails stops the rollout</strong>: no further machine is started, those already updating finish, and the rest show as not started.</li>
 </ul>
 <p>The Fleet page shows the rollout while it runs and afterwards (reload it): each machine as waiting, its live stage, done, skipped and why, rolled back, failed or not started. <strong>Stop</strong> starts no more machines; those updating finish. The rollout also stops when the fleet port goes down or another process takes the fleet: it starts nothing over links it no longer holds.</p>
-<p>One rollout runs at a time. It is kept in the running Tenant’s memory: a restart of the master forgets it, though each machine still finishes or rolls back by itself. A rollout takes a signed-in browser; the API key cannot start or stop one.</p>
+<p>One rollout runs at a time. A rollout takes a signed-in browser; the API key cannot start or stop one.</p>
+<h3 id="how-each-machines-last-update-went">How each machine’s last update went</h3>
+<p>The Fleet page has one card, <strong>Updates</strong>, with a row for each machine shown:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Column</th>
+<th>What it says</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td>the version the machine reports, in quotes as its own words</td>
+</tr>
+<tr>
+<td><strong>Last update</strong></td>
+<td>the version this Tenant last sent it, or “none sent from this Tenant”</td>
+</tr>
+<tr>
+<td><strong>When</strong></td>
+<td>when that update ended, or started if it is still running</td>
+</tr>
+<tr>
+<td><strong>How it went</strong></td>
+<td><strong>done</strong>; <strong>rolled back</strong>, with the machine’s reason; <strong>failed</strong>, with the reason; <strong>refused</strong>; or the stage of an update that is running</td>
+</tr>
+</tbody>
+</table>
+<p>A machine that took an update, never said how it went and has no link now shows <strong>has not redialled since</strong> and a time: when its link ended, or, when that was before this Tenant started, when the update was last written down. What the machine says when it links again is recorded then, however much later: “the machine linked again: back on the new version 1.4.0”, or “the machine linked again: rolled back to”1.3.2”” with its reason. A machine’s own page says the same in its <strong>Update</strong> card, with every line of the update. A rollout that stopped at a machine because it said nothing in time shows that machine as “failed, then done” or “failed, then rolled back” once it has said.</p>
+<p>A machine keeps its word about its last update until the next one starts its trial run. On a second try at a version that rolled back before, a machine that links in between still says what became of the first try. That word is not taken for the new try’s: the master notes the time on the word the machine has when an update starts, by the machine’s own clock, and takes only a later one as that update’s.</p>
+<h3 id="when-the-master-restarts">When the master restarts</h3>
+<p>The Tenant that holds the fleet writes the rollout and each machine’s last update to <code>fleet-updates.json</code> in its <a href="/tenant/docs/setup/directories">data folder</a> at every step, and reads it back when it starts. So the Fleet page shows the last rollout and each machine’s last update after a restart too. A file that does not read does not stop the master: it is logged, treated as no record, and replaced at the next update.</p>
+<p><strong>A rollout that was running is not taken up again.</strong> It is closed where it stood, the status feed says so, and the Fleet page shows each machine:</p>
+<ul>
+<li><strong>done</strong>, skipped, rolled back or failed, as recorded before the restart;</li>
+<li><strong>interrupted</strong>: its update was under way. What became of it is filled in from the machine’s own word on its next link (“interrupted, then done”, “interrupted, then rolled back”);</li>
+<li><strong>not started</strong>: nothing was sent to it.</li>
+</ul>
+<p>Nothing is sent to any machine because of the restart. To finish, start a new rollout over the same machines: one that already runs the version counts as done and is sent nothing.</p>
+<p>Before the new rollout, give the machines shown as interrupted a few minutes to link again and say how their update went. A machine has one record, its last update, and an update sent to it replaces that record. Sent while the interrupted one is still unsettled, the new update takes its place, and how the interrupted one went may never be recorded: if the latest release has moved since, a machine that is still applying the first refuses the new archive, and that refusal is all its record then says. The machine itself finishes the first update or rolls it back all the same, and the version it reports says which.</p>
+<p>An update that was under way is ended in the record by how far it had got:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>It was</th>
+<th>The record says</th>
+<th>On the machine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fetching the release</td>
+<td>failed: this Tenant stopped before anything was sent</td>
+<td>nothing changed</td>
+</tr>
+<tr>
+<td>sending the archive</td>
+<td>failed: this Tenant stopped while the archive was on its way</td>
+<td>most likely nothing changed, and an update sent again goes on from what arrived. If the machine did have all of it, it goes on by itself, and its word on its next link corrects the record</td>
+</tr>
+<tr>
+<td>being applied by the machine</td>
+<td>failed, until the machine says how it went</td>
+<td>the machine goes on by itself: it comes back on the new version, or puts the old one back</td>
+</tr>
+</tbody>
+</table>
+<p>The machines need nothing: each redials by itself, waiting from one second up to a minute between tries, and is online as soon as its link is made.</p>
+<p>Run fleet updates from one Tenant on a data folder. Two Tenants on one data folder (serve and the terminal app) write the same file with nothing to keep them apart: the one that writes last wins, and one that takes the fleet from another that is still running reports that other’s rollout as cut short. Start a rollout or an update from one Tenant, and let that one keep the fleet until every machine has said how it went.</p>
 <h2 id="what-the-machine-does">What the machine does</h2>
 <ol type="1">
 <li>It writes the archive to <code>&lt;dir&gt;-data/update/</code> (a dropped link resumes there) and touches nothing else until the archive is whole and hashes right.</li>

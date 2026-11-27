@@ -69,6 +69,7 @@ Secrets never live in `config.json`. `tenant doctor` checks the permissions of e
 | `.tenant.lock` | held shared by every running command, exclusively by `tenant backup restore` |
 | `fleet/` | on a fleet master: each machine's memory as encrypted snapshots, one folder per machine id, with the memory kept aside after it was replaced (30 days); `forgets.age`, the sealed record of forgets still to reach the machines |
 | `fleet-updates/<tag>/<os>_<arch>/` | on a fleet master: the releases `tenant fleet update` fetched and verified for its machines |
+| `fleet-updates.json` | on a fleet master: each machine's last update and the last rollout, written at every step so that a restart of Tenant still shows them ([Fleet updates](/tenant/docs/fleet/updates#when-the-master-restarts)); owner-only |
 
 Next to the data dir, `tenant update` keeps `<data>-backups/pre-update-<version>.tenant-backup`.
 
