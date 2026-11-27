@@ -81,6 +81,7 @@ The same is `/logs log:fleet` in the terminal UI and the **Logs** page of the da
 | an enrollment or confirmation refused; a spent code presented again | `fleet/2101`, `2102`, `3101` |
 | a machine connected, and disconnected with why | `fleet/1101`, `1102` |
 | each call on a machine, with its outcome and the hash of the machine's own audit record | `fleet/1201` |
+| a call that was kept back while its machine applied an update, and for how long | `fleet/1206` |
 | each step of an update, and one that did not go through | `fleet/1301`, `2301` |
 | the machines' memory: open or unavailable, copies, forgets, and what went wrong | `fleet/3`, `2003`, `1401`–`1407`, `2401`–`2414` |
 

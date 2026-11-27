@@ -138,7 +138,7 @@ tenant fleet group rules <group> [add <pattern> <mode> | rm <pattern>]        a 
 tenant fleet group apply <group>                                              lay the fleet's rules and each member's groups' rules over every confirmed member
 tenant fleet relay [discord|imessage [on|off]]                                whether a turn from that relay may reach the fleet (off by default)
 tenant fleet remote-confirm [on|off]                                          whether a signed-in dashboard browser on another computer may confirm a machine (off by default)
-tenant fleet update <name> | --all | --group <group> [--version vX.Y.Z] [--allow-older]   send machines a newer Tenant over their links
+tenant fleet update <name> | --all | --group <group> [--version vX.Y.Z | --build ARCHIVE] [--allow-older]   send machines a newer Tenant over their links, or with --build a build of your own, to machines set to updates master
 tenant fleet recover <name> [--was ID]                                        read a machine's memory made under another fleet key, with the recovery identity
 tenant child install [--system] [--ceiling full|no-exec|read-only] [--updates release|master]   enroll this machine and install its service
 tenant child updates [release|master]        whose word an update from the master is taken on
