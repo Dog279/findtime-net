@@ -65,6 +65,8 @@ The Tenant that holds the fleet writes the rollout and each machine's last updat
 
 Nothing is sent to any machine because of the restart. To finish, start a new rollout over the same machines: one that already runs the version counts as done and is sent nothing.
 
+Before the new rollout, give the machines shown as interrupted a few minutes to link again and say how their update went. A machine has one record, its last update, and an update sent to it replaces that record. Sent while the interrupted one is still unsettled, the new update takes its place, and how the interrupted one went may never be recorded: if the latest release has moved since, a machine that is still applying the first refuses the new archive, and that refusal is all its record then says. The machine itself finishes the first update or rolls it back all the same, and the version it reports says which.
+
 An update that was under way is ended in the record by how far it had got:
 
 | It was | The record says | On the machine |
@@ -74,6 +76,8 @@ An update that was under way is ended in the record by how far it had got:
 | being applied by the machine | failed, until the machine says how it went | the machine goes on by itself: it comes back on the new version, or puts the old one back |
 
 The machines need nothing: each redials by itself, waiting from one second up to a minute between tries, and is online as soon as its link is made.
+
+Run fleet updates from one Tenant on a data folder. Two Tenants on one data folder (serve and the terminal app) write the same file with nothing to keep them apart: the one that writes last wins, and one that takes the fleet from another that is still running reports that other's rollout as cut short. Start a rollout or an update from one Tenant, and let that one keep the fleet until every machine has said how it went.
 
 ## What the machine does
 
