@@ -197,10 +197,10 @@ tenant fleet enroll web1          # a one-time code
 printf '%s\n' '<code>' | tenant child rehome     # or TENANT_ENROLL_CODE='<code>' tenant child rehome
 #   add --system, from an elevated shell, for the machine's own child
 # start its child again, then on the new master:
-tenant fleet confirm web1         # the six digits rehome printed
+tenant fleet confirm web1         # only with the six digits on: the digits rehome printed
 ```
 
-`rehome` is enrollment with the key the machine already has. It changes only which master the machine trusts, in one step; its key, ceiling, tool list, sandbox, secret list, pause, update rule, audit log and memory copies stay. It refuses, with nothing changed, while a child process runs on the directory, and a code that does not enroll leaves the machine with its old master. Afterwards the old master's certificate is refused. The audit log records the account and both masters' fingerprints. Nothing on the link, no tool and no command on the master can make a machine re-home.
+`rehome` is enrollment with the key the machine already has. It changes only which master the machine trusts, in one step; its key, ceiling, tool list, sandbox, secret list, pause, update rule, audit log and memory copies stay. It refuses, with nothing changed, while a child process runs on the directory, and a code that does not enroll leaves the machine with its old master. The new master confirms the machine by its code or, with [the six digits](/tenant/docs/fleet/setup#the-six-digits-as-a-second-step) on, holds it as pending until you type them, as for any new machine. Afterwards the old master's certificate is refused. The audit log records the account and both masters' fingerprints. Nothing on the link, no tool and no command on the master can make a machine re-home.
 
 ## Recover a machine's memory
 

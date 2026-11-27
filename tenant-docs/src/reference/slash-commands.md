@@ -124,7 +124,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /fleet init [--listen ADDR] [--address HOST:PORT]...      make this Tenant a fleet master (once); the app steps aside while the recovery identity is shown on the terminal and typed back
 /fleet show <name>                                        everything known about one machine, with what it reported marked as its own words
 /fleet enroll <name>                                      a one-time code for a new machine, and the line to paste there
-/fleet confirm <name>                                     the confirm screen of a pending machine: what it reported, the scheme it starts with
+/fleet confirm <name>                                     with the six digits on: the confirm screen of a pending machine, what it reported and the scheme it starts with
 /fleet confirm <name> <six digits> [category=mode ...]    confirm it with the digits it shows; a pair sets that category for this machine alone
 /fleet revoke <name> [keep|delete]                        end a machine; keep or delete its approval scheme
 /fleet relay [discord|imessage [on|off]]                  whether a relay's turns may reach the fleet at all (default off)
@@ -135,7 +135,7 @@ Slash commands are typed into the terminal UI (`tenant tui`). Each belongs to on
 /fleet remote-confirm [on|off]                            whether a signed-in dashboard browser on another computer may confirm a machine, with the sign-in key again (default off)
 ```
 
-A machine's own approval scheme is `/permissions fleet <name>`, and the fleet's defaults for new machines `/permissions fleet --defaults`, under Safety &amp; approvals. A line the app submits for you does not change the fleet: type these yourself. A form that only shows something (the list, a machine, the confirm screen, a switch's state, the groups, a group or its rules) needs no typing. Groups are explained in [Fleet approvals](/tenant/docs/fleet/approvals#groups).
+A machine's own approval scheme is `/permissions fleet <name>`, and the fleet's defaults for new machines `/permissions fleet --defaults`, under Safety &amp; approvals. A line the app submits for you does not change the fleet: type these yourself. A form that only shows something (the list, a machine, the confirm screen, a switch's state, the groups, a group or its rules) needs no typing. Groups are explained in [Fleet approvals](/tenant/docs/fleet/approvals#groups). Pausing a machine (`tenant fleet pause`) and the six digits (`tenant fleet digits`) are shell commands only.
 
 ## Skills ([Skills](/tenant/docs/first-launch/skills))
 

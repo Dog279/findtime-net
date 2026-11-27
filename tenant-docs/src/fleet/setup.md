@@ -1,11 +1,11 @@
 ---
 title: Set up a fleet
-description: Make one Tenant a fleet master, give a new machine a one-time code, confirm it with the six digits it shows, and choose how your machines reach the master.
+description: Make one Tenant a fleet master, give a new machine a one-time code and paste one line on it, and choose how your machines reach the master. Typing six digits on the master is a second step you can turn on.
 area: Fleet
 area-url: /tenant/docs/fleet/overview
 ---
 
-Setting up a fleet takes three steps: make a master once, then for each machine make a code on the master, paste one line on the machine, and confirm the machine on the master.
+Setting up a fleet takes a master, made once, and then two steps for each machine: make a code on the master, and paste one line on the machine. The code confirms the machine. A fleet that wants a second check can ask for [six digits](/tenant/docs/fleet/setup#the-six-digits-as-a-second-step) typed on the master as well.
 
 ## 1. Make a master
 
@@ -98,15 +98,45 @@ printf '%s\n' '<code>' | tenant child install --system   # in a root shell: a se
 
 `tenant child install` also takes `--ceiling full|no-exec|read-only` and `--updates release|master`; [On a fleet machine](/tenant/docs/fleet/machines) and [Update, move and recover](/tenant/docs/fleet/updates) explain them.
 
-## 3. Confirm the machine
+## 3. The machine joins
 
-The machine makes its own key, prints **six digits**, and shows as `pending` on the master. Until you confirm it, the master sends it nothing.
+There is nothing more to do. A code that is valid, unused and not expired confirms the machine as it enrolls: the machine makes its own key, says that its master confirmed it with the enrollment code, and is online.
+
+On the master you are told where you look, in the terminal app's feed or in serve's log: the machine's name and id, the address it came from, what it reports about itself (system, account, version: its own words, not checked), and the command that undoes it, `tenant fleet revoke <name>`. The Security log has the record, with `enroll-code` as where it was made, and the fleet log has `fleet/1003`.
+
+The machine starts with the approval scheme every new machine gets: a copy of the master's, with the fleet's defaults, its rules and the rules of the machine's groups laid over it ([Approvals on fleet machines](/tenant/docs/fleet/approvals)). To start machines tighter, set a default before they join (`tenant fleet permissions --defaults set exec ask`); to change one machine, edit its scheme once it has joined (`tenant fleet permissions <name> set exec ask`).
+
+**The code is the whole check.** Treat it as a password for as long as it lasts: paste it on the one machine it is for, and nowhere a second person or a log can read it. Whoever uses it first joins under that name.
+
+**A code presented a second time is refused**, and you are alerted: someone other than the machine it enrolled holds that code, or held it first. The machine the code enrolled is **paused** until you have looked. If it is yours, `tenant fleet resume <name>`. If it is not, `tenant fleet revoke <name>` and enroll yours again. The alert is an error in the Security log (`security/4322`) and in the fleet log (`fleet/3101`).
+
+The enroll endpoint takes five attempts a minute from one address.
+
+If the master cannot confirm a machine by its code alone, for example because the fleet's defaults cannot be read, the machine waits as `pending` and you are told to confirm it with its six digits, as below.
+
+## The six digits, as a second step
+
+For a fleet where a code may pass through hands you do not trust, turn the second step on. A machine that enrolls then shows six digits and waits until a person types them on the master.
+
+```bash
+tenant fleet digits [on|off]
+```
+
+| Command | Does |
+|---|---|
+| `tenant fleet digits` | says whether it is on |
+| `tenant fleet digits on` | every machine that enrolls from now on waits for its six digits. It asks nothing |
+| `tenant fleet digits off` | back to the code alone. It says what that allows and asks you to type `off`; it refuses when its input is not a terminal |
+
+Turning it on needs nobody. Turning it off takes a person at a terminal, so a script or the agent cannot take the second step away with this command. There is no slash command and no dashboard switch for it. The setting is `fleet.confirm` in `config.json` ([config.json](/tenant/docs/reference/config)); the running Tenant reads it at each enrollment, so nothing restarts. Each change is a Security record.
+
+With the digits on, the machine makes its own key, prints **six digits**, and shows as `pending` on the master. Until you confirm it, the master sends it nothing.
 
 ```bash
 tenant fleet confirm <name> [--set category=mode]...
 ```
 
-`confirm` shows what the machine reported about itself (OS, account, version, sandbox, ceiling: its own words, not checked) and the approval scheme it will start with, then asks for the six digits. `--set exec=allow` sets a category for this machine alone. Each line of the scheme says where its value came from when it is not the master's own: `set by you`, `fleet default`, `fleet rule`, `group <name>`, or `(this master: allow)` for a category the copy made stricter. [Approvals on fleet machines](/tenant/docs/fleet/approvals) explains the starting scheme.
+`confirm` shows what the machine reported about itself (OS, account, version, sandbox, ceiling: its own words, not checked) and the approval scheme it will start with, then asks for the six digits. `--set exec=allow` sets a category for this machine alone. Each line of the scheme says where its value came from when it is not the master's own: `set by you`, `fleet default`, `fleet rule` or `group <name>`.
 
 Compare the digits with the ones on the machine's own screen. They tie the record on the master to that machine, and to no other machine that got hold of its code.
 
@@ -121,11 +151,11 @@ Confirming takes a person. It is accepted from:
 
 A request that carries only the API key is refused, whatever the setting. No tool, relay command or approval card can confirm a machine.
 
-The enroll endpoint takes five attempts a minute from one address. A code presented a second time is refused and raises an alert.
+With the digits on, a code presented a second time is still refused and still raises the alert, but no machine is paused: compare the six digits on the machine's own screen before you confirm it.
 
 ### Confirming from another computer
 
-A browser that reaches the dashboard over the local network, by a Tailscale name or through a proxy is not on the master: its Fleet page shows the pending machine and says where to confirm it. On a master with no screen (Windows Server Core, a headless box) that means a console for every machine. You can let a signed-in browser elsewhere confirm instead. It is off until you turn it on, at the master's terminal:
+This applies only with the six digits on; with the code alone there is nothing to confirm. A browser that reaches the dashboard over the local network, by a Tailscale name or through a proxy is not on the master: its Fleet page shows the pending machine and says where to confirm it. On a master with no screen (Windows Server Core, a headless box) that means a console for every machine. You can let a signed-in browser elsewhere confirm instead. It is off until you turn it on, at the master's terminal:
 
 ```bash
 tenant fleet remote-confirm [on|off]
@@ -192,6 +222,10 @@ A public address is a workable route: both ends are pinned by certificate, so so
 tenant fleet list | show <name>       # the machines and which process holds the fleet; one machine in full
 tenant fleet rename <name> <new-name> # relabel; its id and what is kept under it stay
 tenant fleet revoke <name> [--keep-scheme | --delete-scheme]
+tenant fleet pause <name>             # no call goes to the machine and its link is refused
+tenant fleet resume <name>            # calls go to it again, and it may link
 ```
+
+A paused machine keeps its certificate, its approval scheme and its memory, and `tenant child status` on it says it is paused on the master. Pausing and resuming are shell commands and each is recorded; the dashboard's Fleet page shows the state.
 
 `tenant fleet list` in another process cannot tell online from offline: only the process that holds the fleet knows (`/fleet` there, or the dashboard's Fleet page). Revoking is described in [On a fleet machine](/tenant/docs/fleet/machines#when-a-machine-is-revoked).
