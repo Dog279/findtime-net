@@ -113,7 +113,7 @@
 <h1>Update, move and recover</h1>
 <p class="lede">Update fleet machines over their links, choose whose word a machine takes for an update, move a machine to a new master, and read its memory again after the master was lost.</p>
 <h2 id="updating-machines">Updating machines</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet update <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">--all</span> <span class="kw">|</span> <span class="ex">--group</span> <span class="op">&lt;</span>group<span class="op">&gt;</span> [--version vX.Y.Z] <span class="pp">[--</span><span class="ss">allow</span><span class="pp">-</span><span class="ss">older</span><span class="pp">]</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet update <span class="op">&lt;</span>name<span class="op">&gt;</span> <span class="kw">|</span> <span class="ex">--all</span> <span class="kw">|</span> <span class="ex">--group</span> <span class="op">&lt;</span>group<span class="op">&gt;</span> [--version vX.Y.Z <span class="kw">|</span> <span class="ex">--build</span> ARCHIVE] <span class="pp">[--</span><span class="ss">allow</span><span class="pp">-</span><span class="ss">older</span><span class="pp">]</span></span></code></pre></div>
 <table>
 <colgroup>
 <col style="width: 50%" />
@@ -139,6 +139,10 @@
 <td>that release instead of the latest</td>
 </tr>
 <tr>
+<td><code>--build ARCHIVE</code></td>
+<td>send this archive, a build of your own, in place of a release (<a href="#sending-a-build-of-your-own">Sending a build of your own</a>). Not with <code>--version</code></td>
+</tr>
+<tr>
 <td><code>--allow-older</code></td>
 <td>send a version older than the machine runs</td>
 </tr>
@@ -155,6 +159,16 @@
 <p>The command asks the running Tenant that holds the fleet, through its dashboard, since that Tenant has the links. It fetches the release for the machine’s system and processor into <code>&lt;data&gt;/fleet-updates/</code>, verifies it as <a href="/tenant/docs/setup/update"><code>tenant update</code></a> verifies its own, and sends it over the link with its SHA-256. The machine needs no way to the internet.</p>
 <p>On the dashboard, a machine’s page on the Fleet page has <strong>Update this machine</strong>, with a version (empty for the latest) and a box to allow an older one.</p>
 <p>Each step is printed, and how it ended: back on the new version, rolled back (with the machine’s reason), refused, or failed. An offline machine is refused; nothing is queued. <code>--all</code> and <code>--group</code> update one machine after the other and go on past a failure. The exit status is 0 only when every machine runs the version asked for.</p>
+<p>Versions are ordered as semantic versioning orders them: one release candidate before the next (<code>0.3.0-rc.1</code>, then <code>0.3.0-rc.2</code>), and both before the release (<code>0.3.0</code>). A machine that already runs the version asked for is sent nothing, and one asked to take an older version is refused unless <code>--allow-older</code>.</p>
+<h3 id="calls-while-a-machine-updates">Calls while a machine updates</h3>
+<p>A machine can be updated while the agent works on it. From the moment the machine says it is applying the update:</p>
+<ul>
+<li><strong>The calls it is running finish first.</strong> The machine gives them up to 2 minutes before it drops its link. A call still running then ends with the restart, and its outcome is not known.</li>
+<li><strong>New calls to it are not sent.</strong> The master keeps them back until the machine is linked again and says how the update went, done or rolled back, and then makes them: on the new version, or on the old one after a rollback. A call waits at most 7 minutes this way; after that it is made, and fails as offline if the machine is still away. A call whose own time limit ends while it waits fails, and says it was not sent.</li>
+<li><strong>Background commands and the machine’s browser still end at the restart.</strong></li>
+</ul>
+<p>Each call that waited is in the fleet log (<code>fleet/1206</code>) with how long it waited.</p>
+<p>Both halves need a Tenant that does this: the master’s to keep calls back, the machine’s to let its running calls finish. A machine on an older Tenant drops its link a second after it has the update, so the update that first brings a machine to such a version can still cut off a call that is running. Calls are kept back by the Tenant that watched the update start: one that restarts in the middle keeps none back (<a href="#when-the-master-restarts">When the master restarts</a>).</p>
 <h3 id="a-rollout-many-machines-a-few-at-a-time">A rollout: many machines, a few at a time</h3>
 <p>On the dashboard’s Fleet page, tick machines (or narrow the list to a group and choose everyone shown), pick <strong>Update</strong>, a version (empty is the latest release) and how many update at once, 1 to 8. The page first says how many machines it will update and names them, with those it leaves out and why (pending, revoked, offline: nothing is queued). After the second button, the running Tenant that holds the fleet starts that many machines, in the list’s order, and starts the next each time one ends:</p>
 <ul>
@@ -163,12 +177,90 @@
 <li>the first machine that <strong>rolls back or fails stops the rollout</strong>: no further machine is started, those already updating finish, and the rest show as not started.</li>
 </ul>
 <p>The Fleet page shows the rollout while it runs and afterwards (reload it): each machine as waiting, its live stage, done, skipped and why, rolled back, failed or not started. <strong>Stop</strong> starts no more machines; those updating finish. The rollout also stops when the fleet port goes down or another process takes the fleet: it starts nothing over links it no longer holds.</p>
-<p>One rollout runs at a time. It is kept in the running Tenant’s memory: a restart of the master forgets it, though each machine still finishes or rolls back by itself. A rollout takes a signed-in browser; the API key cannot start or stop one.</p>
+<p>One rollout runs at a time. A rollout takes a signed-in browser; the API key cannot start or stop one.</p>
+<h3 id="how-each-machines-last-update-went">How each machine’s last update went</h3>
+<p>The Fleet page has one card, <strong>Updates</strong>, with a row for each machine shown:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Column</th>
+<th>What it says</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Version</strong></td>
+<td>the version the machine reports, in quotes as its own words</td>
+</tr>
+<tr>
+<td><strong>Last update</strong></td>
+<td>the version this Tenant last sent it, or “none sent from this Tenant”</td>
+</tr>
+<tr>
+<td><strong>When</strong></td>
+<td>when that update ended, or started if it is still running</td>
+</tr>
+<tr>
+<td><strong>How it went</strong></td>
+<td><strong>done</strong>; <strong>rolled back</strong>, with the machine’s reason; <strong>failed</strong>, with the reason; <strong>refused</strong>; or the stage of an update that is running</td>
+</tr>
+</tbody>
+</table>
+<p>A machine that took an update, never said how it went and has no link now shows <strong>has not redialled since</strong> and a time: when its link ended, or, when that was before this Tenant started, when the update was last written down. What the machine says when it links again is recorded then, however much later: “the machine linked again: back on the new version 1.4.0”, or “the machine linked again: rolled back to”1.3.2”” with its reason. A machine’s own page says the same in its <strong>Update</strong> card, with every line of the update. A rollout that stopped at a machine because it said nothing in time shows that machine as “failed, then done” or “failed, then rolled back” once it has said.</p>
+<p>A machine keeps its word about its last update until the next one starts its trial run. On a second try at a version that rolled back before, a machine that links in between still says what became of the first try. That word is not taken for the new try’s: the master notes the time on the word the machine has when an update starts, by the machine’s own clock, and takes only a later one as that update’s.</p>
+<h3 id="when-the-master-restarts">When the master restarts</h3>
+<p>The Tenant that holds the fleet writes the rollout and each machine’s last update to <code>fleet-updates.json</code> in its <a href="/tenant/docs/setup/directories">data folder</a> at every step, and reads it back when it starts. So the Fleet page shows the last rollout and each machine’s last update after a restart too. A file that does not read does not stop the master: it is logged, treated as no record, and replaced at the next update.</p>
+<p><strong>A rollout that was running is not taken up again.</strong> It is closed where it stood, the status feed says so, and the Fleet page shows each machine:</p>
+<ul>
+<li><strong>done</strong>, skipped, rolled back or failed, as recorded before the restart;</li>
+<li><strong>interrupted</strong>: its update was under way. What became of it is filled in from the machine’s own word on its next link (“interrupted, then done”, “interrupted, then rolled back”);</li>
+<li><strong>not started</strong>: nothing was sent to it.</li>
+</ul>
+<p>Nothing is sent to any machine because of the restart. To finish, start a new rollout over the same machines: one that already runs the version counts as done and is sent nothing.</p>
+<p>Before the new rollout, give the machines shown as interrupted a few minutes to link again and say how their update went. A machine has one record, its last update, and an update sent to it replaces that record. Sent while the interrupted one is still unsettled, the new update takes its place, and how the interrupted one went may never be recorded: if the latest release has moved since, a machine that is still applying the first refuses the new archive, and that refusal is all its record then says. The machine itself finishes the first update or rolls it back all the same, and the version it reports says which.</p>
+<p>An update that was under way is ended in the record by how far it had got:</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr>
+<th>It was</th>
+<th>The record says</th>
+<th>On the machine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>fetching the release</td>
+<td>failed: this Tenant stopped before anything was sent</td>
+<td>nothing changed</td>
+</tr>
+<tr>
+<td>sending the archive</td>
+<td>failed: this Tenant stopped while the archive was on its way</td>
+<td>most likely nothing changed, and an update sent again goes on from what arrived. If the machine did have all of it, it goes on by itself, and its word on its next link corrects the record</td>
+</tr>
+<tr>
+<td>being applied by the machine</td>
+<td>failed, until the machine says how it went</td>
+<td>the machine goes on by itself: it comes back on the new version, or puts the old one back</td>
+</tr>
+</tbody>
+</table>
+<p>The machines need nothing: each redials by itself, waiting from one second up to a minute between tries, and is online as soon as its link is made.</p>
+<p>Run fleet updates from one Tenant on a data folder. Two Tenants on one data folder (serve and the terminal app) write the same file with nothing to keep them apart: the one that writes last wins, and one that takes the fleet from another that is still running reports that other’s rollout as cut short. Start a rollout or an update from one Tenant, and let that one keep the fleet until every machine has said how it went.</p>
 <h2 id="what-the-machine-does">What the machine does</h2>
 <ol type="1">
 <li>It writes the archive to <code>&lt;dir&gt;-data/update/</code> (a dropped link resumes there) and touches nothing else until the archive is whole and hashes right.</li>
 <li>It unpacks the new binary beside the installed one. On macOS it signs that binary with the hardened runtime first, as <code>tenant update</code> does; if signing fails, the update is refused and nothing has changed. Then it runs the new binary once with <code>version</code>.</li>
-<li>It drops its link and its background commands, and runs the new binary as a trial, beside the old one.</li>
+<li>It lets the calls it is running finish, for up to 2 minutes (<a href="#calls-while-a-machine-updates">Calls while a machine updates</a>). Then it drops its link and its background commands, and runs the new binary as a trial, beside the old one.</li>
 <li>When the trial reaches the master, the child stops it, swaps the binaries (the old one stays as <code>tenant.prev</code>), and restarts into the new one.</li>
 <li>If the new version does not reach the master by the deadline, the machine puts the old binary back itself. A trial that exits, or does not reach the master within a minute, is deleted, and the machine reconnects on the old version.</li>
 </ol>
@@ -201,21 +293,47 @@
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> child updates                    <span class="co"># which rule is in force</span></span></code></pre></div>
 <p>Under <code>master</code> the machine checks the archive only against the SHA-256 sent with it. <strong>Whoever controls the master, or can change files on its disk, can then install any program on that machine</strong>, with the rights its child runs with.</p>
 <p>The rule is kept in <code>child.json</code> (<code>"updates": "master"</code>). It is set only on the machine, never over the link; a change is a record in the machine’s audit log; <code>tenant child rehome</code> keeps it; <code>tenant child status</code> shows it. A machine running a Tenant from before machines verified releases takes its master’s hash.</p>
+<h3 id="sending-a-build-of-your-own">Sending a build of your own</h3>
+<p>Between releases, a machine set to <code>master</code> can be sent what you built yourself. Build and pack it from a checkout of Tenant’s repository, with Go installed:</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> run ./scripts/devbuild                        <span class="co"># for the computer you are on</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> run ./scripts/devbuild darwin/arm64           <span class="co"># for another system and processor</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> run ./scripts/devbuild linux/amd64 windows/amd64</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> run ./scripts/devbuild all                    <span class="co"># the six targets a release has</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="ex">go</span> run ./scripts/devbuild <span class="at">-o</span> DIR darwin/arm64    <span class="co"># into DIR, not dist/dev</span></span></code></pre></div>
+<p>The targets are <code>linux</code>, <code>darwin</code> and <code>windows</code>, each for <code>amd64</code> and <code>arm64</code>. Each one becomes an archive in <code>dist/dev/</code> of the checkout, named as a release’s archive is, under a development version of its own:</p>
+<pre><code>&lt;the last release&#39;s numbers&gt;-dev.&lt;UTC time of the build&gt;.&lt;commit&gt;[.dirty]</code></pre>
+<p>For example <code>0.3.0-dev.20261126193000.e56d774</code>. The time makes every build a version of its own, the commit says what it was built from, and <code>.dirty</code> marks a tree whose code had changes that were not committed. That version is what the machine then reports: in <code>tenant fleet show</code>, on the Fleet page, and from <code>tenant version</code> on the machine.</p>
+<p>Then, on the master, with the archive on the master’s own disk:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet update web1 <span class="at">--build</span> dist/dev/tenant_0.3.0-dev.20261126193000.e56d774_linux_x86_64.tar.gz</span></code></pre></div>
+<pre><code>web1: sending tenant_0.3.0-dev.20261126193000.e56d774_linux_x86_64.tar.gz (14.8 MB): a build this Tenant was handed, which no release vouches for
+web1: the machine is set to trust this master&#39;s hash (`updates master` on the machine): it checks the archive against the SHA-256 sent with it, not against a signature
+web1: sent 14.8 MB; the machine checked its SHA-256 and is applying it. The calls it is running finish first, and new ones wait until it is back. Its background commands end at the restart
+web1: the new version reached the master in its trial run; the machine is putting it in place
+web1: back on the new version 0.3.0-dev.20261126193000.e56d774</code></pre>
+<ul>
+<li><strong>Nothing is fetched and nothing is verified on the master.</strong> The archive’s name says its version, system and processor, and the master sends the archive’s SHA-256 with it. An archive that is not named as a build’s is refused, and so is a build for another system or processor than the machine’s, before anything is sent.</li>
+<li><strong>The machine does what it does with a release.</strong> It checks the hash, runs the binary once to see that it runs there and says the version it was sent as, runs it on trial, and rolls back by itself if the trial does not reach the master (<a href="#what-the-machine-does">What the machine does</a>).</li>
+<li><strong>A machine on the default rule refuses a build</strong> on the first piece, before any of the archive is sent: no release vouches for it. The command says so, and names what to set on the machine.</li>
+<li><strong>The archive has to be on the master’s own disk.</strong> The command checks that the file is there, and the running Tenant that holds the fleet then reads it itself.</li>
+<li><strong><code>--version</code> does not go with <code>--build</code>, and <code>--allow-older</code> is not asked for.</strong> Builds are not ordered against what a machine runs: one is sent unless the machine already reports that very version.</li>
+<li><strong>A release still updates over a build.</strong> A development version sorts before the release candidates of the same numbers, so no <code>--allow-older</code> is needed for the next release. <a href="/tenant/docs/setup/update"><code>tenant update</code></a> on a computer that runs a build leaves it alone unless forced.</li>
+</ul>
+<p>A build is sent from the command line. The Fleet page’s <strong>Update this machine</strong> form and its rollouts send releases.</p>
 <h2 id="move-a-machine-to-another-master">Move a machine to another master</h2>
 <p>A master restored from an encrypted backup needs nothing: its machines reconnect. A master restored from a plain backup, or rebuilt from nothing, is a stranger to them: <code>tenant child status</code> on each says the master rejected it, or offline. Re-home each machine:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on the new master</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet init                 <span class="co"># at a terminal: a new fleet key and recovery identity</span></span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet enroll web1          <span class="co"># a one-time code</span></span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="co"># on the machine, with its child stopped (its service, or the tenant child run holding it)</span></span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">&#39;%s\n&#39;</span> <span class="st">&#39;&lt;code&gt;&#39;</span> <span class="kw">|</span> <span class="ex">tenant</span> child rehome     <span class="co"># or TENANT_ENROLL_CODE=&#39;&lt;code&gt;&#39; tenant child rehome</span></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   from a root shell or a PowerShell run as administrator: the child is the machine&#39;s own</span></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># start its child again, then on the new master:</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet confirm web1         <span class="co"># the six digits rehome printed</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># on the new master</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet init                 <span class="co"># at a terminal: a new fleet key and recovery identity</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet enroll web1          <span class="co"># a one-time code</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a><span class="co"># on the machine, with its child stopped (its service, or the tenant child run holding it)</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="bu">printf</span> <span class="st">&#39;%s\n&#39;</span> <span class="st">&#39;&lt;code&gt;&#39;</span> <span class="kw">|</span> <span class="ex">tenant</span> child rehome     <span class="co"># or TENANT_ENROLL_CODE=&#39;&lt;code&gt;&#39; tenant child rehome</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="co">#   from a root shell or a PowerShell run as administrator: the child is the machine&#39;s own</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co"># start its child again, then on the new master:</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet confirm web1         <span class="co"># the six digits rehome printed</span></span></code></pre></div>
 <p><code>rehome</code> is enrollment with the key the machine already has. It changes only which master the machine trusts, in one step; its key, ceiling, tool list, sandbox, secret list, pause, update rule, audit log and memory copies stay. It refuses, with nothing changed, while a child process runs on the directory, and a code that does not enroll leaves the machine with its old master. Afterwards the old master’s certificate is refused. The audit log records the account and both masters’ fingerprints. Nothing on the link, no tool and no command on the master can make a machine re-home.</p>
 <h2 id="recover-a-machines-memory">Recover a machine’s memory</h2>
 <p>A re-homed machine’s copies were sealed to the old fleet’s keys, so the new master shows its memory as <strong>needs recovery key</strong> and reads none of it. Bring the old fleet’s recovery identity:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet recover <span class="op">&lt;</span>name<span class="op">&gt;</span> [--was ID]</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet recover <span class="op">&lt;</span>name<span class="op">&gt;</span> [--was ID]</span></code></pre></div>
 <p><code>--was</code> is the id the machine had under the old master (<code>rehome</code> prints it). The identity is read at the terminal without being shown, or from standard input; never from an argument. The running Tenant that holds the fleet reads the machine’s newest copy with it, makes it the machine’s memory, and sends it back under the new key. The old copies stay on the machine. <code>--hub ADDR</code> names the running Tenant when it is not where <code>config.json</code> says; the command sends the identity over plain http only to this computer, and otherwise only to an <code>https://</code> address. Without <code>--was</code>, the same command reads a machine’s memory after the master’s fleet key file was replaced.</p>
 <p>What a recovered copy says the master recorded (the inventory, notes) cannot be checked, since the old fleet’s secret is gone. It is recalled from then on as the machine’s own words, inside its frame, and the new master takes the machine’s inventory again. Look at those records before relying on them.</p>
 <h2 id="what-doctor-shows">What doctor shows</h2>
