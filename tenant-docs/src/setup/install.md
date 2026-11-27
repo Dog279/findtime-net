@@ -56,7 +56,7 @@ Set these in the environment before running the script.
 TENANT_VERSION=0.1.0 TENANT_INSTALL_DIR=/opt/tenant/bin sh -c "$(curl -fsSL https://github.com/Dog279/TENANT/releases/latest/download/install.sh)"
 ```
 
-The same script can make the machine a child of a [fleet](/tenant/docs/fleet/setup): with `TENANT_CHILD` set it goes straight on to `tenant child install`. `TENANT_CHILD=user` runs the child as your account; `TENANT_CHILD=system` runs it as root (or SYSTEM on Windows) from boot, needs the script run as root (an elevated PowerShell on Windows), and puts the binary in `/usr/local/bin` (`%ProgramFiles%\Tenant`). `TENANT_ENROLL_CODE` is the one-time code `tenant fleet enroll <name>` printed on the master; left unset, the script asks for it at the terminal. `tenant fleet enroll` prints the full line to paste.
+The same script can make the machine a child of a [fleet](/tenant/docs/fleet/setup): with `TENANT_CHILD` set it goes straight on to `tenant child install`. `TENANT_CHILD=system` installs the child as the machine's own service, which runs as root (or SYSTEM on Windows) from boot: it needs the script run as root (a PowerShell run as administrator on Windows), and puts the binary in `/usr/local/bin` (`%ProgramFiles%\Tenant`). A development build of an older master prints `TENANT_CHILD=user`, and gets the same; a released older master hands out its own release's script. `TENANT_ENROLL_CODE` is the one-time code `tenant fleet enroll <name>` printed on the master; left unset, the script asks for it at the terminal. `tenant fleet enroll` prints the full line to paste.
 
 ## Manual install
 

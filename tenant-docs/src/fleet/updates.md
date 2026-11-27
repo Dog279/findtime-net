@@ -96,7 +96,7 @@ tenant fleet enroll web1          # a one-time code
 
 # on the machine, with its child stopped (its service, or the tenant child run holding it)
 printf '%s\n' '<code>' | tenant child rehome     # or TENANT_ENROLL_CODE='<code>' tenant child rehome
-#   add --system, from an elevated shell, for the machine's own child
+#   from a root shell or a PowerShell run as administrator: the child is the machine's own
 # start its child again, then on the new master:
 tenant fleet confirm web1         # the six digits rehome printed
 ```

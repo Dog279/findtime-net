@@ -30,7 +30,7 @@ An environment variable is read at launch (or by the script that reads it). A ke
 | `TENANT_INSTALL_DIR` | where the binary goes (default `~/.local/bin`, or `%LOCALAPPDATA%\Programs\tenant`) |
 | `TENANT_REPO` | the GitHub `owner/name` asked for the latest release |
 | `TENANT_BASE_URL` | a directory URL that holds the archive and `checksums.txt` |
-| `TENANT_CHILD` | after installing, make this machine a child of a fleet: `user` (runs as this account) or `system` (as root or SYSTEM from boot; run the script as root, or from an elevated PowerShell) |
+| `TENANT_CHILD` | `system`: after installing, make this machine a child of a fleet, as a service that runs as root or SYSTEM from boot (run the script as root, or from a PowerShell run as administrator). `user`, which a development build of an older master prints, does the same |
 | `TENANT_ENROLL_CODE` | with `TENANT_CHILD`: the one-time code `tenant fleet enroll <name>` printed; unset, it is asked for at the terminal |
 
 ## Model providers

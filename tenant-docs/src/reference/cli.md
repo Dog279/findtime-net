@@ -140,7 +140,7 @@ tenant fleet relay [discord|imessage [on|off]]                                wh
 tenant fleet remote-confirm [on|off]                                          whether a signed-in dashboard browser on another computer may confirm a machine (off by default)
 tenant fleet update <name> | --all | --group <group> [--version vX.Y.Z] [--allow-older]   send machines a newer Tenant over their links
 tenant fleet recover <name> [--was ID]                                        read a machine's memory made under another fleet key, with the recovery identity
-tenant child install [--system] [--ceiling full|no-exec|read-only] [--updates release|master]   enroll this machine and install its service
+tenant child install [--dir D] [--ceiling full|no-exec|read-only] [--updates release|master]   enroll this machine and install its service, which runs as root or SYSTEM from boot (an elevated terminal)
 tenant child updates [release|master]        whose word an update from the master is taken on
 tenant child rehome                          trust another master, keeping this machine's key, ceiling, audit log and memory copies
 tenant child status                          connected, waiting for confirmation, paused, rejected, offline; exit 3 unless connected
