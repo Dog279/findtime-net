@@ -75,7 +75,7 @@ Next to the data dir, `tenant update` keeps `<data>-backups/pre-update-<version>
 
 ## On a fleet machine
 
-A child keeps its files in its own directory: `<config>/child` for one that runs as you, or, with `tenant child install --system`, `/etc/tenant/child` (Linux), `/Library/Application Support/tenant/child` (macOS), `C:\ProgramData\tenant\child` (Windows). The file tools refuse it.
+A child keeps its files in its own directory, the machine's: `/etc/tenant/child` (Linux), `/Library/Application Support/tenant/child` (macOS), `C:\ProgramData\tenant\child` (Windows). One that runs as a single account keeps them in the directory `tenant child install --dir` named, or in `<config>/child` where an earlier Tenant installed it. The file tools refuse it.
 
 | Path | What |
 |---|---|

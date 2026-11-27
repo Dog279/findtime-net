@@ -10,7 +10,7 @@ Everything on this page runs on the machine itself, not on the master.
 ## Commands
 
 ```bash
-tenant child install [--system] [--ceiling full|no-exec|read-only] [--updates release|master]
+tenant child install [--dir D] [--ceiling full|no-exec|read-only] [--updates release|master]
 tenant child updates [release|master]
 tenant child rehome
 tenant child status
@@ -22,7 +22,7 @@ tenant child run
 
 | Command | Does |
 |---|---|
-| `install` | enrolls this machine with the code from `tenant fleet enroll` (read from standard input or `TENANT_ENROLL_CODE`, never an argument), shows the six digits to type on the master, and installs the service |
+| `install` | enrolls this machine with the code from `tenant fleet enroll` (read from standard input or `TENANT_ENROLL_CODE`, never an argument), shows the six digits to type on the master when it asks for them, and installs the service: the machine's own, which runs as root or SYSTEM from boot. Needs a root shell (or sudo) or a PowerShell run as administrator |
 | `updates` | whose word an update from the master is taken on; see [Update, move and recover](/tenant/docs/fleet/updates) |
 | `rehome` | trust another master; see [Update, move and recover](/tenant/docs/fleet/updates#move-a-machine-to-another-master) |
 | `status` | where this machine stands: connected, waiting for confirmation (with the six digits, on a fleet that asks for them), paused here or on the master, rejected, offline. Exit 3 unless connected |
@@ -34,35 +34,45 @@ tenant child run
 
 | Flag | Effect |
 |---|---|
-| `--system` | `install`: a service that runs as root or SYSTEM from boot, with the child's files in the machine's own location. Needs a root shell or a PowerShell run as administrator |
+| `--system` | the machine's own child, which is what `install` installs without it. Still accepted: the lines a master prints pass it |
 | `--ceiling` | `install`: what this machine lets its master do: `full` (default), `no-exec` or `read-only` |
 | `--updates` | `install`: `release` (default) or `master` |
 | `--sandbox` | `install`: the sandbox backend this machine runs commands through (default `host`) |
-| `--dir` | the child's directory, instead of this account's or (with `--system`) the machine's |
+| `--dir` | the child's directory, instead of the machine's. `install --dir <directory>` keeps the child there and runs it as your account from logon: for a machine nobody may administer. Refused from a root shell on Linux and macOS |
 
-Exit codes: 0 done, 1 an error, 2 refused before anything changed (a code given as an argument, a machine that is already enrolled, `--system` without elevation), 3 from `status` when the machine is not connected.
+Exit codes: 0 done, 1 an error, 2 refused before anything changed (a code given as an argument, a machine that is already enrolled, an install without elevation), 3 from `status` when the machine is not connected.
 
 ## Where a child keeps its files
 
-The child's directory is `<config>/child` for your own account. With `--system` it is the machine's:
+A child is the machine's own, and so is its directory:
 
-| System | `--system` directory |
+| System | The child's directory |
 |---|---|
 | Windows | `%ProgramData%\tenant\child` |
 | Linux | `/etc/tenant/child` |
 | macOS | `/Library/Application Support/tenant/child` |
 
-It holds `child.json`, the machine's key (`child-identity.pem`), the link's state (`child-link.json`) and the `audit` folder. What the child's tools work with goes beside it, in `<dir>-data`.
+It holds `child.json`, the machine's key (`child-identity.pem`), the link's state (`child-link.json`) and the `audit` folder. What the child's tools work with goes beside it, in `<dir>-data`. A child that runs as one account keeps the same files in the directory `install --dir` named, or in `<config>/child` where an earlier Tenant installed it.
 
 ## The service on each system
 
-| System | As you (from logon) | With `--system` (from boot) |
+| System | The machine's own (from boot) | With `--dir`, as your account (from logon) |
 |---|---|---|
-| Windows | scheduled task `\Tenant\Child`, started at logon | service `TenantChild`, started automatically |
-| Linux | systemd user unit `tenant-child.service` | system unit `/etc/systemd/system/tenant-child.service` |
-| macOS | LaunchAgent `com.tenant.child` in `~/Library/LaunchAgents` | LaunchDaemon `com.tenant.child` in `/Library/LaunchDaemons` |
+| Windows | service `TenantChild`, started automatically, as SYSTEM | scheduled task `\Tenant\Child`, started at logon |
+| Linux | system unit `/etc/systemd/system/tenant-child.service`, as root | systemd user unit `tenant-child.service` |
+| macOS | LaunchDaemon `com.tenant.child` in `/Library/LaunchDaemons`, as root | LaunchAgent `com.tenant.child` in `~/Library/LaunchAgents` |
 
-On Linux, a user unit stops when you log out unless lingering is on; `install` prints the `loginctl enable-linger` command when it is off. The child's labels differ from `tenant service`'s, so a child can be installed beside a full Tenant on the same machine.
+On Linux, a user unit stops when you log out unless lingering is on; `install --dir` prints the `loginctl enable-linger` command when it is off. The child's labels differ from `tenant service`'s, so a child can be installed beside a full Tenant on the same machine.
+
+## What running as root or SYSTEM means
+
+Whoever adds a machine to a fleet owns or administers it. As root or SYSTEM the child is there from boot, whoever is logged on, and what its master can do on the machine is limited by the ceiling below and the master's approvals, not by an account.
+
+- Every command the master runs there runs as root or SYSTEM, in that account's environment: not a user's `PATH`, shell profile, keychain or signed-in tools. Files it writes are root's or SYSTEM's.
+- The binary the service runs must be where only an administrator can replace it; `install` refuses one that is not. On Linux and macOS that is a path that is root's all the way up and closed to writing by group and others (`/usr/local/bin`). On Windows it is under `%ProgramFiles%` and nowhere else: a folder of its own on the system drive, such as `C:\Tenant`, lets every signed-in account change its files. The install script puts the binary in the right place; a Tenant in your own folder (`~/.local/bin`, `%LOCALAPPDATA%\Programs\tenant`) is refused.
+- **Linux: the child's browser does not start.** Chrome refuses to run as root with its own sandbox on, and Tenant turns that sandbox off only inside a container or a user namespace, when `browser_no_sandbox` says so. The other tools are not affected.
+
+A child that an earlier Tenant installed for an account keeps running, and `status`, `pause`, `resume`, `rehome` and `uninstall` still find it. While it is there `install` refuses, so that one machine does not become two to its master. To make it the machine's own, `tenant child uninstall` and enroll again from an elevated terminal: a new enrollment is a new key.
 
 ## child.json and the ceiling
 
@@ -132,4 +142,4 @@ To use a revoked machine again, uninstall it and enroll it anew, or give it a co
 
 ## Uninstalling
 
-`tenant child uninstall` (from an elevated terminal for a `--system` child) removes the service, the machine's key and `child.json`, and the child's working files. It keeps the audit log, the record of what the master did on this machine. Revoke the machine on the master too.
+`tenant child uninstall` (from an elevated terminal, as the child is the machine's own) removes the service, the machine's key and `child.json`, and the child's working files. It keeps the audit log, the record of what the master did on this machine. Revoke the machine on the master too.
