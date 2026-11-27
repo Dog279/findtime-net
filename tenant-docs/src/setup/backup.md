@@ -29,7 +29,7 @@ tenant backup restore FILE [--dry-run] [--yes] [--force] [--identity FILE]
 
 ## What is in a backup
 
-A tar.gz with `MANIFEST.json` first, then the config dir and the data dir: every SQLite store, the archive, the log book, research, the soul, `config.json` and `settings.<agent>.json`. The backup is consistent even while Tenant runs: it holds the data-dir lock shared, so a command cannot restore underneath it, and copies the databases through SQLite's backup API.
+A tar.gz with `MANIFEST.json` first, then the config dir and the data dir: every SQLite store, the archive, the log book, research, the soul, `config.json` and `settings.<agent>.json`. The backup is consistent even while Tenant runs: it holds the data-dir lock shared, so a command cannot restore underneath it, and copies the databases through SQLite's backup API. The empty lock files a running Tenant holds are left out: they hold nothing, Tenant makes them again, and on Windows a held one cannot be read at all.
 
 **Credentials are left out of an unencrypted backup.** An encrypted one (`--encrypt` or `--recipient`) carries `credentials.json` too, so a restore on another machine is complete.
 

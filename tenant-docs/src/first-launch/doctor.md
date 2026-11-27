@@ -28,7 +28,7 @@ Each check reports **OK**, **WARN**, **FAIL** or **SKIP** with a detail line and
 | fallback health gating | whether latency gating is on and has a chain to move to |
 | generation endpoint | the active provider answers (for `claudecode`, the `claude` program exists) |
 | tokenize endpoint | vLLM's `/tokenize`, or the chars/4 estimate other kinds use |
-| embedding endpoint | the embedder answers |
+| embedding endpoint | the embedder returns an embedding within 30 seconds |
 | embedding dimension consistency | stored vectors match the current embedder's dimension; the fix is `tenant memory reembed` |
 | sqlite stores | every store opens |
 | db integrity | `PRAGMA integrity_check` on each; `--fix` renames a corrupt file to `.corrupted` so the next start gets a fresh one |
@@ -57,7 +57,7 @@ Only safe, reversible repairs: owner-only permissions on secret files and stores
 
 ## Reading a failure
 
-- **embedding endpoint FAIL**: start Ollama and `ollama pull nomic-embed-text`, or point `embed` at your embedder. Until then the agent runs amnesiac.
+- **embedding endpoint FAIL**: start Ollama and `ollama pull nomic-embed-text`, or point `embed` at your embedder. Until then the agent runs amnesiac. When the row says the embedder *took the connection and returned no embedding in 30s*, the server is up and stuck (its model list still loads): restart it, and for Ollama check `ollama ps` afterwards.
 - **embedding dimension consistency FAIL**: you switched embedders after storing data. `tenant memory reembed` recomputes every vector with the current one.
 - **generation endpoint FAIL**: the endpoint or key. `tenant model models` lists what the provider serves; `/model reload` re-reads a rotated key.
 - **secret storage protection WARN**: run `tenant doctor --fix` from the account that owns the files (on a Windows service, an administrator window).
