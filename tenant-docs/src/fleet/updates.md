@@ -36,7 +36,44 @@ On the dashboard's Fleet page, tick machines (or narrow the list to a group and 
 
 The Fleet page shows the rollout while it runs and afterwards (reload it): each machine as waiting, its live stage, done, skipped and why, rolled back, failed or not started. **Stop** starts no more machines; those updating finish. The rollout also stops when the fleet port goes down or another process takes the fleet: it starts nothing over links it no longer holds.
 
-One rollout runs at a time. It is kept in the running Tenant's memory: a restart of the master forgets it, though each machine still finishes or rolls back by itself. A rollout takes a signed-in browser; the API key cannot start or stop one.
+One rollout runs at a time. A rollout takes a signed-in browser; the API key cannot start or stop one.
+
+### How each machine's last update went
+
+The Fleet page has one card, **Updates**, with a row for each machine shown:
+
+| Column | What it says |
+|---|---|
+| **Version** | the version the machine reports, in quotes as its own words |
+| **Last update** | the version this Tenant last sent it, or "none sent from this Tenant" |
+| **When** | when that update ended, or started if it is still running |
+| **How it went** | **done**; **rolled back**, with the machine's reason; **failed**, with the reason; **refused**; or the stage of an update that is running |
+
+A machine that took an update, never said how it went and has no link now shows **has not redialled since** and a time: when its link ended, or, when that was before this Tenant started, when the update was last written down. What the machine says when it links again is recorded then, however much later: "the machine linked again: back on the new version 1.4.0", or "the machine linked again: rolled back to "1.3.2"" with its reason. A machine's own page says the same in its **Update** card, with every line of the update. A rollout that stopped at a machine because it said nothing in time shows that machine as "failed, then done" or "failed, then rolled back" once it has said.
+
+A machine keeps its word about its last update until the next one starts its trial run. On a second try at a version that rolled back before, a machine that links in between still says what became of the first try. That word is not taken for the new try's: the master notes the time on the word the machine has when an update starts, by the machine's own clock, and takes only a later one as that update's.
+
+### When the master restarts
+
+The Tenant that holds the fleet writes the rollout and each machine's last update to `fleet-updates.json` in its [data folder](/tenant/docs/setup/directories) at every step, and reads it back when it starts. So the Fleet page shows the last rollout and each machine's last update after a restart too. A file that does not read does not stop the master: it is logged, treated as no record, and replaced at the next update.
+
+**A rollout that was running is not taken up again.** It is closed where it stood, the status feed says so, and the Fleet page shows each machine:
+
+- **done**, skipped, rolled back or failed, as recorded before the restart;
+- **interrupted**: its update was under way. What became of it is filled in from the machine's own word on its next link ("interrupted, then done", "interrupted, then rolled back");
+- **not started**: nothing was sent to it.
+
+Nothing is sent to any machine because of the restart. To finish, start a new rollout over the same machines: one that already runs the version counts as done and is sent nothing.
+
+An update that was under way is ended in the record by how far it had got:
+
+| It was | The record says | On the machine |
+|---|---|---|
+| fetching the release | failed: this Tenant stopped before anything was sent | nothing changed |
+| sending the archive | failed: this Tenant stopped while the archive was on its way | most likely nothing changed, and an update sent again goes on from what arrived. If the machine did have all of it, it goes on by itself, and its word on its next link corrects the record |
+| being applied by the machine | failed, until the machine says how it went | the machine goes on by itself: it comes back on the new version, or puts the old one back |
+
+The machines need nothing: each redials by itself, waiting from one second up to a minute between tries, and is online as soon as its link is made.
 
 ## What the machine does
 
