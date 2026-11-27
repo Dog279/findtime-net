@@ -15,12 +15,14 @@ A call on a machine is decided by that machine's own stored scheme and nothing e
 
 A machine's **fresh copy**, what it gets when you confirm it or copy it again with `--from master`, is built in this order, each layer winning over the one before it where they disagree:
 
-1. **A copy of the master's local scheme** as its settings file holds it: category modes, tool rules and command rules. Launch-flag grants and session grants are not copied. `exec`, `write`, `destructive`, `send` and `sandbox` start no looser than `ask`, whatever the master allows, and every copied allow rule that could reach those categories becomes `ask` too.
+1. **A copy of the master's local scheme** as its settings file holds it: category modes, tool rules and command rules. The copy is exact: what the master allows without asking, the machine does too. Launch-flag grants and session grants are not copied. To start every machine tighter than the master, set a default first (`tenant fleet permissions --defaults set exec ask`).
 2. **The fleet's default categories**: each category you set for new machines replaces the copy's mode. A category you did not set comes from the copy.
 3. **The fleet's rules** for new machines.
 4. **The rules of each group the machine is in**, groups in name order (compared without case): a later group wins over an earlier one, and any group wins over a fleet rule.
 
 Then anything you set at confirmation with `--set category=mode`. The confirm screen marks each line that came from a layer (`fleet default`, `fleet rule`, `group <name>`).
+
+Tenant 0.2.0 held `exec`, `write`, `destructive`, `send` and `sandbox` at `ask` in the copy, whatever the master allowed. A machine confirmed then keeps the scheme it has; `tenant fleet permissions --all --from master` gives every confirmed machine the exact copy.
 
 A rule laid over a scheme replaces every rule of the machine's that it answers for (the same pattern, a narrower command under its prefix, a tool its glob covers), and leaves the machine's categories alone.
 
@@ -31,7 +33,7 @@ The schemes are kept in `settings.<agent>.json`, under `fleet_schemes` (by machi
 ## What asks
 
 - `fleet_list`, `fleet_tools`, `fleet_list_dir` and `fleet_read` ask nobody. The machine refuses its secret files.
-- Every shell command on a machine asks until you answer **always**. The read-only command judgement that lets `ls` or `git status` run unasked on the master is not used on a machine.
+- While a machine's `exec` is `ask`, every shell command on it asks until you answer **always**. The read-only command judgement that lets `ls` or `git status` run unasked on the master is not used on a machine.
 - A `fleet_call` to a tool Tenant does not ship (a local MCP server's) asks before it is sent.
 - Writes, edits and the other gated actions follow the machine's category modes.
 
@@ -52,7 +54,7 @@ tenant fleet permissions <name> --from defaults|master
 | `... web1 set exec allow` | set a category for that machine |
 | `... web1 add "os_exec(systemctl status *)" allow` | add a tool or command rule for that machine |
 | `... web1 --from defaults` | **Apply**: lay the fleet's rules, then the rules of each of the machine's groups, over the scheme it has; its categories stay |
-| `... web1 --from master` | copy the master's local scheme again, with the floor, the fleet's defaults and its groups: a fresh copy |
+| `... web1 --from master` | copy the master's local scheme again, with the fleet's defaults and its groups: a fresh copy |
 
 A laid rule replaces every rule of the machine's own that it answers for, **a block included**: a group rule `os_exec(git *)` allow removes the machine's `os_exec(git status)` deny. The answer and the machine's Security record say which rules were replaced and what they were.
 
