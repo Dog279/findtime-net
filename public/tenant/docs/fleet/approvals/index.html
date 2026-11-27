@@ -61,6 +61,13 @@
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
 </ul></details>
+<details class="area"><summary>Security</summary><ul>
+  <li><a href="/tenant/docs/security/overview">How Tenant is kept safe</a></li>
+  <li><a href="/tenant/docs/security/permissions">The permission categories</a></li>
+  <li><a href="/tenant/docs/security/commands">Security commands</a></li>
+  <li><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></li>
+  <li><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></li>
+</ul></details>
 <details class="area"><summary>Fleet</summary><ul>
   <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
   <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
@@ -118,19 +125,20 @@
 <p>A call on a machine is decided by that machine’s own stored scheme and nothing else. The fleet’s defaults and its groups are never read when a call is decided: they are laid over a scheme on purpose, at a step you take, and each such step leaves one Security record per machine.</p>
 <p>A machine’s <strong>fresh copy</strong>, what it gets when you confirm it or copy it again with <code>--from master</code>, is built in this order, each layer winning over the one before it where they disagree:</p>
 <ol type="1">
-<li><strong>A copy of the master’s local scheme</strong> as its settings file holds it: category modes, tool rules and command rules. Launch-flag grants and session grants are not copied. <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>send</code> and <code>sandbox</code> start no looser than <code>ask</code>, whatever the master allows, and every copied allow rule that could reach those categories becomes <code>ask</code> too.</li>
+<li><strong>A copy of the master’s local scheme</strong> as its settings file holds it: category modes, tool rules and command rules. The copy is exact: what the master allows without asking, the machine does too. Launch-flag grants and session grants are not copied. To start every machine tighter than the master, set a default first (<code>tenant fleet permissions --defaults set exec ask</code>).</li>
 <li><strong>The fleet’s default categories</strong>: each category you set for new machines replaces the copy’s mode. A category you did not set comes from the copy.</li>
 <li><strong>The fleet’s rules</strong> for new machines.</li>
 <li><strong>The rules of each group the machine is in</strong>, groups in name order (compared without case): a later group wins over an earlier one, and any group wins over a fleet rule.</li>
 </ol>
 <p>Then anything you set at confirmation with <code>--set category=mode</code>. The confirm screen marks each line that came from a layer (<code>fleet default</code>, <code>fleet rule</code>, <code>group &lt;name&gt;</code>).</p>
+<p>Tenant 0.2.0 held <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>send</code> and <code>sandbox</code> at <code>ask</code> in the copy, whatever the master allowed. A machine confirmed then keeps the scheme it has; <code>tenant fleet permissions --all --from master</code> gives every confirmed machine the exact copy.</p>
 <p>A rule laid over a scheme replaces every rule of the machine’s that it answers for (the same pattern, a narrower command under its prefix, a tool its glob covers), and leaves the machine’s categories alone.</p>
 <p>Once laid, the scheme is the machine’s. An edit made to it (a category, a rule, an <strong>always</strong> on its card) stands, over every layer, until a layer is laid over it again. A later change to the master’s own scheme, to a default or to a group moves no machine; when you change a default or a group, the answer says so and names the step that does.</p>
 <p>The schemes are kept in <code>settings.&lt;agent&gt;.json</code>, under <code>fleet_schemes</code> (by machine id), with the layers beside them: <code>fleet_permissions</code> (the default categories), <code>fleet_rules</code> and <code>fleet_groups</code> (<a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a>). An entry that cannot be read leaves that machine with no scheme, and every call to it is refused, reads included, until <code>tenant fleet permissions &lt;name&gt; --from master</code> writes it again.</p>
 <h2 id="what-asks">What asks</h2>
 <ul>
 <li><code>fleet_list</code>, <code>fleet_tools</code>, <code>fleet_list_dir</code> and <code>fleet_read</code> ask nobody. The machine refuses its secret files.</li>
-<li>Every shell command on a machine asks until you answer <strong>always</strong>. The read-only command judgement that lets <code>ls</code> or <code>git status</code> run unasked on the master is not used on a machine.</li>
+<li>While a machine’s <code>exec</code> is <code>ask</code>, every shell command on it asks until you answer <strong>always</strong>. The read-only command judgement that lets <code>ls</code> or <code>git status</code> run unasked on the master is not used on a machine.</li>
 <li>A <code>fleet_call</code> to a tool Tenant does not ship (a local MCP server’s) asks before it is sent.</li>
 <li>Writes, edits and the other gated actions follow the machine’s category modes.</li>
 </ul>
@@ -169,7 +177,7 @@
 </tr>
 <tr>
 <td><code>... web1 --from master</code></td>
-<td>copy the master’s local scheme again, with the floor, the fleet’s defaults and its groups: a fresh copy</td>
+<td>copy the master’s local scheme again, with the fleet’s defaults and its groups: a fresh copy</td>
 </tr>
 </tbody>
 </table>

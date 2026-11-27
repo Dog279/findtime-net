@@ -61,6 +61,13 @@
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
 </ul></details>
+<details class="area"><summary>Security</summary><ul>
+  <li><a href="/tenant/docs/security/overview">How Tenant is kept safe</a></li>
+  <li><a href="/tenant/docs/security/permissions">The permission categories</a></li>
+  <li><a href="/tenant/docs/security/commands">Security commands</a></li>
+  <li><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></li>
+  <li><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></li>
+</ul></details>
 <details class="area"><summary>Fleet</summary><ul>
   <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
   <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
@@ -148,7 +155,7 @@
 </tr>
 <tr>
 <td><code>status</code></td>
-<td>where this machine stands: connected, waiting for confirmation (with the six digits), paused, rejected, offline. Exit 3 unless connected</td>
+<td>where this machine stands: connected, waiting for confirmation (with the six digits, on a fleet that asks for them), paused here or on the master, rejected, offline. Exit 3 unless connected</td>
 </tr>
 <tr>
 <td><code>pause</code></td>
@@ -351,6 +358,7 @@
 <p><code>tenant child audit</code> checks the chain. The chain shows a change inside the log; it cannot show records cut off its end. For that, the master keeps the hash of each record with its own record of the call (event <code>fleet/1201</code> in <a href="/tenant/docs/fleet/overview#the-fleet-log">the fleet log</a>), so the two can be compared, and the system log has a line per record.</p>
 <h2 id="pausing">Pausing</h2>
 <p><code>tenant child pause</code> drops the link and ends running calls and background commands. While paused the machine serves nothing. The pause lasts across restarts; <code>tenant child resume</code> reconnects.</p>
+<p>The master can pause a machine from its side too, with <code>tenant fleet pause &lt;name&gt;</code>: no call goes to the machine and its link is refused, and <code>tenant child status</code> says it is paused on the master. That pause is undone on the master, with <code>tenant fleet resume &lt;name&gt;</code>.</p>
 <h2 id="when-a-machine-is-revoked">When a machine is revoked</h2>
 <p>On the master:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">tenant</span> fleet revoke <span class="op">&lt;</span>name<span class="op">&gt;</span>                  <span class="co"># at a terminal: asks whether to keep or delete its scheme</span></span>

@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#080808">
+<title>Security commands — Tenant docs — FindTime</title>
+<meta name="description" content="Every command that shows or changes what the agent may do, grouped by what you are trying to do. Slash commands for the terminal UI, the shell command where there is one, and the page that explains each.">
+<link rel="canonical" href="https://findtime.net/tenant/docs/security/commands">
+<meta property="og:title" content="Security commands — Tenant docs">
+<meta property="og:description" content="Every command that shows or changes what the agent may do, grouped by what you are trying to do. Slash commands for the terminal UI, the shell command where there is one, and the page that explains each.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://findtime.net/tenant/docs/security/commands">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="stylesheet" href="/tenant/docs/docs.css">
+<script src="/tenant/docs/versions.js"></script>
+</head>
+<body id="top">
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="site-header">
+  <nav class="container navigation" aria-label="Main navigation">
+    <a class="brand" href="/" aria-label="FindTime home"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+    <div class="nav-links">
+      <a href="/#apps">Apps</a>
+      <a href="/tenant">Tenant</a>
+      <a href="/tenant/docs/" aria-current="page">Docs</a>
+      <a href="https://github.com/Dog279/TENANT">GitHub</a>
+      <a href="/support">Support</a>
+    </div>
+    <div class="nav-actions">
+      <select class="ver" aria-label="Documentation version" title="Documentation version">
+        <option value="">Latest</option>
+      </select>
+    </div>
+  </nav>
+</header>
+
+<div class="container docs">
+
+<nav class="side" aria-label="Documentation">
+<details class="sidebox" open>
+<summary>Documentation</summary>
+<a class="home" href="/tenant/docs/">Tenant docs</a>
+<details class="area" open><summary>Setup &amp; install</summary><ul>
+  <li><a href="/tenant/docs/setup/requirements">Requirements</a></li>
+  <li><a href="/tenant/docs/setup/install">Install</a></li>
+  <li><a href="/tenant/docs/setup/directories">Files &amp; directories</a></li>
+  <li><a href="/tenant/docs/setup/service">Run in the background</a></li>
+  <li><a href="/tenant/docs/setup/update">Update &amp; roll back</a></li>
+  <li><a href="/tenant/docs/setup/process-protection">Process protection</a></li>
+  <li><a href="/tenant/docs/setup/backup">Backup &amp; restore</a></li>
+  <li><a href="/tenant/docs/setup/privacy">Privacy &amp; retention</a></li>
+</ul></details>
+<details class="area"><summary>First launch</summary><ul>
+  <li><a href="/tenant/docs/first-launch/setup-wizard">The setup wizard</a></li>
+  <li><a href="/tenant/docs/first-launch/doctor">Doctor</a></li>
+  <li><a href="/tenant/docs/first-launch/terminal-ui">The terminal UI</a></li>
+  <li><a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a></li>
+  <li><a href="/tenant/docs/first-launch/sandbox">The execution sandbox</a></li>
+  <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
+  <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
+</ul></details>
+<details class="area"><summary>Security</summary><ul>
+  <li><a href="/tenant/docs/security/overview">How Tenant is kept safe</a></li>
+  <li><a href="/tenant/docs/security/permissions">The permission categories</a></li>
+  <li><a href="/tenant/docs/security/commands">Security commands</a></li>
+  <li><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></li>
+  <li><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></li>
+</ul></details>
+<details class="area"><summary>Fleet</summary><ul>
+  <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
+  <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
+  <li><a href="/tenant/docs/fleet/machines">On a fleet machine</a></li>
+  <li><a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a></li>
+  <li><a href="/tenant/docs/fleet/memory">A machine's memory</a></li>
+  <li><a href="/tenant/docs/fleet/updates">Update, move and recover</a></li>
+</ul></details>
+<details class="area"><summary>Models &amp; helpers</summary><ul>
+  <li><a href="/tenant/docs/models/providers">Providers</a></li>
+  <li><a href="/tenant/docs/models/switching">Switching models</a></li>
+  <li><a href="/tenant/docs/models/local">Local models</a></li>
+  <li><a href="/tenant/docs/models/fallbacks">Fallbacks &amp; health</a></li>
+  <li><a href="/tenant/docs/models/tuning">Reasoning, ceiling &amp; turns</a></li>
+  <li><a href="/tenant/docs/models/routing">Prompt routing</a></li>
+  <li><a href="/tenant/docs/models/helpers">Helpers</a></li>
+  <li><a href="/tenant/docs/models/teams">Teams, research &amp; goals</a></li>
+  <li><a href="/tenant/docs/models/judge">The Judge</a></li>
+  <li><a href="/tenant/docs/models/eval">Quality evals</a></li>
+</ul></details>
+<details class="area"><summary>MCPs &amp; tools</summary><ul>
+  <li><a href="/tenant/docs/mcp/overview">How tools reach Tenant</a></li>
+  <li><a href="/tenant/docs/mcp/remote">Remote MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/local">Local MCP servers</a></li>
+  <li><a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a></li>
+  <li><a href="/tenant/docs/mcp/memory-server">Tenant as an MCP server</a></li>
+  <li><a href="/tenant/docs/mcp/built-in-tools">Built-in tools</a></li>
+  <li><a href="/tenant/docs/mcp/integrations">Integrations</a></li>
+</ul></details>
+<details class="area"><summary>Dashboard</summary><ul>
+  <li><a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a></li>
+  <li><a href="/tenant/docs/dashboard/pages">Page by page</a></li>
+  <li><a href="/tenant/docs/dashboard/approvals">Approvals</a></li>
+  <li><a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a></li>
+  <li><a href="/tenant/docs/dashboard/cron">Scheduled jobs</a></li>
+  <li><a href="/tenant/docs/dashboard/logs">Logs &amp; alerts</a></li>
+  <li><a href="/tenant/docs/dashboard/api">REST API</a></li>
+</ul></details>
+<details class="area"><summary>Reference</summary><ul>
+  <li><a href="/tenant/docs/reference/config">config.json</a></li>
+  <li><a href="/tenant/docs/reference/settings">settings.&lt;agent&gt;.json</a></li>
+  <li><a href="/tenant/docs/reference/cli">CLI commands</a></li>
+  <li><a href="/tenant/docs/reference/slash-commands">Slash commands</a></li>
+  <li><a href="/tenant/docs/reference/environment">Environment variables</a></li>
+</ul></details>
+</details></nav>
+
+<main id="main" class="content" tabindex="-1">
+<p class="crumbs"><a href="/tenant">Tenant</a><span aria-hidden="true">/</span><a href="/tenant/docs/">Docs</a><span aria-hidden="true">/</span><a href="/tenant/docs/security/overview">Security</a></p>
+<h1>Security commands</h1>
+<p class="lede">Every command that shows or changes what the agent may do, grouped by what you are trying to do. Slash commands for the terminal UI, the shell command where there is one, and the page that explains each.</p>
+<p><code>/…</code> is typed into the terminal UI (<code>tenant tui</code>): it takes effect at once, in the running Tenant, and is saved. <code>tenant …</code> is a shell command. Where a row shows both, they do the same thing. Most of these are also a switch on the dashboard: <strong>Approvals &amp; safety</strong> for the host’s categories, <strong>Access</strong> for Discord and iMessage, <strong>Tools</strong> for tool rules, <strong>Remote services</strong> for MCP servers and <strong>Fleet</strong> for machines.</p>
+<p>A category is one of <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>web</code>, <code>send</code>, <code>egress</code>, <code>mcp</code> and <code>sandbox</code>. A mode is <code>ask</code>, <code>allow</code> or <code>deny</code> (<a href="/tenant/docs/security/permissions">The permission categories</a>).</p>
+<h2 id="see-what-is-in-force">See what is in force</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Command</th>
+<th>Shows</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/permissions</code> (or <code>/perms</code>)</td>
+<td>the host’s modes and its tool rules</td>
+</tr>
+<tr>
+<td><code>tenant permissions effective</code></td>
+<td>what each surface may do once categories, rules and trust are combined; <code>--surface local</code>, <code>discord</code> or <code>imessage</code> for one surface, <code>--agent ID</code> for one agent</td>
+</tr>
+<tr>
+<td><code>tenant security audit</code></td>
+<td>what each surface may do unasked, listeners, secret files and the sandbox; non-zero exit on a critical finding, <code>--json</code> for a script</td>
+</tr>
+<tr>
+<td><code>/relay</code></td>
+<td>whether the Discord relay runs, its operator, and whether exec is unlocked</td>
+</tr>
+<tr>
+<td><code>/imessage</code></td>
+<td>the allowlist and the responder’s state</td>
+</tr>
+<tr>
+<td><code>/permissions fleet &lt;name&gt;</code><br><code>tenant fleet permissions &lt;name&gt;</code></td>
+<td>one fleet machine’s scheme</td>
+</tr>
+<tr>
+<td><code>/fleet relay</code><br><code>tenant fleet relay</code></td>
+<td>whether Discord and iMessage may reach the fleet</td>
+</tr>
+<tr>
+<td><code>tenant sandbox probe</code></td>
+<td>what each surface’s sandbox profile enforces on this machine</td>
+</tr>
+<tr>
+<td><code>tenant doctor</code></td>
+<td>process protection, secret-file permissions, the container sandbox</td>
+</tr>
+<tr>
+<td><code>/logs log:security</code><br><code>tenant logs query "log:security"</code></td>
+<td>every request, every answer and every change</td>
+</tr>
+</tbody>
+</table>
+<h2 id="answer-a-request">Answer a request</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>In the terminal UI</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/approve</code></td>
+<td>this one action</td>
+</tr>
+<tr>
+<td><code>/approve session</code></td>
+<td>the same kind of action, until Tenant restarts or you revoke it</td>
+</tr>
+<tr>
+<td><code>/approve always</code></td>
+<td>sets the category to <code>allow</code>. On a command’s prompt it saves that command’s family as a rule; on a sandbox prompt it saves the one refused folder as an exception</td>
+</tr>
+<tr>
+<td><code>/deny</code> (or <code>/reject</code>)</td>
+<td>refuse</td>
+</tr>
+</tbody>
+</table>
+<p>The dashboard has the same answers as buttons, a Discord card has <strong>Approve</strong> and <strong>Deny</strong>, and iMessage takes <code>Y &lt;nonce&gt;</code> or <code>deny &lt;nonce&gt;</code> from the operator handle (<a href="/tenant/docs/first-launch/permissions#answering-a-request">Answering a request</a>).</p>
+<h2 id="the-hosts-categories-and-rules">The host’s categories and rules</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Command</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/permissions set &lt;category&gt; &lt;mode&gt;</code></td>
+<td>set one category, for example <code>/permissions set exec ask</code></td>
+</tr>
+<tr>
+<td><code>/permissions add &lt;tool|pattern&gt; &lt;mode&gt;</code></td>
+<td>a tool rule: a tool’s name, an exact id or a glob, such as <code>delete_* deny</code> or <code>mcp:127.0.0.1:9000:* allow</code></td>
+</tr>
+<tr>
+<td><code>/permissions add os_exec(&lt;glob&gt;) &lt;mode&gt;</code></td>
+<td>a command rule, such as <code>os_exec(brew install *) allow</code></td>
+</tr>
+<tr>
+<td><code>/permissions rm &lt;pattern&gt;</code></td>
+<td>remove a rule</td>
+</tr>
+<tr>
+<td><code>tenant permissions preset safe|balanced|full</code></td>
+<td>every category to <code>deny</code>, to <code>ask</code>, or to <code>allow</code> with <code>sandbox</code> left at <code>ask</code>; <code>--surface discord</code> or <code>imessage</code> for a relay’s own modes</td>
+</tr>
+</tbody>
+</table>
+<p>Details: <a href="/tenant/docs/first-launch/permissions">Permissions &amp; approvals</a>.</p>
+<h2 id="the-discord-relay">The Discord relay</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>In the terminal UI</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/relay on | off</code></td>
+<td>start or stop the relay; the choice is kept</td>
+</tr>
+<tr>
+<td><code>/relay allow &lt;discord-user-id&gt;</code></td>
+<td>the one operator whose messages drive the agent</td>
+</tr>
+<tr>
+<td><code>/relay exec on | off</code></td>
+<td>unlock <code>exec</code>, <code>write</code>, <code>destructive</code>, <code>sandbox</code> and <code>send</code> over Discord (off by default). Each then follows the relay’s modes</td>
+</tr>
+<tr>
+<td><code>/relay permissions set &lt;category&gt; &lt;mode&gt;</code></td>
+<td>the relay’s own mode for a category; <code>ask</code> posts a card with buttons</td>
+</tr>
+<tr>
+<td><code>/relay timeout &lt;duration&gt;</code></td>
+<td>how long a card waits before it is denied (30 s to 24 h; <code>10m</code> to begin with)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="the-imessage-responder">The iMessage responder</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>In the terminal UI</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/imessage on | off</code></td>
+<td>start or stop the responder</td>
+</tr>
+<tr>
+<td><code>/imessage passive | respond</code></td>
+<td>read every text and answer none, or answer the allowlist</td>
+</tr>
+<tr>
+<td><code>/imessage allow &lt;handle&gt;</code></td>
+<td>let a phone number or an email address drive the agent</td>
+</tr>
+<tr>
+<td><code>/imessage deny &lt;handle&gt; | clear</code></td>
+<td>take one handle off the allowlist, or empty it</td>
+</tr>
+<tr>
+<td><code>/imessage permissions set &lt;category&gt; &lt;mode&gt;</code></td>
+<td>the responder’s own mode for a category (<code>deny</code> to begin with)</td>
+</tr>
+</tbody>
+</table>
+<p>Details for both: <a href="/tenant/docs/dashboard/access">Access: Discord &amp; iMessage</a>.</p>
+<h2 id="mcp-servers-and-scheduled-jobs">MCP servers and scheduled jobs</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>In the terminal UI</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/mcp trust &lt;label&gt; &lt;ask|allow|deny&gt;</code></td>
+<td>one server’s trust: <code>allow</code> stops the per-call prompts, <code>deny</code> refuses and hides its tools (<a href="/tenant/docs/mcp/trust">Trust &amp; tool rules</a>)</td>
+</tr>
+<tr>
+<td><code>/cron exec on | off</code></td>
+<td>the one switch for shell jobs and for commands in prompt jobs (off by default) (<a href="/tenant/docs/dashboard/cron">Scheduled jobs</a>)</td>
+</tr>
+<tr>
+<td><code>/cron fleet &lt;id&gt; &lt;machine&gt;... | none</code></td>
+<td>the fleet machines a job may reach (none by default)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="who-can-reach-the-dashboard">Who can reach the dashboard</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>In the terminal UI</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/dashboard on | off | status</code></td>
+<td>run the dashboard or stop it, and show its address</td>
+</tr>
+<tr>
+<td><code>/dashboard serve lan [HOST:PORT]</code></td>
+<td>a second listener for your local network, over HTTPS (off by default)</td>
+</tr>
+<tr>
+<td><code>/dashboard serve off</code></td>
+<td>turn that listener off</td>
+</tr>
+<tr>
+<td><code>/tailscale serve</code></td>
+<td>publish the dashboard on your tailnet</td>
+</tr>
+</tbody>
+</table>
+<p>Every way in still asks for the sign-in key (<a href="/tenant/docs/dashboard/overview">Turn it on &amp; sign in</a>).</p>
+<h2 id="the-fleet-on-the-master">The fleet, on the master</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>Command</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/permissions fleet &lt;name&gt; set &lt;category&gt; &lt;mode&gt;</code><br><code>tenant fleet permissions &lt;name&gt; set &lt;category&gt; &lt;mode&gt;</code></td>
+<td>one category on one machine</td>
+</tr>
+<tr>
+<td><code>/permissions fleet &lt;name&gt; add &lt;pattern&gt; &lt;mode&gt;</code><br><code>tenant fleet permissions &lt;name&gt; add &lt;pattern&gt; &lt;mode&gt;</code></td>
+<td>a tool or command rule on one machine; <code>rm &lt;pattern&gt;</code> removes one</td>
+</tr>
+<tr>
+<td><code>tenant fleet permissions &lt;name&gt; --from master</code></td>
+<td>copy the host’s scheme to the machine again, with the fleet’s defaults and its groups</td>
+</tr>
+<tr>
+<td><code>tenant fleet permissions &lt;name&gt; --from defaults</code></td>
+<td>lay the fleet’s rules and its groups’ rules over the scheme the machine has</td>
+</tr>
+<tr>
+<td><code>/permissions fleet --defaults set &lt;category&gt; &lt;mode&gt;</code><br><code>tenant fleet permissions --defaults set &lt;category&gt; &lt;mode&gt;</code></td>
+<td>what every newly confirmed machine starts with; also <code>unset</code>, <code>add</code> and <code>rm</code></td>
+</tr>
+<tr>
+<td><code>tenant fleet permissions --group &lt;group&gt; …</code><br><code>tenant fleet permissions --all …</code></td>
+<td>the same change to each member of a group, or to every confirmed machine</td>
+</tr>
+<tr>
+<td><code>/fleet group …</code><br><code>tenant fleet group …</code></td>
+<td>named groups of machines with rules of their own</td>
+</tr>
+<tr>
+<td><code>/fleet relay discord|imessage on|off</code><br><code>tenant fleet relay discord|imessage on|off</code></td>
+<td>whether a turn from that relay may reach the fleet at all (off by default)</td>
+</tr>
+<tr>
+<td><code>tenant fleet pause &lt;name&gt;</code><br><code>tenant fleet resume &lt;name&gt;</code></td>
+<td>switch a machine off for now: no call goes to it and its link is refused</td>
+</tr>
+<tr>
+<td><code>/fleet revoke &lt;name&gt; [keep|delete]</code><br><code>tenant fleet revoke &lt;name&gt;</code></td>
+<td>end a machine for good: its certificate is refused from then on. Its scheme is kept or deleted, as you choose</td>
+</tr>
+<tr>
+<td><code>tenant fleet digits [on|off]</code></td>
+<td>whether a machine that joins waits for you to type the six digits it shows (off by default: its one-time code confirms it)</td>
+</tr>
+<tr>
+<td><code>/fleet remote-confirm [on|off]</code><br><code>tenant fleet remote-confirm [on|off]</code></td>
+<td>whether a signed-in dashboard browser on another computer may confirm a machine (off by default)</td>
+</tr>
+</tbody>
+</table>
+<p>Details: <a href="/tenant/docs/security/fleet">Fleet and relay permissions</a> and <a href="/tenant/docs/fleet/approvals">Approvals on fleet machines</a>.</p>
+<h2 id="on-a-fleet-machine">On a fleet machine</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>In a shell, on the machine</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tenant child install --ceiling full|no-exec|read-only</code></td>
+<td>what this machine lets its master do, set when it joins. The master cannot lift it</td>
+</tr>
+<tr>
+<td><code>tenant child pause</code>, <code>tenant child resume</code></td>
+<td>stop serving the master at once, until <code>resume</code></td>
+</tr>
+<tr>
+<td><code>tenant child status</code></td>
+<td>connected, waiting, paused, rejected or offline</td>
+</tr>
+<tr>
+<td><code>tenant child audit</code></td>
+<td>check the chain of this machine’s audit log of the master’s calls</td>
+</tr>
+</tbody>
+</table>
+<p>Details: <a href="/tenant/docs/fleet/machines">On a fleet machine</a>.</p>
+<h2 id="the-sandbox">The sandbox</h2>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr>
+<th>In a shell</th>
+<th>Does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tenant sandbox probe</code></td>
+<td>what each surface’s profile enforces on this machine, its folders and its exceptions</td>
+</tr>
+<tr>
+<td><code>tenant sandbox selftest</code></td>
+<td>run the escape suite; <code>--backend restricted</code> or <code>container</code> for one backend</td>
+</tr>
+<tr>
+<td><code>tenant sandbox run --surface S -- CMD</code></td>
+<td>run one command under a surface’s profile</td>
+</tr>
+<tr>
+<td><code>tenant sandbox stop-all</code></td>
+<td>remove every Tenant sandbox container now</td>
+</tr>
+<tr>
+<td><code>tenant sandbox image build</code></td>
+<td>build the image the <code>container</code> backend runs commands in</td>
+</tr>
+</tbody>
+</table>
+<p>Profiles themselves have no command. They are <code>exec_profiles</code> in <code>settings.&lt;agent&gt;.json</code>, which you edit by hand (<a href="/tenant/docs/security/sandbox">Sandbox defaults</a>).</p>
+<h2 id="changes-that-take-a-person">Changes that take a person</h2>
+<p>A few switches ask you to type a word at a terminal and refuse when their input is not one, so that a script or the agent cannot make them:</p>
+<ul>
+<li><code>tenant fleet remote-confirm on</code>. In the terminal UI, only a line you type yourself changes it.</li>
+<li><code>tenant fleet digits off</code>, which takes the second step out of joining.</li>
+<li><code>tenant fleet confirm &lt;name&gt;</code>, when digits are on: the six digits are typed by a person, and there is no flag for them.</li>
+</ul>
+<p>There is no command, in either place, that lets the agent write a rule or a mode for itself.</p>
+<div class="pagefoot">
+  <a href="https://github.com/Dog279/findtime-net/edit/main/tenant-docs/src/security/commands.mdtenant-docs/src/security/commands.md">Edit this page on GitHub</a>
+  <a href="https://github.com/Dog279/TENANT/issues">Report a problem</a>
+  <span>Tenant is open source under the MIT license.</span>
+</div>
+</main>
+
+<aside class="rail" aria-label="In this article">
+<div class="railbox">
+<div class="label">In this article</div>
+<ul>
+<li><a href="#see-what-is-in-force" id="toc-see-what-is-in-force">See what is in force</a></li>
+<li><a href="#answer-a-request" id="toc-answer-a-request">Answer a request</a></li>
+<li><a href="#the-hosts-categories-and-rules" id="toc-the-hosts-categories-and-rules">The host’s categories and rules</a></li>
+<li><a href="#the-discord-relay" id="toc-the-discord-relay">The Discord relay</a></li>
+<li><a href="#the-imessage-responder" id="toc-the-imessage-responder">The iMessage responder</a></li>
+<li><a href="#mcp-servers-and-scheduled-jobs" id="toc-mcp-servers-and-scheduled-jobs">MCP servers and scheduled jobs</a></li>
+<li><a href="#who-can-reach-the-dashboard" id="toc-who-can-reach-the-dashboard">Who can reach the dashboard</a></li>
+<li><a href="#the-fleet-on-the-master" id="toc-the-fleet-on-the-master">The fleet, on the master</a></li>
+<li><a href="#on-a-fleet-machine" id="toc-on-a-fleet-machine">On a fleet machine</a></li>
+<li><a href="#the-sandbox" id="toc-the-sandbox">The sandbox</a></li>
+<li><a href="#changes-that-take-a-person" id="toc-changes-that-take-a-person">Changes that take a person</a></li>
+</ul>
+</div>
+</aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <a class="brand" href="/"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><circle cx="16" cy="16" r="12" stroke="currentColor" stroke-width="2.2"/><path d="M16 8v8l5 3" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/><circle cx="16" cy="16" r="1.7" fill="currentColor"/></svg>FindTime</a>
+      <p>Small apps. A little more time for life.</p>
+      <a class="back-top" href="#top">Back to top <span aria-hidden="true">↑</span></a>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 FindTime LLC. All rights reserved.</p>
+      <nav aria-label="Footer navigation">
+        <a href="/tenant">Tenant</a>
+        <a href="/tenant/docs/">Docs</a>
+        <a href="https://github.com/Dog279/TENANT">GitHub</a>
+        <a href="/support">Support</a>
+        <a href="/legal/privacy">Privacy Policy</a>
+        <a href="/legal/terms">Terms of Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    // Mark the current page in the sidebar; fold the sidebar on phones.
+    var norm = function (s) { return s.replace(/\.html$/, "").replace(/\/index$/, "").replace(/\/$/, ""); };
+    var here = norm(location.pathname);
+    document.querySelectorAll(".side a").forEach(function (a) {
+      if (norm(a.getAttribute("href")) === here) { a.classList.add("active"); var d = a.closest("details.area"); if (d) d.open = true; }
+    });
+    if (window.matchMedia("(max-width: 700px)").matches) {
+      var box = document.querySelector(".side > .sidebox"); if (box) box.open = false;
+    }
+
+    // The version menu. /tenant/docs/ is Latest (Tenant's main branch); a
+    // release's docs are frozen under /tenant/docs/vX.Y.Z/ by snapshot.sh,
+    // and versions.js (shared by every copy) lists them, newest first.
+    var m = location.pathname.match(/^\/tenant\/docs\/(v[0-9][^\/]*)\//);
+    var current = m ? m[1] : "";
+    var rest = location.pathname.replace(/^\/tenant\/docs\/(v[0-9][^\/]*\/)?/, "");
+    var sel = document.querySelector("select.ver");
+    (window.TENANT_DOCS_VERSIONS || []).forEach(function (v) {
+      var o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o);
+    });
+    if (current && !sel.querySelector('option[value="' + current + '"]')) {
+      var o = document.createElement("option"); o.value = current; o.textContent = current; sel.appendChild(o);
+    }
+    sel.value = current;
+    sel.addEventListener("change", function () {
+      var base = "/tenant/docs/" + (sel.value ? sel.value + "/" : "");
+      var same = base + rest;
+      // Go to the same page in that version when it exists there, else to its home.
+      fetch(same, { method: "HEAD" }).then(function (r) { location.href = r.ok ? same : base; },
+                                           function () { location.href = base; });
+    });
+    if (current) {
+      var b = document.createElement("div"); b.className = "verbanner";
+      var s = document.createElement("strong"); s.textContent = current;
+      var a = document.createElement("a"); a.href = "/tenant/docs/" + rest; a.textContent = "Switch to the latest version";
+      b.append("You are reading the documentation for Tenant ", s, ". ", a, ".");
+      var main = document.querySelector("main.content"); main.insertBefore(b, main.firstChild);
+    }
+  })();
+</script>
+</body>
+</html>

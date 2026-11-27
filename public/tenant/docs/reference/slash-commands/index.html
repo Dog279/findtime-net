@@ -61,6 +61,13 @@
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
 </ul></details>
+<details class="area"><summary>Security</summary><ul>
+  <li><a href="/tenant/docs/security/overview">How Tenant is kept safe</a></li>
+  <li><a href="/tenant/docs/security/permissions">The permission categories</a></li>
+  <li><a href="/tenant/docs/security/commands">Security commands</a></li>
+  <li><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></li>
+  <li><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></li>
+</ul></details>
 <details class="area"><summary>Fleet</summary><ul>
   <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
   <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
@@ -204,7 +211,7 @@
 /fleet init [--listen ADDR] [--address HOST:PORT]...      make this Tenant a fleet master (once); the app steps aside while the recovery identity is shown on the terminal and typed back
 /fleet show &lt;name&gt;                                        everything known about one machine, with what it reported marked as its own words
 /fleet enroll &lt;name&gt;                                      a one-time code for a new machine, and the line to paste there
-/fleet confirm &lt;name&gt;                                     the confirm screen of a pending machine: what it reported, the scheme it starts with
+/fleet confirm &lt;name&gt;                                     with the six digits on: the confirm screen of a pending machine, what it reported and the scheme it starts with
 /fleet confirm &lt;name&gt; &lt;six digits&gt; [category=mode ...]    confirm it with the digits it shows; a pair sets that category for this machine alone
 /fleet revoke &lt;name&gt; [keep|delete]                        end a machine; keep or delete its approval scheme
 /fleet relay [discord|imessage [on|off]]                  whether a relay&#39;s turns may reach the fleet at all (default off)
@@ -213,7 +220,7 @@
 /fleet group rules &lt;group&gt; [add &lt;pattern&gt; &lt;mode&gt; | rm &lt;pattern&gt;]   a group&#39;s rules: laid after the fleet&#39;s rules, groups in name order, each winning over the one before
 /fleet group apply &lt;group&gt;                                lay the fleet&#39;s rules and each member&#39;s groups&#39; rules over every confirmed member&#39;s scheme; its categories stay
 /fleet remote-confirm [on|off]                            whether a signed-in dashboard browser on another computer may confirm a machine, with the sign-in key again (default off)</code></pre>
-<p>A machine’s own approval scheme is <code>/permissions fleet &lt;name&gt;</code>, and the fleet’s defaults for new machines <code>/permissions fleet --defaults</code>, under Safety &amp; approvals. A line the app submits for you does not change the fleet: type these yourself. A form that only shows something (the list, a machine, the confirm screen, a switch’s state, the groups, a group or its rules) needs no typing. Groups are explained in <a href="/tenant/docs/fleet/approvals#groups">Fleet approvals</a>.</p>
+<p>A machine’s own approval scheme is <code>/permissions fleet &lt;name&gt;</code>, and the fleet’s defaults for new machines <code>/permissions fleet --defaults</code>, under Safety &amp; approvals. A line the app submits for you does not change the fleet: type these yourself. A form that only shows something (the list, a machine, the confirm screen, a switch’s state, the groups, a group or its rules) needs no typing. Groups are explained in <a href="/tenant/docs/fleet/approvals#groups">Fleet approvals</a>. Pausing a machine (<code>tenant fleet pause</code>) and the six digits (<code>tenant fleet digits</code>) are shell commands only.</p>
 <h2 id="skills-skills">Skills (<a href="/tenant/docs/first-launch/skills">Skills</a>)</h2>
 <pre class="text"><code>/skills                                   list reusable skill recipes
 /skills add &lt;name&gt; | &lt;desc&gt; | &lt;recipe&gt;    save a skill

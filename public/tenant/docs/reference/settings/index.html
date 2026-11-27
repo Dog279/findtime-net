@@ -61,6 +61,13 @@
   <li><a href="/tenant/docs/first-launch/memory">Memory &amp; soul</a></li>
   <li><a href="/tenant/docs/first-launch/skills">Skills</a></li>
 </ul></details>
+<details class="area"><summary>Security</summary><ul>
+  <li><a href="/tenant/docs/security/overview">How Tenant is kept safe</a></li>
+  <li><a href="/tenant/docs/security/permissions">The permission categories</a></li>
+  <li><a href="/tenant/docs/security/commands">Security commands</a></li>
+  <li><a href="/tenant/docs/security/sandbox">Sandbox defaults</a></li>
+  <li><a href="/tenant/docs/security/fleet">Fleet and relay permissions</a></li>
+</ul></details>
 <details class="area"><summary>Fleet</summary><ul>
   <li><a href="/tenant/docs/fleet/overview">What a fleet is</a></li>
   <li><a href="/tenant/docs/fleet/setup">Set up a fleet</a></li>
@@ -178,7 +185,7 @@
 </tr>
 <tr>
 <td><code>fleet_schemes</code></td>
-<td>a fleet machine’s id → its own approval scheme, with the same two keys as above, <code>permissions</code> and <code>tool_rules</code>. Copied from this file’s own at confirmation, with exec, write, destructive, send and sandbox no looser than <code>ask</code>, then <code>fleet_permissions</code>, <code>fleet_rules</code> and the rules of the machine’s groups laid over it, in that order. A call on the machine is decided by this entry alone. An entry with anything Tenant cannot read leaves that machine with no scheme, and every call to it is refused until the entry is fixed (<a href="/tenant/docs/fleet/approvals">Fleet approvals</a>)</td>
+<td>a fleet machine’s id → its own approval scheme, with the same two keys as above, <code>permissions</code> and <code>tool_rules</code>. Copied from this file’s own at confirmation, as they are, then <code>fleet_permissions</code>, <code>fleet_rules</code> and the rules of the machine’s groups laid over it, in that order. A call on the machine is decided by this entry alone. An entry with anything Tenant cannot read leaves that machine with no scheme, and every call to it is refused until the entry is fixed (<a href="/tenant/docs/fleet/approvals">Fleet approvals</a>)</td>
 <td><code>tenant fleet confirm</code>, <code>tenant fleet permissions</code>, <code>/permissions fleet &lt;name&gt;</code>, the <strong>Fleet</strong> page, “always” on a machine’s request, <code>tenant fleet revoke --delete-scheme</code> (removes it), by hand</td>
 </tr>
 <tr>
